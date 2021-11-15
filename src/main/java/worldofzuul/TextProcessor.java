@@ -40,6 +40,7 @@ public class TextProcessor {
                                         allExits);                      //adding items to room should be done directly
                 output.add(newRoom);                                            //in the constructor instead method in class
             }
+            br.close();
         }
         catch (IOException e)
         {
@@ -94,6 +95,8 @@ public class TextProcessor {
                 Item item = new Item(Integer.parseInt(itemAtributes[0]), itemAtributes[1]);
                 output.add(item);
             }
+
+            br.close();
         }catch (IOException e){
             e.printStackTrace();
         }
