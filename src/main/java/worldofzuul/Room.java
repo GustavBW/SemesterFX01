@@ -227,6 +227,8 @@ public class Room {
         return someBool;
     }
 
+    public int getId(){return id;}
+
     public ArrayList<ExitDefinition> getExits(){return this.exitDefinitions;}
 }
 
