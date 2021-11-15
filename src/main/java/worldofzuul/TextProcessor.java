@@ -3,17 +3,18 @@ package worldofzuul;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-
+import java.util.Objects;
 
 
 public class TextProcessor {
     
-    private final String itemsFilePath = "Data/Items.csv";
-    private final String roomsFilePath = "Data/Rooms.csv";
-    private final String exitsFilePath = "Data/Exits.csv";
-    private final String roomQuestFilePath = "Data/RoomQuest.csv";
+    private String itemsFilePath = "/Data/Items.csv";
+    private String roomsFilePath = "/Data/Rooms.csv";
+    private String exitsFilePath = "/Data/Exits.csv";
+    private String roomQuestFilePath = "/Data/RoomQuest.csv";
 
 
     public ArrayList<Room> getAllRooms()
@@ -25,7 +26,7 @@ public class TextProcessor {
 
         try
         {
-            BufferedReader br = new BufferedReader(new FileReader(roomsFilePath));
+            BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(roomsFilePath)));
             while((line = br.readLine()) != null)
             {
                 String[] room = line.split(splitBy);
@@ -88,7 +89,7 @@ public class TextProcessor {
         String splitBy = ";";
         try
         {
-            BufferedReader br = new BufferedReader(new FileReader(itemsFilePath));
+            BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(itemsFilePath)));
             while((line = br.readLine()) != null)
             {
                 String[] itemAtributes = line.split(splitBy);
@@ -121,7 +122,7 @@ public class TextProcessor {
 
         try
         {
-            BufferedReader br = new BufferedReader(new FileReader(roomQuestFilePath));
+            BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(roomQuestFilePath)));
             while((line = br.readLine()) != null)
             {
                 String[] atributes = line.split(splitBy);
@@ -137,6 +138,7 @@ public class TextProcessor {
                 }
 
             }
+            br.close();
         }catch (IOException e)
         {
             e.printStackTrace();
@@ -157,7 +159,7 @@ public class TextProcessor {
 
         try
         {
-            BufferedReader br = new BufferedReader(new FileReader(exitsFilePath));
+            BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(exitsFilePath)));
             while((line = br.readLine()) != null)
             {
                 String[] s = line.split(splitBy);
@@ -166,6 +168,7 @@ public class TextProcessor {
                                                         Integer.parseInt(s[2]));
                 output.add(exit);
             }
+            br.close();
         }catch (IOException e)
         {
             e.printStackTrace();

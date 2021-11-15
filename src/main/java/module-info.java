@@ -1,4 +1,4 @@
-module com.semesterprojekt01.semesterprojekt01 {
+module worldofzuul {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -7,6 +7,6 @@ module com.semesterprojekt01.semesterprojekt01 {
     requires org.kordamp.ikonli.javafx;
     requires eu.hansolo.tilesfx;
 
-    opens com.semesterprojekt01.semesterprojekt01 to javafx.fxml;
-    exports com.semesterprojekt01.semesterprojekt01;
+    opens worldofzuul to javafx.fxml;
+    exports worldofzuul;
 }

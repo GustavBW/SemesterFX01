@@ -1,0 +1,16 @@
+All graphical elements in a room, must be within it's own folder by the name of the Room ID. Say you got room 3 the path for this directory would be:
+"/Graphics/3"
+Note that the player - being consistent through all rooms/scenes - is not stored in this manner. More info below.
+
+To make quick procedual work of this, each "entity" in a scene (room) has a specific name as to be able to access these easily.
+In order of significanse to the scene:
+Name:   What it is:                                                                     File Info:
+BASE    A 1000 by 1500 picture that is the foundation of the scene (room) top down.     PNG     ("/Graphics/x/BASE.png")
+MIDDLE  A 1000 by 1500 picture that shows the interiors of any rooms.                   PNG     ("/Graphics/x/MIDDLE.png")
+SHADOW  A 1000 by 1500 picture that contains the shadows from walls and such            PNG     ("/Graphics/x/SHADOW.png")
+TOP     A 1000 by 1500 picture that shows rooftops, tree-tops, clouds.                  PNG     ("/Graphics/x/TOP.png")
+
+/Graphics/Player/
+Contains 4 directories: North, South, East & West. These directories contains the walking animations (or still frames) of the player moving in these directions.
+To access these efficiently you'd load them into the Player class which impliments Renderable as 4 BufferedImage arrays.
+More directories can be added later for additional animations.
