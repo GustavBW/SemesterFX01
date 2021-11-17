@@ -2,25 +2,31 @@ package worldofzuul;
 
 import java.util.ArrayList;
 
+import static javafx.application.Application.launch;
+
 public class Game{
     private final Parser parser;
     private static Room currentRoom;
     private static TextProcessor tp = new TextProcessor();
     private final InventoryManager inventoryManager;
     private final ArrayList<Room> allRooms = new ArrayList<>();
+    private final MainGUIController mGUIC;
 
     private int helpCount = 0, hintCount = 0, turnCount = 0;
     private final int WIDTH = 1500, HEIGHT = 1000;
 
     public static void main(String[] args) {
-        new Game();
+        new Game(args);
     }
 
-    public Game() {
+    public Game(String[] args) {
 
         createRooms();
         parser = new Parser();
         inventoryManager = new InventoryManager();
+
+        mGUIC = new MainGUIController(WIDTH,HEIGHT);
+        mGUIC.setup(args);
 
         play();
     }

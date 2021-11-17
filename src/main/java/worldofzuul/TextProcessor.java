@@ -81,6 +81,31 @@ public class TextProcessor {
         return output;
     }
 
+    public ArrayList<Item> getItemsForRoom(int roomId){
+
+        String itemsRequested = null;
+        String line = "";
+        String splitBy = ";";
+
+        try{
+            BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(roomsFilePath)));
+            while((line = br.readLine()) != null)
+            {
+                String[] currentLine = line.split(splitBy);
+                if(Integer.parseInt(currentLine[0]) == roomId){
+                    itemsRequested = currentLine[6];
+                }
+            }
+            br.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return allItemsInRoom(itemsRequested);
+    }
+
 
     public ArrayList<Item> getAllItems()
     {
@@ -103,11 +128,6 @@ public class TextProcessor {
         }
         return output;
     }
-
-
-
-
-
 
     public ArrayList<Quest> getQuests(String ids){
         ArrayList<Quest> output = new ArrayList<>();
@@ -145,12 +165,6 @@ public class TextProcessor {
         }
         return output;
     }
-
-
-
-
-
-
 
     public ArrayList<ExitDefinition> getAllExits(){
         ArrayList<ExitDefinition> output = new ArrayList<ExitDefinition>();
