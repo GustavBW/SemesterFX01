@@ -7,13 +7,15 @@ import static javafx.application.Application.launch;
 public class Game{
     private final Parser parser;
     private static Room currentRoom;
+    private MainGUIController mGUIC;
     private static TextProcessor tp = new TextProcessor();
     private final InventoryManager inventoryManager;
     private final ArrayList<Room> allRooms = new ArrayList<>();
-    private final MainGUIController mGUIC;
+
+    private Thread renderThread, interThread;
 
     private int helpCount = 0, hintCount = 0, turnCount = 0;
-    private final int WIDTH = 1500, HEIGHT = 1000;
+    public static final int WIDTH = 1500, HEIGHT = 1000;
 
     public static void main(String[] args) {
         new Game(args);
@@ -25,9 +27,7 @@ public class Game{
         parser = new Parser();
         inventoryManager = new InventoryManager();
 
-        mGUIC = new MainGUIController(WIDTH,HEIGHT);
-        mGUIC.setup(args);
-
+        MainGUIController.main(args);
         play();
     }
 
@@ -165,6 +165,13 @@ public class Game{
             System.out.println("Hjælp:      " + helpCount);
             System.out.println("Hints:      " + hintCount);
             System.out.println("Handlinger: " + turnCount);
+
+            try{
+                renderThread.join();
+                interThread.join();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
             return true;
         }
