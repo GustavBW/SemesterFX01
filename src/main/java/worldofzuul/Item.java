@@ -8,6 +8,12 @@ public class Item {
     private int itemAmount;
     private final int id;
 
+    public Item(Item item){
+        this.itemName = item.getName();
+        this.itemAmount = item.getAmount();
+        this.id = item.getId();
+    }
+
     public Item(int id, String name){
         this.id = id;
         this.itemName = name;

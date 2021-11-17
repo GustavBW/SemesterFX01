@@ -10,8 +10,11 @@ public class MainGUIController extends Application {
 
     private RoomCollection currentCollection;
 
-    public MainGUIController(){
-        initializeGUI();
+    private final int WIDTH,HEIGHT;
+
+    public MainGUIController(int width, int height){
+        this.WIDTH = width;
+        this.HEIGHT = height;
     }
 
     @Override
@@ -19,11 +22,7 @@ public class MainGUIController extends Application {
 
     }
 
-    public boolean initializeGUI(){
-        boolean success = false;
 
-        return success;
-    }
 
 
 

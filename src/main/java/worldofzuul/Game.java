@@ -10,6 +10,7 @@ public class Game{
     private final ArrayList<Room> allRooms = new ArrayList<>();
 
     private int helpCount = 0, hintCount = 0, turnCount = 0;
+    private final int WIDTH = 1500, HEIGHT = 1000;
 
     public static void main(String[] args) {
         new Game();
