@@ -9,4 +9,8 @@ module worldofzuul {
 
     opens worldofzuul to javafx.fxml;
     exports worldofzuul;
+    exports Realtime;
+    opens Realtime to javafx.fxml;
+    exports BackEnd;
+    opens BackEnd to javafx.fxml;
 }

@@ -1,13 +1,12 @@
-package worldofzuul;
+package Realtime;
 
-import javafx.geometry.Point2D;
+import Realtime.Renderable;
+import Realtime.Tickable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-import java.util.Vector;
-
-public class Player implements Renderable, Tickable{
+public class Player implements Renderable, Tickable {
 
     private int posX,posY;
     private Image image;

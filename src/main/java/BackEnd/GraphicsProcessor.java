@@ -1,12 +1,10 @@
-package worldofzuul;
+package BackEnd;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import javafx.geometry.Point2D;
-import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 
 public class GraphicsProcessor {

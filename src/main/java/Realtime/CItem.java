@@ -1,10 +1,14 @@
-package worldofzuul;
+package Realtime;
 
+import BackEnd.PosPicCombo;
+import Realtime.Interactible;
+import Realtime.Renderable;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import worldofzuul.Item;
 
-public class CItem extends Item implements Interactible,Renderable{
+public class CItem extends Item implements Interactible, Renderable {
 
     private Point2D position;
     private Image picture;

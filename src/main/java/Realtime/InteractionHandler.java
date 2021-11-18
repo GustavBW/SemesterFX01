@@ -1,4 +1,6 @@
-package worldofzuul;
+package Realtime;
+
+import worldofzuul.Game;
 
 public class InteractionHandler implements Runnable{
 

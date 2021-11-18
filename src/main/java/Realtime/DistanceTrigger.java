@@ -1,6 +1,8 @@
-package worldofzuul;
+package Realtime;
 
-public class DistanceTrigger implements Interactible{
+import Realtime.Interactible;
+
+public class DistanceTrigger implements Interactible {
 
     private int posX, posY, interRadius;
 

@@ -1,19 +1,15 @@
-package worldofzuul;
+package Realtime;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.BorderImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import worldofzuul.Game;
+import BackEnd.RoomCollection;
 
 public class MainGUIController extends Application implements Runnable{
 
