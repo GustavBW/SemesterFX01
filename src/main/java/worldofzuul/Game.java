@@ -1,10 +1,7 @@
 package worldofzuul;
 
 import BackEnd.TextProcessor;
-import Realtime.InteractionHandler;
-import Realtime.MainGUIController;
-import Realtime.Player;
-import Realtime.Tickable;
+import Realtime.*;
 
 import java.util.ArrayList;
 
@@ -22,7 +19,7 @@ public class Game implements Runnable{
     double interpolation = 0;
     final int TICKS_PER_SECOND = 60, SKIP_TICKS = 1000 / TICKS_PER_SECOND,MAX_FRAMESKIP = 5;
 
-    public static final int WIDTH = 1500, HEIGHT = 1000;
+    public static final int WIDTH = 1500, HEIGHT = 1000, DELAY = 50;
     public static Player player;
     public static Room currentRoom;
     public static boolean isRunning = false,onPause = false;
@@ -55,27 +52,45 @@ public class Game implements Runnable{
 
         currentRoom = allRooms.get(0);
     }
-    public void play() 
+    public void play()
     {            
         printWelcome();
+
+        int j = 0;
+        while(!MainGUIController.isReady){
+            System.out.println("YOURE AWAITING " + j);
+            j++;
+        }
+        System.out.println("Game continued from flag-sleep");
+
         int loops;
         double next_game_tick = System.currentTimeMillis();
         //boolean finished = false;
 
         while(MainGUIController.isRunning && Game.isRunning){
             loops = 0;
+            long timeA = System.nanoTime();
+
             while (System.currentTimeMillis() > next_game_tick
                     && loops < MAX_FRAMESKIP) {
 
                 next_game_tick += SKIP_TICKS;
                 loops++;
 
+                new DistanceTrigger(400,400,40);
+
                 if(onPause){continue;}
 
                 for(Tickable t : Tickable.tickables){
                     t.tick();
                 }
+
             }
+
+            long timeB = System.nanoTime();
+
+            MainGUIController.updateLogText(3, timeB - timeA);
+
         }
         quit(new Command(CommandWord.QUIT, null ));
 

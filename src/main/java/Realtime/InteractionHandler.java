@@ -11,7 +11,18 @@ public class InteractionHandler implements Runnable{
     }
 
     public void calcDistances(){
+
+        int j = 0;
+        while(!MainGUIController.isReady){
+            System.out.println("IM AWAITING " + j);
+            j++;
+        }     //Halts the thread until the application class is ready
+        System.out.println("InterHandler continued from flag-sleep");
+
         while(Game.isRunning && MainGUIController.isRunning){
+            
+            long timeA = System.nanoTime();
+
             int pPosX = player.getPosX();
             int pPosY = player.getPosY();
 
@@ -27,6 +38,10 @@ public class InteractionHandler implements Runnable{
                     i.onInteraction();
                 }
             }
+            long timeB = System.nanoTime();
+
+            MainGUIController.updateLogText(2, timeB - timeA);
+
         }
     }
 
