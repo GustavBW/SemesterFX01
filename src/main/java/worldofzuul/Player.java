@@ -17,7 +17,7 @@ public class Player implements Renderable, Tickable{
         this.posX = x;
         this.posY = y;
         this.image = image;
-        this.velX = 0;
+        this.velX = 1;
         this.velY = 0;
     }
 

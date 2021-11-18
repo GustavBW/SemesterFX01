@@ -7,7 +7,6 @@ import static javafx.application.Application.launch;
 public class Game implements Runnable{
     private Parser parser = null;
     private static Room currentRoom;
-    private MainGUIController mGUIC;
     private static TextProcessor tp = new TextProcessor();
     private InventoryManager inventoryManager = null;
     private InteractionHandler interHandler;
@@ -15,7 +14,7 @@ public class Game implements Runnable{
 
     private final ArrayList<Room> allRooms = new ArrayList<>();
 
-    private Thread tickThread, interThread;
+    public static Thread tickThread, interThread;
 
     private int helpCount = 0, hintCount = 0, turnCount = 0;
     public static final int WIDTH = 1500, HEIGHT = 1000;
@@ -60,8 +59,12 @@ public class Game implements Runnable{
                 
         boolean finished = false;
         while (! finished) {
+            if(!MainGUIController.isRunning){
+                quit(new Command(CommandWord.QUIT, null ));
+            }
             Command command = parser.getCommand();
             finished = processCommand(command);
+            System.out.println("looooooop");
         }
     }
 
@@ -179,14 +182,18 @@ public class Game implements Runnable{
             System.out.println("Hints:      " + hintCount);
             System.out.println("Handlinger: " + turnCount);
 
-            try{
-                tickThread.join();
-                interThread.join();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+            stop();
 
             return true;
+        }
+    }
+
+    public synchronized void stop(){
+        try{
+            tickThread.join();
+            interThread.join();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

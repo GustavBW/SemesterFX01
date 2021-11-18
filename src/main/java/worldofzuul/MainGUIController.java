@@ -12,9 +12,10 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class MainGUIController extends Application implements Runnable {
+public class MainGUIController extends Application {
 
     //This class will control the scene, stage and the general GUI setup.
     //This class can take in a RoomCollection and display what it contains
@@ -25,6 +26,7 @@ public class MainGUIController extends Application implements Runnable {
     private Canvas canvas;
     private GraphicsContext gc;
     private RoomCollection currentCollection;
+    public static boolean isRunning = false;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -47,13 +49,20 @@ public class MainGUIController extends Application implements Runnable {
         bp.setCenter(canvas);
 
         mainStage.setScene(new Scene(bp,Game.WIDTH,Game.HEIGHT));
+        mainStage.setOnCloseRequest(e -> stop());
         mainStage.show();
+
+        isRunning = true;
     }
 
-    private void onUpdate(){
+    public synchronized void stop(){
+        isRunning = false;
+    }
 
-        gc.setFill(Color.BLACK);
-        gc.fillRect(300,300,300,300);
+
+
+
+    private void onUpdate(){
 
         for(Renderable r : Renderable.renderables){
             r.render(gc);
@@ -65,7 +74,7 @@ public class MainGUIController extends Application implements Runnable {
 
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         launch(args);
     }
 
@@ -73,8 +82,4 @@ public class MainGUIController extends Application implements Runnable {
 
     public RoomCollection getCurrentCollection(){return currentCollection;}
 
-    @Override
-    public void run() {
-        launch();
-    }
 }
