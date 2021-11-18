@@ -15,8 +15,15 @@ public class InteractionHandler implements Runnable{
 
             for(Interactible i : Interactible.interactibles){
 
+                int interRadiusSq = i.getInterRadius() * i.getInterRadius();
+                double distXSq = (pPosX - i.getPosX()) * (pPosX - i.getPosX());
+                double distYSq = (pPosY - i.getPosY()) * (pPosY - i.getPosY());
 
+                double distanceSquared = distXSq + distYSq;
 
+                if(distanceSquared < interRadiusSq){
+                    i.onInteraction();
+                }
             }
         }
     }

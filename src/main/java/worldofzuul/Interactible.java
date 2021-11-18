@@ -11,5 +11,7 @@ public interface Interactible {
     void onInstancedInter();
     void onInteraction();
     int getInterRadius();
+    int getPosX();
+    int getPosY();
 
 }
