@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 import static javafx.application.Application.launch;
 
-public class Game{
-    private final Parser parser;
+public class Game implements Runnable{
+    private Parser parser = null;
     private static Room currentRoom;
     private MainGUIController mGUIC;
     private static TextProcessor tp = new TextProcessor();
-    private final InventoryManager inventoryManager;
+    private InventoryManager inventoryManager = null;
     private final ArrayList<Room> allRooms = new ArrayList<>();
 
-    private Thread renderThread, interThread;
+    private Thread tickThread, interThread;
 
     private int helpCount = 0, hintCount = 0, turnCount = 0;
     public static final int WIDTH = 1500, HEIGHT = 1000;
@@ -23,12 +23,10 @@ public class Game{
 
     public Game(String[] args) {
 
-        createRooms();
-        parser = new Parser();
-        inventoryManager = new InventoryManager();
-
+        tickThread = new Thread(this);
+        tickThread.start();
         MainGUIController.main(args);
-        play();
+
     }
 
     private void createRooms() {
@@ -167,7 +165,7 @@ public class Game{
             System.out.println("Handlinger: " + turnCount);
 
             try{
-                renderThread.join();
+                tickThread.join();
                 interThread.join();
             }catch (Exception e){
                 e.printStackTrace();
@@ -175,5 +173,15 @@ public class Game{
 
             return true;
         }
+    }
+
+    @Override
+    public void run() {
+
+        createRooms();
+        parser = new Parser();
+        inventoryManager = new InventoryManager();
+
+        play();
     }
 }
