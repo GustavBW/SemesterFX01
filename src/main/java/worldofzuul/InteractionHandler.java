@@ -9,7 +9,7 @@ public class InteractionHandler implements Runnable{
     }
 
     public void calcDistances(){
-        while(Game.isRunning){
+        while(Game.isRunning && MainGUIController.isRunning){
             int pPosX = player.getPosX();
             int pPosY = player.getPosY();
 

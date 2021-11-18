@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class MainGUIController extends Application {
+public class MainGUIController extends Application implements Runnable{
 
     //This class will control the scene, stage and the general GUI setup.
     //This class can take in a RoomCollection and display what it contains
@@ -51,18 +51,15 @@ public class MainGUIController extends Application {
         mainStage.setScene(new Scene(bp,Game.WIDTH,Game.HEIGHT));
         mainStage.setOnCloseRequest(e -> stop());
         mainStage.show();
-
-        isRunning = true;
     }
 
     public synchronized void stop(){
         isRunning = false;
     }
 
-
-
-
     private void onUpdate(){
+
+        gc = canvas.getGraphicsContext2D();
 
         for(Renderable r : Renderable.renderables){
             r.render(gc);
@@ -75,7 +72,14 @@ public class MainGUIController extends Application {
     }
 
     public static void main(String[] args) {
+        isRunning = true;
         launch(args);
+    }
+
+    @Override
+    public void run(){
+        String[] args = new String[]{};
+        main(args);
     }
 
     public void setCollection(RoomCollection rc){this.currentCollection = rc;}
