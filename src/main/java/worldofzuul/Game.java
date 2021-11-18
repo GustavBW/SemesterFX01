@@ -10,12 +10,16 @@ public class Game implements Runnable{
     private MainGUIController mGUIC;
     private static TextProcessor tp = new TextProcessor();
     private InventoryManager inventoryManager = null;
+    private InteractionHandler interHandler;
+    private Player player;
+
     private final ArrayList<Room> allRooms = new ArrayList<>();
 
     private Thread tickThread, interThread;
 
     private int helpCount = 0, hintCount = 0, turnCount = 0;
     public static final int WIDTH = 1500, HEIGHT = 1000;
+    public static boolean isRunning = false;
 
     public static void main(String[] args) {
         new Game(args);
@@ -23,10 +27,18 @@ public class Game implements Runnable{
 
     public Game(String[] args) {
 
+        isRunning = true;
+
+        player = new Player((int) WIDTH / 2, (int) HEIGHT / 2, null);
+
+        interHandler = new InteractionHandler(player);
+        interThread = new Thread(interHandler);
+        interThread.start();
+
         tickThread = new Thread(this);
         tickThread.start();
-        MainGUIController.main(args);
 
+        MainGUIController.main(args);
     }
 
     private void createRooms() {
@@ -156,6 +168,9 @@ public class Game implements Runnable{
             return false;
         }
         else {
+
+            isRunning = false;
+
             System.out.println();
             System.out.println("Tak for din opmærksomhed!");
             System.out.println();

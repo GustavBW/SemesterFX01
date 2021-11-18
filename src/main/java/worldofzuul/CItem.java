@@ -8,6 +8,7 @@ public class CItem extends Item implements Interactible,Renderable{
 
     private Point2D position;
     private Image picture;
+    private int interRadius = 50;
 
     public CItem(Item item, PosPicCombo posPic){
         super(item);
@@ -21,6 +22,9 @@ public class CItem extends Item implements Interactible,Renderable{
     public void onInstancedInter(){
         Interactible.interactibles.add(this);
     }
+
+    @Override
+    public int getInterRadius(){return interRadius;}
 
     @Override
     public void onInteraction() {
