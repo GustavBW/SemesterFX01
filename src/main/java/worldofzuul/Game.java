@@ -29,6 +29,7 @@ public class Game implements Runnable{
     }
 
     public Game(String[] args) {
+
         player = new Player( WIDTH / 2,  HEIGHT / 2, null);
 
         interHandler = new InteractionHandler(player);
@@ -58,25 +59,24 @@ public class Game implements Runnable{
         double next_game_tick = System.currentTimeMillis();
         boolean finished = false;
 
-        while (! finished) {
-            while(MainGUIController.isRunning){
-                loops = 0;
-                while (System.currentTimeMillis() > next_game_tick
-                        && loops < MAX_FRAMESKIP) {
+        while(MainGUIController.isRunning && Game.isRunning){
+            loops = 0;
+            while (System.currentTimeMillis() > next_game_tick
+                    && loops < MAX_FRAMESKIP) {
 
-                    next_game_tick += SKIP_TICKS;
-                    loops++;
+                next_game_tick += SKIP_TICKS;
+                loops++;
 
-                    for(Tickable t : Tickable.tickables){
-                        t.tick();
-                    }
+                for(Tickable t : Tickable.tickables){
+                    t.tick();
                 }
             }
-            quit(new Command(CommandWord.QUIT, null ));
-
-            Command command = parser.getCommand();
-            finished = processCommand(command);
         }
+        quit(new Command(CommandWord.QUIT, null ));
+
+        Command command = parser.getCommand();
+        finished = processCommand(command);
+
     }
     private void printWelcome()
     {
@@ -193,10 +193,12 @@ public class Game implements Runnable{
     }
     public synchronized void stop(){
         try{
+
             tickThread.join();
             interThread.join();
             renderThread.join();
             isRunning = false;
+
         }catch (Exception e){
             e.printStackTrace();
         }

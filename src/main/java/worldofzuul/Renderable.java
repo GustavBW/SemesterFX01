@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface Renderable {
 
-    public static ArrayList<Renderable> renderables = new ArrayList<>();
+    ArrayList<Renderable> renderables = new ArrayList<>();
 
     void onInstancedRender();
     void render(GraphicsContext gc);

@@ -18,17 +18,18 @@ public class Player implements Renderable, Tickable{
         this.posY = y;
         this.image = image;
         this.velX = 1;
-        this.velY = 0;
+        this.velY = 1;
+
+        onInstancedRender();
+        onInstancedTick();
     }
-
-
 
     @Override
     public void render(GraphicsContext gc) {
         if(image != null){
             gc.drawImage(image,posX,posY);
         }else{
-            gc.setFill(Color.BLACK);
+            gc.setFill(Color.WHITE);
             gc.fillRect(100,100,100,100);
         }
     }

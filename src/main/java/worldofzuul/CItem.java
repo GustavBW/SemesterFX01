@@ -14,6 +14,9 @@ public class CItem extends Item implements Interactible,Renderable{
         super(item);
         position = posPic.getPos();
         picture = posPic.getPic();
+
+        onInstancedInter();
+        onInstancedRender();
     }
 
     @Override

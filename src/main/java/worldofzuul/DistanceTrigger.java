@@ -8,6 +8,8 @@ public class DistanceTrigger implements Interactible{
         this.posX = x;
         this.posY = y;
         this.interRadius = r;
+
+        onInstancedInter();
     }
 
 
