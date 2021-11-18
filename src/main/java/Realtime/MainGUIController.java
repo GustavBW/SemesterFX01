@@ -18,6 +18,8 @@ public class MainGUIController extends Application implements Runnable{
 
     public static Stage mainStage;
     private BorderPane bp;
+    private KeyHandler keyHandler;
+    private MouseHandler mouseHandler;
 
     private Canvas canvas;
     private GraphicsContext gc;
@@ -38,19 +40,28 @@ public class MainGUIController extends Application implements Runnable{
             @Override
             public void handle(long now) {
                 onUpdate();
+                if(!Game.isRunning || !MainGUIController.isRunning){
+                    this.stop();
+                }
             }
         };
         timer.start();
 
         bp.setCenter(canvas);
+        keyHandler = new KeyHandler();
+        mouseHandler = new MouseHandler();
+        Scene scene = new Scene(bp,Game.WIDTH,Game.HEIGHT);
+        scene.setOnKeyPressed(e -> keyHandler.handle(e));
+        scene.setOnMouseClicked(e -> mouseHandler.handle(e));
 
-        mainStage.setScene(new Scene(bp,Game.WIDTH,Game.HEIGHT));
+        mainStage.setScene(scene);
         mainStage.setOnCloseRequest(e -> stop());
         mainStage.show();
     }
 
     public synchronized void stop(){
         isRunning = false;
+        mainStage.close();
     }
 
     private void onUpdate(){

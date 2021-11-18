@@ -10,7 +10,7 @@ public class Player implements Renderable, Tickable {
 
     private int posX,posY;
     private Image image;
-    private double velX, velY, drag = 0.9, velFloorVal = 0.05;
+    private double velX, velY, drag = 0.99, velFloorVal = 0.05, mvSpeed = 3;
 
     public Player(int x, int y, Image image){
         this.posX = x;
@@ -29,7 +29,7 @@ public class Player implements Renderable, Tickable {
             gc.drawImage(image,posX,posY);
         }else{
             gc.setFill(Color.WHITE);
-            gc.fillRect(100,100,100,100);
+            gc.fillRect(posX,posY,100,100);
         }
     }
 
@@ -49,8 +49,8 @@ public class Player implements Renderable, Tickable {
         }
     }
 
-    public void changeVelX(double i){velX += i;}
-    public void changeVelY(double i){velY += i;}
+    public void changeVelX(double i){velX += i * mvSpeed;}
+    public void changeVelY(double i){velY += i * mvSpeed;}
 
     public double getVelX(){return velX;}
     public double getVelY(){return velY;}

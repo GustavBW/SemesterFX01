@@ -8,33 +8,30 @@ import Realtime.Tickable;
 
 import java.util.ArrayList;
 
-import static javafx.application.Application.launch;
-
 public class Game implements Runnable{
-    private Parser parser = null;
-    private static Room currentRoom;
-    private static TextProcessor tp = new TextProcessor();
-    private InventoryManager inventoryManager = null;
+    private final Parser parser;
+
+    private final static TextProcessor tp = new TextProcessor();
+    private final InventoryManager inventoryManager;
     private final InteractionHandler interHandler;
-    private final Player player;
     private final MainGUIController mGUIC;
-
     private final ArrayList<Room> allRooms = new ArrayList<>();
-
     private Thread tickThread, interThread, renderThread;
 
     private int helpCount = 0, hintCount = 0, turnCount = 0;
-    public static final int WIDTH = 1500, HEIGHT = 1000;
     double interpolation = 0;
     final int TICKS_PER_SECOND = 60, SKIP_TICKS = 1000 / TICKS_PER_SECOND,MAX_FRAMESKIP = 5;
 
-    public static boolean isRunning = false;
+    public static final int WIDTH = 1500, HEIGHT = 1000;
+    public static Player player;
+    public static Room currentRoom;
+    public static boolean isRunning = false,onPause = false;
 
     public static void main(String[] args) {
-        new Game(args);
+        new Game();
     }
 
-    public Game(String[] args) {
+    public Game() {
 
         player = new Player( WIDTH / 2,  HEIGHT / 2, null);
 
@@ -63,7 +60,7 @@ public class Game implements Runnable{
         printWelcome();
         int loops;
         double next_game_tick = System.currentTimeMillis();
-        boolean finished = false;
+        //boolean finished = false;
 
         while(MainGUIController.isRunning && Game.isRunning){
             loops = 0;
@@ -73,6 +70,8 @@ public class Game implements Runnable{
                 next_game_tick += SKIP_TICKS;
                 loops++;
 
+                if(onPause){continue;}
+
                 for(Tickable t : Tickable.tickables){
                     t.tick();
                 }
@@ -80,8 +79,8 @@ public class Game implements Runnable{
         }
         quit(new Command(CommandWord.QUIT, null ));
 
-        Command command = parser.getCommand();
-        finished = processCommand(command);
+        //Command command = parser.getCommand();
+        //finished = processCommand(command);
 
     }
     private void printWelcome()
