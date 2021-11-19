@@ -176,6 +176,19 @@ public class MainGUIController extends Application implements Runnable{
         }
         onExitFlagSleep();
 
+        long timeA = System.nanoTime();
+
+        clearAllTicksRendersInters();
+        addNewRenderables(rc);
+        Game.currentRoom = rc.getRoom();
+
+        long timeB = System.nanoTime();
+        System.out.println("MGUIC.changeScene took: " + (timeB - timeA) + "ns");
+
+        isReady = true;
+    }
+
+    private void clearAllTicksRendersInters(){
         Interactible.interactibles.clear();
         Tickable.tickables.clear();
         Renderable.renderLayer0.clear();    //Ground layer
@@ -183,15 +196,16 @@ public class MainGUIController extends Application implements Runnable{
                                             //Layer2 isn't cleared as that is the player layer
         Renderable.renderLayer3.clear();    //Rooftops
         Renderable.renderLayer4.clear();    //Uh. Something. I've forgotten.
-
-        addNewRenderables(rc);
-
-
-        isReady = true;
     }
 
     private void addNewRenderables(RoomCollection rc){
-        
+        Renderable.renderLayer0.add(rc.getBaseImages().get(0));
+        Renderable.renderLayer1.add(rc.getBaseImages().get(1));
+                                                                    //Layer2 is the player layer, it isn't cleared and isn't modified.
+        Renderable.renderLayer3.add(rc.getBaseImages().get(3));
+        Renderable.renderLayer4.add(rc.getBaseImages().get(4));
+
+        Renderable.renderLayer1.addAll(rc.getCitems());
     }
 
     private void onAwait(){

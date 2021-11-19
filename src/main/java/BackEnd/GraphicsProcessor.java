@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import Realtime.RenderableImage;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
@@ -20,8 +21,8 @@ public class GraphicsProcessor {
         private final String cItemPositions = "cItemPositions.csv";
         private final String cItemSplitBy = ";";
 
-        public ArrayList<Image> getBaseForRoom(int roomId){
-                ArrayList<Image> images = new ArrayList<>();
+        public ArrayList<RenderableImage> getBaseForRoom(int roomId){
+                ArrayList<RenderableImage> images = new ArrayList<>();
 
                 try{
                         for(String s : imageTypes) {

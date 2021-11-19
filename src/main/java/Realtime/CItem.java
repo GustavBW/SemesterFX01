@@ -45,7 +45,7 @@ public class CItem extends Item implements Interactible, Renderable {
     public void onInVicinity() {    }
     @Override
     public void onInstancedRender() {
-        Renderable.renderables.add(this);
+        //Since CItems are de-rendered when the rooms change, it can't add itself when instantied. MGUIC takes care of it.
     }
     @Override
     public void render(GraphicsContext gc) {
