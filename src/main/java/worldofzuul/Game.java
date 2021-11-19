@@ -22,7 +22,7 @@ public class Game implements Runnable{
     public static final int WIDTH = 1500, HEIGHT = 1000, DELAY = 50;
     public static Player player;
     public static Room currentRoom;
-    public static boolean isRunning = false,onPause = false, isAwaiting;
+    public static boolean isRunning = false,onPause = false, isAwaiting = false, awaitBoolean = false;
 
     public static void main(String[] args) {
         new Game();
@@ -56,9 +56,12 @@ public class Game implements Runnable{
     {            
         printWelcome();
 
+        awaitBoolean = false;
         while(!MainGUIController.isReady){
             onAwait();
         }
+        try{Thread.sleep(500);
+        }catch (Exception e){e.printStackTrace();}
         onExitFlagSleep();
 
         int loops;
@@ -71,7 +74,7 @@ public class Game implements Runnable{
             while(!MainGUIController.isReady){
                 onAwait();
             }
-            onExitFlagSleep();
+            isAwaiting = false;
 
 
             while (System.currentTimeMillis() > next_game_tick
@@ -102,6 +105,11 @@ public class Game implements Runnable{
     }
     private void onAwait(){
         isAwaiting = true;
+        if(!awaitBoolean){
+            System.out.println("Game was asked to Await. Now awaiting at: " + System.nanoTime());
+            awaitBoolean = !awaitBoolean;
+        }
+        System.out.print(" ");
     }
     private void onExitFlagSleep(){
         isAwaiting = false;

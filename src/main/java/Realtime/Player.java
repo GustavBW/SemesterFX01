@@ -62,7 +62,7 @@ public class Player implements Renderable, Tickable {
 
     @Override
     public void onInstancedRender() {
-        Renderable.renderables.add(this);
+        Renderable.renderLayer2.add(this);
     }
     @Override
     public void onInstancedTick() {

@@ -1,7 +1,7 @@
 package BackEnd;
 
+import Realtime.DistanceTrigger;
 import Realtime.RenderableImage;
-import javafx.scene.image.Image;
 import Realtime.CItem;
 import worldofzuul.Room;
 
@@ -13,13 +13,19 @@ public class RoomCollection {
     private Room room;
     private ArrayList<RenderableImage> baseImages;
     private ArrayList<CItem> citemsInRoom;
+    private ArrayList<DistanceTrigger> triggers;
 
 
     public RoomCollection(Room room, ArrayList<RenderableImage> baseImages, ArrayList<CItem> citems){
+        this(room,baseImages, citems,null);
+    }
+
+    public RoomCollection(Room room, ArrayList<RenderableImage> baseImages, ArrayList<CItem> citems, ArrayList<DistanceTrigger> triggers){
         this.id = room.getId();
         this.room = room;
         this.baseImages = baseImages;
         this.citemsInRoom = citems;
+        this.triggers = triggers;
     }
 
     public ArrayList<RenderableImage> getBaseImages(){
@@ -35,5 +41,4 @@ public class RoomCollection {
         this.room = room;
         this.id = room.getId();
     }
-
 }

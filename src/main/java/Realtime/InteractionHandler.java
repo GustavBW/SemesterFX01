@@ -7,7 +7,7 @@ public class InteractionHandler implements Runnable{
     private Player player;
 
     public static Interactible interactibleReadyToInteract = null;
-    public static boolean isRunning,isAwaiting;
+    public static boolean isRunning,isAwaiting = false,awaitBoolean;
 
     public InteractionHandler(Player player){
         this.player = player;
@@ -15,10 +15,12 @@ public class InteractionHandler implements Runnable{
 
     public void calcDistances(){
 
-        int j = 0;
+        awaitBoolean = true;
         while(!MainGUIController.isReady){
             awaiting();
         }
+        try{Thread.sleep(500);
+        }catch (Exception e){e.printStackTrace();}
         onExitFlagSleep();
 
         while(Game.isRunning && MainGUIController.isRunning){
@@ -56,6 +58,11 @@ public class InteractionHandler implements Runnable{
 
     private void awaiting(){
         isAwaiting = true;
+        if(awaitBoolean){
+            System.out.println("InteractionHandler was asked to Await. Now awaiting at: " + System.nanoTime());
+            awaitBoolean = !awaitBoolean;
+        }
+        System.out.println(" ");
     }
     private void onExitFlagSleep(){
         isAwaiting = false;

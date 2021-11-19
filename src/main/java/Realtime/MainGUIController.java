@@ -32,7 +32,7 @@ public class MainGUIController extends Application implements Runnable{
     private RoomCollection currentCollection;
 
     private static long logRequestCount1, logRequestCount2,logRequestCount3;
-    public static boolean isRunning = false, isReady = false;
+    public static boolean isRunning = false, isReady = false,awaitBoolean = false;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -42,7 +42,6 @@ public class MainGUIController extends Application implements Runnable{
 
         mainStage = stage;
         mainStage.setTitle("WorldOfToxins");
-
 
         canvas = new Canvas(Game.WIDTH,Game.HEIGHT);
         gc = canvas.getGraphicsContext2D();
@@ -70,6 +69,7 @@ public class MainGUIController extends Application implements Runnable{
         mainStage.requestFocus();
         mainStage.show();
         isReady = true;
+        System.out.println("MGUIC has finished setup at " + System.nanoTime());
     }
 
     private void createLoggingTexts() {
@@ -143,7 +143,6 @@ public class MainGUIController extends Application implements Runnable{
             r.render(gc);
         }
 
-
         long timeB = System.nanoTime();
 
         updateLogText(1, timeB - timeA);
@@ -152,12 +151,10 @@ public class MainGUIController extends Application implements Runnable{
     @Override
     public void init(){
 
-    }
-
+    }                                               //This one loads the first RoomCollection in through the CE
     public static void main(String[] args) {
         launch(args);
     }
-
     @Override
     public void run(){
         isRunning = true;
@@ -166,12 +163,11 @@ public class MainGUIController extends Application implements Runnable{
     }
 
     public void setCollection(RoomCollection rc){this.currentCollection = rc;}
-
     public RoomCollection getCurrentCollection(){return currentCollection;}
-
     private void changeScene(RoomCollection rc){
         isReady = false;
-        while(!Game.isAwaiting && !InteractionHandler.isAwaiting){
+        awaitBoolean = false;
+        while(!(Game.isAwaiting && InteractionHandler.isAwaiting)){
             onAwait();
         }
         onExitFlagSleep();
@@ -187,7 +183,6 @@ public class MainGUIController extends Application implements Runnable{
 
         isReady = true;
     }
-
     private void clearAllTicksRendersInters(){
         Interactible.interactibles.clear();
         Tickable.tickables.clear();
@@ -197,7 +192,6 @@ public class MainGUIController extends Application implements Runnable{
         Renderable.renderLayer3.clear();    //Rooftops
         Renderable.renderLayer4.clear();    //Uh. Something. I've forgotten.
     }
-
     private void addNewRenderables(RoomCollection rc){
         Renderable.renderLayer0.add(rc.getBaseImages().get(0));
         Renderable.renderLayer1.add(rc.getBaseImages().get(1));
@@ -207,9 +201,13 @@ public class MainGUIController extends Application implements Runnable{
 
         Renderable.renderLayer1.addAll(rc.getCitems());
     }
-
     private void onAwait(){
-        System.out.print("");       //Tricking the compiler to not skip the while loop
+        System.out.print(" ");       //Tricking the compiler to not skip the while loop
+        if(!awaitBoolean){
+            System.out.println("MGUIC is Awaiting Game and InteractionHandler at: " + System.nanoTime());
+        }
+        System.out.println(" ");
+        awaitBoolean = true;
     }
     private void onExitFlagSleep(){
         System.out.println("MGUIC continued from flag sleep at: " + System.nanoTime());

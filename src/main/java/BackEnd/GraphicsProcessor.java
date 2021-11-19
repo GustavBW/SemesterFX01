@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 
 public class GraphicsProcessor {
 
-
         //Room stuff
         private final String graphicsDirectory = "/Graphics";
         private final String[] subDirectories = {"/TestDirectory"};
