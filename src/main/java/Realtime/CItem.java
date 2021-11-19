@@ -42,6 +42,8 @@ public class CItem extends Item implements Interactible, Renderable {
         System.out.println("You're now in radius of Item: " + super.getName());
     }
     @Override
+    public void onInVicinity() {    }
+    @Override
     public void onInstancedRender() {
         Renderable.renderables.add(this);
     }

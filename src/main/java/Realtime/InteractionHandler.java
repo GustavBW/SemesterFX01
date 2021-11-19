@@ -6,6 +6,9 @@ public class InteractionHandler implements Runnable{
 
     private Player player;
 
+    public static Interactible interactibleReadyToInteract = null;
+    public static boolean isRunning,isAwaiting;
+
     public InteractionHandler(Player player){
         this.player = player;
     }
@@ -14,13 +17,19 @@ public class InteractionHandler implements Runnable{
 
         int j = 0;
         while(!MainGUIController.isReady){
-            System.out.println("IM AWAITING " + j);
-            j++;
-        }     //Halts the thread until the application class is ready
-        System.out.println("InterHandler continued from flag-sleep");
+            awaiting();
+        }
+        onExitFlagSleep();
 
         while(Game.isRunning && MainGUIController.isRunning){
-            
+
+            if(Game.onPause){continue;}
+
+            if(!MainGUIController.isReady){
+                awaiting();
+            }
+            isAwaiting = false;
+
             long timeA = System.nanoTime();
 
             int pPosX = player.getPosX();
@@ -35,18 +44,27 @@ public class InteractionHandler implements Runnable{
                 double distanceSquared = distXSq + distYSq;
 
                 if(distanceSquared < interRadiusSq){
-                    i.onInteraction();
+                    i.onInVicinity();
+                    interactibleReadyToInteract = i;
                 }
             }
+
             long timeB = System.nanoTime();
-
             MainGUIController.updateLogText(2, timeB - timeA);
-
         }
+    }
+
+    private void awaiting(){
+        isAwaiting = true;
+    }
+    private void onExitFlagSleep(){
+        isAwaiting = false;
+        System.out.println("InterHandler continued from flag-sleep at SysTimeNS: " + System.nanoTime());
     }
 
     @Override
     public void run() {
+        isRunning = true;
         calcDistances();
     }
 }

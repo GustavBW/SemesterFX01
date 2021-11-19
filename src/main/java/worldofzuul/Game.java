@@ -22,7 +22,7 @@ public class Game implements Runnable{
     public static final int WIDTH = 1500, HEIGHT = 1000, DELAY = 50;
     public static Player player;
     public static Room currentRoom;
-    public static boolean isRunning = false,onPause = false;
+    public static boolean isRunning = false,onPause = false, isAwaiting;
 
     public static void main(String[] args) {
         new Game();
@@ -56,12 +56,10 @@ public class Game implements Runnable{
     {            
         printWelcome();
 
-        int j = 0;
         while(!MainGUIController.isReady){
-            System.out.println("YOURE AWAITING " + j);
-            j++;
+            onAwait();
         }
-        System.out.println("Game continued from flag-sleep");
+        onExitFlagSleep();
 
         int loops;
         double next_game_tick = System.currentTimeMillis();
@@ -69,15 +67,21 @@ public class Game implements Runnable{
 
         while(MainGUIController.isRunning && Game.isRunning){
             loops = 0;
-            long timeA = System.nanoTime();
+
+            while(!MainGUIController.isReady){
+                onAwait();
+            }
+            onExitFlagSleep();
+
 
             while (System.currentTimeMillis() > next_game_tick
                     && loops < MAX_FRAMESKIP) {
 
+                long timeA = System.nanoTime();
+
                 next_game_tick += SKIP_TICKS;
                 loops++;
 
-                new DistanceTrigger(400,400,40);
 
                 if(onPause){continue;}
 
@@ -85,12 +89,10 @@ public class Game implements Runnable{
                     t.tick();
                 }
 
+                long timeB = System.nanoTime();
+                MainGUIController.updateLogText(3, timeB - timeA);
+
             }
-
-            long timeB = System.nanoTime();
-
-            MainGUIController.updateLogText(3, timeB - timeA);
-
         }
         quit(new Command(CommandWord.QUIT, null ));
 
@@ -98,6 +100,14 @@ public class Game implements Runnable{
         //finished = processCommand(command);
 
     }
+    private void onAwait(){
+        isAwaiting = true;
+    }
+    private void onExitFlagSleep(){
+        isAwaiting = false;
+        System.out.println("Game continued from flag-sleep at SysTimeNS: " + System.nanoTime());
+    }
+
     private void printWelcome()
     {
         System.out.println();

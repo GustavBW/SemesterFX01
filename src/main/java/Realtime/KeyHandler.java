@@ -20,7 +20,10 @@ public class KeyHandler implements EventHandler<KeyEvent> {
             case A -> Game.player.changeVelX(-1D);
             case S -> Game.player.changeVelY(1D);
             case D -> Game.player.changeVelX(1D);
-            case E -> isInteraction = true;
+            case E -> {
+                if(InteractionHandler.interactibleReadyToInteract != null){
+                InteractionHandler.interactibleReadyToInteract.onInteraction();}
+            }
             case P -> Game.onPause = !Game.onPause;
         }
     }

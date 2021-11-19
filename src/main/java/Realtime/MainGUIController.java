@@ -30,6 +30,8 @@ public class MainGUIController extends Application implements Runnable{
     private Canvas canvas;
     private GraphicsContext gc;
     private RoomCollection currentCollection;
+
+    private static long logRequestCount1, logRequestCount2,logRequestCount3;
     public static boolean isRunning = false, isReady = false;
 
     @Override
@@ -66,8 +68,8 @@ public class MainGUIController extends Application implements Runnable{
         mainStage.setScene(scene);
         mainStage.setOnCloseRequest(e -> stop());
         mainStage.requestFocus();
-        isReady = true;
         mainStage.show();
+        isReady = true;
     }
 
     private void createLoggingTexts() {
@@ -89,14 +91,25 @@ public class MainGUIController extends Application implements Runnable{
     public static void updateLogText(int id, long deltaNS){
         long fps = 1_000_000_000 / (deltaNS + 1);
 
-        try {
-            switch (id) {
-                case 1 -> renderFPSText.setText("R FPS: " + fps + " ");
-                case 2 -> interFPSText = new Text("I FPS: " + fps + " ");
-                case 3 -> tickFPSText = new Text("T FPS: " + fps + " ");
+        switch (id) {
+            case 1 -> {
+                logRequestCount1++;
+                if (logRequestCount1 % 100 == 0) {
+                    renderFPSText.setText("R FPS: " + fps + " ");
+                }
             }
-        }catch (Exception e){
-            e.printStackTrace();
+            case 2 -> {
+                logRequestCount2++;
+                if (logRequestCount2 % 100 == 0) {
+                    interFPSText.setText("I FPS: " + fps + " ");
+                }
+            }
+            case 3 -> {
+                logRequestCount3++;
+                if (logRequestCount3 % 100 == 0) {
+                    tickFPSText.setText("T FPS: " + fps + " ");
+                }
+            }
         }
     }
 
@@ -114,17 +127,26 @@ public class MainGUIController extends Application implements Runnable{
         gc.setFill(Color.BLACK);
         gc.fillRect(0,0,Game.WIDTH,Game.HEIGHT);
 
-        for(Renderable r : Renderable.renderables){
+        for(Renderable r : Renderable.renderLayer0){
+            r.render(gc);
+        }
+        for(Renderable r : Renderable.renderLayer1){
+            r.render(gc);
+        }
+        for(Renderable r : Renderable.renderLayer2){
+            r.render(gc);
+        }
+        for(Renderable r : Renderable.renderLayer3){
+            r.render(gc);
+        }
+        for(Renderable r : Renderable.renderLayer4){
             r.render(gc);
         }
 
+
         long timeB = System.nanoTime();
 
-        try {
-            updateLogText(1, timeB - timeA);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        updateLogText(1, timeB - timeA);
     }
 
     @Override
@@ -133,7 +155,6 @@ public class MainGUIController extends Application implements Runnable{
     }
 
     public static void main(String[] args) {
-
         launch(args);
     }
 
@@ -148,4 +169,35 @@ public class MainGUIController extends Application implements Runnable{
 
     public RoomCollection getCurrentCollection(){return currentCollection;}
 
+    private void changeScene(RoomCollection rc){
+        isReady = false;
+        while(!Game.isAwaiting && !InteractionHandler.isAwaiting){
+            onAwait();
+        }
+        onExitFlagSleep();
+
+        Interactible.interactibles.clear();
+        Tickable.tickables.clear();
+        Renderable.renderLayer0.clear();    //Ground layer
+        Renderable.renderLayer1.clear();    //Item + NPC + houseWalls
+                                            //Layer2 isn't cleared as that is the player layer
+        Renderable.renderLayer3.clear();    //Rooftops
+        Renderable.renderLayer4.clear();    //Uh. Something. I've forgotten.
+
+        addNewRenderables(rc);
+
+
+        isReady = true;
+    }
+
+    private void addNewRenderables(RoomCollection rc){
+        
+    }
+
+    private void onAwait(){
+        System.out.print("");       //Tricking the compiler to not skip the while loop
+    }
+    private void onExitFlagSleep(){
+        System.out.println("MGUIC continued from flag sleep at: " + System.nanoTime());
+    }
 }

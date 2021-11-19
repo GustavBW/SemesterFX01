@@ -26,6 +26,9 @@ public class DistanceTrigger implements Interactible {
     }
 
     @Override
+    public void onInVicinity() {    }
+
+    @Override
     public int getInterRadius() {
         return interRadius;
     }
