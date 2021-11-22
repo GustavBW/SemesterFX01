@@ -32,7 +32,8 @@ public class MainGUIController extends Application implements Runnable{
     private RoomCollection currentCollection;
 
     private static long logRequestCount1, logRequestCount2,logRequestCount3;
-    public static boolean isRunning = false, isReady = false,awaitBoolean = false;
+    public static boolean isRunning = false, isReady = false, awaitBoolean = false, sceneChangeRequested = false;
+    public static RoomCollection roomToChangeTo;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -74,11 +75,11 @@ public class MainGUIController extends Application implements Runnable{
 
     private void createLoggingTexts() {
 
-        renderFPSText = new Text("R FPS: ...");
+        renderFPSText = new Text("R FPS: Inactive");
         renderFPSText.setDisable(true);
-        interFPSText = new Text("I FPS: ...");
+        interFPSText = new Text("I FPS: Inactive");
         interFPSText.setDisable(true);
-        tickFPSText = new Text("T FPS: ...");
+        tickFPSText = new Text("T FPS: Inactive");
         tickFPSText.setDisable(true);
 
         hboxTop = new HBox(5);
@@ -144,8 +145,11 @@ public class MainGUIController extends Application implements Runnable{
         }
 
         long timeB = System.nanoTime();
-
         updateLogText(1, timeB - timeA);
+
+        if(sceneChangeRequested){
+            changeScene(roomToChangeTo);
+        }
     }
 
     @Override

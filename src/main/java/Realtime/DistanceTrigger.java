@@ -6,6 +6,10 @@ public class DistanceTrigger implements Interactible {
 
     private int posX, posY, interRadius;
 
+    public DistanceTrigger(){
+        this(0,0,0);
+    }
+
     public DistanceTrigger(int x, int y, int r){
         this.posX = x;
         this.posY = y;
@@ -22,11 +26,11 @@ public class DistanceTrigger implements Interactible {
 
     @Override
     public void onInteraction() {
-        System.out.println("You're in radius of a distance trigger");
+        System.out.println("You interacted with a distance trigger");
     }
 
     @Override
-    public void onInVicinity() {    }
+    public void onInVicinity() {System.out.println("You're in radius of a distance trigger");}
 
     @Override
     public int getInterRadius() {
@@ -37,9 +41,12 @@ public class DistanceTrigger implements Interactible {
     public int getPosX() {
         return posX;
     }
-
     @Override
     public int getPosY() {
         return posX;
     }
+
+    public void setPosX(int i){posX = i;}
+    public void setPosY(int i){posY = i;}
+    public void setInterRadius(int i){interRadius = i;}
 }

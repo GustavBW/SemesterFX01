@@ -50,6 +50,7 @@ public class Player implements Renderable, Tickable {
     public void tick() {
         posX += velX;
         posY += velY;
+
         orX = imW + posX;
         orY = imH + posY;
 
