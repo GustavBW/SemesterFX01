@@ -1,5 +1,6 @@
 package Realtime;
 
+import BackEnd.ExitDefinition;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -13,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import worldofzuul.Game;
 import BackEnd.RoomCollection;
+import worldofzuul.Room;
 
 public class MainGUIController extends Application implements Runnable{
 
@@ -183,7 +185,7 @@ public class MainGUIController extends Application implements Runnable{
         Game.currentRoom = rc.getRoom();
 
         long timeB = System.nanoTime();
-        System.out.println("MGUIC.changeScene took: " + (timeB - timeA) + "ns");
+        System.out.println("MGUIC.changeScene() took: " + (timeB - timeA) + "ns");
 
         isReady = true;
     }
@@ -215,5 +217,6 @@ public class MainGUIController extends Application implements Runnable{
     }
     private void onExitFlagSleep(){
         System.out.println("MGUIC continued from flag sleep at: " + System.nanoTime());
+        awaitBoolean = false;
     }
 }

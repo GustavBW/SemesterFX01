@@ -30,12 +30,12 @@ public class InteractionHandler implements Runnable{
             if(!MainGUIController.isReady){
                 awaiting();
             }
-            isAwaiting = false;
+            onExitFlagSleep();
 
             long timeA = System.nanoTime();
 
-            int pPosX = player.getPosX();
-            int pPosY = player.getPosY();
+            int pPosX = player.getOrX();        //Using Origin coords here, as it'll give a better result.
+            int pPosY = player.getOrY();        //Player.posX & posY would make a scewed distance calculation.
 
             if(!Interactible.interactibles.isEmpty()) {
                 for (Interactible i : Interactible.interactibles) {
@@ -70,7 +70,6 @@ public class InteractionHandler implements Runnable{
         isAwaiting = false;
         System.out.println("InterHandler continued from flag-sleep at SysTimeNS: " + System.nanoTime());
     }
-
     @Override
     public void run() {
         isRunning = true;

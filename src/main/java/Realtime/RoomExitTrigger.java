@@ -10,7 +10,7 @@ public class RoomExitTrigger extends DistanceTrigger{
     private final RoomCollection roomToChangeTo;
     private final ExitDefinition exit;
     private Point2D position;
-    private int interActionRadius = 50;
+    private final int interActionRadius = 50;
 
     public RoomExitTrigger(RoomCollection rc, ExitDefinition ed) {
 
@@ -35,14 +35,15 @@ public class RoomExitTrigger extends DistanceTrigger{
         if(InteractionHandler.interactibleReadyToInteract == null) {
             InteractionHandler.interactibleReadyToInteract = this;
         }
-
     }
-
     @Override
     public void onInteraction(){
         System.out.println("You just interacted with a Room Trigger");
 
         MainGUIController.roomToChangeTo = roomToChangeTo;
         MainGUIController.sceneChangeRequested = true;
+    }
+    public String getExitString(){
+        return exit.getDirection() + ": " + roomToChangeTo.getRoom().getName();
     }
 }
