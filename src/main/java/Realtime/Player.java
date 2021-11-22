@@ -1,16 +1,16 @@
 package Realtime;
 
-import Realtime.Renderable;
-import Realtime.Tickable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import worldofzuul.Game;
 
 public class Player implements Renderable, Tickable {
 
-    private int posX,posY;
-    private Image image;
-    private double velX, velY, drag = 0.99, velFloorVal = 0.05, mvSpeed = 3;
+    private int posX,posY,orX,orY,imW, imH;;  //orX describes the graphical origin. Meaning where the center of any image or rectangle LOOKS to be.
+    private final Image image;
+    private double velX, velY;
+    private final double drag = 0.99, velFloorVal = 0.05, mvSpeed = 3;
 
     public Player(int x, int y, Image image){
         this.posX = x;
@@ -19,6 +19,19 @@ public class Player implements Renderable, Tickable {
         this.velX = 1;
         this.velY = 1;
 
+
+        if(this.image != null) {                //This if condition wont be necessary when images are working
+            this.imW = (int) image.getWidth();
+            this.imH = (int) image.getHeight();
+            this.orX = imW + posX;
+            this.orY = imH + posY;
+        }else{
+            this.imW = 50;
+            this.imH = 50;
+            this.orX = posX + imW;
+            this.orY = posY + imH;
+        }
+
         onInstancedRender();
         onInstancedTick();
     }
@@ -26,10 +39,10 @@ public class Player implements Renderable, Tickable {
     @Override
     public void render(GraphicsContext gc) {
         if(image != null){
-            gc.drawImage(image,posX,posY);
+            gc.drawImage(image,orX,orY);
         }else{
-            gc.setFill(Color.WHITE);
-            gc.fillRect(posX,posY,100,100);
+            gc.setFill(Color.GREEN);
+            gc.fillRect(orX,orY,100,100);
         }
     }
 
@@ -37,10 +50,18 @@ public class Player implements Renderable, Tickable {
     public void tick() {
         posX += velX;
         posY += velY;
+        orX = imW + posX;
+        orY = imH + posY;
 
         velX *= drag;
         velY *= drag;
 
+        if(posX >= Game.WIDTH || posX <= 0){
+            velX = 0;
+        }
+        if(posX >= Game.HEIGHT || posY <= 0){
+            velY = 0;
+        }
         if(velX < velFloorVal){
             velX = 0;
         }
@@ -49,8 +70,8 @@ public class Player implements Renderable, Tickable {
         }
     }
 
-    public void changeVelX(double i){velX += i * mvSpeed;}
-    public void changeVelY(double i){velY += i * mvSpeed;}
+    public void changeVelX(double i){velX += (i * mvSpeed) * (1 / ((velX * velX) + 1));}
+    public void changeVelY(double i){velY += (i * mvSpeed) * (1 / ((velX * velX) + 1));}
 
     public double getVelX(){return velX;}
     public double getVelY(){return velY;}

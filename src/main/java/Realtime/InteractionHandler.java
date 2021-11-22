@@ -37,22 +37,24 @@ public class InteractionHandler implements Runnable{
             int pPosX = player.getPosX();
             int pPosY = player.getPosY();
 
-            for(Interactible i : Interactible.interactibles){
+            if(!Interactible.interactibles.isEmpty()) {
+                for (Interactible i : Interactible.interactibles) {
 
-                int interRadiusSq = i.getInterRadius() * i.getInterRadius();
-                double distXSq = (pPosX - i.getPosX()) * (pPosX - i.getPosX());
-                double distYSq = (pPosY - i.getPosY()) * (pPosY - i.getPosY());
+                    int interRadiusSq = i.getInterRadius() * i.getInterRadius();
+                    double distXSq = (pPosX - i.getPosX()) * (pPosX - i.getPosX());
+                    double distYSq = (pPosY - i.getPosY()) * (pPosY - i.getPosY());
 
-                double distanceSquared = distXSq + distYSq;
+                    double distanceSquared = distXSq + distYSq;
 
-                if(distanceSquared < interRadiusSq){
-                    i.onInVicinity();
-                    interactibleReadyToInteract = i;
+                    if (distanceSquared < interRadiusSq) {
+                        i.onInVicinity();
+                        interactibleReadyToInteract = i;
+                    }
                 }
-            }
+                long timeB = System.nanoTime();
 
-            long timeB = System.nanoTime();
-            MainGUIController.updateLogText(2, timeB - timeA);
+                MainGUIController.updateLogText(2, timeB - timeA);
+            }
         }
     }
 

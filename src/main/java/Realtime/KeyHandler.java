@@ -16,10 +16,10 @@ public class KeyHandler implements EventHandler<KeyEvent> {
     public void handle(KeyEvent keyEvent) {
 
         switch (keyEvent.getCode()) {
-            case W -> Game.player.changeVelY(-1D);
-            case A -> Game.player.changeVelX(-1D);
-            case S -> Game.player.changeVelY(1D);
-            case D -> Game.player.changeVelX(1D);
+            case W -> Game.player.changeVelY(-1);
+            case A -> Game.player.changeVelX(-1);
+            case S -> Game.player.changeVelY(1);
+            case D -> Game.player.changeVelX(1);
             case E -> {
                 if(InteractionHandler.interactibleReadyToInteract != null){
                 InteractionHandler.interactibleReadyToInteract.onInteraction();}
