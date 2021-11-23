@@ -15,7 +15,7 @@ public class Player implements Renderable, Tickable {
     private int imH;  //orX describes the graphical origin. Meaning where the center of any image or rectangle LOOKS to be.
     private final Image image;
     private double velX, velY;
-    private final double drag = 0.95, velFloorVal = 0.005, mvSpeed = 5;
+    private final double drag = 0.99, velFloorVal = 0.01, mvSpeed = 5;
 
     public Player(int x, int y, Image image){
         this.posX = x;
@@ -60,6 +60,7 @@ public class Player implements Renderable, Tickable {
 
         orX = posX - imW;   //Updating Origins
         orY = posY - imH;
+        System.out.println("orY = " + orY + " imH & posY = " + imH + " " + posY);
 
         velX *= drag;       //Applying drag
         velY *= drag;
@@ -81,8 +82,8 @@ public class Player implements Renderable, Tickable {
         }
     }
 
-    public void changeVelX(double i){velX += (i * mvSpeed) * (1 / ((velX * velX) + 1));}
-    public void changeVelY(double i){velY += (i * mvSpeed) * (1 / ((velX * velX) + 1));}
+    public void changeVelX(double i){velX = (i * mvSpeed) * (1 / ((velX * velX) + 1));}
+    public void changeVelY(double i){velY = (i * mvSpeed) * (1 / ((velX * velX) + 1));}
 
     public double getVelX(){return velX;}
     public double getVelY(){return velY;}

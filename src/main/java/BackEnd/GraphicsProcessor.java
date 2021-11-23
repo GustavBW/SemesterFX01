@@ -1,11 +1,12 @@
 package BackEnd;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 
 import Realtime.RenderableImage;
 import javafx.geometry.Point2D;
+import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 
 public class GraphicsProcessor {
@@ -74,6 +75,14 @@ public class GraphicsProcessor {
 
 
                 return new PosPicCombo(picture,position);
+        }
+
+
+        public Image getImage(){
+                Image output;
+                output = new Image(getClass().getResourceAsStream("/Graphics/0/PlayerTest.png"));
+
+                return output;
         }
 
 }

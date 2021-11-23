@@ -1,5 +1,6 @@
 package worldofzuul;
 
+import BackEnd.GraphicsProcessor;
 import BackEnd.TextProcessor;
 import Realtime.*;
 
@@ -9,6 +10,7 @@ public class Game implements Runnable{
     private final Parser parser;
 
     private final static TextProcessor tp = new TextProcessor();
+    private final static GraphicsProcessor gp = new GraphicsProcessor();
     private final InventoryManager inventoryManager;
     private final InteractionHandler interHandler;
     private final MainGUIController mGUIC;
@@ -30,7 +32,7 @@ public class Game implements Runnable{
 
     public Game() {
 
-        player = new Player( WIDTH / 2,  HEIGHT / 2, null);
+        player = new Player( WIDTH / 2,  HEIGHT / 2, gp.getImage());
 
         interHandler = new InteractionHandler(player);
         mGUIC = new MainGUIController();
