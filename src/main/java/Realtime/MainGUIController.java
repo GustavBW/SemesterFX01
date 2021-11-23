@@ -1,6 +1,5 @@
 package Realtime;
 
-import BackEnd.ExitDefinition;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -14,7 +13,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import worldofzuul.Game;
 import BackEnd.RoomCollection;
-import worldofzuul.Room;
 
 public class MainGUIController extends Application implements Runnable{
 
@@ -32,6 +30,7 @@ public class MainGUIController extends Application implements Runnable{
     private Canvas canvas;
     private GraphicsContext gc;
     private RoomCollection currentCollection;
+    private RoomCollection previousRCollection;
 
     private static long logRequestCount1, logRequestCount2,logRequestCount3;
     public static boolean isRunning = false, isReady = false, awaitBoolean = false, sceneChangeRequested = false;
@@ -177,6 +176,8 @@ public class MainGUIController extends Application implements Runnable{
             onAwait();
         }
         onExitFlagSleep();
+        previousRCollection = currentCollection;
+        currentCollection = rc;
 
         long timeA = System.nanoTime();
 

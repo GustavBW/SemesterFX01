@@ -39,16 +39,23 @@ public class InteractionHandler implements Runnable{
 
             if(!Interactible.interactibles.isEmpty()) {
                 for (Interactible i : Interactible.interactibles) {
+                    if(i instanceof DistanceTrigger) {
+                        int interRadiusSq = i.getInterRadius() * i.getInterRadius();
+                        double distXSq = (pPosX - i.getPosX()) * (pPosX - i.getPosX());
+                        double distYSq = (pPosY - i.getPosY()) * (pPosY - i.getPosY());
 
-                    int interRadiusSq = i.getInterRadius() * i.getInterRadius();
-                    double distXSq = (pPosX - i.getPosX()) * (pPosX - i.getPosX());
-                    double distYSq = (pPosY - i.getPosY()) * (pPosY - i.getPosY());
+                        double distanceSquared = distXSq + distYSq;
 
-                    double distanceSquared = distXSq + distYSq;
-
-                    if (distanceSquared < interRadiusSq) {
-                        i.onInVicinity();
-                        interactibleReadyToInteract = i;
+                        if (distanceSquared < interRadiusSq) {
+                            interactibleReadyToInteract = i;
+                            i.onInVicinity();
+                        }
+                    }
+                    if(i instanceof SquareTrigger){
+                        if(((SquareTrigger) i).isInBounds(pPosX,pPosY)){
+                            interactibleReadyToInteract = i;
+                            i.onInVicinity();
+                        }
                     }
                 }
                 long timeB = System.nanoTime();

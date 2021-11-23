@@ -59,7 +59,7 @@ public class GraphicsProcessor {
                                 String[] currentLine = line.split(cItemSplitBy);
 
                                 if(currentLine[0].equals(String.valueOf(itemId))){
-                                        position = new Point2D(Integer.parseInt(currentLine[1]),Integer.parseInt(currentLine[2]));
+                                        position = new Point2D(Integer.parseInt(currentLine[1]), Integer.parseInt(currentLine[2]));
                                 }
                         }
 

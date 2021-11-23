@@ -42,7 +42,9 @@ public class CItem extends Item implements Interactible, Renderable {
         System.out.println("You're now in radius of Item: " + super.getName());
     }
     @Override
-    public void onInVicinity() {    }
+    public void onInVicinity() {
+
+    }
     @Override
     public void onInstancedRender() {
         //Since CItems are de-rendered when the rooms change, it can't add itself when instantied. MGUIC takes care of it.
