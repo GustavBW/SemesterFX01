@@ -1,8 +1,9 @@
 package Realtime;
 
+import Realtime.interfaces.Interactible;
 import javafx.geometry.Point2D;
 
-public class SquareTrigger implements Interactible{
+public class SquareTrigger implements Interactible {
 
     private boolean inBounds;
     private final int x,y,sizeX,sizeY,orX,orY;

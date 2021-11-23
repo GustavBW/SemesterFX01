@@ -1,4 +1,4 @@
-package Realtime;
+package Realtime.interfaces;
 
 import javafx.scene.canvas.GraphicsContext;
 

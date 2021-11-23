@@ -1,5 +1,7 @@
 package Realtime;
 
+import Realtime.interfaces.Renderable;
+import Realtime.interfaces.Tickable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;

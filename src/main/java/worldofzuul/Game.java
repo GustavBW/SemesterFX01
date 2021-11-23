@@ -3,6 +3,7 @@ package worldofzuul;
 import BackEnd.GraphicsProcessor;
 import BackEnd.TextProcessor;
 import Realtime.*;
+import Realtime.interfaces.Tickable;
 
 import java.util.ArrayList;
 

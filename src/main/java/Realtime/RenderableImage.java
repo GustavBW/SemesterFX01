@@ -1,10 +1,11 @@
 package Realtime;
 
+import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class RenderableImage implements Renderable{
+public class RenderableImage implements Renderable {
 
     private final Point2D position;
     private final double width, height;

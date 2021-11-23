@@ -1,4 +1,4 @@
-package Realtime;
+package Realtime.interfaces;
 
 import java.util.ArrayList;
 

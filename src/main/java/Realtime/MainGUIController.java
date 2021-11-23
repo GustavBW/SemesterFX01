@@ -1,5 +1,8 @@
 package Realtime;
 
+import Realtime.interfaces.Interactible;
+import Realtime.interfaces.Renderable;
+import Realtime.interfaces.Tickable;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Pos;

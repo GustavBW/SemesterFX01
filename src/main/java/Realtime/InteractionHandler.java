@@ -1,5 +1,6 @@
 package Realtime;
 
+import Realtime.interfaces.Interactible;
 import worldofzuul.Game;
 
 public class InteractionHandler implements Runnable{

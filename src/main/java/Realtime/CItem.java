@@ -1,8 +1,8 @@
 package Realtime;
 
 import BackEnd.PosPicCombo;
-import Realtime.Interactible;
-import Realtime.Renderable;
+import Realtime.interfaces.Interactible;
+import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

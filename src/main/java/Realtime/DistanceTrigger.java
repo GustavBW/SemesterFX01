@@ -1,6 +1,6 @@
 package Realtime;
 
-import Realtime.Interactible;
+import Realtime.interfaces.Interactible;
 
 public class DistanceTrigger implements Interactible {
 
