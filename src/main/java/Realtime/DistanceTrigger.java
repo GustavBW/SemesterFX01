@@ -33,6 +33,11 @@ public class DistanceTrigger implements Interactible {
     public void onInVicinity() {System.out.println("You're in radius of a distance trigger");}
 
     @Override
+    public String getPopUpText() {
+        return " ";
+    }
+
+    @Override
     public int getInterRadius() {
         return interRadius;
     }
