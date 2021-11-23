@@ -96,7 +96,7 @@ public class Game implements Runnable{
                 }
 
                 long timeB = System.nanoTime();
-                MainGUIController.updateLogText(3, timeB - timeA);
+                MainGUIController.logTimeTick = timeB - timeA;
 
             }
         }

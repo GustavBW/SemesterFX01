@@ -34,7 +34,7 @@ public class DistanceTrigger implements Interactible {
 
     @Override
     public String getPopUpText() {
-        return " ";
+        return "What up my dude!";
     }
 
     @Override

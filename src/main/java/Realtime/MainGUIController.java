@@ -5,6 +5,7 @@ import Realtime.interfaces.Renderable;
 import Realtime.interfaces.Tickable;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -23,7 +24,7 @@ public class MainGUIController extends Application implements Runnable{
     //This class can take in a RoomCollection and display what it contains
 
     public static Stage mainStage;
-    private static Text renderFPSText,interFPSText,tickFPSText;
+    private Text renderFPSText,interFPSText,tickFPSText;
     private HBox hboxTop;
 
     private BorderPane bp;
@@ -32,10 +33,11 @@ public class MainGUIController extends Application implements Runnable{
 
     private Canvas canvas;
     private GraphicsContext gc;
-    private RoomCollection currentCollection;
-    private RoomCollection previousRCollection;
+    private static RoomCollection currentCollection;
+    private RoomCollection previousRCollection;             //Redundant. But might get important for some race conditions
+    private long logLastCall = 0;
 
-    private static long logRequestCount1, logRequestCount2,logRequestCount3;
+    public static long logTimeRender = 888,logTimeTick = 888,logTimeInter = 888;
     public static boolean isRunning = false, isReady = false, awaitBoolean = false, sceneChangeRequested = false;
     public static RoomCollection roomToChangeTo;
 
@@ -62,6 +64,8 @@ public class MainGUIController extends Application implements Runnable{
         };
         timer.start();
 
+        new DistanceTrigger(400,400,50);
+
         bp.setCenter(canvas);
         keyHandler = new KeyHandler();
         mouseHandler = new MouseHandler();
@@ -79,11 +83,11 @@ public class MainGUIController extends Application implements Runnable{
 
     private void createLoggingTexts() {
 
-        renderFPSText = new Text("R FPS: Inactive");
+        renderFPSText = new Text("R FPS: Inactive ");
         renderFPSText.setDisable(true);
-        interFPSText = new Text("I FPS: Inactive");
+        interFPSText = new Text("I FPS: Inactive ");
         interFPSText.setDisable(true);
-        tickFPSText = new Text("T FPS: Inactive");
+        tickFPSText = new Text("T FPS: Inactive ");
         tickFPSText.setDisable(true);
 
         hboxTop = new HBox(5);
@@ -93,37 +97,24 @@ public class MainGUIController extends Application implements Runnable{
         bp.setTop(hboxTop);
     }
 
-    public static void updateLogText(int id, long deltaNS){
-        long fps = 1_000_000_000 / (deltaNS + 1);
+    private void updateLogText() {
+        if(System.currentTimeMillis() >= logLastCall + 500) {       //Triggers log ~2 times a second
+            long rFPS = 1_000_000_000 / (logTimeRender + 1);        //Super fast method of avoiding dividing by zero
+            long iFPS = 1_000_000_000 / (logTimeInter + 1);         //Unfortunatly it will make the times occur slower
+            long tFPS = 1_000_000_000 / (logTimeTick + 1);          //By a very small fraction
 
-        switch (id) {
-            case 1 -> {
-                logRequestCount1++;
-                if (logRequestCount1 % 100 == 0) {
-                    renderFPSText.setText("R FPS: " + fps + " ");
-                }
-            }
-            case 2 -> {
-                logRequestCount2++;
-                if (logRequestCount2 % 100 == 0) {
-                    interFPSText.setText("I FPS: " + fps + " ");
-                }
-            }
-            case 3 -> {
-                logRequestCount3++;
-                if (logRequestCount3 % 100 == 0) {
-                    tickFPSText.setText("T FPS: " + fps + " ");
-                }
-            }
+            renderFPSText.setText(" R/s : " + rFPS + " ");
+            interFPSText.setText(" I/s : " + iFPS + " ");
+            tickFPSText.setText(" T/s : " + tFPS + " ");
+
+            logLastCall = System.currentTimeMillis();
         }
     }
-
     public synchronized void stop(){
         System.out.println("MGUIC.Stop() called");
         isRunning = false;
         mainStage.close();
     }
-
     private void onUpdate(){
 
         long timeA = System.nanoTime();
@@ -148,21 +139,34 @@ public class MainGUIController extends Application implements Runnable{
             r.render(gc);
         }
 
+        if(InteractionHandler.interactibleReadyToInteract != null){
+            displayTemporaryText(InteractionHandler.interactibleReadyToInteract);
+        }
+
+        updateLogText();
         long timeB = System.nanoTime();
-        updateLogText(1, timeB - timeA);
+        logTimeRender = timeB - timeA;
 
         if(sceneChangeRequested){
             changeScene(roomToChangeTo);
         }
     }
 
+    public void displayTemporaryText(Interactible i){
+        if(i instanceof CItem){
+            new RenderableText(i.getPopUpText(), new Point2D(i.getPosX(),i.getPosY()),5000);
+        }
+    }
+
     @Override
     public void init(){
 
-    }                                               //This one loads the first RoomCollection in through the CE
+    }//This one loads the first RoomCollection in through the CE
+
     public static void main(String[] args) {
         launch(args);
     }
+
     @Override
     public void run(){
         isRunning = true;
@@ -223,5 +227,13 @@ public class MainGUIController extends Application implements Runnable{
     private void onExitFlagSleep(){
         System.out.println("MGUIC continued from flag sleep at: " + System.nanoTime());
         awaitBoolean = false;
+    }
+
+    public static RoomCollection getCurrentRoom(){
+        if(sceneChangeRequested) {
+            return roomToChangeTo;
+        }else{
+            return currentCollection;
+        }
     }
 }

@@ -6,6 +6,7 @@ import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import worldofzuul.Game;
 import worldofzuul.Item;
 
 public class CItem extends Item implements Interactible, Renderable {
@@ -45,7 +46,8 @@ public class CItem extends Item implements Interactible, Renderable {
     public Item getItem(){return item;}
     public PosPicCombo getPosPic(){return posPic;}
     public void reInstate(){
-
+        MainGUIController.getCurrentRoom().getCitems().add(this);
+        position = new Point2D(Game.player.getOrX(),Game.player.getOrY());
         Interactible.interactibles.add(this);
         Renderable.renderLayer1.add(this);
     }
@@ -71,7 +73,8 @@ public class CItem extends Item implements Interactible, Renderable {
     public void render(GraphicsContext gc) {
         gc.drawImage(picture, position.getX(),position.getY());
     }
-    public void destroy(){
+    public void destroy(){                                  //Removes the item from any static contexts in which a reference is kept
+        MainGUIController.getCurrentRoom().getCitems().remove(this);
         Interactible.interactibles.remove(this);
         Renderable.renderLayer1.remove(this);
     }

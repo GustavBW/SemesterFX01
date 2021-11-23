@@ -20,7 +20,7 @@ public class InteractionHandler implements Runnable{
         while(!MainGUIController.isReady){
             awaiting();
         }
-        try{Thread.sleep(500);
+        try{Thread.sleep(5000);
         }catch (Exception e){e.printStackTrace();}
         onExitFlagSleep();
 
@@ -39,6 +39,9 @@ public class InteractionHandler implements Runnable{
             int pPosY = player.getOrY();        //Player.posX & posY would make a scewed distance calculation.
 
             if(!Interactible.interactibles.isEmpty()) {
+
+                boolean foundSomething = false;
+
                 for (Interactible i : Interactible.interactibles) {
                     if(i instanceof DistanceTrigger) {
                         int interRadiusSq = i.getInterRadius() * i.getInterRadius();
@@ -50,18 +53,25 @@ public class InteractionHandler implements Runnable{
                         if (distanceSquared < interRadiusSq) {
                             interactibleReadyToInteract = i;
                             i.onInVicinity();
+                            foundSomething = true;
                         }
                     }
                     if(i instanceof SquareTrigger){     //Yeah SquareTriggers don't use math. Just a giant ass if statement.
                         if(((SquareTrigger) i).isInBounds(pPosX,pPosY)){
                             interactibleReadyToInteract = i;
                             i.onInVicinity();
+                            foundSomething = true;
                         }
                     }
                 }
+
+                if(!foundSomething){                    //Resets it as the MGUIC listens to whether or not "interactibleReadyToInteract" is null
+                    interactibleReadyToInteract = null;
+                }
+
                 long timeB = System.nanoTime();
 
-                MainGUIController.updateLogText(2, timeB - timeA);
+                MainGUIController.logTimeTick = timeB - timeA;
             }
         }
     }
