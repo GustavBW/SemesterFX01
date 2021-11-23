@@ -81,7 +81,6 @@ public class GraphicsProcessor {
         public Image getImage(){
                 Image output;
                 output = new Image(getClass().getResourceAsStream("/Graphics/0/PlayerTest.png"));
-
                 return output;
         }
 
