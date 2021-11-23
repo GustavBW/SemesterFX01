@@ -74,10 +74,10 @@ public class Player implements Renderable, Tickable {
         }
 
         //Capping slowest possible movements as else the player will drift very slowly for a long time
-        if(velX < velFloorVal){
+        if(velX < velFloorVal && velX > -1 * velFloorVal){
             velX = 0;
         }
-        if(velY < velFloorVal){
+        if(velY < velFloorVal && velY > -1 * velFloorVal){
             velY = 0;
         }
     }

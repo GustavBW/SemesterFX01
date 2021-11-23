@@ -68,7 +68,6 @@ public class InteractionHandler implements Runnable{
     }
     private void onExitFlagSleep(){
         isAwaiting = false;
-        System.out.println("InterHandler continued from flag-sleep at SysTimeNS: " + System.nanoTime());
     }
     @Override
     public void run() {
