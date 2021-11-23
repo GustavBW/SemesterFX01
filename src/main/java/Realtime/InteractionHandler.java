@@ -8,7 +8,7 @@ public class InteractionHandler implements Runnable{
 
     private Player player;
 
-    public static Interactible interactibleReadyToInteract = null;
+    public static Interactible interactibleReadyToInteract;
     public static boolean isRunning,isAwaiting = false,awaitBoolean;
 
     public InteractionHandler(Player player){
@@ -16,7 +16,7 @@ public class InteractionHandler implements Runnable{
     }
 
     public void calcDistances(){
-        System.out.println("InteractionHandler was started");
+
         awaitBoolean = true;
         while(!MainGUIController.isReady){
             awaiting();

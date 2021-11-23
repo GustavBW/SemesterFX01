@@ -35,7 +35,7 @@ public class MainGUIController extends Application implements Runnable{
     private GraphicsContext gc;
     private static RoomCollection currentCollection;
     private RoomCollection previousRCollection;             //Redundant. But might get important for some race conditions
-    private long logLastCall = 0;
+    private long logLastCall = 0, distTrigLastTextCall = 0;
 
     public static long logTimeRender = 888,logTimeTick = 888,logTimeInter = 888;
     public static boolean isRunning = false, isReady = false, awaitBoolean = false, sceneChangeRequested = false;
@@ -64,9 +64,7 @@ public class MainGUIController extends Application implements Runnable{
         };
         timer.start();
 
-
-        new DistanceTrigger(400, 400, 100);
-
+        new DistanceTrigger(Game.WIDTH / 2,Game.HEIGHT / 2,400);
 
         bp.setCenter(canvas);
         keyHandler = new KeyHandler();
@@ -100,7 +98,7 @@ public class MainGUIController extends Application implements Runnable{
     }
 
     private void updateLogText() {
-        if(System.currentTimeMillis() >= logLastCall + 500) {       //Triggers log ~2 times a second
+        if(System.currentTimeMillis() >= logLastCall + 500) {       //Triggers log updated ~2 times a second
             long rFPS = 1_000_000_000 / (logTimeRender + 1);        //Super fast method of avoiding dividing by zero
             long iFPS = 1_000_000_000 / (logTimeInter + 1);         //Unfortunatly it will make the times occur slower
             long tFPS = 1_000_000_000 / (logTimeTick + 1);          //By a very small fraction
@@ -138,7 +136,9 @@ public class MainGUIController extends Application implements Runnable{
             r.render(gc);
         }
         for(Renderable r : Renderable.renderLayer4){
-            r.render(gc);
+            if(!r.isDead()) {
+                r.render(gc);
+            }
         }
 
         if(InteractionHandler.interactibleReadyToInteract != null){
@@ -146,6 +146,7 @@ public class MainGUIController extends Application implements Runnable{
         }
 
         updateLogText();
+        cleanUpExperied();
         long timeB = System.nanoTime();
         logTimeRender = timeB - timeA;
 
@@ -155,8 +156,17 @@ public class MainGUIController extends Application implements Runnable{
     }
 
     public void displayTemporaryText(Interactible i){
-        if(i instanceof CItem){
-            new RenderableText(i.getPopUpText(), new Point2D(i.getPosX(),i.getPosY()),500);
+        if(i instanceof DistanceTrigger || i instanceof CItem){
+            if(System.currentTimeMillis() > distTrigLastTextCall + 500) {
+                new RenderableText(i.getPopUpText(), new Point2D(i.getPosX(), i.getPosY()), 500);
+                distTrigLastTextCall = System.currentTimeMillis();
+            }
+        }
+    }
+
+    public void cleanUpExperied(){
+        for(RenderableText t : RenderableText.deadRendText){
+            t.destroy();
         }
     }
 
@@ -176,7 +186,7 @@ public class MainGUIController extends Application implements Runnable{
         launch(args);
     }
 
-    public void setCollection(RoomCollection rc){this.currentCollection = rc;}
+    public void setCollection(RoomCollection rc){currentCollection = rc;}
     public RoomCollection getCurrentCollection(){return currentCollection;}
     private void changeScene(RoomCollection rc){
         isReady = false;

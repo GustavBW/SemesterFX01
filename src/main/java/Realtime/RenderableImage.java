@@ -29,6 +29,11 @@ public class RenderableImage implements Renderable {
         gc.drawImage(image,position.getX(),position.getY());
     }
 
+    @Override
+    public boolean isDead() {
+        return false;
+    }
+
     public double getWidth(){
         return width;
     }

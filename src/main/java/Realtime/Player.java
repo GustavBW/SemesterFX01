@@ -53,6 +53,11 @@ public class Player implements Renderable, Tickable {
     }
 
     @Override
+    public boolean isDead() {
+        return false;
+    }
+
+    @Override
     public void tick() {
         int prePosX = posX;     //Saving previous location
         int prePosY = posY;

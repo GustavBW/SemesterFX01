@@ -73,6 +73,12 @@ public class CItem extends Item implements Interactible, Renderable {
     public void render(GraphicsContext gc) {
         gc.drawImage(picture, position.getX(),position.getY());
     }
+
+    @Override
+    public boolean isDead() {
+        return false;
+    }
+
     public void destroy(){                                  //Removes the item from any static contexts in which a reference is kept
         MainGUIController.getCurrentRoom().getCitems().remove(this);
         Interactible.interactibles.remove(this);
