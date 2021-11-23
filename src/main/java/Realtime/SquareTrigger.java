@@ -38,13 +38,13 @@ public class SquareTrigger implements Interactible{
     }
 
     public boolean isInBounds(int pOrX,int pOrY){
+        //If each of the coordinates given (x & y) is within the boundaries of the square trigger. Based on its position and its size.
         inBounds = (pOrX < orX + sizeX / 2 && pOrX > orX - sizeX / 2) && (pOrY < orY + sizeY / 2 && pOrY > orY - sizeY / 2);
 
         return inBounds;
     }
     public Point2D getInvApproachVector(int pOrX, int pOrY){
-        Point2D apprVec = new Point2D(pOrX - orX,pOrY - orY);
-        return apprVec;
+        return new Point2D(pOrX - orX,pOrY - orY);
     }
     public Point2D getSizes(){
         return new Point2D(sizeX,sizeY);

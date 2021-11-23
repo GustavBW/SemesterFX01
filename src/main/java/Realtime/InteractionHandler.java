@@ -51,7 +51,7 @@ public class InteractionHandler implements Runnable{
                             i.onInVicinity();
                         }
                     }
-                    if(i instanceof SquareTrigger){
+                    if(i instanceof SquareTrigger){     //Yeah SquareTriggers don't use math. Just a giant ass if statement.
                         if(((SquareTrigger) i).isInBounds(pPosX,pPosY)){
                             interactibleReadyToInteract = i;
                             i.onInVicinity();
