@@ -64,7 +64,9 @@ public class MainGUIController extends Application implements Runnable{
         };
         timer.start();
 
-        new DistanceTrigger(400,400,50);
+        for(int i = 0; i < 100; i++) {
+            new DistanceTrigger(400, 400, 50);
+        }
 
         bp.setCenter(canvas);
         keyHandler = new KeyHandler();

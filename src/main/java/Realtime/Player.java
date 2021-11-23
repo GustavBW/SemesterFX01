@@ -83,8 +83,8 @@ public class Player implements Renderable, Tickable {
         }
     }
 
-    public void changeVelX(double i){velX = (i * mvSpeed) * (1 / ((velX * velX) + 1));}
-    public void changeVelY(double i){velY = (i * mvSpeed) * (1 / ((velX * velX) + 1));}
+    public void changeVelX(double i){velX += (i * mvSpeed) * (1 / ((velX * velX) + 1));}
+    public void changeVelY(double i){velY += (i * mvSpeed) * (1 / ((velX * velX) + 1));}
 
     public double getVelX(){return velX;}
     public double getVelY(){return velY;}

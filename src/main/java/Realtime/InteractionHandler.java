@@ -1,6 +1,7 @@
 package Realtime;
 
 import Realtime.interfaces.Interactible;
+import Realtime.MainGUIController;
 import worldofzuul.Game;
 
 public class InteractionHandler implements Runnable{
@@ -20,9 +21,7 @@ public class InteractionHandler implements Runnable{
         while(!MainGUIController.isReady){
             awaiting();
         }
-        try{Thread.sleep(5000);
-        }catch (Exception e){e.printStackTrace();}
-        onExitFlagSleep();
+
 
         while(Game.isRunning && MainGUIController.isRunning){
 
@@ -31,6 +30,7 @@ public class InteractionHandler implements Runnable{
             if(!MainGUIController.isReady){
                 awaiting();
             }
+
             onExitFlagSleep();
 
             long timeA = System.nanoTime();
@@ -71,7 +71,7 @@ public class InteractionHandler implements Runnable{
 
                 long timeB = System.nanoTime();
 
-                MainGUIController.logTimeTick = timeB - timeA;
+                MainGUIController.logTimeTick = (timeB - timeA);
             }
         }
     }

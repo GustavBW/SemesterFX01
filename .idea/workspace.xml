@@ -5,32 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bfdae99-945c-487c-90a0-7c778f424550" name="Changes" comment="added interfaces to version control">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_17_ea_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_17_ea_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_17_ea_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_17_ea_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_media_win_17_ea_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_web_win_17_ea_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Semesterprojekt01.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Semesterprojekt01.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/GraphicsProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BackEnd/GraphicsProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/CItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/CItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/DistanceTrigger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/DistanceTrigger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/Interactible.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/InteractionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/InteractionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Realtime/InteractionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/InteractionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/KeyHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/KeyHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/KeyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/KeyHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/Renderable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RenderableImage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/RenderableImage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RoomExitTrigger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/RoomExitTrigger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/SquareTrigger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/SquareTrigger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/Tickable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
