@@ -29,3 +29,7 @@
 .idea/libraries/Maven__org_openjfx_javafx_web_win_17_ea_11.xml
 Semesterprojekt01.iml
 .idea/workspace.xml
+target/classes/module-info.class
+target/classes/Realtime/CItem.class
+target/classes/worldofzuul/InventoryManager.class
+target/classes/BackEnd/GraphicsProcessor.class

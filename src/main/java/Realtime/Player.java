@@ -62,7 +62,6 @@ public class Player implements Renderable, Tickable {
 
         orX = posX - imW;   //Updating Origins
         orY = posY - imH;
-        System.out.println("orY = " + orY + " imH & posY = " + imH + " " + posY);
 
         velX *= drag;       //Applying drag
         velY *= drag;
