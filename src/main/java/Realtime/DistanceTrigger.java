@@ -18,7 +18,6 @@ public class DistanceTrigger implements Interactible {
         onInstancedInter();
     }
 
-
     @Override
     public void onInstancedInter() {
         Interactible.interactibles.add(this);
@@ -30,7 +29,7 @@ public class DistanceTrigger implements Interactible {
     }
 
     @Override
-    public void onInVicinity() {System.out.println("You're in radius of a distance trigger");}
+    public void onInVicinity() {}
 
     @Override
     public String getPopUpText() {

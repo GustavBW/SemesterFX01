@@ -248,12 +248,15 @@ public class Game implements Runnable{
         isRunning = true;
 
         interThread = new Thread(interHandler);
+
         tickThread = new Thread(this);
         renderThread = new Thread(mGUIC);
 
         interThread.start();
         tickThread.start();
         renderThread.start();
+
+        System.out.println("interThread startet");
     }
 
     @Override

@@ -16,7 +16,7 @@ public class InteractionHandler implements Runnable{
     }
 
     public void calcDistances(){
-
+        System.out.println("InteractionHandler was started");
         awaitBoolean = true;
         while(!MainGUIController.isReady){
             awaiting();
@@ -30,7 +30,6 @@ public class InteractionHandler implements Runnable{
             if(!MainGUIController.isReady){
                 awaiting();
             }
-
             onExitFlagSleep();
 
             long timeA = System.nanoTime();

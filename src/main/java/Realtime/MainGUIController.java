@@ -64,9 +64,9 @@ public class MainGUIController extends Application implements Runnable{
         };
         timer.start();
 
-        for(int i = 0; i < 100; i++) {
-            new DistanceTrigger(400, 400, 50);
-        }
+
+        new DistanceTrigger(400, 400, 100);
+
 
         bp.setCenter(canvas);
         keyHandler = new KeyHandler();
@@ -156,7 +156,7 @@ public class MainGUIController extends Application implements Runnable{
 
     public void displayTemporaryText(Interactible i){
         if(i instanceof CItem){
-            new RenderableText(i.getPopUpText(), new Point2D(i.getPosX(),i.getPosY()),5000);
+            new RenderableText(i.getPopUpText(), new Point2D(i.getPosX(),i.getPosY()),500);
         }
     }
 
