@@ -4,7 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6bfdae99-945c-487c-90a0-7c778f424550" name="Changes" comment="" />
+    <list default="true" id="6bfdae99-945c-487c-90a0-7c778f424550" name="Changes" comment="added interfaces to version control">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_media_win_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_web_win_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semesterprojekt01.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Semesterprojekt01.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/GraphicsProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BackEnd/GraphicsProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/CItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/CItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/DistanceTrigger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/DistanceTrigger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/Interactible.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/InteractionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/InteractionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/KeyHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/KeyHandler$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/KeyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/KeyHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/Renderable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RenderableImage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/RenderableImage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RoomExitTrigger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/RoomExitTrigger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/SquareTrigger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/SquareTrigger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/Tickable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +48,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="210ALkVcmyik5hz34jsYNuLgol6" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -97,9 +127,33 @@
       <workItem from="1637670078509" duration="924000" />
       <workItem from="1637671145276" duration="1587000" />
     </task>
+    <task id="LOCAL-00001" summary="added interfaces to version control">
+      <created>1637673725438</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1637673725438</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added interfaces to version control" />
+    <option name="LAST_COMMIT_MESSAGE" value="added interfaces to version control" />
   </component>
 </project>
