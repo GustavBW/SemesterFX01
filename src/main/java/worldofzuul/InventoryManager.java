@@ -1,5 +1,8 @@
 package worldofzuul;
 
+import BackEnd.PosPicCombo;
+import Realtime.CItem;
+
 import java.util.ArrayList;
 
 public class InventoryManager {
@@ -11,18 +14,6 @@ public class InventoryManager {
         inventory = new ArrayList<>();
     }
 
-    public void removeItem(String itemName, int howMany){
-        for (int i = 0; i < inventory.size(); i++){
-            if (inventory.get(i).getName().equalsIgnoreCase(itemName)){
-                inventory.get(i).changeAmount(howMany);
-
-                if(inventory.get(i).getAmount() <= 0){
-                    inventory.remove(i);
-                }
-                break;
-            }
-        }
-    }
     public boolean removeItem(String name){
         boolean foundItem = false;
         for (Item i : inventory){
@@ -38,13 +29,54 @@ public class InventoryManager {
         return foundItem;
     }
 
+    public void addCItem(CItem citem){
+
+        boolean doesAlreadyContain = false;
+        if(inventory.size() < inventorySize) {
+            if (citem != null) {
+                for (Item i : inventory) {
+                    if (i == citem) {
+                        i.changeAmount(citem.getAmount());
+                        ((CItem) i).destroy();
+                        doesAlreadyContain = true;
+                        break;
+                    }
+                }
+                if (!doesAlreadyContain) {
+                    inventory.add(new CItem(citem.getItem(), citem.getPosPic()));
+                    citem.destroy();
+                }
+            }
+        }else{
+            //FAIL
+        }
+    }
+    public void removeCItem(CItem citem){
+        for(Item i : inventory){
+            if(i == citem){
+                ((CItem) i).destroy();
+                inventory.remove(i);
+                break;
+            }
+        }
+    }
+    public void dropCItem(CItem citem){
+        for(Item i : inventory){
+            if(i == citem){
+                ((CItem) i).reInstate();
+                inventory.remove(i);
+                break;
+            }
+        }
+    }
+
     public void addItem(Item item){
 
         boolean containsItem = false;
         boolean ableToFit = false;
 
         if (inventory.size() <= inventorySize) {
-            if (item != null) {                                   //Firstly check if the item is null
+            if (item != null) {                                      //Firstly check if the item is null
                 for (int i = 0; i < inventory.size(); i++) {         //Secondly check if it exists in the inventory already
                     if (inventory.get(i).getName().equalsIgnoreCase(item.getName())) {
                         inventory.get(i).changeAmount(item.getAmount());        //And simply increase the amount of it in the inventory
@@ -76,7 +108,6 @@ public class InventoryManager {
         }
         return itemFound;
     }
-
     public void printInventory(){
         System.out.println();
         for (Item n : inventory){
