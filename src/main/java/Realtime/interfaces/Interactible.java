@@ -11,6 +11,7 @@ public interface Interactible {
     void onInstancedInter();
     void onInteraction();
     void onInVicinity();
+    String getPopUpText();
     int getInterRadius();
     int getPosX();
     int getPosY();

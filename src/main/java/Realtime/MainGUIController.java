@@ -179,11 +179,12 @@ public class MainGUIController extends Application implements Runnable{
             onAwait();
         }
         onExitFlagSleep();
-        previousRCollection = currentCollection;
-        currentCollection = rc;
 
         long timeA = System.nanoTime();
 
+        previousRCollection = currentCollection;
+        currentCollection = rc;
+        
         clearAllTicksRendersInters();
         addNewRenderables(rc);
         Game.currentRoom = rc.getRoom();
@@ -206,8 +207,8 @@ public class MainGUIController extends Application implements Runnable{
         Renderable.renderLayer0.add(rc.getBaseImages().get(0));
         Renderable.renderLayer1.add(rc.getBaseImages().get(1));
                                                                     //Layer2 is the player layer, it isn't cleared and isn't modified.
-        Renderable.renderLayer3.add(rc.getBaseImages().get(3));
-        Renderable.renderLayer4.add(rc.getBaseImages().get(4));
+        Renderable.renderLayer3.add(rc.getBaseImages().get(2));
+        Renderable.renderLayer4.add(rc.getBaseImages().get(3));
 
         Renderable.renderLayer1.addAll(rc.getCitems());
     }

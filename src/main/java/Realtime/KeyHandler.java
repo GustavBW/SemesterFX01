@@ -6,8 +6,6 @@ import worldofzuul.Game;
 
 public class KeyHandler implements EventHandler<KeyEvent> {
 
-    boolean isInteraction; //Just tracking rn. Figuring out how to get this result to the InteractionHandler to determine wether to call onInteraction or not.
-
     public KeyHandler(){
 
     }

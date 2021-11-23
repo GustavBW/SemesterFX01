@@ -7,6 +7,7 @@ public class SquareTrigger implements Interactible {
 
     private boolean inBounds;
     private final int x,y,sizeX,sizeY,orX,orY;
+    private final String popUpText = " ";
 
     public SquareTrigger(int x, int y, int size){
         this(x,y,size,size);
@@ -32,10 +33,14 @@ public class SquareTrigger implements Interactible {
     public void onInteraction() {
 
     }
-
     @Override
     public void onInVicinity() {
 
+    }
+
+    @Override
+    public String getPopUpText() {
+        return popUpText;
     }
 
     public boolean isInBounds(int pOrX,int pOrY){
@@ -55,14 +60,8 @@ public class SquareTrigger implements Interactible {
     public int getInterRadius() {
         return (sizeX + sizeY) / 2;
     }
-
     @Override
-    public int getPosX() {
-        return x;
-    }
-
+    public int getPosX() {return x;}
     @Override
-    public int getPosY() {
-        return y;
-    }
+    public int getPosY() {return y;}
 }
