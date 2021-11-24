@@ -45,6 +45,7 @@ public class CItem extends Item implements Interactible, Renderable {
     }
     public Item getItem(){return item;}
     public PosPicCombo getPosPic(){return posPic;}
+
     public void reInstate(){
         MainGUIController.getCurrentRoom().getCitems().add(this);
         position = new Point2D(Game.player.getOrX(),Game.player.getOrY());
@@ -74,10 +75,6 @@ public class CItem extends Item implements Interactible, Renderable {
         gc.drawImage(picture, position.getX(),position.getY());
     }
 
-    @Override
-    public boolean isDead() {
-        return false;
-    }
 
     public void destroy(){                                  //Removes the item from any static contexts in which a reference is kept
         MainGUIController.getCurrentRoom().getCitems().remove(this);

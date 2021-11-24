@@ -14,5 +14,4 @@ public interface Renderable {
 
     void onInstancedRender();
     void render(GraphicsContext gc);
-    boolean isDead();
 }

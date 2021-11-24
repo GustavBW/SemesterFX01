@@ -36,10 +36,9 @@ public class MainGUIController extends Application implements Runnable{
     private ArrayList<CItem> cinventory;
 
     //DisplayInventory Stuff
-    int mainFrameWidth = 300;
-    int mainFrameHeight = 400;
-    double mainFramePosX = (Game.WIDTH / 2.0) - (mainFrameWidth / 2.0);
-    double mainFramePosY = (Game.HEIGHT / 2.0) - (mainFrameHeight / 2.0);
+    final int mainFrameWidth = 300, mainFrameHeight = 400, buttonSize = 30, buttonPadding = 5;
+    final double mainFramePosX = (Game.WIDTH / 2.0) - (mainFrameWidth / 2.0);
+    final double mainFramePosY = (Game.HEIGHT / 2.0) - (mainFrameHeight / 2.0);
     long lastCallForInventoryContent = 0;
 
     //Graphics stuff
@@ -162,7 +161,8 @@ public class MainGUIController extends Application implements Runnable{
         }
 
         updateLogText();
-        cleanUpExperied();
+        cleanUpExpired();
+
         long timeB = System.nanoTime();
         logTimeRender = timeB - timeA;
 
@@ -179,12 +179,19 @@ public class MainGUIController extends Application implements Runnable{
         if(System.currentTimeMillis() > lastCallForInventoryContent + 100) {
             /*
             for (int i = 0; i < cinventory.size(); i++) {
-                Point2D position = new Point2D(mainFramePosX + (mainFrameWidth * 0.1), (mainFramePosY + (mainFrameHeight - 50)) + (i * mainFrameHeight * 0.1));
-                new RenderableText(cinventory.get(i).getName() + " " + cinventory.get(i).getAmount(), position, 100);
+                Point2D position = new Point2D(mainFramePosX + (mainFrameWidth * 0.1),(mainFramePosY + (mainFrameHeight * 0.2)) + (i * buttonSize));
+                new CItemButton(cinventory.get(i), position, Game.getInventoryManager(), buttonSize, buttonSize, 100);
+
+                position = new Point2D(mainFramePosX + (mainFrameWidth * 0.1) + (buttonSize * 2), (mainFramePosY + (mainFrameHeight * 0.2)) + (i * buttonSize));   //Reenable this when there's some Citems
+                new RenderableText("Stuff & Amount", position, 100);
             }
              */
+
             for (int i = 0; i < 10; i++) {
-                Point2D position = new Point2D(mainFramePosX + (mainFrameWidth * 0.1), (mainFramePosY + (mainFrameHeight * 0.2)) + (i * mainFrameHeight * 0.08));
+                Point2D position = new Point2D(mainFramePosX + buttonSize,((mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding))) - (buttonSize / 2.0));   //Disable this when there's some Citems
+                new CItemButton(null, position, Game.getInventoryManager(), buttonSize, buttonSize, 100);
+
+                position = new Point2D(mainFramePosX + buttonSize + (buttonSize * 2),(mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding)));
                 new RenderableText("Stuff & Amount", position, 100);
             }
 
@@ -203,10 +210,15 @@ public class MainGUIController extends Application implements Runnable{
         }
     }
 
-    public void cleanUpExperied(){
+    public void cleanUpExpired(){
         for(RenderableText t : RenderableText.deadRendText){
             t.destroy();
         }
+        RenderableText.deadRendText.clear();
+        for(CItemButton b : CItemButton.deadItemButtons){
+            b.destroy();
+        }
+        CItemButton.deadItemButtons.clear();
     }
 
     @Override

@@ -5,21 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bfdae99-945c-487c-90a0-7c778f424550" name="Changes" comment="added interfaces to version control">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Realtime/interfaces/Clickable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Realtime/CItemButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/InteractionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/InteractionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/KeyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/CItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/CItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/DistanceTrigger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/DistanceTrigger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/MouseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/MouseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/RenderableImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/RenderableImage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/RenderableText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/RenderableText.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/worldofzuul/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldofzuul/InventoryManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/InteractionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/InteractionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/KeyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/KeyHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/interfaces/Clickable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/interfaces/Clickable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/interfaces/Renderable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/interfaces/Renderable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/CItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/CItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/DistanceTrigger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/DistanceTrigger.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RenderableImage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/RenderableImage.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RenderableText.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/RenderableText.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/InventoryManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/worldofzuul/InventoryManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/interfaces/Clickable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/interfaces/Clickable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/interfaces/Renderable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/interfaces/Renderable.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,13 +33,21 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="210ALkVcmyik5hz34jsYNuLgol6" />
   <component name="ProjectLevelVcsManager">

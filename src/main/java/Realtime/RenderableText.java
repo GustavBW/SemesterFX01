@@ -40,11 +40,6 @@ public class RenderableText implements Renderable {
         deadRendText.add(this);
     }
 
-    @Override
-    public boolean isDead() {
-        return isDead;
-    }
-
     public void destroy(){
         Renderable.renderLayer4.remove(this);
     }

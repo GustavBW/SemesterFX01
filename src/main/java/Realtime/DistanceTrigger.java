@@ -74,9 +74,4 @@ public class DistanceTrigger implements Interactible, Renderable {
         gc.fillRect(posX,posY,10,10);
 
     }
-
-    @Override
-    public boolean isDead() {
-        return false;
-    }
 }
