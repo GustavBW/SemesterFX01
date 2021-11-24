@@ -1,7 +1,7 @@
 package Realtime;
 
+import Realtime.interfaces.Clickable;
 import Realtime.interfaces.Interactible;
-import Realtime.MainGUIController;
 import worldofzuul.Game;
 
 public class InteractionHandler implements Runnable{
@@ -73,6 +73,24 @@ public class InteractionHandler implements Runnable{
                 MainGUIController.logTimeTick = (timeB - timeA);
             }
         }
+    }
+    public static Clickable findInteractibleOnMouseClick(int mouseX, int mouseY){
+        Clickable toReturn = null;
+
+        for(Clickable c : Clickable.clickables){
+            int interRadiusSq = c.getSize() * c.getSize();
+            double distXSq = (mouseX - c.getX()) * (mouseX - c.getX());
+            double distYSq = (mouseY - c.getY()) * (mouseY - c.getY());
+
+            double distanceSquared = distXSq + distYSq;
+
+            if (distanceSquared < interRadiusSq) {
+                toReturn = c;
+                break;
+            }
+        }
+
+        return toReturn;
     }
 
     private void awaiting(){

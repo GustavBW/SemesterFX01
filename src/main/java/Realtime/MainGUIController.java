@@ -17,6 +17,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import worldofzuul.Game;
 import BackEnd.RoomCollection;
+import worldofzuul.InventoryManager;
+
+import java.util.ArrayList;
 
 public class MainGUIController extends Application implements Runnable{
 
@@ -30,7 +33,16 @@ public class MainGUIController extends Application implements Runnable{
     private BorderPane bp;
     private KeyHandler keyHandler;
     private MouseHandler mouseHandler;
+    private ArrayList<CItem> cinventory;
 
+    //DisplayInventory Stuff
+    int mainFrameWidth = 300;
+    int mainFrameHeight = 400;
+    double mainFramePosX = (Game.WIDTH / 2.0) - (mainFrameWidth / 2.0);
+    double mainFramePosY = (Game.HEIGHT / 2.0) - (mainFrameHeight / 2.0);
+    long lastCallForInventoryContent = 0;
+
+    //Graphics stuff
     private Canvas canvas;
     private GraphicsContext gc;
     private static RoomCollection currentCollection;
@@ -38,7 +50,7 @@ public class MainGUIController extends Application implements Runnable{
     private long logLastCall = 0, distTrigLastTextCall = 0;
 
     public static long logTimeRender = 888,logTimeTick = 888,logTimeInter = 888;
-    public static boolean isRunning = false, isReady = false, awaitBoolean = false, sceneChangeRequested = false;
+    public static boolean isRunning = false, isReady = false, awaitBoolean = false, sceneChangeRequested = false, showInventory = false;
     public static RoomCollection roomToChangeTo;
 
     @Override
@@ -46,6 +58,8 @@ public class MainGUIController extends Application implements Runnable{
         isRunning = true;
         bp = new BorderPane();
         createLoggingTexts();
+
+        cinventory = Game.getInventoryManager().getCInventory();
 
         mainStage = stage;
         mainStage.setTitle("WorldOfToxins");
@@ -136,9 +150,11 @@ public class MainGUIController extends Application implements Runnable{
             r.render(gc);
         }
         for(Renderable r : Renderable.renderLayer4){
-            if(!r.isDead()) {
-                r.render(gc);
-            }
+            r.render(gc);
+        }
+
+        if(showInventory){
+            displayInventory();
         }
 
         if(InteractionHandler.interactibleReadyToInteract != null){
@@ -153,6 +169,29 @@ public class MainGUIController extends Application implements Runnable{
         if(sceneChangeRequested){
             changeScene(roomToChangeTo);
         }
+    }
+
+    private void displayInventory(){
+
+        gc.setFill(new Color(0,0,0,0.3));
+        gc.fillRoundRect(mainFramePosX,mainFramePosY,mainFrameWidth,mainFrameHeight,50,50);
+
+        if(System.currentTimeMillis() > lastCallForInventoryContent + 100) {
+            /*
+            for (int i = 0; i < cinventory.size(); i++) {
+                Point2D position = new Point2D(mainFramePosX + (mainFrameWidth * 0.1), (mainFramePosY + (mainFrameHeight - 50)) + (i * mainFrameHeight * 0.1));
+                new RenderableText(cinventory.get(i).getName() + " " + cinventory.get(i).getAmount(), position, 100);
+            }
+             */
+            for (int i = 0; i < 10; i++) {
+                Point2D position = new Point2D(mainFramePosX + (mainFrameWidth * 0.1), (mainFramePosY + (mainFrameHeight * 0.2)) + (i * mainFrameHeight * 0.08));
+                new RenderableText("Stuff & Amount", position, 100);
+            }
+
+            lastCallForInventoryContent = System.currentTimeMillis();
+        }
+
+
     }
 
     public void displayTemporaryText(Interactible i){

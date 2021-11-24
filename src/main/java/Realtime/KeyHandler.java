@@ -24,6 +24,7 @@ public class KeyHandler implements EventHandler<KeyEvent> {
                 }
             }
             case P -> Game.onPause = !Game.onPause;
+            case I -> MainGUIController.showInventory = !MainGUIController.showInventory;
         }
     }
 }

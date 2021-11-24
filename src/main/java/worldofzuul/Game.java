@@ -12,9 +12,9 @@ public class Game implements Runnable{
 
     private final static TextProcessor tp = new TextProcessor();
     private final static GraphicsProcessor gp = new GraphicsProcessor();
-    private final InventoryManager inventoryManager;
+    private static MainGUIController mGUIC;
+    private static InventoryManager inventoryManager;
     private final InteractionHandler interHandler;
-    private final MainGUIController mGUIC;
     private final ArrayList<Room> allRooms = new ArrayList<>();
     private Thread tickThread, interThread, renderThread;
 
@@ -36,11 +36,11 @@ public class Game implements Runnable{
         player = new Player( WIDTH / 2,  HEIGHT / 2, gp.getImage());
 
         interHandler = new InteractionHandler(player);
-        mGUIC = new MainGUIController();
 
         createRooms();
         parser = new Parser();
         inventoryManager = new InventoryManager();
+        mGUIC = new MainGUIController();
 
         start();
         //MainGUIController.main(args);
@@ -263,4 +263,7 @@ public class Game implements Runnable{
     public void run() {
         play();
     }
+
+    public static MainGUIController getMGUIC(){return mGUIC;}
+    public static InventoryManager getInventoryManager(){return inventoryManager;}
 }

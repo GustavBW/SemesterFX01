@@ -12,7 +12,6 @@ public class RenderableText implements Renderable {
 
     private final String text;
     private final Point2D position;
-    private int lifetime;
     private long timeOfDeath;
     private boolean isDead = false;
 
@@ -21,17 +20,15 @@ public class RenderableText implements Renderable {
     public RenderableText(String text, Point2D position, int lifetimeMS){
         this.text = text;
         this.position = position;
-        this.lifetime = lifetimeMS;
 
         timeOfDeath = System.currentTimeMillis() + lifetimeMS;
         onInstancedRender();
-        System.out.println("Created RenderableText with timeOfDeath : " + timeOfDeath + " at SysTimeMS : " + System.currentTimeMillis());
     }
 
     @Override
     public void render(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
-        gc.fillText(text,position.getX(),position.getY());
+        gc.fillText(text, position.getX(), position.getY());
 
         if(System.currentTimeMillis() > timeOfDeath || isDead){
             expired();
@@ -41,7 +38,6 @@ public class RenderableText implements Renderable {
     private void expired(){
         isDead = true;
         deadRendText.add(this);
-        System.out.println("Destroyed Renderable Text with timeOfDeath : " + timeOfDeath + " at SysTimeMS : " + System.currentTimeMillis());
     }
 
     @Override
@@ -60,5 +56,7 @@ public class RenderableText implements Renderable {
 
     public String getText(){return text;}
     public Point2D getPosition(){return position;}
-    public void setLifetime(int i){lifetime = i;}
+    public void extendLifetime(int i){
+        timeOfDeath += i;
+    }
 }

@@ -1,17 +1,17 @@
 package worldofzuul;
 
-import BackEnd.PosPicCombo;
 import Realtime.CItem;
-
 import java.util.ArrayList;
 
 public class InventoryManager {
 
     private final ArrayList<Item> inventory;
+    private final ArrayList<CItem> cinventory;
     private final int inventorySize = 9;
 
     public InventoryManager(){
         inventory = new ArrayList<>();
+        cinventory = new ArrayList<>();
     }
 
     public boolean removeItem(String name){
@@ -32,38 +32,38 @@ public class InventoryManager {
     public void addCItem(CItem citem){
 
         boolean doesAlreadyContain = false;
-        if(inventory.size() < inventorySize) {
-            if (citem != null) {
-                for (Item i : inventory) {
-                    if (i == citem) {
-                        i.changeAmount(citem.getAmount());
-                        ((CItem) i).destroy();
-                        doesAlreadyContain = true;
-                        break;
-                    }
-                }
-                if (!doesAlreadyContain) {
-                    inventory.add(new CItem(citem.getItem(), citem.getPosPic()));
-                    citem.destroy();
+        if(cinventory.size() < inventorySize) {
+            for (CItem i : cinventory) {
+                if(i == citem) {
+                    i.changeAmount(citem.getAmount());
+                    i.destroy();
+                    doesAlreadyContain = true;
+                    break;
                 }
             }
+            if (!doesAlreadyContain) {
+                cinventory.add(new CItem(citem.getItem(), citem.getPosPic()));
+                citem.destroy();
+            }
         }else{
-            //FAIL
+            citem.reInstate();
         }
     }
     public void removeCItem(CItem citem){
-        for(Item i : inventory){
-            if(i == citem){
-                ((CItem) i).destroy();
-                inventory.remove(i);
+        boolean foundTheThing = false;
+        for(CItem i : cinventory){
+            if(i == citem) {
+                i.destroy();
+                cinventory.remove(i);
+                foundTheThing = true;
                 break;
             }
         }
     }
     public void dropCItem(CItem citem){
-        for(Item i : inventory){
+        for(CItem i : cinventory){
             if(i == citem){
-                ((CItem) i).reInstate();
+                i.reInstate();
                 inventory.remove(i);
                 break;
             }
@@ -142,4 +142,5 @@ public class InventoryManager {
             Game.getCurrentRoom().useItem(itemToUse);                                   //Send the item along to currentRoom to be used
         }
     }
+    public ArrayList<CItem> getCInventory(){return cinventory;}
 }
