@@ -27,7 +27,7 @@ public class RenderableButton extends SquareTrigger implements Clickable, Render
     }
 
     @Override
-    public void onInstancedInter() {    }
+    public void onInstancedInter() {}
 
     @Override
     public void onInstancedClick() {
@@ -52,6 +52,10 @@ public class RenderableButton extends SquareTrigger implements Clickable, Render
     @Override
     public Point2D getSizes() {
         return super.getSizes();
+    }
+
+    public void enableClickable(){
+        Clickable.clickables.add(this);
     }
 
     @Override

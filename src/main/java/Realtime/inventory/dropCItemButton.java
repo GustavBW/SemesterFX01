@@ -11,7 +11,6 @@ import worldofzuul.Game;
 public class dropCItemButton extends RenderableButton implements Renderable, Clickable {
 
     private CItem citem;
-    private boolean active = false;
     private String text;
     private Point2D position;
 
@@ -27,10 +26,10 @@ public class dropCItemButton extends RenderableButton implements Renderable, Cli
 
     @Override
     public void onInteraction() {
-        if(active) {
-            Game.getInventoryManager().useCItem(citem);
-            System.out.println("You pressed a dropCItemButton");
-        }
+
+        Game.getInventoryManager().useCItem(citem);
+        System.out.println("You pressed a dropCItemButton");
+
     }
 
     @Override

@@ -20,16 +20,12 @@ public class CItemButton implements Clickable, Renderable {
     private Color color1 = new Color(1,1,1,0.2);
     private Color color2 = new Color(1,1,1,0.5);
 
-    public static ArrayList<CItemButton> deadItemButtons = new ArrayList<>();
-
     public CItemButton (CItem citem, Point2D position, int sizeX, int sizeY, InventoryGUIManager iGUIM){
         this.citem = citem;
         this.position = position;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.iGUIM = iGUIM;
-
-        System.out.println("CItemButton made");
 
         onInstancedClick();
         onInstancedRender();
@@ -59,15 +55,10 @@ public class CItemButton implements Clickable, Renderable {
         for(int i = 0; i < 3; i++) {
             gc.fillRect(position.getX() + ((sizeX / 2.0) - 7.5), position.getY() + ((sizeY / 2.0) - 6) + (i * 5), 15, 2);
         }
-
-        if(System.currentTimeMillis() > timeOfDeath){
-            deadItemButtons.add(this);
-        }
     }
 
     @Override
     public void onInteraction(){
-        System.out.println("Setting InspectedElement to: " + citem.toString());
         iGUIM.setInspectedElement(citem);
     }
     public void destroy(){
@@ -81,7 +72,6 @@ public class CItemButton implements Clickable, Renderable {
     @Override
     public void onInstancedClick() {
         Clickable.clickables.add(this);
-        System.out.println("CItemButton.onInstancedClick");
     }
 
     @Override

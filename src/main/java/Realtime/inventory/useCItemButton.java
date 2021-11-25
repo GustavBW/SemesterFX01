@@ -11,7 +11,6 @@ import worldofzuul.Game;
 public class useCItemButton extends RenderableButton implements Clickable, Renderable {
 
     private CItem citem;
-    private boolean active = false;
     private String text;
     private Point2D position;
 
@@ -21,8 +20,6 @@ public class useCItemButton extends RenderableButton implements Clickable, Rende
         this.text = text;
         this.position = position;
 
-
-        System.out.println("Sub-CItemButton made");
     }
 
     @Override
@@ -30,10 +27,8 @@ public class useCItemButton extends RenderableButton implements Clickable, Rende
 
     @Override
     public void onInteraction() {
-        if(active) {
-            Game.getInventoryManager().useCItem(citem);
-            System.out.println("You pressed a useCItemButton");
-        }
+        Game.getInventoryManager().useCItem(citem);
+        System.out.println("You pressed a useCItemButton");
     }
 
     @Override
@@ -46,13 +41,10 @@ public class useCItemButton extends RenderableButton implements Clickable, Rende
         gc.fillText(text,super.getX() + 5,super.getY() + (super.getSizes().getY() / 2) + 4);
 
     }
-    @Override
-    public void onInstancedRender() {
 
-    }
     @Override
-    public void onInstancedClick() {
-
-    }
+    public void onInstancedRender() {}
+    @Override
+    public void onInstancedClick() {}
 
 }

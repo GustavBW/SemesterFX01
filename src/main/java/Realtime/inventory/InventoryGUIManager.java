@@ -90,7 +90,7 @@ public class InventoryGUIManager {
             }
         }
 
-        //destroyAll();     //As some of these elements above adds themselves their renderlayers on instantiation, we just make sure to remove them at first.
+        destroyAll();     //As some of these elements above adds themselves their renderlayers on instantiation, we just make sure to remove them at first.
     }
 
     public void render(GraphicsContext gc){
@@ -181,8 +181,19 @@ public class InventoryGUIManager {
     }
 
     public void setInspectedElement(CItem citem){
+        
+        if(inspectedElement != null) {
+            for (RenderableButton rB : SUBs.get(inspectedElement.getId())) {
+                rB.destroy();
+            }
+        }
+
+        for(RenderableButton rB : SUBs.get(citem.getId())){
+            rB.enableClickable();
+        }
+
         inspectedElement = citem;
-        System.out.println("Set inspected element to: " + citem.toString());
+
     }
 
     public boolean getDisplayStatus(){return doDisplay;}

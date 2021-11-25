@@ -89,9 +89,8 @@ public class InteractionHandler implements Runnable{
                 toReturn = c;
                 break;
             }
-
-            System.out.println("Distance^2 is: " + distanceSquared + " and c.inBounds is: " + c.inBounds(mouseX,mouseY) + " list of clickables is empty? : " + Clickable.clickables.isEmpty());
         }
+        System.out.println("Clickable.clickable.size() = " + Clickable.clickables.size());
 
         return toReturn;
     }

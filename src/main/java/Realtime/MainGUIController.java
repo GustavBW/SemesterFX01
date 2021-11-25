@@ -179,15 +179,13 @@ public class MainGUIController extends Application implements Runnable{
             t.destroy();
         }
         RenderableText.deadRendText.clear();
-        for(CItemButton b : CItemButton.deadItemButtons){
-            b.destroy();
-        }
-        CItemButton.deadItemButtons.clear();
+
         for(RenderableButton rB : RenderableButton.deadRendButton){
             rB.destroy();
         }
         RenderableButton.deadRendButton.clear();
     }
+
     @Override
     public void init(){
 
