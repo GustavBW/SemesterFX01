@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bfdae99-945c-487c-90a0-7c778f424550" name="Changes" comment="added interfaces to version control">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Realtime/inventory/useCItemButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/CItemButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/CItemButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/InteractionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/InteractionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/interfaces/Clickable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/interfaces/Clickable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/CItemButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/CItemButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/ContentEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/ContentEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/RoomCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/RoomCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/TextProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/TextProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/CItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/inventory/CItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/CItemButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/inventory/CItemButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldofzuul/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/inventory/InventoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldofzuul/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/inventory/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldofzuul/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldofzuul/Room.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +72,7 @@
       <module name="Semesterprojekt01" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="worldofzuul.*" />
+          <option name="PATTERN" value="Realtime.inventory.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -77,7 +85,7 @@
       <module name="Semesterprojekt01" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="worldofzuul.*" />
+          <option name="PATTERN" value="Realtime.inventory.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -101,7 +109,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Game" />
-        <item itemvalue="Application.MainGUIController (1)" />
         <item itemvalue="Application.MainGUIController" />
       </list>
     </recent_temporary>
@@ -155,7 +162,7 @@
         <line-breakpoint enabled="true" type="java-line">
           <condition expression="MainGUIController.isRunning == false" language="JAVA" />
           <url>file://$PROJECT_DIR$/src/main/java/worldofzuul/Game.java</url>
-          <line>73</line>
+          <line>74</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

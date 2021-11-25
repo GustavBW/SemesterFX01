@@ -15,4 +15,6 @@ module worldofzuul {
     opens BackEnd to javafx.fxml;
     exports Realtime.interfaces;
     opens Realtime.interfaces to javafx.fxml;
+    exports Realtime.inventory;
+    opens Realtime.inventory to javafx.fxml;
 }

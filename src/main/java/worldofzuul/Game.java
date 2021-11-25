@@ -4,6 +4,7 @@ import BackEnd.GraphicsProcessor;
 import BackEnd.TextProcessor;
 import Realtime.*;
 import Realtime.interfaces.Tickable;
+import Realtime.inventory.InventoryManager;
 
 import java.util.ArrayList;
 

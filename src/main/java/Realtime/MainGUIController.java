@@ -3,6 +3,8 @@ package Realtime;
 import Realtime.interfaces.Interactible;
 import Realtime.interfaces.Renderable;
 import Realtime.interfaces.Tickable;
+import Realtime.inventory.CItem;
+import Realtime.inventory.CItemButton;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
@@ -17,7 +19,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import worldofzuul.Game;
 import BackEnd.RoomCollection;
-import worldofzuul.InventoryManager;
 
 import java.util.ArrayList;
 

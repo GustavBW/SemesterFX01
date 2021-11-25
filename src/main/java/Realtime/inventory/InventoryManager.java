@@ -1,6 +1,7 @@
-package worldofzuul;
+package Realtime.inventory;
 
-import Realtime.CItem;
+import worldofzuul.Game;
+
 import java.util.ArrayList;
 
 public class InventoryManager {
@@ -30,7 +31,6 @@ public class InventoryManager {
     }
 
     public void addCItem(CItem citem){
-
         boolean doesAlreadyContain = false;
         if(cinventory.size() < inventorySize) {
             for (CItem i : cinventory) {
@@ -48,6 +48,7 @@ public class InventoryManager {
         }else{
             citem.reInstate();
         }
+        addItem(citem.getItem());
     }
     public void removeCItem(CItem citem){
         boolean foundTheThing = false;
@@ -64,9 +65,14 @@ public class InventoryManager {
         for(CItem i : cinventory){
             if(i == citem){
                 i.reInstate();
-                inventory.remove(i);
+                cinventory.remove(i);
                 break;
             }
+        }
+    }
+    public void useCItem(CItem citem){
+        if(useItem(citem.getItem().getName())){
+            citem.destroy();
         }
     }
 
@@ -117,7 +123,8 @@ public class InventoryManager {
         }
         System.out.println("");
     }
-    public void useItem(String name){           //Called from Game.processCommand, triggered by CMD Word USE
+    public boolean useItem(String name){           //Called from Game.processCommand, triggered by CMD Word USE
+        boolean success = false;
         Item itemToUse = null;                  //Prepare an item
         boolean dontEvenThinkAboutIt = false;
 
@@ -140,7 +147,12 @@ public class InventoryManager {
         }
         if(itemToUse != null){
             Game.getCurrentRoom().useItem(itemToUse);                                   //Send the item along to currentRoom to be used
+            success = true;
         }
+        return success;
     }
+
+
+
     public ArrayList<CItem> getCInventory(){return cinventory;}
 }

@@ -1,6 +1,7 @@
 package BackEnd;
 
-import Realtime.CItem;
+import Realtime.inventory.CItem;
+import Realtime.inventory.Item;
 import worldofzuul.*;
 
 import java.util.ArrayList;

@@ -1,6 +1,4 @@
-package worldofzuul;
-
-import java.util.Objects;
+package Realtime.inventory;
 
 public class Item {
 

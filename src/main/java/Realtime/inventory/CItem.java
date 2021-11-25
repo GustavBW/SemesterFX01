@@ -1,13 +1,14 @@
-package Realtime;
+package Realtime.inventory;
 
 import BackEnd.PosPicCombo;
+import Realtime.InteractionHandler;
+import Realtime.MainGUIController;
 import Realtime.interfaces.Interactible;
 import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import worldofzuul.Game;
-import worldofzuul.Item;
 
 public class CItem extends Item implements Interactible, Renderable {
 
@@ -54,8 +55,9 @@ public class CItem extends Item implements Interactible, Renderable {
     }
     @Override
     public void onInteraction() {
-
-        System.out.println("You're now in radius of Item: " + super.getName());
+        Game.getInventoryManager().addCItem(this);
+        destroy();
+        System.out.println("You picked up: " + super.getName());
     }
     @Override
     public void onInVicinity() {

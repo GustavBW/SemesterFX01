@@ -2,7 +2,7 @@ package BackEnd;
 
 import Realtime.DistanceTrigger;
 import Realtime.RenderableImage;
-import Realtime.CItem;
+import Realtime.inventory.CItem;
 import worldofzuul.Room;
 
 import java.util.ArrayList;

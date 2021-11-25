@@ -1,6 +1,7 @@
 package worldofzuul;
 
 import BackEnd.ExitDefinition;
+import Realtime.inventory.Item;
 
 import java.util.ArrayList;
 import java.util.Set;

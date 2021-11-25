@@ -1,6 +1,6 @@
 package BackEnd;
 
-import worldofzuul.Item;
+import Realtime.inventory.Item;
 import worldofzuul.Quest;
 import worldofzuul.Room;
 

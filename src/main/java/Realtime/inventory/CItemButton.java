@@ -1,11 +1,10 @@
-package Realtime;
+package Realtime.inventory;
 
 import Realtime.interfaces.Clickable;
 import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import worldofzuul.InventoryManager;
 
 import java.util.ArrayList;
 
@@ -64,6 +63,7 @@ public class CItemButton implements Clickable, Renderable {
 
         if(showSubButtons){
             gc.setFill(color1);
+
         }
 
         if(System.currentTimeMillis() > timeOfDeath){
