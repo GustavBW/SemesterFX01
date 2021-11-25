@@ -13,4 +13,5 @@ public interface Clickable {
     int getX();
     int getY();
     Point2D getSizes();
+    void onInteraction();
 }

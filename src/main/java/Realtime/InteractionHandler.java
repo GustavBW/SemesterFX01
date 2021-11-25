@@ -84,7 +84,7 @@ public class InteractionHandler implements Runnable{
 
             double distanceSquared = distXSq + distYSq;
 
-            if (distanceSquared < interRadiusSq || c.inBounds(mouseX,mouseY)) {
+            if ((distanceSquared < interRadiusSq && c.inBounds(mouseX,mouseY)) || c.inBounds(mouseX,mouseY)) {
                 toReturn = c;
                 break;
             }
