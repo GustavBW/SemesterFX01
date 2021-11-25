@@ -239,6 +239,7 @@ public class Game implements Runnable{
             interThread.join();
             renderThread.join();
             isRunning = false;
+            System.exit(420);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -256,7 +257,6 @@ public class Game implements Runnable{
         tickThread.start();
         renderThread.start();
 
-        System.out.println("interThread startet");
     }
 
     @Override

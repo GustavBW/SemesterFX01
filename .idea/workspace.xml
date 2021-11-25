@@ -5,25 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bfdae99-945c-487c-90a0-7c778f424550" name="Changes" comment="added interfaces to version control">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Realtime/CItemButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Realtime/RenderableButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/CItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/CItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/DistanceTrigger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/DistanceTrigger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/CItemButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/CItemButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/InteractionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/InteractionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/MouseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/MouseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/RenderableImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/RenderableImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/RenderableText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/RenderableText.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/SquareTrigger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/SquareTrigger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/interfaces/Clickable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/interfaces/Clickable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/interfaces/Renderable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/interfaces/Renderable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/CItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/CItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/DistanceTrigger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/DistanceTrigger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RenderableImage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/RenderableImage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RenderableText.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/RenderableText.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/interfaces/Clickable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/interfaces/Clickable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/interfaces/Renderable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/interfaces/Renderable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/CItemButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/CItemButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,12 +77,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainGUIController (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Realtime.MainGUIController" />
+    <configuration name="MainGUIController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="worldofzuul.MainGUIController" />
       <module name="Semesterprojekt01" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Realtime.*" />
+          <option name="PATTERN" value="worldofzuul.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -100,11 +91,11 @@
       </method>
     </configuration>
     <configuration name="MainGUIController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="worldofzuul.MainGUIController" />
+      <option name="MAIN_CLASS_NAME" value="Realtime.MainGUIController" />
       <module name="Semesterprojekt01" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="worldofzuul.*" />
+          <option name="PATTERN" value="Realtime.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -162,5 +153,17 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added interfaces to version control" />
     <option name="LAST_COMMIT_MESSAGE" value="added interfaces to version control" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <condition expression="MainGUIController.isRunning == false" language="JAVA" />
+          <url>file://$PROJECT_DIR$/src/main/java/worldofzuul/Game.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

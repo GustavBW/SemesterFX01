@@ -1,5 +1,7 @@
 package Realtime.interfaces;
 
+import javafx.geometry.Point2D;
+
 import java.util.ArrayList;
 
 public interface Clickable {
@@ -7,7 +9,8 @@ public interface Clickable {
     ArrayList<Clickable> clickables = new ArrayList<>();
 
     void onInstancedClick();
+    boolean inBounds(int x, int y);
     int getX();
     int getY();
-    int getSize();
+    Point2D getSizes();
 }

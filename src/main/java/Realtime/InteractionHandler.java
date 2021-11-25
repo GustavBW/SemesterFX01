@@ -78,13 +78,13 @@ public class InteractionHandler implements Runnable{
         Clickable toReturn = null;
 
         for(Clickable c : Clickable.clickables){
-            int interRadiusSq = c.getSize() * c.getSize();
+            int interRadiusSq = (int) c.getSizes().getX() * (int) c.getSizes().getY();
             double distXSq = (mouseX - c.getX()) * (mouseX - c.getX());
             double distYSq = (mouseY - c.getY()) * (mouseY - c.getY());
 
             double distanceSquared = distXSq + distYSq;
 
-            if (distanceSquared < interRadiusSq) {
+            if (distanceSquared < interRadiusSq || c.inBounds(mouseX,mouseY)) {
                 toReturn = c;
                 break;
             }

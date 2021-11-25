@@ -33,8 +33,6 @@ public class CItemButton implements Clickable, Renderable {
     }
 
 
-
-
     @Override
     public int getX() {
         return (int) position.getX();
@@ -44,10 +42,9 @@ public class CItemButton implements Clickable, Renderable {
         return (int) position.getY();
     }
     @Override
-    public int getSize() {
-        return (sizeX + sizeY) / 2;
+    public Point2D getSizes() {
+        return new Point2D(sizeX,sizeY);
     }
-
 
     @Override
     public void render(GraphicsContext gc) {
@@ -55,12 +52,11 @@ public class CItemButton implements Clickable, Renderable {
         gc.setFill(new Color(1,1,1,0.2));
         gc.fillRoundRect(position.getX(), position.getY(), sizeX, sizeY, sizeX, sizeY);
 
-        gc.setFill(new Color(1,1,1,1));
+        gc.setFill(new Color(1,1,1,0.5));
 
         for(int i = 0; i < 3; i++) {
             gc.fillRect(position.getX() + ((sizeX / 2.0) - 7.5), position.getY() + ((sizeY / 2.0) - 6) + (i * 5), 15, 2);
         }
-
 
         if(System.currentTimeMillis() > timeOfDeath){
             deadItemButtons.add(this);
@@ -78,6 +74,11 @@ public class CItemButton implements Clickable, Renderable {
     @Override
     public void onInstancedClick() {
         Clickable.clickables.add(this);
+    }
+
+    @Override
+    public boolean inBounds(int x, int y) {
+        return false;
     }
 
 }
