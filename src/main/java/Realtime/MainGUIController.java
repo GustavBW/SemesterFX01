@@ -181,7 +181,7 @@ public class MainGUIController extends Application implements Runnable{
             /*
             for (int i = 0; i < cinventory.size(); i++) {
                 Point2D position = new Point2D(mainFramePosX + buttonSize,((mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding))) - (buttonSize / 2.0));
-                new CItemButton(cinventory.get(i), position, Game.getInventoryManager(), buttonSize, buttonSize, 100);
+                new CItemButton(cinventory.get(i), position, buttonSize, buttonSize, 100);
 
                 position = new Point2D(mainFramePosX + buttonSize + (buttonSize * 2),(mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding)));   //Reenable this when there's some Citems
                 new RenderableText(cinventory.get(i).getName() + " " + cinventory.get(i).getAmount(), position, 100);
@@ -190,7 +190,7 @@ public class MainGUIController extends Application implements Runnable{
 
             for (int i = 0; i < 10; i++) {
                 Point2D position = new Point2D(mainFramePosX + buttonSize,((mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding))) - (buttonSize / 2.0));   //Disable this when there's some Citems
-                new CItemButton(null, position, Game.getInventoryManager(), buttonSize, buttonSize, 100);
+                new CItemButton(null, position, buttonSize, buttonSize, 100);
 
                 position = new Point2D(mainFramePosX + buttonSize + (buttonSize * 2),(mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding)));
                 new RenderableText("Stuff & Amount", position, 100);

@@ -8,14 +8,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import worldofzuul.Game;
 
-public class useCItemButton extends RenderableButton implements Clickable, Renderable {
+public class dropCItemButton extends RenderableButton implements Renderable, Clickable {
 
     private CItem citem;
     private boolean active = false;
     private String text;
 
 
-    public useCItemButton(CItem citem, String text, Point2D position, int sizeX, int sizeY, int lifetime) {
+    public dropCItemButton(CItem citem, String text, Point2D position, int sizeX, int sizeY, int lifetime) {
         super(text, position, sizeX, sizeY, lifetime);
         this.citem = citem;
         this.text = text;
@@ -24,14 +24,9 @@ public class useCItemButton extends RenderableButton implements Clickable, Rende
     @Override
     public void onInteraction() {
         if(active) {
-            Game.getInventoryManager().useCItem(citem);
-            System.out.println("You pressed a useCItemButton");
+            Game.getInventoryManager().dropCItem(citem);
+            System.out.println("You pressed a dropCItemButton");
         }
-    }
-
-    @Override
-    public void expired() {
-
     }
 
     @Override

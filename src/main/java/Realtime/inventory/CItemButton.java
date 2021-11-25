@@ -13,26 +13,29 @@ public class CItemButton implements Clickable, Renderable {
     private Point2D position;
     private int sizeX,sizeY;
     private CItem citem;
-    private InventoryManager inventoryManager;
     private long timeOfDeath = 0;
     private boolean showSubButtons = false;
+    private useCItemButton uCIB;
+    private dropCItemButton dCIB;
+    private int interactionCount = 0, lifetime;
 
     private Color color1 = new Color(1,1,1,0.2);
     private Color color2 = new Color(1,1,1,0.5);
 
     public static ArrayList<CItemButton> deadItemButtons = new ArrayList<>();
 
-    public CItemButton (CItem citem, Point2D position, InventoryManager inventoryManager, int sizeX, int sizeY, int lifeTime){
+    public CItemButton (CItem citem, Point2D position, int sizeX, int sizeY, int lifeTime){
         this.citem = citem;
         this.position = position;
-        this.inventoryManager = inventoryManager;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
+        lifetime = lifeTime;
 
         timeOfDeath = System.currentTimeMillis() + lifeTime;
 
         onInstancedClick();
         onInstancedRender();
+
     }
 
 
@@ -62,17 +65,34 @@ public class CItemButton implements Clickable, Renderable {
         }
 
         if(showSubButtons){
-            gc.setFill(color1);
-
+            uCIB.render(gc);
+            dCIB.render(gc);
         }
 
         if(System.currentTimeMillis() > timeOfDeath){
             deadItemButtons.add(this);
         }
     }
+    private void createSubButtons(int lifetime){
+        Point2D sub1Position = new Point2D(position.getX(), position.getY() + sizeY);
+        uCIB = new useCItemButton(citem,"Use",sub1Position, 100,sizeY,lifetime);
+
+        Point2D sub2Position = new Point2D(position.getX(), position.getY() + 2 * sizeY);
+        dCIB = new dropCItemButton(citem,"Drop", sub2Position,100,sizeY,lifetime);
+    }
+
     @Override
     public void onInteraction(){
+        System.out.println("You pressed a CItemButton");
+        interactionCount++;
+
+        if(interactionCount == 1){
+            createSubButtons(100);
+        }
+
         showSubButtons = !showSubButtons;
+        uCIB.toggleActive();
+        dCIB.toggleActive();
     }
     public void destroy(){
         Renderable.renderLayer4.remove(this);
