@@ -76,6 +76,7 @@ public class InteractionHandler implements Runnable{
     }
     public static Clickable findInteractibleOnMouseClick(int mouseX, int mouseY){
         Clickable toReturn = null;
+        System.out.println("Trying to find stuff InteractionHandler 79");
 
         for(Clickable c : Clickable.clickables){
             int interRadiusSq = (int) c.getSizes().getX() * (int) c.getSizes().getY();
@@ -88,6 +89,8 @@ public class InteractionHandler implements Runnable{
                 toReturn = c;
                 break;
             }
+
+            System.out.println("Distance^2 is: " + distanceSquared + " and c.inBounds is: " + c.inBounds(mouseX,mouseY) + " list of clickables is empty? : " + Clickable.clickables.isEmpty());
         }
 
         return toReturn;

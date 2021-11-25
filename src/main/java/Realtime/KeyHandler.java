@@ -6,8 +6,10 @@ import worldofzuul.Game;
 
 public class KeyHandler implements EventHandler<KeyEvent> {
 
-    public KeyHandler(){
+    private MainGUIController mGUIC;
 
+    public KeyHandler(MainGUIController mGUIC){
+        this.mGUIC = mGUIC;
     }
 
     @Override
@@ -24,7 +26,7 @@ public class KeyHandler implements EventHandler<KeyEvent> {
                 }
             }
             case P -> Game.onPause = !Game.onPause;
-            case I -> MainGUIController.showInventory = !MainGUIController.showInventory;
+            case I -> mGUIC.toggleInventoryGUI();
         }
     }
 }

@@ -76,7 +76,7 @@ public class MainGUIController extends Application implements Runnable{
         new DistanceTrigger(Game.WIDTH / 2,Game.HEIGHT / 2,400);
 
         bp.setCenter(canvas);
-        keyHandler = new KeyHandler();
+        keyHandler = new KeyHandler(this);
         mouseHandler = new MouseHandler();
         Scene scene = new Scene(bp,Game.WIDTH,Game.HEIGHT);
         scene.setOnKeyPressed(e -> keyHandler.handle(e));
@@ -153,7 +153,6 @@ public class MainGUIController extends Application implements Runnable{
             displayTemporaryText(InteractionHandler.interactibleReadyToInteract);
         }
 
-        iGUIM.setDoDisplay(showInventory);
         iGUIM.render(gc);
 
         updateLogText();
@@ -255,6 +254,10 @@ public class MainGUIController extends Application implements Runnable{
     private void onExitFlagSleep(){
         System.out.println("MGUIC continued from flag sleep at: " + System.nanoTime());
         awaitBoolean = false;
+    }
+
+    public void toggleInventoryGUI(){
+        iGUIM.setDoDisplay(!iGUIM.getDisplayStatus());
     }
 
     public InventoryGUIManager getiGUIM(){return iGUIM;}

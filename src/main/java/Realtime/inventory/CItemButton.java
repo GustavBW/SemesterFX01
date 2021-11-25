@@ -81,6 +81,7 @@ public class CItemButton implements Clickable, Renderable {
     @Override
     public void onInstancedClick() {
         Clickable.clickables.add(this);
+        System.out.println("CItemButton.onInstancedClick");
     }
 
     @Override
