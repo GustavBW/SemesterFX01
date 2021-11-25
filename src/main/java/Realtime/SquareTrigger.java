@@ -35,7 +35,6 @@ public class SquareTrigger implements Interactible {
     }
     @Override
     public void onInVicinity() {
-
     }
 
     @Override
@@ -50,6 +49,7 @@ public class SquareTrigger implements Interactible {
     public Point2D getInvApproachVector(int pOrX, int pOrY){
         return new Point2D(pOrX - orX,pOrY - orY);
     }
+
     public Point2D getSizes(){
         return new Point2D(sizeX,sizeY);
     }

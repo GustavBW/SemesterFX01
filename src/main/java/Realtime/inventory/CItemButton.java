@@ -1,5 +1,6 @@
 package Realtime.inventory;
 
+import Realtime.debugging.RenderableCircle;
 import Realtime.interfaces.Clickable;
 import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public class CItemButton implements Clickable, Renderable {
 
     private final Point2D position;
-    private final int sizeX,sizeY;
+    private final int sizeX,sizeY, interRadius;
     private final CItem citem;
     private long timeOfDeath = 0;
     private boolean showSubButtons = false;
@@ -25,6 +26,7 @@ public class CItemButton implements Clickable, Renderable {
         this.position = position;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
+        this.interRadius = (sizeX + sizeY) / 2;
         this.iGUIM = iGUIM;
 
         onInstancedClick();
@@ -33,11 +35,11 @@ public class CItemButton implements Clickable, Renderable {
 
     @Override
     public int getX() {
-        return (int) position.getX();
+        return (int) position.getX() + (sizeX / 2);
     }
     @Override
     public int getY() {
-        return (int) position.getY();
+        return (int) position.getY() + (sizeY / 2);
     }
     @Override
     public Point2D getSizes() {
@@ -61,14 +63,23 @@ public class CItemButton implements Clickable, Renderable {
     public void onInteraction(){
         iGUIM.setInspectedElement(citem);
     }
+
+    @Override
+    public int getInterRadius() {
+        new RenderableCircle(new Point2D(getX(),getY()),interRadius,1000, Color.WHITE);
+        return interRadius;
+    }
+
     public void destroy(){
         Renderable.renderLayer4.remove(this);
         Clickable.clickables.remove(this);
     }
+
     @Override
     public void onInstancedRender() {
         Renderable.renderLayer4.add(this);
     }
+
     @Override
     public void onInstancedClick() {
         Clickable.clickables.add(this);

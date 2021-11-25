@@ -14,4 +14,6 @@ public interface Clickable {
     int getY();
     Point2D getSizes();
     void onInteraction();
+
+    int getInterRadius();
 }

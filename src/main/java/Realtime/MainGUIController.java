@@ -184,6 +184,11 @@ public class MainGUIController extends Application implements Runnable{
             rB.destroy();
         }
         RenderableButton.deadRendButton.clear();
+
+        for(TemporaryRenderable tR : TemporaryRenderable.tempRends){
+            tR.destroy();
+        }
+        TemporaryRenderable.tempRends.clear();
     }
 
     @Override
