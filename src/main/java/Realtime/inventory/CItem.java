@@ -78,10 +78,20 @@ public class CItem extends Item implements Interactible, Renderable {
         gc.drawImage(picture, position.getX(),position.getY());
     }
 
-
     public void destroy(){                                  //Removes the item from any static contexts in which a reference is kept
         MainGUIController.getCurrentRoom().getCitems().remove(this);
         Interactible.interactibles.remove(this);
         Renderable.renderLayer1.remove(this);
+    }
+
+    @Override
+    public String toString(){
+        String toReturn = "";
+        if(item == null){
+            toReturn = "CITEM with no Item";
+        }else{
+            toReturn = "CITEM: " + item.getName() + " " + item.getAmount();
+        }
+        return toReturn;
     }
 }

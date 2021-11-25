@@ -13,13 +13,20 @@ public class useCItemButton extends RenderableButton implements Clickable, Rende
     private CItem citem;
     private boolean active = false;
     private String text;
+    private Point2D position;
 
-
-    public useCItemButton(CItem citem, String text, Point2D position, int sizeX, int sizeY, int lifetime) {
-        super(text, position, sizeX, sizeY, lifetime);
+    public useCItemButton(CItem citem, String text, Point2D position, int sizeX, int sizeY) {
+        super(text, position, sizeX, sizeY, 2);
         this.citem = citem;
         this.text = text;
+        this.position = position;
+
+
+        System.out.println("Sub-CItemButton made");
     }
+
+    @Override
+    public void expired(){}
 
     @Override
     public void onInteraction() {
@@ -30,23 +37,22 @@ public class useCItemButton extends RenderableButton implements Clickable, Rende
     }
 
     @Override
-    public void expired() {
-
-    }
-
-    @Override
     public void render(GraphicsContext gc) {
-        if(active) {
-            gc.setFill(new Color(1,1,1,0.5));
-            gc.fillRoundRect(super.getX(),super.getY(),super.getSizes().getX(),super.getSizes().getY(),5,5);
-            gc.fillText(text,super.getX(),super.getY() + (super.getSizes().getY() / 2));
-        }
+
+        gc.setFill(new Color(1,1,1,0.5));
+        gc.fillRoundRect(position.getX(),position.getY(),super.getSizes().getX(),super.getSizes().getY(),5,5);
+
+        gc.setFill(Color.BLACK);
+        gc.fillText(text,super.getX() + 5,super.getY() + (super.getSizes().getY() / 2) + 4);
+
+    }
+    @Override
+    public void onInstancedRender() {
+
+    }
+    @Override
+    public void onInstancedClick() {
+
     }
 
-    public void setActive(boolean active){
-        this.active = active;
-    }
-    public void toggleActive(){
-        this.active = !this.active;
-    }
 }

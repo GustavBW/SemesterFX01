@@ -71,8 +71,10 @@ public class InventoryManager {
         }
     }
     public void useCItem(CItem citem){
-        if(useItem(citem.getItem().getName())){
-            citem.destroy();
+        if(citem != null) {
+            if (useItem(citem.getItem().getName())) {
+                citem.destroy();
+            }
         }
     }
 

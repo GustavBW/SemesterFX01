@@ -26,6 +26,8 @@ public class RenderableButton extends SquareTrigger implements Clickable, Render
         onInstancedClick();
     }
 
+    @Override
+    public void onInstancedInter() {    }
 
     @Override
     public void onInstancedClick() {

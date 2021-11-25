@@ -5,6 +5,7 @@ import Realtime.interfaces.Renderable;
 import Realtime.interfaces.Tickable;
 import Realtime.inventory.CItem;
 import Realtime.inventory.CItemButton;
+import Realtime.inventory.InventoryGUIManager;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
@@ -34,13 +35,7 @@ public class MainGUIController extends Application implements Runnable{
     private BorderPane bp;
     private KeyHandler keyHandler;
     private MouseHandler mouseHandler;
-    private ArrayList<CItem> cinventory;
-
-    //DisplayInventory Stuff
-    final int mainFrameWidth = 300, mainFrameHeight = 400, buttonSize = 30, buttonPadding = 5;
-    final double mainFramePosX = (Game.WIDTH / 2.0) - (mainFrameWidth / 2.0);
-    final double mainFramePosY = (Game.HEIGHT / 2.0) - (mainFrameHeight / 2.0);
-    long lastCallForInventoryContent = 0;
+    private InventoryGUIManager iGUIM;
 
     //Graphics stuff
     private Canvas canvas;
@@ -59,7 +54,7 @@ public class MainGUIController extends Application implements Runnable{
         bp = new BorderPane();
         createLoggingTexts();
 
-        cinventory = Game.getInventoryManager().getCInventory();
+        iGUIM = new InventoryGUIManager(Game.getInventoryManager(), false);
 
         mainStage = stage;
         mainStage.setTitle("WorldOfToxins");
@@ -128,6 +123,7 @@ public class MainGUIController extends Application implements Runnable{
         System.out.println("MGUIC.Stop() called");
         isRunning = false;
         mainStage.close();
+        System.exit(69);
     }
     private void onUpdate(){
 
@@ -153,13 +149,12 @@ public class MainGUIController extends Application implements Runnable{
             r.render(gc);
         }
 
-        if(showInventory){
-            displayInventory();
-        }
-
         if(InteractionHandler.interactibleReadyToInteract != null){
             displayTemporaryText(InteractionHandler.interactibleReadyToInteract);
         }
+
+        iGUIM.setDoDisplay(showInventory);
+        iGUIM.render(gc);
 
         updateLogText();
         cleanUpExpired();
@@ -172,36 +167,6 @@ public class MainGUIController extends Application implements Runnable{
         }
     }
 
-    private void displayInventory(){
-
-        gc.setFill(new Color(0,0,0,0.3));
-        gc.fillRoundRect(mainFramePosX,mainFramePosY,mainFrameWidth,mainFrameHeight,50,50);
-
-        if(System.currentTimeMillis() > lastCallForInventoryContent + 100) {
-            /*
-            for (int i = 0; i < cinventory.size(); i++) {
-                Point2D position = new Point2D(mainFramePosX + buttonSize,((mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding))) - (buttonSize / 2.0));
-                new CItemButton(cinventory.get(i), position, buttonSize, buttonSize, 100);
-
-                position = new Point2D(mainFramePosX + buttonSize + (buttonSize * 2),(mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding)));   //Reenable this when there's some Citems
-                new RenderableText(cinventory.get(i).getName() + " " + cinventory.get(i).getAmount(), position, 100);
-            }
-             */
-
-            for (int i = 0; i < 10; i++) {
-                Point2D position = new Point2D(mainFramePosX + buttonSize,((mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding))) - (buttonSize / 2.0));   //Disable this when there's some Citems
-                new CItemButton(null, position, buttonSize, buttonSize, 100);
-
-                position = new Point2D(mainFramePosX + buttonSize + (buttonSize * 2),(mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding)));
-                new RenderableText("Stuff & Amount", position, 100);
-            }
-
-            lastCallForInventoryContent = System.currentTimeMillis();
-        }
-
-
-    }
-
     public void displayTemporaryText(Interactible i){
         if(i instanceof DistanceTrigger || i instanceof CItem){
             if(System.currentTimeMillis() > distTrigLastTextCall + 500) {
@@ -210,7 +175,6 @@ public class MainGUIController extends Application implements Runnable{
             }
         }
     }
-
     public void cleanUpExpired(){
         for(RenderableText t : RenderableText.deadRendText){
             t.destroy();
@@ -225,23 +189,19 @@ public class MainGUIController extends Application implements Runnable{
         }
         RenderableButton.deadRendButton.clear();
     }
-
     @Override
     public void init(){
 
     }//This one loads the first RoomCollection in through the CE
-
     public static void main(String[] args) {
         launch(args);
     }
-
     @Override
     public void run(){
         isRunning = true;
         String[] args = new String[]{};
         launch(args);
     }
-
     public void setCollection(RoomCollection rc){currentCollection = rc;}
     public RoomCollection getCurrentCollection(){return currentCollection;}
     private void changeScene(RoomCollection rc){
@@ -297,6 +257,7 @@ public class MainGUIController extends Application implements Runnable{
         awaitBoolean = false;
     }
 
+    public InventoryGUIManager getiGUIM(){return iGUIM;}
     public static RoomCollection getCurrentRoom(){
         if(sceneChangeRequested) {
             return roomToChangeTo;

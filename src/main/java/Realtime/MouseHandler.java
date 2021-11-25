@@ -12,7 +12,7 @@ public class MouseHandler implements EventHandler<MouseEvent> {
         if(mouseEvent.getButton() == MouseButton.PRIMARY){
             Clickable c = InteractionHandler.findInteractibleOnMouseClick( (int) mouseEvent.getX(), (int) mouseEvent.getY());
             if(c != null){
-                System.out.println("You just clicked a button!");
+                c.onInteraction();
             }
         }
     }
