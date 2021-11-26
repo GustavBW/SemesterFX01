@@ -1,7 +1,10 @@
 package Realtime;
 
+import Realtime.debugging.RenderableCircle;
 import Realtime.interfaces.Clickable;
 import Realtime.interfaces.Interactible;
+import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 import worldofzuul.Game;
 
 public class InteractionHandler implements Runnable{
@@ -77,8 +80,14 @@ public class InteractionHandler implements Runnable{
     public static Clickable findInteractibleOnMouseClick(int mouseX, int mouseY){
         Clickable toReturn = null;
 
+        //Offsetting where you click so it matches what you expect. JavaFX is just wierd
+        mouseX += 2;
+        mouseY -= 8;
+
+        new RenderableCircle(new Point2D(mouseX, mouseY), 5, 1000, Color.BLACK);
+
         for(Clickable c : Clickable.clickables){
-            int interRadius = c.getInterRadius();
+            int interRadius = c.getInterRadius() * c.getInterRadius();
             double distXSq = (mouseX - c.getX()) * (mouseX - c.getX());
             double distYSq = (mouseY - c.getY()) * (mouseY - c.getY());
 

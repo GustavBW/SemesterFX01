@@ -26,7 +26,7 @@ public class CItemButton implements Clickable, Renderable {
         this.position = position;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        this.interRadius = (sizeX + sizeY) / 2;
+        this.interRadius = ((sizeX + sizeY) / 2) / 2;
         this.iGUIM = iGUIM;
 
         onInstancedClick();
@@ -66,7 +66,6 @@ public class CItemButton implements Clickable, Renderable {
 
     @Override
     public int getInterRadius() {
-        new RenderableCircle(new Point2D(getX(),getY()),interRadius,1000, Color.WHITE);
         return interRadius;
     }
 

@@ -34,7 +34,6 @@ public class dropCItemButton extends RenderableButton implements Renderable, Cli
     @Override
     public boolean isInBounds(int pOrX,int pOrY){
         //If each of the coordinates given (x & y) is within the boundaries of the square trigger. Based on its position and its size.
-        new RenderableSquare(position, sizeX, sizeY, 1000, Color.BLACK);
         return super.isInBounds(pOrX, pOrY);
     }
 
@@ -44,7 +43,7 @@ public class dropCItemButton extends RenderableButton implements Renderable, Cli
     @Override
     public void onInteraction() {
         Game.getInventoryManager().useCItem(citem);
-        System.out.println("You pressed a useCItemButton for CITEM id: " + citem.getId());
+        System.out.println("You pressed a dropCItemButton for CITEM id: " + citem.getId());
     }
 
     @Override
