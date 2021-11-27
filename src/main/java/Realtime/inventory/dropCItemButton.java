@@ -15,12 +15,13 @@ public class dropCItemButton extends RenderableButton implements Renderable, Cli
     private String text;
     private Point2D position;
     private int sizeX, sizeY, interRadius = 10, x, y;
+    private Color color1;
 
     public dropCItemButton(CItem citem, String text, Point2D position, int sizeX, int sizeY) {
         super(text, position, sizeX, sizeY, 2);
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-
+        this.color1 = new Color(1,1,1,0.5);
         this.citem = citem;
         this.text = text;
         this.position = position;
@@ -42,6 +43,8 @@ public class dropCItemButton extends RenderableButton implements Renderable, Cli
 
     @Override
     public void onInteraction() {
+        color1 = new Color(1,1,1,0.8);
+        Game.getInventoryManager().inventoryChanged = true;
         Game.getInventoryManager().useCItem(citem);
         System.out.println("You pressed a dropCItemButton for CITEM id: " + citem.getId());
     }
@@ -49,7 +52,7 @@ public class dropCItemButton extends RenderableButton implements Renderable, Cli
     @Override
     public void render(GraphicsContext gc) {
 
-        gc.setFill(new Color(1,1,1,0.5));
+        gc.setFill(color1);
         gc.fillRoundRect(position.getX(),position.getY(),sizeX,sizeY,5,5);
 
         gc.setFill(Color.BLACK);

@@ -45,7 +45,7 @@ public class MainGUIController extends Application implements Runnable{
     private long logLastCall = 0, distTrigLastTextCall = 0;
 
     public static long logTimeRender = 888,logTimeTick = 888,logTimeInter = 888;
-    public static boolean isRunning = false, isReady = false, awaitBoolean = false, sceneChangeRequested = false, showInventory = false;
+    public static boolean isRunning = false, isReady = false, awaitBoolean = false, sceneChangeRequested = false;
     public static RoomCollection roomToChangeTo;
 
     @Override
@@ -54,7 +54,7 @@ public class MainGUIController extends Application implements Runnable{
         bp = new BorderPane();
         createLoggingTexts();
 
-        iGUIM = new InventoryGUIManager(Game.getInventoryManager(), false);
+        iGUIM = Game.getiGUIM();
 
         mainStage = stage;
         mainStage.setTitle("WorldOfToxins");

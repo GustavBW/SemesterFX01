@@ -10,6 +10,8 @@ public class InventoryManager {
     private final ArrayList<CItem> cinventory;
     private final int inventorySize = 9;
 
+    public boolean inventoryChanged = false;
+
     public InventoryManager(){
         inventory = new ArrayList<>();
         cinventory = new ArrayList<>();
@@ -20,6 +22,7 @@ public class InventoryManager {
         for (Item i : inventory){
             if(i.getName().equalsIgnoreCase(name)){
                 inventory.remove(i);
+                inventoryChanged = true;
                 foundItem = true;
                 break;
             }
@@ -36,6 +39,7 @@ public class InventoryManager {
             for (CItem i : cinventory) {
                 if(i == citem) {
                     i.changeAmount(citem.getAmount());
+                    inventoryChanged = true;
                     i.destroy();
                     doesAlreadyContain = true;
                     break;
@@ -43,6 +47,7 @@ public class InventoryManager {
             }
             if (!doesAlreadyContain) {
                 cinventory.add(new CItem(citem.getItem(), citem.getPosPic()));
+                inventoryChanged = true;
                 citem.destroy();
             }
         }else{
@@ -56,6 +61,7 @@ public class InventoryManager {
             if(i == citem) {
                 i.destroy();
                 cinventory.remove(i);
+                inventoryChanged = true;
                 foundTheThing = true;
                 break;
             }
@@ -65,6 +71,7 @@ public class InventoryManager {
         for(CItem i : cinventory){
             if(i == citem){
                 i.reInstate();
+                inventoryChanged = true;
                 cinventory.remove(i);
                 break;
             }
@@ -73,6 +80,7 @@ public class InventoryManager {
     public void useCItem(CItem citem){
         if(citem != null) {
             if (useItem(citem.getItem().getName())) {
+                inventoryChanged = true;
                 citem.destroy();
             }
         }
@@ -88,6 +96,7 @@ public class InventoryManager {
                 for (int i = 0; i < inventory.size(); i++) {         //Secondly check if it exists in the inventory already
                     if (inventory.get(i).getName().equalsIgnoreCase(item.getName())) {
                         inventory.get(i).changeAmount(item.getAmount());        //And simply increase the amount of it in the inventory
+                        inventoryChanged = true;
                         containsItem = true;
                         ableToFit = true;
                         System.out.println("Du fandt mere: " + item.getName());
@@ -96,6 +105,7 @@ public class InventoryManager {
                 }
                 if (!containsItem) {
                     inventory.add(new Item(item.getId(),item.getName(), item.getAmount()));                                //And put it there
+                    inventoryChanged = true;
                     System.out.println("Du har nu en ny ting: " + item.getName());
                     ableToFit = true;
 
@@ -136,6 +146,7 @@ public class InventoryManager {
                     itemToUse = new Item(i.getId(),i.getName(), i.getAmount());     //If you do, initiate itemToUse as a clone of that item
                     if(!name.equalsIgnoreCase("Kamera")) {
                         inventory.remove(i);                                                 //Now remove that item from your inventory
+                        inventoryChanged = true;
                     }
                     break;
                 }

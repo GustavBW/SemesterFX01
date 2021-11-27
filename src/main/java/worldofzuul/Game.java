@@ -4,6 +4,7 @@ import BackEnd.GraphicsProcessor;
 import BackEnd.TextProcessor;
 import Realtime.*;
 import Realtime.interfaces.Tickable;
+import Realtime.inventory.InventoryGUIManager;
 import Realtime.inventory.InventoryManager;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class Game implements Runnable{
     private final static GraphicsProcessor gp = new GraphicsProcessor();
     private static MainGUIController mGUIC;
     private static InventoryManager inventoryManager;
+    private static InventoryGUIManager iGUIM;
     private final InteractionHandler interHandler;
     private final ArrayList<Room> allRooms = new ArrayList<>();
     private Thread tickThread, interThread, renderThread;
@@ -41,6 +43,7 @@ public class Game implements Runnable{
         createRooms();
         parser = new Parser();
         inventoryManager = new InventoryManager();
+        iGUIM = new InventoryGUIManager(inventoryManager, false);
         mGUIC = new MainGUIController();
 
         start();
@@ -94,6 +97,10 @@ public class Game implements Runnable{
 
                 for(Tickable t : Tickable.tickables){
                     t.tick();
+                }
+                if(inventoryManager.inventoryChanged){
+                    iGUIM.createNew(false);
+                    inventoryManager.inventoryChanged = false;
                 }
 
                 long timeB = System.nanoTime();
@@ -265,6 +272,7 @@ public class Game implements Runnable{
         play();
     }
 
+    public static InventoryGUIManager getiGUIM(){return iGUIM;}
     public static MainGUIController getMGUIC(){return mGUIC;}
     public static InventoryManager getInventoryManager(){return inventoryManager;}
 }

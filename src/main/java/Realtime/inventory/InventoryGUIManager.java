@@ -3,6 +3,7 @@ package Realtime.inventory;
 import BackEnd.PosPicCombo;
 import Realtime.RenderableButton;
 import Realtime.RenderableText;
+import Realtime.debugging.TestingCItem;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -13,18 +14,25 @@ import java.util.HashMap;
 
 public class InventoryGUIManager {
 
-    private InventoryManager inventoryManager;
-    private ArrayList<CItemButton> CIBs;
-    private ArrayList<RenderableText> RTFBs;
-    private HashMap<Integer, ArrayList<RenderableButton>> SUBs;
+    private final InventoryManager inventoryManager;
+    private final ArrayList<CItemButton> CIBs;        //Main buttons for each item in the inventory
+    private final ArrayList<RenderableText> RTFBs;    //Labels telling what item it is and how many of these you got
+    private final HashMap<Integer, ArrayList<RenderableButton>> SUBs; //Functional buttons that actually do the Use / Drop thing
 
+    //Me checking if updating the inventory GUI actually works as expected.
+    private int howManyTimesHaveIDoneThis = 0;
+
+    //Specifications for the inventory look.
     private final int mainFrameWidth = 300, mainFrameHeight = 400, buttonSize = 30, subWidth = 40, buttonPadding = 5;
     private final double mainFramePosX = (Game.WIDTH / 2.0) - (mainFrameWidth / 2.0);
     private final double mainFramePosY = (Game.HEIGHT / 2.0) - (mainFrameHeight / 2.0);
 
+    //The Inspected Element is set by the CItemButton that is pressed. THis is how the iGUIM determines which Sub-buttons to show
     private CItem inspectedElement;
 
+    //These are public as for easy reference. Their function is super basic, but very important
     public boolean doDisplay = false;
+    public static boolean GUIisReady = false; //Makes sure not to try and render the GUI whilest a new one is being created.
 
     public InventoryGUIManager(InventoryManager inventoryManager, boolean actuallyTheThing){
         this.inventoryManager = inventoryManager;
@@ -32,31 +40,41 @@ public class InventoryGUIManager {
         this.RTFBs = new ArrayList<>();
         this.SUBs = new HashMap<>();
 
+        howManyTimesHaveIDoneThis = 0;
         createNew(actuallyTheThing);
     }
 
     public void createNew(boolean actuallyTheThing){
 
-        int i = 0;
+        //Wiping all the lists of stuff first, then checking if to show a mockup (if actuallyTheThing == false) or the real functional thing (if actuallyTheThing == true)
+
+        howManyTimesHaveIDoneThis++;
+
+        GUIisReady = false;
+        clearAll();
 
         if(actuallyTheThing) {
+
+            int i = 0;
+
             for (CItem c : inventoryManager.getCInventory()) {
 
                 //CIBS
                 Point2D CIBposition = new Point2D(mainFramePosX + buttonSize, ((mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding))) - (buttonSize / 2.0));   //Disable this when there's some Citems
                 CIBs.add(new CItemButton(c, CIBposition, buttonSize, buttonSize, this));
 
-                Point2D RTFBposition = new Point2D(mainFramePosX + buttonSize + (buttonSize * 2), (mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding)) + 4);
-                RTFBs.add(new RenderableText(c.getName() + " " + c.getAmount(), RTFBposition, 100));
+                Point2D RTFBposition = new Point2D(CIBposition.getX() + (buttonSize * 2), CIBposition.getY() + 4 + (buttonSize / 2.0));
+                RTFBs.add(new RenderableText(c.getPopUpText(), RTFBposition, 100));
 
                 //SUBS
                 ArrayList<RenderableButton> newArrayList = new ArrayList<>();
 
-                Point2D sub1Position = new Point2D(CIBposition.getX() + 150, CIBposition.getY());
-                newArrayList.add(new useCItemButton(c,"Use",sub1Position, 40,buttonSize));
+                Point2D sub1Position = new Point2D(CIBposition.getX() + 165, CIBposition.getY());
+                newArrayList.add(new useCItemButton(c,"Use", sub1Position, subWidth, buttonSize));
+                System.out.println("Made SUB at y = " + CIBposition.getY());
 
-                Point2D sub2Position = new Point2D(CIBposition.getX() + 150 + 40 + 5, CIBposition.getY());
-                newArrayList.add(new dropCItemButton(c,"Drop", sub2Position,40,buttonSize));
+                Point2D sub2Position = new Point2D(sub1Position.getX() + subWidth + 5, sub1Position.getY());
+                newArrayList.add(new dropCItemButton(c,"Drop", sub2Position,subWidth, buttonSize));
 
                 SUBs.put(c.getId(), newArrayList);
 
@@ -67,21 +85,20 @@ public class InventoryGUIManager {
 
             for (int j = 0; j < 10; j++) {
 
-                CItem tempCitem = new CItem(new Item(j,"tempCItem",69),new PosPicCombo(null, new Point2D(1,1)));
+                TestingCItem tempCitem = new TestingCItem(new Item(j,"tempCItem",69),new PosPicCombo(null, new Point2D(1,1)));
 
                 //CIBS
                 Point2D CIBposition = new Point2D(mainFramePosX + buttonSize, ((mainFramePosY + (mainFrameHeight * 0.11)) + (j * (buttonSize + buttonPadding))) - (buttonSize / 2.0));   //Disable this when there's some Citems
                 CIBs.add(new CItemButton(tempCitem, CIBposition, buttonSize, buttonSize, this));
 
                 Point2D RTFBposition = new Point2D(CIBposition.getX() + (buttonSize * 2), CIBposition.getY() + 4 + (buttonSize / 2.0));
-                RTFBs.add(new RenderableText("Stuff & Amount", RTFBposition, 100));
+                RTFBs.add(new RenderableText("Stuff & Amount " + howManyTimesHaveIDoneThis, RTFBposition, 100));
 
                 //SUBS
                 ArrayList<RenderableButton> newArrayList = new ArrayList<>();
 
                 Point2D sub1Position = new Point2D(CIBposition.getX() + 165, CIBposition.getY());
                 newArrayList.add(new useCItemButton(tempCitem,"Use", sub1Position, subWidth, buttonSize));
-                System.out.println("Made SUB at y = " + CIBposition.getY());
 
                 Point2D sub2Position = new Point2D(sub1Position.getX() + subWidth + 5, sub1Position.getY());
                 newArrayList.add(new dropCItemButton(tempCitem,"Drop", sub2Position,subWidth, buttonSize));
@@ -89,12 +106,13 @@ public class InventoryGUIManager {
                 SUBs.put(j, newArrayList);
             }
         }
-
         destroyAll();     //As some of these elements above adds themselves their renderlayers on instantiation, we just make sure to remove them at first.
+
+        GUIisReady = true;
     }
 
     public void render(GraphicsContext gc){
-        if(doDisplay) {
+        if(doDisplay && GUIisReady) {
             gc.setFill(new Color(0, 0, 0, 0.3));
             gc.fillRoundRect(mainFramePosX, mainFramePosY, mainFrameWidth, mainFrameHeight, 50, 50);
 
@@ -116,15 +134,15 @@ public class InventoryGUIManager {
     }
 
     public void clearAll(){
-        if(!(CIBs.isEmpty() || CIBs == null)) {
+        if(!CIBs.isEmpty() && CIBs != null) {
             CIBs.clear();
         }
 
-        if(!(RTFBs.isEmpty() || RTFBs == null)) {
+        if(!RTFBs.isEmpty() && RTFBs != null) {
             RTFBs.clear();
         }
 
-        if(!(SUBs.isEmpty() || SUBs == null)) {
+        if(!SUBs.isEmpty() && SUBs != null) {
             SUBs.clear();
         }
     }
@@ -148,7 +166,6 @@ public class InventoryGUIManager {
                 }
             }
         }
-        System.out.println("InventoryGUIManager destroyed all - iGUIM 153");
     }
     public void reInstateAll(){
         if(!(CIBs.isEmpty() || CIBs == null)) {
@@ -165,8 +182,6 @@ public class InventoryGUIManager {
                 }
             }
         }
-
-        System.out.println("InventoryGUIManager reinstated all - iGUIM 171");
     }
 
     public void setDoDisplay(boolean active){
@@ -197,6 +212,6 @@ public class InventoryGUIManager {
     }
 
     public boolean getDisplayStatus(){return doDisplay;}
-
-
+    public CItem getInspectedElement(){return inspectedElement;}
+    public InventoryManager getInventoryManager(){return inventoryManager;}
 }

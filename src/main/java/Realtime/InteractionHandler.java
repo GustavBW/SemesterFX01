@@ -3,6 +3,7 @@ package Realtime;
 import Realtime.debugging.RenderableCircle;
 import Realtime.interfaces.Clickable;
 import Realtime.interfaces.Interactible;
+import Realtime.inventory.InventoryGUIManager;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import worldofzuul.Game;
@@ -87,13 +88,13 @@ public class InteractionHandler implements Runnable{
         new RenderableCircle(new Point2D(mouseX, mouseY), 5, 1000, Color.BLACK);
 
         for(Clickable c : Clickable.clickables){
-            int interRadius = c.getInterRadius() * c.getInterRadius();
+            int interRadiusSq = c.getInterRadius() * c.getInterRadius();
             double distXSq = (mouseX - c.getX()) * (mouseX - c.getX());
             double distYSq = (mouseY - c.getY()) * (mouseY - c.getY());
 
             double distanceSq = distXSq + distYSq;
 
-            if (distanceSq < interRadius || c.inBounds(mouseX,mouseY)) {
+            if (distanceSq < interRadiusSq || c.inBounds(mouseX,mouseY)) {
                 toReturn = c;
                 break;
             }

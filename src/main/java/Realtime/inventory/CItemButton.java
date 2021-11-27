@@ -49,13 +49,29 @@ public class CItemButton implements Clickable, Renderable {
     @Override
     public void render(GraphicsContext gc) {
 
-        gc.setFill(color1);
-        gc.fillRoundRect(position.getX(), position.getY(), sizeX, sizeY, sizeX, sizeY);
 
-        gc.setFill(color2);
 
-        for(int i = 0; i < 3; i++) {
-            gc.fillRect(position.getX() + ((sizeX / 2.0) - 7.5), position.getY() + ((sizeY / 2.0) - 6) + (i * 5), 15, 2);
+        if(iGUIM.getInspectedElement() == citem) {
+
+            gc.setFill(new Color(1,1,1,0.8));
+            gc.fillRoundRect(position.getX(), position.getY(), sizeX, sizeY, sizeX, sizeY);
+
+            gc.setFill(new Color(0,0,0,0.8));
+
+            for (int i = 0; i < 3; i++) {
+                gc.fillRect(position.getX() + ((sizeX / 2.0) - 6) + (i * 5),position.getY() + ((sizeY / 2.0) - 7.5) , 2, 15);
+
+            }
+        }else{
+
+            gc.setFill(color1);
+            gc.fillRoundRect(position.getX(), position.getY(), sizeX, sizeY, sizeX, sizeY);
+
+            gc.setFill(color2);
+
+            for (int i = 0; i < 3; i++) {
+                gc.fillRect(position.getX() + ((sizeX / 2.0) - 7.5), position.getY() + ((sizeY / 2.0) - 6) + (i * 5), 15, 2);
+            }
         }
     }
 
