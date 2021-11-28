@@ -2,6 +2,7 @@ package Realtime;
 
 import Realtime.interfaces.Clickable;
 import Realtime.interfaces.Renderable;
+import Realtime.triggers.SquareTrigger;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

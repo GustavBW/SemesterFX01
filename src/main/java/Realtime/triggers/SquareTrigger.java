@@ -1,4 +1,4 @@
-package Realtime;
+package Realtime.triggers;
 
 import Realtime.interfaces.Interactible;
 import javafx.geometry.Point2D;

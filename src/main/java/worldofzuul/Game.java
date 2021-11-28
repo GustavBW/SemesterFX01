@@ -98,7 +98,7 @@ public class Game implements Runnable{
                 for(Tickable t : Tickable.tickables){
                     t.tick();
                 }
-                if(inventoryManager.inventoryChanged){
+                if(inventoryManager.inventoryChanged){          //Its the Tick threads (this one) that actually updates the Inventory GUI.
                     iGUIM.createNew(false);
                     inventoryManager.inventoryChanged = false;
                 }

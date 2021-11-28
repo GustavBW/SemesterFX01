@@ -1,5 +1,6 @@
 package BackEnd;
 
+import Realtime.triggers.RoomExitTrigger;
 import Realtime.inventory.CItem;
 import Realtime.inventory.Item;
 import worldofzuul.*;
@@ -30,7 +31,7 @@ public class ContentEngine {
     }
 
     public RoomCollection getRoomCollection(Room room){
-        RoomCollection rc = new RoomCollection(room,gp.getBaseForRoom(room.getId()),getCItems(room.getId()));
+        RoomCollection rc = new RoomCollection(room,gp.getBaseForRoom(room.getId()),getCItems(room.getId()), (ArrayList<RoomExitTrigger>) null);        //Gotta parse the RoomExitTriggers here as well. Forgot them
 
         return rc;
     }

@@ -17,4 +17,6 @@ module worldofzuul {
     opens Realtime.interfaces to javafx.fxml;
     exports Realtime.inventory;
     opens Realtime.inventory to javafx.fxml;
+    exports Realtime.triggers;
+    opens Realtime.triggers to javafx.fxml;
 }

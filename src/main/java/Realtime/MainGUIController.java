@@ -4,8 +4,9 @@ import Realtime.interfaces.Interactible;
 import Realtime.interfaces.Renderable;
 import Realtime.interfaces.Tickable;
 import Realtime.inventory.CItem;
-import Realtime.inventory.CItemButton;
 import Realtime.inventory.InventoryGUIManager;
+import Realtime.triggers.DistanceTrigger;
+import Realtime.triggers.RoomExitTrigger;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
@@ -20,8 +21,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import worldofzuul.Game;
 import BackEnd.RoomCollection;
-
-import java.util.ArrayList;
 
 public class MainGUIController extends Application implements Runnable{
 
@@ -42,7 +41,7 @@ public class MainGUIController extends Application implements Runnable{
     private GraphicsContext gc;
     private static RoomCollection currentCollection;
     private RoomCollection previousRCollection;             //Redundant. But might get important for some race conditions
-    private long logLastCall = 0, distTrigLastTextCall = 0;
+    private long logLastCall = 0, distTrigLastTextCall = 0, roomTrigLastCall = 0;
 
     public static long logTimeRender = 888,logTimeTick = 888,logTimeInter = 888;
     public static boolean isRunning = false, isReady = false, awaitBoolean = false, sceneChangeRequested = false;
@@ -161,16 +160,25 @@ public class MainGUIController extends Application implements Runnable{
         long timeB = System.nanoTime();
         logTimeRender = timeB - timeA;
 
-        if(sceneChangeRequested){
+        if(sceneChangeRequested && roomToChangeTo != null){     //Just adding a bit more redundancy here.
             changeScene(roomToChangeTo);
         }
     }
 
     public void displayTemporaryText(Interactible i){
+
+        //I'mma split them up like this, as to be able to customize their looks
+
         if(i instanceof DistanceTrigger || i instanceof CItem){
             if(System.currentTimeMillis() > distTrigLastTextCall + 500) {
                 new RenderableText(i.getPopUpText(), new Point2D(i.getPosX(), i.getPosY()), 500);
                 distTrigLastTextCall = System.currentTimeMillis();
+            }
+        }
+        if(i instanceof RoomExitTrigger){
+            if(System.currentTimeMillis() > roomTrigLastCall + 500){
+                new RenderableText(i.getPopUpText(), new Point2D(i.getPosX(), i.getPosY()), 500);
+                roomTrigLastCall = System.currentTimeMillis();
             }
         }
     }
@@ -207,44 +215,82 @@ public class MainGUIController extends Application implements Runnable{
     public void setCollection(RoomCollection rc){currentCollection = rc;}
     public RoomCollection getCurrentCollection(){return currentCollection;}
     private void changeScene(RoomCollection rc){
+
+        //This function takes awhile due to the fact that the rest of the threads has to stop what they're doing first.
+        //At first it signals to the other threads (that are always looking for this static booleans) that somethings up.
         isReady = false;
         awaitBoolean = false;
-        while(!(Game.isAwaiting && InteractionHandler.isAwaiting)){
+        while(!(Game.isAwaiting && InteractionHandler.isAwaiting)){ //Afterwards it goes into a busy-sleep giving a little message in the log awaiting the other threads to declare that they're now waiting
             onAwait();
         }
-        onExitFlagSleep();
+        onExitFlagSleep();           //Since the step above can anywhere from .1 millisecond to a couple of seconds (it shouldn't, but might happen) it writes a message to the log again.
 
-        long timeA = System.nanoTime();
+        long timeA = System.nanoTime(); //Thus the timing starts. Now the fun happens. (The timing is only for me really, so I can see if somethings up
 
-        previousRCollection = currentCollection;
-        currentCollection = rc;
+        previousRCollection = currentCollection;    //Keeping track of the previous collection is necessary due to the way CItems can be put back into the world. If done during
+                                                    //a scene change, trying to add it to the new Room you're entering, WILL cause a ConcurrentModificationsException. (As you're adding to an arraylist whilest
+                                                    //its elements are being read and executed in other places. Also this is only an issue since the Interaction system is on another thread.
+        currentCollection = rc;                     //Updating current RC - which is also static meaning you can technically reference all current room components (base images, CItems, triggers...) from anywhere
         
-        clearAllTicksRendersInters();
-        addNewRenderables(rc);
-        Game.currentRoom = rc.getRoom();
+        clearAllTicksRendersInters();               //Wipe all the lists. Tickables, Renderables, Interactable. NOT Clickable as clickables are UI elements and are updated elsewhere (take the Inventory GUI).
+                                                    //Also this is the step that would fuck everything up if the other threads were running at this point. And oh gosh darn I don't want anymore race conditions.
+        addNewRenderables(rc);                      //Then read from the arraylist and adds them in.
+        addNewInteractibles(rc);
+        getThatPlayerBackInThere();                 //Since it might be for the best to just wipe everything. It's easiest to just add the player in afterwards.
+        Game.currentRoom = rc.getRoom();            //Kinda redundant. But it's a nice touch.
 
         long timeB = System.nanoTime();
-        System.out.println("MGUIC.changeScene() took: " + (timeB - timeA) + "ns");
+        System.out.println("MGUIC.changeScene() took: " + (timeB - timeA) + "ns");  //Hopefully we wont ever reach scene changes taking more than half a second. But we for sure will know exactly how long each was.
 
-        isReady = true;
+        isReady = true; //With this flag set - which the other threads are looking for - they'll resume their tasks.
     }
     private void clearAllTicksRendersInters(){
         Interactible.interactibles.clear();
         Tickable.tickables.clear();
         Renderable.renderLayer0.clear();    //Ground layer
         Renderable.renderLayer1.clear();    //Item + NPC + houseWalls
-                                            //Layer2 isn't cleared as that is the player layer
+        Renderable.renderLayer2.clear();    //Welp we add the player back in again anyways, so might aswell make sure to just clean up shop.
         Renderable.renderLayer3.clear();    //Rooftops
-        Renderable.renderLayer4.clear();    //Uh. Something. I've forgotten.
+        Renderable.renderLayer4.clear();    //UI
     }
     private void addNewRenderables(RoomCollection rc){
-        Renderable.renderLayer0.add(rc.getBaseImages().get(0));
-        Renderable.renderLayer1.add(rc.getBaseImages().get(1));
-                                                                    //Layer2 is the player layer, it isn't cleared and isn't modified.
-        Renderable.renderLayer3.add(rc.getBaseImages().get(2));
-        Renderable.renderLayer4.add(rc.getBaseImages().get(3));
+
+        //Might seem unecessary, but, it's mostly a matter of redundancy. No need to break the game if a picture wasn't loaded.
+        //Problem is, the Renderthread will stop IMMEDIATLY if you try and call "render" on a null-object.
+
+        String status = "";
+        boolean success = true;
+
+        if(rc.getBaseImages().get(0) != null) {
+            Renderable.renderLayer0.add(rc.getBaseImages().get(0));
+        }else{ status += " 0,"; success = false;}
+
+        if(rc.getBaseImages().get(1) != null) {
+            Renderable.renderLayer1.add(rc.getBaseImages().get(1));
+        }else{ status += " 1,"; success = false;}
+
+        if(rc.getBaseImages().get(2) != null) {                                                            //Layer2 is the player layer, it isn't cleared and isn't modified.
+            Renderable.renderLayer3.add(rc.getBaseImages().get(2));
+        }else{ status += " 2,"; success = false;}
+
+        if(rc.getBaseImages().get(3) != null) {
+            Renderable.renderLayer4.add(rc.getBaseImages().get(3));
+        }else{ status += " 3,"; success = false;}
 
         Renderable.renderLayer1.addAll(rc.getCitems());
+
+        if(success) {   //Also again redundant. But I have a feeling we'll have some hickups
+            System.out.println("MGUIC succesfully added new renderables during scene change.");
+        }else{
+            System.out.println("MGUIC failed to add base image(s): " + status + " during scene change for RoomCollection: " + rc.getRoom().getName());
+        }
+    }
+    private void addNewInteractibles(RoomCollection rc){
+        Interactible.interactibles.addAll(rc.getExitTriggers());
+    }
+    private void getThatPlayerBackInThere(){
+        Tickable.tickables.add(Game.player);
+        Renderable.renderLayer2.add(Game.player);
     }
     private void onAwait(){
         System.out.print(" ");       //Tricking the compiler to not skip the while loop

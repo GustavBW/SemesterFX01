@@ -1,7 +1,7 @@
 package BackEnd;
 
-import Realtime.DistanceTrigger;
 import Realtime.RenderableImage;
+import Realtime.triggers.RoomExitTrigger;
 import Realtime.inventory.CItem;
 import worldofzuul.Room;
 
@@ -13,14 +13,9 @@ public class RoomCollection {
     private Room room;
     private ArrayList<RenderableImage> baseImages;
     private ArrayList<CItem> citemsInRoom;
-    private ArrayList<DistanceTrigger> triggers;
+    private ArrayList<RoomExitTrigger> triggers;
 
-
-    public RoomCollection(Room room, ArrayList<RenderableImage> baseImages, ArrayList<CItem> citems){
-        this(room,baseImages, citems,null);
-    }
-
-    public RoomCollection(Room room, ArrayList<RenderableImage> baseImages, ArrayList<CItem> citems, ArrayList<DistanceTrigger> triggers){
+    public RoomCollection(Room room, ArrayList<RenderableImage> baseImages, ArrayList<CItem> citems, ArrayList<RoomExitTrigger> triggers){
         this.id = room.getId();
         this.room = room;
         this.baseImages = baseImages;
@@ -34,7 +29,9 @@ public class RoomCollection {
     public ArrayList<CItem> getCitems(){return citemsInRoom;}
     public Room getRoom(){return room;}
     public int getId(){return id;}
+    public ArrayList<RoomExitTrigger> getExitTriggers(){return triggers;}
 
+    public void setExits(ArrayList<RoomExitTrigger> RETs){triggers = RETs;}
     public void setBaseImages(ArrayList<RenderableImage> images){baseImages = images;}
     public void setCitemsInRoom(ArrayList<CItem> citems){citemsInRoom = citems;}
     public void setRoom(Room room){

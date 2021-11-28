@@ -3,7 +3,8 @@ package Realtime;
 import Realtime.debugging.RenderableCircle;
 import Realtime.interfaces.Clickable;
 import Realtime.interfaces.Interactible;
-import Realtime.inventory.InventoryGUIManager;
+import Realtime.triggers.DistanceTrigger;
+import Realtime.triggers.SquareTrigger;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import worldofzuul.Game;
@@ -41,7 +42,7 @@ public class InteractionHandler implements Runnable{
             int pPosX = player.getOrX();        //Using Origin coords here, as it'll give a better result.
             int pPosY = player.getOrY();        //Player.posX & posY would make a scewed distance calculation.
 
-            if(!Interactible.interactibles.isEmpty()) {
+            if(!Interactible.interactibles.isEmpty()) { //An interesting thing happens when you don't check. It simply sends too many updates to MGUIC which messes everything up
 
                 boolean foundSomething = false;
 
