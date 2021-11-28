@@ -17,7 +17,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import worldofzuul.Game;
 import BackEnd.RoomCollection;
-import worldofzuul.InventoryManager;
 
 import java.util.ArrayList;
 
@@ -31,9 +30,13 @@ public class MainGUIController extends Application implements Runnable{
     private HBox hboxTop;
 
     private BorderPane bp;
-    private KeyHandler keyHandler;
     private MouseHandler mouseHandler;
     private ArrayList<CItem> cinventory;
+
+    //Player Movement
+    private OnKeyPressed keyHandlerDown;
+    private OnKeyReleased keyHandlerUp;
+
 
     //DisplayInventory Stuff
     final int mainFrameWidth = 300, mainFrameHeight = 400, buttonSize = 30, buttonPadding = 5;
@@ -80,10 +83,12 @@ public class MainGUIController extends Application implements Runnable{
         new DistanceTrigger(Game.WIDTH / 2,Game.HEIGHT / 2,400);
 
         bp.setCenter(canvas);
-        keyHandler = new KeyHandler();
+        keyHandlerDown = new OnKeyPressed();
+        keyHandlerUp = new OnKeyReleased();
         mouseHandler = new MouseHandler();
         Scene scene = new Scene(bp,Game.WIDTH,Game.HEIGHT);
-        scene.setOnKeyPressed(e -> keyHandler.handle(e));
+        scene.setOnKeyPressed(e -> keyHandlerDown.handle(e));
+        scene.setOnKeyReleased(e -> keyHandlerUp.handle(e));
         scene.setOnMouseClicked(e -> mouseHandler.handle(e));
 
         mainStage.setScene(scene);
