@@ -10,20 +10,20 @@ public class OnKeyReleased implements EventHandler<KeyEvent> {
 
     @Override
     public void handle(KeyEvent keyEvent) {
-        switch (keyEvent.getText()) {
-            case "w": {
+        switch (keyEvent.getCode()) {
+            case W: {
                 Game.player.setUpKeyPressed(false);
                 break;
             }
-            case "d": {
+            case D: {
                 Game.player.setRightKeyPressed(false);
                 break;
             }
-            case "s": {
+            case S: {
                 Game.player.setDownKeyPressed(false);
                 break;
             }
-            case "a": {
+            case A: {
                 Game.player.setLeftKeyPressed(false);
                 break;
             }

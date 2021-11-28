@@ -1,6 +1,7 @@
 package Realtime;
 
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import worldofzuul.Game;
 
@@ -15,32 +16,34 @@ public class OnKeyPressed implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent keyEvent) {
 
-        switch (keyEvent.getText()) {
-            case "w": {
+        switch (keyEvent.getCode()) {
+            case W: {
                 Game.player.setUpKeyPressed(true);
                 break;
             }
-            case "d": {
+            case D: {
                 Game.player.setRightKeyPressed(true);
                 break;
             }
-            case "s": {
+            case S: {
                 Game.player.setDownKeyPressed(true);
                 break;
             }
-            case "a": {
+            case A: {
                 Game.player.setLeftKeyPressed(true);
                 break;
             }
-            case "e": {
+            case E: {
                 if(InteractionHandler.interactibleReadyToInteract != null){
                     InteractionHandler.interactibleReadyToInteract.onInteraction();
+                    System.out.println("Interaction happened");
                 }
+                break;
             }
-            case "p": {
+            case P: {
                 Game.onPause = !Game.onPause;
             }
-            case "i": {
+            case I: {
                 mGUIC.toggleInventoryGUI();
             }
         }
