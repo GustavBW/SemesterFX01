@@ -31,9 +31,11 @@ public class MainGUIController extends Application implements Runnable{
     private Text renderFPSText,interFPSText,tickFPSText;
     private HBox hboxTop;
 
+    //static elements. Always there.
     private BorderPane bp;
     private MouseHandler mouseHandler;
     private InventoryGUIManager iGUIM;
+    private RoomTitleText roomTitleText;
 
     //Player Movement
     private OnKeyPressed keyHandlerDown;
@@ -76,6 +78,7 @@ public class MainGUIController extends Application implements Runnable{
         timer.start();
 
         new DistanceTrigger(Game.WIDTH / 2,Game.HEIGHT / 2,400);
+        Renderable.renderLayer4.add(new RoomTitleText("ROOM TITLE TEXT", 36));
 
         bp.setCenter(canvas);
         mouseHandler = new MouseHandler();

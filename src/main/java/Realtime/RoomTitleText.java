@@ -15,13 +15,13 @@ public class RoomTitleText implements Renderable {
     private final Font fontToUse;
     private final String text;
     private Color color1, color2;
-    private int dropShadowOffset = 3;
+    private int dropShadowOffset = -1;
 
 
     public RoomTitleText(String text, int fontSize) {
         this.text = text;
         fontToUse = new Font("Impact", fontSize);
-        this.position = new Point2D(Game.WIDTH / 2.0 - ((text.getBytes().length * (fontSize * 0.75)) / 2),0);
+        this.position = new Point2D((Game.WIDTH / 2.0 - (((text.getBytes().length - 5) * (fontSize / 1.333333)) / 2)),(fontSize / 1.333333) * 2);
             //So. Font size is measured in "points" Pt, not pixels (Px), which means above is to take the amount of letters in the text, at a given font size, converted to pixels.
             //That is how I get the size of the text.
 
