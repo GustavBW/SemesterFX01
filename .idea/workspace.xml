@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bfdae99-945c-487c-90a0-7c778f424550" name="Changes" comment="added interfaces to version control">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Realtime/RoomTitleText.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/RenderableText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/RenderableText.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/RoomDescriptionText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/RoomDescriptionText.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/inventory/InventoryGUIManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/inventory/InventoryGUIManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/inventory/dropCItemButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/inventory/dropCItemButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/inventory/useCItemButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/inventory/useCItemButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/KeyHandler$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/KeyHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RoomDescriptionText.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/RoomDescriptionText.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

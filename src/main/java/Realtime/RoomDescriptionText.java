@@ -8,14 +8,22 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import worldofzuul.Game;
 
+import java.util.ArrayList;
+import java.util.stream.IntStream;
+
 public class RoomDescriptionText extends TemporaryRenderable implements Renderable, Clickable {
 
-    private Point2D position;
-    private Point2D sizes;
-    private String text;
+    private final Point2D position;
+    private final Point2D sizes;
+    private final String text;
     private int advance;    //Since you can click this thing multiple times. This tracks how long you've "advanced".
-    private Font fontToUse;
-    private Color color1, color2;
+    private final Font fontToUse;
+    private final Color color1;
+    private final Color color2;
+    private final ArrayList<String> textAsLines;
+    private int linesMade;
+    private final int linesToShowAtATime = 4;
+    private final int lineHeight = 10;
 
     public RoomDescriptionText(String text, int lifetime){
         super(lifetime + System.currentTimeMillis());
@@ -26,8 +34,34 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
         fontToUse = new Font("Times New Roman", 16D);
         color1 = new Color(1,1,1,0.5);
         color2 = new Color(0,0,0,0.5);
+
+        textAsLines = getTextAsStringArray(text, 50);
     }
 
+
+    private ArrayList<String> getTextAsStringArray(String text, int symbolsPerLine){    //WHy do I have the strange feeling that this isn't how you do this?
+        ArrayList<String> array = new ArrayList<String>();
+        linesMade = 0;
+
+        int[] asCharArray = text.chars().toArray();
+
+        int next = 0;
+        while (asCharArray[next] != 0){
+
+            StringBuilder toAddtoArray = new StringBuilder();
+
+            for(int i = 0; i < symbolsPerLine; i++){
+                toAddtoArray.append((char) asCharArray[next + i]);
+            }
+
+            array.add(toAddtoArray.toString());
+
+            linesMade++;
+            next += symbolsPerLine;
+        }
+
+        return array;
+    }
 
 
     @Override
@@ -38,24 +72,31 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
 
     @Override
     public void onInteraction() {
+        if(advance * linesToShowAtATime > linesMade){   //If you've gotten shown all the text and press again, it marks this for termination next render pass.
+            TemporaryRenderable.tempRends.add(this);
+        }
+
         advance++;
     }
 
     @Override
     public void render(GraphicsContext gc) {
 
+        //Outer Rectangle
+        gc.setFill(color2);
+        gc.fillRoundRect(position.getX() - 5, position.getY() - 5, sizes.getX() + 5, sizes.getY() + 200, 10, 10);   //This will go out of the screen. And that is intentional
+
         //Inner Rectangle
         gc.setFill(color1);
         gc.fillRoundRect(position.getX(), position.getY(), sizes.getX(), sizes.getY() + 200, 10, 10);   //This will go out of the screen. And that is intentional
 
-        //Outer Rectangle
-        gc.setFill(color1);
-        gc.fillRoundRect(position.getX(), position.getY(), sizes.getX(), sizes.getY() + 200, 10, 10);   //This will go out of the screen. And that is intentional
+        for(int i = 0; i < linesToShowAtATime; i++){
 
-        gc.setFill(Color.BLACK);
-        gc.setFont(fontToUse);
-        gc.fillText(text, position.getX(), position.getY(), Game.WIDTH / 3.0);
+            gc.setFill(Color.BLACK);
+            gc.setFont(fontToUse);
+            gc.fillText(textAsLines.get(i + (advance * linesToShowAtATime)), position.getX() + 5, position.getY() + (i * lineHeight) + 5, Game.WIDTH / 3.0);
 
+        }
     }
 
     @Override
