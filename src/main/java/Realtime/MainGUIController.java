@@ -40,7 +40,7 @@ public class MainGUIController extends Application implements Runnable{
     private Canvas canvas;
     private GraphicsContext gc;
     private static RoomCollection currentCollection;
-    private RoomCollection previousRCollection;             //Redundant. But might get important for some race conditions
+    private RoomCollection previousRCollection;             //Important for some race conditions and Interactibles and such
     private long logLastCall = 0, distTrigLastTextCall = 0, roomTrigLastCall = 0;
 
     public static long logTimeRender = 888,logTimeTick = 888,logTimeInter = 888;
@@ -65,7 +65,7 @@ public class MainGUIController extends Application implements Runnable{
             @Override
             public void handle(long now) {
                 if(!Game.isRunning || !MainGUIController.isRunning){
-                    this.stop();
+                    stop();
                 }
                 onUpdate();
             }
@@ -163,11 +163,11 @@ public class MainGUIController extends Application implements Runnable{
         if(sceneChangeRequested && roomToChangeTo != null){     //Just adding a bit more redundancy here.
             changeScene(roomToChangeTo);
         }
-    }
+    }               //THIS IS THE GUY YOU'RE LOOKING FOR
 
     public void displayTemporaryText(Interactible i){
 
-        //I'mma split them up like this, as to be able to customize their looks
+        //I'mma split them up like this, as to be able to customize their looks later
 
         if(i instanceof DistanceTrigger || i instanceof CItem){
             if(System.currentTimeMillis() > distTrigLastTextCall + 500) {
@@ -181,6 +181,13 @@ public class MainGUIController extends Application implements Runnable{
                 roomTrigLastCall = System.currentTimeMillis();
             }
         }
+    }
+    public void displayRoomDescription(){
+
+        String text = currentCollection.getRoom().getLongDescription();
+
+
+
     }
     public void cleanUpExpired(){
         for(RenderableText t : RenderableText.deadRendText){
@@ -213,7 +220,6 @@ public class MainGUIController extends Application implements Runnable{
         launch(args);
     }
     public void setCollection(RoomCollection rc){currentCollection = rc;}
-    public RoomCollection getCurrentCollection(){return currentCollection;}
     private void changeScene(RoomCollection rc){
 
         //This function takes awhile due to the fact that the rest of the threads has to stop what they're doing first.
@@ -238,6 +244,8 @@ public class MainGUIController extends Application implements Runnable{
         addNewInteractibles(rc);
         getThatPlayerBackInThere();                 //Since it might be for the best to just wipe everything. It's easiest to just add the player in afterwards.
         Game.currentRoom = rc.getRoom();            //Kinda redundant. But it's a nice touch.
+
+        displayRoomDescription();
 
         long timeB = System.nanoTime();
         System.out.println("MGUIC.changeScene() took: " + (timeB - timeA) + "ns");  //Hopefully we wont ever reach scene changes taking more than half a second. But we for sure will know exactly how long each was.

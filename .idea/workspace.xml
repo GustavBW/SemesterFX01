@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bfdae99-945c-487c-90a0-7c778f424550" name="Changes" comment="added interfaces to version control">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Realtime/RoomDescriptionText.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/ContentEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/ContentEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/RoomCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/RoomCollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/DistanceTrigger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/triggers/DistanceTrigger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/InteractionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/InteractionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/RenderableButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/RenderableButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/RoomExitTrigger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/triggers/RoomExitTrigger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/SquareTrigger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/triggers/SquareTrigger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
