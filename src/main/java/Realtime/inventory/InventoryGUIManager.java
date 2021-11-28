@@ -63,17 +63,17 @@ public class InventoryGUIManager {
                 Point2D CIBposition = new Point2D(mainFramePosX + buttonSize, ((mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding))) - (buttonSize / 2.0));   //Disable this when there's some Citems
                 CIBs.add(new CItemButton(c, CIBposition, buttonSize, buttonSize, this));
 
-                Point2D RTFBposition = new Point2D(CIBposition.getX() + (buttonSize * 2), CIBposition.getY() + 4 + (buttonSize / 2.0));
+                Point2D RTFBposition = new Point2D(CIBposition.getX() + (buttonSize * 1.5), CIBposition.getY() + 4 + (buttonSize / 2.0));
                 RTFBs.add(new RenderableText(c.getPopUpText(), RTFBposition, 100));
 
                 //SUBS
                 ArrayList<RenderableButton> newArrayList = new ArrayList<>();
 
-                Point2D sub1Position = new Point2D(CIBposition.getX() + 165, CIBposition.getY());
+                Point2D sub1Position = new Point2D(CIBposition.getX() + 175, CIBposition.getY());
                 newArrayList.add(new useCItemButton(c,"Use", sub1Position, subWidth, buttonSize));
                 System.out.println("Made SUB at y = " + CIBposition.getY());
 
-                Point2D sub2Position = new Point2D(sub1Position.getX() + subWidth + 5, sub1Position.getY());
+                Point2D sub2Position = new Point2D(sub1Position.getX() + (subWidth * 1.15), sub1Position.getY());
                 newArrayList.add(new dropCItemButton(c,"Drop", sub2Position,subWidth, buttonSize));
 
                 SUBs.put(c.getId(), newArrayList);
@@ -88,19 +88,19 @@ public class InventoryGUIManager {
                 TestingCItem tempCitem = new TestingCItem(new Item(j,"tempCItem",69),new PosPicCombo(null, new Point2D(1,1)));
 
                 //CIBS
-                Point2D CIBposition = new Point2D(mainFramePosX + buttonSize, ((mainFramePosY + (mainFrameHeight * 0.11)) + (j * (buttonSize + buttonPadding))) - (buttonSize / 2.0));   //Disable this when there's some Citems
+                Point2D CIBposition = new Point2D(mainFramePosX + (buttonSize * 0.75), ((mainFramePosY + (mainFrameHeight * 0.11)) + (j * (buttonSize + buttonPadding))) - (buttonSize / 2.0));
                 CIBs.add(new CItemButton(tempCitem, CIBposition, buttonSize, buttonSize, this));
 
-                Point2D RTFBposition = new Point2D(CIBposition.getX() + (buttonSize * 2), CIBposition.getY() + 4 + (buttonSize / 2.0));
+                Point2D RTFBposition = new Point2D(CIBposition.getX() + (buttonSize * 1.5), CIBposition.getY() + 4 + (buttonSize / 2.0));
                 RTFBs.add(new RenderableText("Stuff & Amount " + howManyTimesHaveIDoneThis, RTFBposition, 100));
 
                 //SUBS
                 ArrayList<RenderableButton> newArrayList = new ArrayList<>();
 
-                Point2D sub1Position = new Point2D(CIBposition.getX() + 165, CIBposition.getY());
+                Point2D sub1Position = new Point2D(CIBposition.getX() + 175, CIBposition.getY());
                 newArrayList.add(new useCItemButton(tempCitem,"Use", sub1Position, subWidth, buttonSize));
 
-                Point2D sub2Position = new Point2D(sub1Position.getX() + subWidth + 5, sub1Position.getY());
+                Point2D sub2Position = new Point2D(sub1Position.getX() + (subWidth * 1.15), sub1Position.getY());
                 newArrayList.add(new dropCItemButton(tempCitem,"Drop", sub2Position,subWidth, buttonSize));
 
                 SUBs.put(j, newArrayList);

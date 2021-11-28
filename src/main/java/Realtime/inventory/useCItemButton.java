@@ -7,6 +7,7 @@ import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import worldofzuul.Game;
 
 public class useCItemButton extends dropCItemButton implements Clickable, Renderable {
@@ -16,6 +17,7 @@ public class useCItemButton extends dropCItemButton implements Clickable, Render
     private int sizeX, sizeY;
     private Color color1;
     private String text;
+    private Font fontToUse;
 
     public useCItemButton(CItem citem, String text, Point2D position, int sizeX, int sizeY) {
         super(citem,  text,  position,  sizeX,  sizeY);
@@ -26,6 +28,7 @@ public class useCItemButton extends dropCItemButton implements Clickable, Render
         this.sizeY = sizeY;
         this.text = text;
 
+        fontToUse = new Font("Helvetica", 16D);
     }
 
     @Override
@@ -39,10 +42,11 @@ public class useCItemButton extends dropCItemButton implements Clickable, Render
     @Override
     public void render(GraphicsContext gc){
         gc.setFill(color1);
-        gc.fillRoundRect(position.getX(),position.getY(),sizeX,sizeY,5,5);
+        gc.fillRoundRect(position.getX(),position.getY(),sizeX,sizeY,10,10);
 
         gc.setFill(Color.BLACK);
-        gc.fillText(text,position.getX() + 8,position.getY() + (sizeY / 2.0) + 5);
+        gc.setFont(fontToUse);
+        gc.fillText(text,position.getX() + 7,position.getY() + (sizeY / 2.0) + 6);
     }
 
     @Override

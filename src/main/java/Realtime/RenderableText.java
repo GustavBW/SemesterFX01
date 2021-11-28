@@ -4,6 +4,8 @@ import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+
 import java.util.ArrayList;
 
 public class RenderableText implements Renderable {
@@ -14,12 +16,14 @@ public class RenderableText implements Renderable {
     private final Point2D position;
     private long timeOfDeath;
     private boolean isDead = false;
+    private Font fontToUse;
 
     public static ArrayList<RenderableText> deadRendText = new ArrayList<>();
 
     public RenderableText(String text, Point2D position, int lifetimeMS){
         this.text = text;
         this.position = position;
+        fontToUse = new Font("Helvetica", 18D);
 
         timeOfDeath = System.currentTimeMillis() + lifetimeMS;
         onInstancedRender();
@@ -28,7 +32,8 @@ public class RenderableText implements Renderable {
     @Override
     public void render(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
-        gc.fillText(text, position.getX(), position.getY());
+        gc.setFont(fontToUse);
+        gc.fillText(text, position.getX(), position.getY(), 120);
 
         if(System.currentTimeMillis() > timeOfDeath || isDead){
             expired();

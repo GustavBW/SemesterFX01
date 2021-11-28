@@ -7,6 +7,7 @@ import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import worldofzuul.Game;
 
 public class dropCItemButton extends RenderableButton implements Renderable, Clickable {
@@ -16,6 +17,7 @@ public class dropCItemButton extends RenderableButton implements Renderable, Cli
     private Point2D position;
     private int sizeX, sizeY, interRadius = 10, x, y;
     private Color color1;
+    private Font fontToUse;
 
     public dropCItemButton(CItem citem, String text, Point2D position, int sizeX, int sizeY) {
         super(text, position, sizeX, sizeY, 2);
@@ -25,6 +27,8 @@ public class dropCItemButton extends RenderableButton implements Renderable, Cli
         this.citem = citem;
         this.text = text;
         this.position = position;
+
+        fontToUse = new Font("Helvetica", 16D);
     }
 
     @Override
@@ -53,10 +57,11 @@ public class dropCItemButton extends RenderableButton implements Renderable, Cli
     public void render(GraphicsContext gc) {
 
         gc.setFill(color1);
-        gc.fillRoundRect(position.getX(),position.getY(),sizeX,sizeY,5,5);
+        gc.fillRoundRect(position.getX(),position.getY(),sizeX,sizeY,10,10);
 
         gc.setFill(Color.BLACK);
-        gc.fillText(text,position.getX() + 5,position.getY() + (sizeY / 2.0) + 4);
+        gc.setFont(fontToUse);
+        gc.fillText(text,position.getX() + 2,position.getY() + (sizeY / 2.0) + 6);
 
     }
 
