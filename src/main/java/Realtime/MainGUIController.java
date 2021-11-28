@@ -32,9 +32,12 @@ public class MainGUIController extends Application implements Runnable{
     private HBox hboxTop;
 
     private BorderPane bp;
-    private KeyHandler keyHandler;
     private MouseHandler mouseHandler;
     private InventoryGUIManager iGUIM;
+
+    //Player Movement
+    private OnKeyPressed keyHandlerDown;
+    private OnKeyReleased keyHandlerUp;
 
     //Graphics stuff
     private Canvas canvas;
@@ -75,11 +78,16 @@ public class MainGUIController extends Application implements Runnable{
         new DistanceTrigger(Game.WIDTH / 2,Game.HEIGHT / 2,400);
 
         bp.setCenter(canvas);
-        keyHandler = new KeyHandler(this);
         mouseHandler = new MouseHandler();
         Scene scene = new Scene(bp,Game.WIDTH,Game.HEIGHT);
-        scene.setOnKeyPressed(e -> keyHandler.handle(e));
         scene.setOnMouseClicked(e -> mouseHandler.handle(e));
+
+        //Movement/Keyboard
+        keyHandlerDown = new OnKeyPressed(this);
+        keyHandlerUp = new OnKeyReleased();
+        scene.setOnKeyPressed(e -> keyHandlerDown.handle(e));
+        scene.setOnKeyReleased(e -> keyHandlerUp.handle(e));
+
 
         mainStage.setScene(scene);
         mainStage.setOnCloseRequest(e -> stop());
@@ -237,7 +245,7 @@ public class MainGUIController extends Application implements Runnable{
                                                     //a scene change, trying to add it to the new Room you're entering, WILL cause a ConcurrentModificationsException. (As you're adding to an arraylist whilest
                                                     //its elements are being read and executed in other places. Also this is only an issue since the Interaction system is on another thread.
         currentCollection = rc;                     //Updating current RC - which is also static meaning you can technically reference all current room components (base images, CItems, triggers...) from anywhere
-        
+
         clearAllTicksRendersInters();               //Wipe all the lists. Tickables, Renderables, Interactable. NOT Clickable as clickables are UI elements and are updated elsewhere (take the Inventory GUI).
                                                     //Also this is the step that would fuck everything up if the other threads were running at this point. And oh gosh darn I don't want anymore race conditions.
         addNewRenderables(rc);                      //Then read from the arraylist and adds them in.
