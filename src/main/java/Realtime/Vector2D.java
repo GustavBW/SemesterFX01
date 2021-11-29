@@ -5,6 +5,7 @@ public class Vector2D {
     private double x;
     private double y;
     private double magnitude;
+    private double magnitudeScalar = 1;
 
     public Vector2D(double x, double y){
         this.x = x;
@@ -18,7 +19,7 @@ public class Vector2D {
         magnitude();
     }
     public double magnitude(){
-        magnitude = Math.sqrt( Math.abs((x*x) + (y*y)) );
+        magnitude = Math.sqrt( (x*x) + (y*y) );
         return magnitude;
     }
     public void multiply(double k){
@@ -54,6 +55,8 @@ public class Vector2D {
         y += k;
         magnitude();
     }
+    public void setX(double k){x = k;}
+    public void setY(double k){y = k;}
     public void clear(){
         x = 0;
         y = 0;

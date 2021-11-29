@@ -25,6 +25,7 @@ public class Game implements Runnable{
     public static double interpolation = 1; //Interpolation is a factor that tells you how long the last tick took compared to having 1 tick per second
                                             //This thus makes it possible to just multiply any movement-vectors with the interpolation, to get all speeds
                                             //As say pixels per second. (It will always be a frame behind, but that's just how it works)
+    private long deltaNSInterpolation = 0;
     final int TICKS_PER_SECOND = 60, SKIP_TICKS = 1000 / TICKS_PER_SECOND,MAX_FRAMESKIP = 5;
 
     public static final int WIDTH = 1500, HEIGHT = 1000, DELAY = 50;
@@ -105,8 +106,9 @@ public class Game implements Runnable{
                 }
 
                 long timeB = System.nanoTime();
-                MainGUIController.logTimeTick = (timeB - timeA);
-                interpolation = Math.min((timeB + timeA) / 1_000_000_000.0 , 1);      //Updating interpolation.
+                deltaNSInterpolation = timeB - timeA;
+                MainGUIController.logTimeTick = (deltaNSInterpolation);
+                interpolation = Math.min((deltaNSInterpolation / 1_000_000_000.0) , 1);      //Updating interpolation.
 
             }
         }
