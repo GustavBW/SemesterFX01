@@ -1,5 +1,6 @@
 package BackEnd;
 
+import Realtime.RenderableImage;
 import Realtime.triggers.RoomExitTrigger;
 import Realtime.inventory.CItem;
 import Realtime.inventory.Item;
@@ -56,15 +57,20 @@ public class ContentEngine {
         return allRoomCollections;
     }
 
-    public ArrayList<Image> specificRoomGraphics(int roomId){
-        ArrayList<Image> output = new ArrayList<>();
+    public ArrayList<RenderableImage> specificRoomGraphics(int roomId){
+        ArrayList<RenderableImage> output = new ArrayList<>();
 
-        output.add(gp.getBaseImage(roomId));
-        output.add(gp.getMiddleImage(roomId));
-        output.add(gp.getShadowImage(roomId));
-        output.add(gp.getTopImage(roomId));
-        output.add(gp.getPlayerGraphics());
+        output.add(convertToRenderableImage(gp.getBaseImage(roomId)));
+        output.add(convertToRenderableImage(gp.getMiddleImage(roomId)));
+        output.add(convertToRenderableImage(gp.getShadowImage(roomId)));
+        output.add(convertToRenderableImage(gp.getTopImage(roomId)));
+        output.add(convertToRenderableImage(gp.getPlayerGraphics()));
 
+        return output;
+    }
+
+    public RenderableImage convertToRenderableImage(Image image){
+        RenderableImage output = new RenderableImage(image);
         return output;
     }
 
