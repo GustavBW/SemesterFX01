@@ -1,5 +1,6 @@
 package worldofzuul;
 
+import BackEnd.ContentEngine;
 import BackEnd.GraphicsProcessor;
 import BackEnd.TextProcessor;
 import Realtime.*;
@@ -54,7 +55,7 @@ public class Game implements Runnable{
     }
 
     private void createRooms() {
-        allRooms.addAll(tp.getAllRooms());
+        allRooms.addAll(ContentEngine.allRoomes());
 
         for(Room r : allRooms){
            r.setAllExits();

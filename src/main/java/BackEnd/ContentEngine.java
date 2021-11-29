@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ContentEngine {
 
-    private TextProcessor tp;
+    private TextProcessor tp = new TextProcessor();
     private GraphicsProcessor gp;
 
     public ContentEngine(){
@@ -18,6 +18,14 @@ public class ContentEngine {
         gp = new GraphicsProcessor();
 
     }
+
+    public static ArrayList<Room> allRoomes() {
+        ArrayList<Room> rooms = new ArrayList<>();
+        TextProcessor textprocessor = new TextProcessor();
+        rooms = textprocessor.getAllRooms();
+        return rooms;
+    }
+
 
     public ArrayList<CItem> getCItems(int roomId){
         ArrayList<CItem> citems = new ArrayList<>();
