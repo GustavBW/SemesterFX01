@@ -8,7 +8,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import worldofzuul.Game;
 
+import java.lang.reflect.Array;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 public class RoomDescriptionText extends TemporaryRenderable implements Renderable, Clickable {
@@ -35,40 +38,14 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
         color1 = new Color(1,1,1,0.5);
         color2 = new Color(0,0,0,0.5);
 
-        textAsLines = getTextAsStringArray(text, 50);
+        textAsLines = ExtendedFunctions.toLines(text,100," ");
+        linesMade = textAsLines.size();
     }
-
-
-    private ArrayList<String> getTextAsStringArray(String text, int symbolsPerLine){    //WHy do I have the strange feeling that this isn't how you do this?
-        ArrayList<String> array = new ArrayList<String>();
-        linesMade = 0;
-
-        int[] asCharArray = text.chars().toArray();
-
-        int next = 0;
-        while (asCharArray[next] != 0){
-
-            StringBuilder toAddtoArray = new StringBuilder();
-
-            for(int i = 0; i < symbolsPerLine; i++){
-                toAddtoArray.append((char) asCharArray[next + i]);
-            }
-
-            array.add(toAddtoArray.toString());
-
-            linesMade++;
-            next += symbolsPerLine;
-        }
-
-        return array;
-    }
-
 
     @Override
     public boolean inBounds(int x, int y) {
         return (position.getX() < x + sizes.getX() && position.getX() > x) && (position.getY() < y + sizes.getY() && position.getY() > y);
     }
-
 
     @Override
     public void onInteraction() {
@@ -90,10 +67,11 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
         gc.setFill(color1);
         gc.fillRoundRect(position.getX(), position.getY(), sizes.getX(), sizes.getY() + 200, 10, 10);   //This will go out of the screen. And that is intentional
 
+        gc.setFill(Color.BLACK);
+        gc.setFont(fontToUse);
+
         for(int i = 0; i < linesToShowAtATime; i++){
 
-            gc.setFill(Color.BLACK);
-            gc.setFont(fontToUse);
             gc.fillText(textAsLines.get(i + (advance * linesToShowAtATime)), position.getX() + 5, position.getY() + (i * lineHeight) + 5, Game.WIDTH / 3.0);
 
         }

@@ -197,7 +197,7 @@ public class MainGUIController extends Application implements Runnable{
 
         String text = currentCollection.getRoom().getLongDescription();
 
-        new RoomDescriptionText(text, 5000);
+        new RoomDescriptionText(text, 50_000);
 
     }
     public void cleanUpExpired(){
