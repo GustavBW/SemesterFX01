@@ -39,8 +39,8 @@ public class InteractionHandler implements Runnable{
 
             long timeA = System.nanoTime();
 
-            int pPosX = player.getOrX();        //Using Origin coords here, as it'll give a better result.
-            int pPosY = player.getOrY();        //Player.posX & posY would make a scewed distance calculation.
+            double pPosX = player.getOrX();        //Using Origin coords here, as it'll give a better result.
+            double pPosY = player.getOrY();        //Player.posX & posY would make a scewed distance calculation.
 
             if(!Interactible.interactibles.isEmpty()) { //An interesting thing happens when you don't check. It simply sends too many updates to MGUIC which messes everything up
 

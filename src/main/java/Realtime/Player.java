@@ -11,23 +11,24 @@ import java.util.Vector;
 
 public class Player implements Renderable, Tickable {
 
-    private int posX;
-    private int posY;
-    private int orX;
-    private int orY;
+    private double posX;
+    private double posY;
+    private double orX;
+    private double orY;
     private int imW;
     private int imH;  //orX describes the graphical origin. Meaning where the center of any image or rectangle LOOKS to be.
-    private double rotationAngle = 0;
+    private double rotationAngle = 0, interpolation = 0;
     private final Image image;
     private Vector2D velocity;
     private final double drag = 0.99, velFloorVal = 0.01, mvSpeed = 5;
     private boolean upKeyPressed,rightKeyPressed,downKeyPressed,leftKeyPressed = false;
+    private long lastCall = 0; //For interpolation calculations
 
     public Player(int x, int y, Image image){
         this.posX = x;
         this.posY = y;
         this.image = image;
-        velocity = new Vector2D(0,0);
+        velocity = new Vector2D(1,1);
 
 
         if(this.image != null) {                //This if condition wont be necessary when images are working
@@ -64,23 +65,28 @@ public class Player implements Renderable, Tickable {
 
     @Override
     public void tick() {
-        int prePosX = posX;     //Saving previous location
-        int prePosY = posY;
+
+        interpolation = 1.0 / (System.nanoTime() - lastCall);
+        lastCall = System.nanoTime();
+
+        double prePosX = posX;     //Saving previous location
+        double prePosY = posY;
 
         if (upKeyPressed) {     //Using a Vector2D is necessary for getting the rotation angle
-            velocity.add(0,-1);
+            velocity.addY(-1);
         }
         if (rightKeyPressed) {
-            velocity.add(1,0);
+            velocity.addX(1);
         }
         if (downKeyPressed) {
-            velocity.add(0,1);
+            velocity.addY(1);
         }
         if (leftKeyPressed) {
-            velocity.add(-1, 0);
+            velocity.addX(-1);
         }
 
-        velocity.multiply(mvSpeed);
+        velocity.normalize();   //Normalizing the vector as that makes EVERYTHING easier
+        velocity.multiply(mvSpeed * interpolation); //Well. Yeeting off into space was fun. But interpolation is very much needed
 
         posX += velocity.getX();
         posY += velocity.getY();
@@ -88,9 +94,9 @@ public class Player implements Renderable, Tickable {
         orX = posX - imW;   //Updating Origins
         orY = posY - imH;
 
-        velocity.normalize();
-        rotationAngle = Math.asin(velocity.getY() + 1 / ( Math.sqrt( velocity.getSquareX() + velocity.getSquareY() ) + 1)); //Adding 1 in both top and bottom to avoid dividing by zero
-        System.out.println("rotation angle is: " + rotationAngle + " velX is: " + velocity.getX() + " velY is: " + velocity.getY());
+
+        rotationAngle = Math.asin((velocity.getY() + 1 / ( Math.sqrt( velocity.getSquareX() + velocity.getSquareY() ) + 1) - 1)); //Adding 1 in both top and bottom to avoid dividing by zero, then subtracting that again
+        System.out.println("rotation angle is: " + rotationAngle + " velX is: " + velocity.getX() + " velY is: " + velocity.getY() + " magnitude is: " + velocity.magnitude());
 
         if(posX >= Game.WIDTH || posX <= 0){        //Capping movement at the boarders of the canvas
             posX = prePosX;
@@ -98,13 +104,15 @@ public class Player implements Renderable, Tickable {
         if(posY >= Game.HEIGHT || posY <= 0){
             posY = prePosY;
         }
+
+
     }
 
     public Vector2D getVelocity(){return velocity;}
-    public int getPosX(){return posX;}
-    public int getPosY(){return posY;}
-    public int getOrX(){return orX;}
-    public int getOrY(){return orY;}
+    public double getPosX(){return posX;}
+    public double getPosY(){return posY;}
+    public double getOrX(){return orX;}
+    public double getOrY(){return orY;}
 
     public void setPosX(int pos){posX = pos;}
     public void setPosY(int pos){posY = pos;}

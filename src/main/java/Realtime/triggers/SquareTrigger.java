@@ -42,7 +42,7 @@ public class SquareTrigger implements Interactible {
         return popUpText;
     }
 
-    public boolean isInBounds(int pOrX,int pOrY){
+    public boolean isInBounds(double pOrX,double pOrY){
         //If each of the coordinates given (x & y) is within the boundaries of the square trigger. Based on its position and its size.
         return (pOrX < x + sizeX && pOrX > x) && (pOrY < y + sizeY && pOrY > y);
     }
