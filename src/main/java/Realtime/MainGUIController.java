@@ -140,7 +140,7 @@ public class MainGUIController extends Application implements Runnable{
         long timeA = System.nanoTime();
 
         gc = canvas.getGraphicsContext2D();
-        gc.setFill(Color.DARKRED);
+        gc.setFill(Color.BLUE);
         gc.fillRect(0,0,Game.WIDTH,Game.HEIGHT);
 
         for(Renderable r : Renderable.renderLayer0){

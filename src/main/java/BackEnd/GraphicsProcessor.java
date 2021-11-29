@@ -76,7 +76,7 @@ public class GraphicsProcessor {
         }
 
 
-        public Image getImage(){
+        public Image getPlayerGraphics(){
                 Image output;
                 output = new Image(getClass().getResourceAsStream("/Graphics/Player/PlayerTest.png"));
                 return output;

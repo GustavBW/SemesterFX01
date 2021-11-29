@@ -39,7 +39,7 @@ public class Game implements Runnable{
 
     public Game() {
 
-        player = new Player( WIDTH / 2,  HEIGHT / 2, gp.getImage());
+        player = new Player( WIDTH / 2,  HEIGHT / 2, gp.getPlayerGraphics());
 
         interHandler = new InteractionHandler(player);
 
