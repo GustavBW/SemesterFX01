@@ -5,9 +5,7 @@ import Realtime.interfaces.Renderable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class DistanceTrigger implements Interactible, Renderable {
-
-    //Remove renderable implimentation when interaction testing is done
+public class DistanceTrigger implements Interactible {
 
     private int posX, posY, interRadius;
 
@@ -21,7 +19,6 @@ public class DistanceTrigger implements Interactible, Renderable {
         this.interRadius = r;
 
         onInstancedInter();
-        onInstancedRender();
     }
 
     @Override
@@ -60,18 +57,4 @@ public class DistanceTrigger implements Interactible, Renderable {
     public void setPosY(int i){posY = i;}
     public void setInterRadius(int i){interRadius = i;}
 
-    @Override
-    public void onInstancedRender() {
-        Renderable.renderLayer1.add(this);
-    }
-
-    @Override
-    public void render(GraphicsContext gc) {
-        gc.setFill(Color.GREY);
-        gc.fillOval(posX - (interRadius / 2.0),posY - (interRadius / 2.0),interRadius,interRadius);
-
-        gc.setFill(Color.BLACK);
-        gc.fillRect(posX,posY,10,10);
-
-    }
 }

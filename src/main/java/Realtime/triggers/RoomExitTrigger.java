@@ -72,8 +72,4 @@ public class RoomExitTrigger extends DistanceTrigger{
     public void onInstancedInter() {
 
     }
-    @Override
-    public void onInstancedRender() {
-
-    }
 }

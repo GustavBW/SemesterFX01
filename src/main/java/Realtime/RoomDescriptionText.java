@@ -16,6 +16,11 @@ import java.util.stream.IntStream;
 
 public class RoomDescriptionText extends TemporaryRenderable implements Renderable, Clickable {
 
+    //This is able to display a lot of text also scrolling through it by clicking on the box
+    //When you click to advance through the last bit of text, the instance is added to the
+    //TemporaryRenderable.tempRends arraylist. That arraylist is loop through every frame and
+    //called destroy() on any instances in it.
+
     private final Point2D position;
     private final Point2D sizes;
     private final String text;
@@ -52,7 +57,6 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
         if(advance * linesToShowAtATime > linesMade){   //If you've gotten shown all the text and press again, it marks this for termination next render pass.
             TemporaryRenderable.tempRends.add(this);
         }
-
         advance++;
     }
 
@@ -71,7 +75,6 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
         gc.setFont(fontToUse);
 
         for(int i = 0; i < linesToShowAtATime; i++){
-
             gc.fillText(textAsLines.get(i + (advance * linesToShowAtATime)), position.getX() + 5, position.getY() + (i * lineHeight) + 5, Game.WIDTH / 3.0);
 
         }

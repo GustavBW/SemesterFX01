@@ -5,87 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bfdae99-945c-487c-90a0-7c778f424550" name="Changes" comment="added interfaces to version control">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Realtime/ExtendedFunctions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Realtime/Vector2D.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Realtime/triggers/DistanceAutoTrigger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/MainGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/RoomDescriptionText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/RoomDescriptionText.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/ContentEngine.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/ExitDefinition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/GraphicsProcessor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/PosPicCombo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/RoomCollection.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/TextProcessor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Exits.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Items.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/RoomQuest.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Rooms.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/0/BASE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/0/MIDDLE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/0/PlayerTest.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/0/SHADOW.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/0/TOP.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/0/TestPicture.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/1/BASE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/1/MIDDLE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/1/SHADOW.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/1/TOP.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/2/BASE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/2/MIDDLE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/2/SHADOW.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/2/TOP.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/3/BASE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/3/MIDDLE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/3/SHADOW.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/3/TOP.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/4/BASE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/4/MIDDLE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/4/SHADOW.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/4/TOP.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/CItem/cItemPositions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graphics/Graphics Access Protocol.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/InteractionHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/MainGUIController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/MouseHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/OnKeyPressed$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/OnKeyPressed.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RenderableButton.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RenderableImage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RenderableText.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RoomDescriptionText.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/RoomTitleText.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/TemporaryRenderable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/debugging/RenderableCircle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/debugging/RenderableSquare.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/debugging/TestingCItem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/interfaces/Clickable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/interfaces/Interactible.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/interfaces/Renderable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/interfaces/Tickable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/inventory/CItem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/inventory/CItemButton.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/inventory/InventoryGUIManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/inventory/InventoryManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/inventory/Item.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/inventory/dropCItemButton.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/inventory/useCItemButton.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/triggers/DistanceTrigger.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/triggers/RoomExitTrigger.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/triggers/SquareTrigger.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/Command.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/CommandWord.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/CommandWords.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/Parser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/Quest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/Room.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/triggers/DistanceTrigger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/triggers/DistanceTrigger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/triggers/RoomExitTrigger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/triggers/RoomExitTrigger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Graphics/Graphics Access Protocol.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Graphics/Graphics Access Protocol.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

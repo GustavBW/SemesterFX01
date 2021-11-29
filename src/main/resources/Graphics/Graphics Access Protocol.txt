@@ -14,3 +14,10 @@ TOP     A 1000 by 1500 picture that shows rooftops, tree-tops, clouds.          
 Contains 4 directories: North, South, East & West. These directories contains the walking animations (or still frames) of the player moving in these directions.
 To access these efficiently you'd load them into the Player class which impliments Renderable as 4 BufferedImage arrays.
 More directories can be added later for additional animations.
+
+/Graphics/CItem
+Contains a LOT of pictures which filename corresponds to the Item ID, but also contains cItemPositions.csv
+
+/Graphics/CItem/cItemPositions.csv
+Syntax:
+<Item ID>,<X-coordinate>,<Y-coordinate>

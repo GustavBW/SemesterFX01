@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import worldofzuul.Game;
 
+import java.util.Vector;
+
 public class Player implements Renderable, Tickable {
 
     private int posX;
@@ -15,8 +17,9 @@ public class Player implements Renderable, Tickable {
     private int orY;
     private int imW;
     private int imH;  //orX describes the graphical origin. Meaning where the center of any image or rectangle LOOKS to be.
+    private double rotationAngle = 0;
     private final Image image;
-    private double velX, velY;
+    private Vector2D velocity;
     private final double drag = 0.99, velFloorVal = 0.01, mvSpeed = 5;
     private boolean upKeyPressed,rightKeyPressed,downKeyPressed,leftKeyPressed = false;
 
@@ -24,8 +27,7 @@ public class Player implements Renderable, Tickable {
         this.posX = x;
         this.posY = y;
         this.image = image;
-        this.velX = 1;
-        this.velY = 1;
+        velocity = new Vector2D(0,0);
 
 
         if(this.image != null) {                //This if condition wont be necessary when images are working
@@ -45,12 +47,19 @@ public class Player implements Renderable, Tickable {
 
     @Override
     public void render(GraphicsContext gc) {
+
+        //Gotta save the GraphicsContext as the rotation needs to be removed from the GC using restore()
+        gc.save();
+        gc.rotate(rotationAngle);
+
         if(image != null){
             gc.drawImage(image,orX,orY);
         }else{
             gc.setFill(Color.GREEN);
             gc.fillRect(orX,orY,100,100);
         }
+
+        gc.restore();
     }
 
     @Override
@@ -58,21 +67,30 @@ public class Player implements Renderable, Tickable {
         int prePosX = posX;     //Saving previous location
         int prePosY = posY;
 
-        if (upKeyPressed) {
-            posY -= 5;
+        if (upKeyPressed) {     //Using a Vector2D is necessary for getting the rotation angle
+            velocity.add(0,-1);
         }
         if (rightKeyPressed) {
-            posX += 5;
+            velocity.add(1,0);
         }
         if (downKeyPressed) {
-            posY += 5;
+            velocity.add(0,1);
         }
         if (leftKeyPressed) {
-            posX -= 5;
+            velocity.add(-1, 0);
         }
+
+        velocity.multiply(mvSpeed);
+
+        posX += velocity.getX();
+        posY += velocity.getY();
 
         orX = posX - imW;   //Updating Origins
         orY = posY - imH;
+
+        velocity.normalize();
+        rotationAngle = Math.asin(velocity.getY() + 1 / ( Math.sqrt( velocity.getSquareX() + velocity.getSquareY() ) + 1)); //Adding 1 in both top and bottom to avoid dividing by zero
+        System.out.println("rotation angle is: " + rotationAngle + " velX is: " + velocity.getX() + " velY is: " + velocity.getY());
 
         if(posX >= Game.WIDTH || posX <= 0){        //Capping movement at the boarders of the canvas
             posX = prePosX;
@@ -82,11 +100,7 @@ public class Player implements Renderable, Tickable {
         }
     }
 
-    public void changeVelX(double i){velX += (i * mvSpeed) * (1 / ((velX * velX) + 1));}
-    public void changeVelY(double i){velY += (i * mvSpeed) * (1 / ((velX * velX) + 1));}
-
-    public double getVelX(){return velX;}
-    public double getVelY(){return velY;}
+    public Vector2D getVelocity(){return velocity;}
     public int getPosX(){return posX;}
     public int getPosY(){return posY;}
     public int getOrX(){return orX;}
