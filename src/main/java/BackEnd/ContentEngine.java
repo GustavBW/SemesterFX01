@@ -57,9 +57,9 @@ public class ContentEngine {
         return allRoomCollections;
     }
 
-    public ArrayList<RenderableImage> specificRoomGraphics(int roomId){
+    public static ArrayList<RenderableImage> specificRoomGraphics(int roomId){
         ArrayList<RenderableImage> output = new ArrayList<>();
-
+        GraphicsProcessor gp = new GraphicsProcessor();
         output.add(convertToRenderableImage(gp.getBaseImage(roomId)));
         output.add(convertToRenderableImage(gp.getMiddleImage(roomId)));
         output.add(convertToRenderableImage(gp.getShadowImage(roomId)));
@@ -69,7 +69,7 @@ public class ContentEngine {
         return output;
     }
 
-    public RenderableImage convertToRenderableImage(Image image){
+    private static RenderableImage convertToRenderableImage(Image image){
         RenderableImage output = new RenderableImage(image);
         return output;
     }

@@ -15,6 +15,16 @@ public class RoomCollection {
     private ArrayList<CItem> citemsInRoom;
     private ArrayList<RoomExitTrigger> triggers;
 
+    public RoomCollection(Room room, ArrayList<CItem> citems, ArrayList<RoomExitTrigger> triggers){
+        this.id = room.getId();
+        this.room = room;
+        this.baseImages = ContentEngine.specificRoomGraphics(room.getId());
+        this.citemsInRoom = citems;
+        this.triggers = triggers;
+    }
+
+
+
     public RoomCollection(Room room, ArrayList<RenderableImage> baseImages, ArrayList<CItem> citems, ArrayList<RoomExitTrigger> triggers){
         this.id = room.getId();
         this.room = room;
