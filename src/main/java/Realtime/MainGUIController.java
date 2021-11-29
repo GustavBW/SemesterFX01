@@ -78,7 +78,7 @@ public class MainGUIController extends Application implements Runnable{
         timer.start();
 
         new DistanceTrigger(Game.WIDTH / 2,Game.HEIGHT / 2,400);
-        Renderable.renderLayer4.add(new RoomTitleText("ROOM TITLE TEXT", 36));
+        Renderable.renderLayer4.add(new RoomTitleText("CURRENT ROOM TITLE", 36));
 
         bp.setCenter(canvas);
         mouseHandler = new MouseHandler();
