@@ -3,6 +3,7 @@ package BackEnd;
 import Realtime.triggers.RoomExitTrigger;
 import Realtime.inventory.CItem;
 import Realtime.inventory.Item;
+import javafx.scene.image.Image;
 import worldofzuul.*;
 
 import java.util.ArrayList;
@@ -53,6 +54,18 @@ public class ContentEngine {
         }
 
         return allRoomCollections;
+    }
+
+    public ArrayList<Image> specificRoomGraphics(int roomId){
+        ArrayList<Image> output = new ArrayList<>();
+
+        output.add(gp.getBaseImage(roomId));
+        output.add(gp.getMiddleImage(roomId));
+        output.add(gp.getShadowImage(roomId));
+        output.add(gp.getTopImage(roomId));
+        output.add(gp.getPlayerGraphics());
+
+        return output;
     }
 
 

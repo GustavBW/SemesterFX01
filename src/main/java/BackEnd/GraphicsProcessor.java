@@ -82,4 +82,28 @@ public class GraphicsProcessor {
                 return output;
         }
 
+        public Image getBaseImage(int roomId){
+                Image output;
+                output = new Image(getClass().getResourceAsStream("/Graphics/" + roomId + "/BASE.png"));
+                return output;
+        }
+
+        public Image getMiddleImage(int roomId){
+                Image output;
+                output = new Image(getClass().getResourceAsStream("/Graphics/" + roomId + "/MIDDLE.png"));
+                return output;
+        }
+
+        public Image getShadowImage(int roomId){
+                Image output;
+                output = new Image(getClass().getResourceAsStream("/Graphics/" + roomId + "/SHADOW.png"));
+                return output;
+        }
+
+        public Image getTopImage(int roomId){
+                Image output;
+                output = new Image(getClass().getResourceAsStream("/Graphics/" + roomId + "/TOP.png"));
+                return output;
+        }
+
 }
