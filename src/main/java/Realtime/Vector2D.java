@@ -54,26 +54,36 @@ public class Vector2D {
         y += k;
         magnitude();
     }
-    public double getSquareX(){
-        return x * x;
-    }
-    public double getSquareY(){
-        return y * y;
-    }
-    public Vector2D square(){
-        x *= x;
-        y *= y;
-        magnitude();
-        return this;
-    }
     public void clear(){
         x = 0;
         y = 0;
         magnitude();
     }
 
+
+    public Vector2D square(){
+        x *= x;
+        y *= y;
+        magnitude();
+        return this;
+    }
+    public Vector2D getNormalized(){
+        return new Vector2D(x / magnitude, y / magnitude);
+    }
+
+    public double getSquareX(){
+        return x * x;
+    }
+    public double getSquareY(){
+        return y * y;
+    }
     public double getX(){return x;}
     public double getY(){return y;}
     public double getMagnitude(){return magnitude;}
+
+    public static Vector2D normalize(double x1, double y1){
+        double magnitude = Math.sqrt( Math.abs(( x1 * x1 ) + ( y1 * y1 )) );
+        return new Vector2D(x1 / magnitude , y1 / magnitude);
+    }
 
 }

@@ -17,17 +17,16 @@ public class Player implements Renderable, Tickable {
     private double orY;
     private int imW;
     private int imH;  //orX describes the graphical origin. Meaning where the center of any image or rectangle LOOKS to be.
-    private double rotationAngle = 0, interpolation = 0;
+    private double rotationRadian = 0;
     private final Image image;
     private Vector2D velocity;
-    private final double drag = 0.99, velFloorVal = 0.01, mvSpeed = 5;
+    private final double drag = 0.99, velFloorVal = 0.01, mvSpeed = 5, toDegree = 57.2957795;
     private boolean upKeyPressed,rightKeyPressed,downKeyPressed,leftKeyPressed = false;
-    private long lastCall = 0; //For interpolation calculations
 
     public Player(int x, int y, Image image){
         this.posX = x;
         this.posY = y;
-        this.image = image;
+        this.image = null;
         velocity = new Vector2D(1,1);
 
 
@@ -51,7 +50,7 @@ public class Player implements Renderable, Tickable {
 
         //Gotta save the GraphicsContext as the rotation needs to be removed from the GC using restore()
         gc.save();
-        gc.rotate(rotationAngle);
+        gc.rotate(rotationRadian * toDegree);
 
         if(image != null){
             gc.drawImage(image,orX,orY);
@@ -65,9 +64,6 @@ public class Player implements Renderable, Tickable {
 
     @Override
     public void tick() {
-
-        interpolation = 1.0 / (System.nanoTime() - lastCall);
-        lastCall = System.nanoTime();
 
         double prePosX = posX;     //Saving previous location
         double prePosY = posY;
@@ -86,24 +82,21 @@ public class Player implements Renderable, Tickable {
         }
 
         velocity.normalize();   //Normalizing the vector as that makes EVERYTHING easier
-        velocity.multiply(mvSpeed * interpolation); //Well. Yeeting off into space was fun. But interpolation is very much needed
-
-        posX += velocity.getX();
-        posY += velocity.getY();
+        velocity.multiply(mvSpeed * Game.interpolation); //Well. Yeeting off into space was fun. But interpolation is very much needed
 
         orX = posX - imW;   //Updating Origins
         orY = posY - imH;
 
-
-        rotationAngle = Math.asin((velocity.getY() + 1 / ( Math.sqrt( velocity.getSquareX() + velocity.getSquareY() ) + 1) - 1)); //Adding 1 in both top and bottom to avoid dividing by zero, then subtracting that again
-        System.out.println("rotation angle is: " + rotationAngle + " velX is: " + velocity.getX() + " velY is: " + velocity.getY() + " magnitude is: " + velocity.magnitude());
-
-        if(posX >= Game.WIDTH || posX <= 0){        //Capping movement at the boarders of the canvas
-            posX = prePosX;
+        //Checking if the update in position would place the player out of bounds
+        if((orX + velocity.getX() < Game.WIDTH && orX + velocity.getX() > 0) && (orY + velocity.getY() < Game.HEIGHT && orY + velocity.getY() > 0)) {
+            posX += velocity.getX();
+            posY += velocity.getY();
         }
-        if(posY >= Game.HEIGHT || posY <= 0){
-            posY = prePosY;
-        }
+
+
+
+        rotationRadian = Math.asin((velocity.getY() + 1 / ( Math.sqrt( velocity.getSquareX() + velocity.getSquareY() ) + 1) - 1)); //Adding 1 in both top and bottom to avoid dividing by zero, then subtracting that again
+        System.out.println("rotation angle is: " + rotationRadian + " velX is: " + velocity.getX() + " velY is: " + velocity.getY() + " magnitude is: " + velocity.magnitude() + " Game.interpolation is: " + Game.interpolation);
 
 
     }

@@ -36,7 +36,6 @@ public class OnKeyPressed implements EventHandler<KeyEvent> {
             case E: {
                 if(InteractionHandler.interactibleReadyToInteract != null){
                     InteractionHandler.interactibleReadyToInteract.onInteraction();
-                    System.out.println("Interaction happened");
                 }
                 break;
             }
