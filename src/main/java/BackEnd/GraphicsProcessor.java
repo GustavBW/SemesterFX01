@@ -1,12 +1,10 @@
 package BackEnd;
 
 import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
 
 import Realtime.RenderableImage;
 import javafx.geometry.Point2D;
-import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 
 public class GraphicsProcessor {
@@ -80,7 +78,7 @@ public class GraphicsProcessor {
 
         public Image getImage(){
                 Image output;
-                output = new Image(getClass().getResourceAsStream("/Graphics/0/PlayerTest.png"));
+                output = new Image(getClass().getResourceAsStream("/Graphics/Player/PlayerTest.png"));
                 return output;
         }
 
