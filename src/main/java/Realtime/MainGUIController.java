@@ -167,6 +167,8 @@ public class MainGUIController extends Application implements Runnable{
 
         iGUIM.render(gc);
 
+        roomTitleText.render(gc);
+
         updateLogText();
         cleanUpExpired();
 
