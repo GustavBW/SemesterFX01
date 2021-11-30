@@ -28,7 +28,7 @@ public class GraphicsProcessor {
 
 
                                 images.add(br.read());
-
+                                //Hjælp
                                 br.close();
 
                                  */
