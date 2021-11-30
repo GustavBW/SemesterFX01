@@ -44,6 +44,10 @@ public class ContentEngine {
         return citems;
     }
 
+    public static TextProcessor getTextProcessor(){
+        return new TextProcessor();
+    }
+
     public static RoomCollection getRoomCollection(Room room){
         RoomCollection rc = new RoomCollection(room);        //Gotta parse the RoomExitTriggers here as well. Forgot them
 

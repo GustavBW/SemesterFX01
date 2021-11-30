@@ -41,7 +41,6 @@ public class AdvancedRendText implements Renderable {
             gc.fillText(s, position.getX(), position.getY() + (lineHeight * counter));
             counter++;
         }
-
     }
 
     @Override

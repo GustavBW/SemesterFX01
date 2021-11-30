@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bfdae99-945c-487c-90a0-7c778f424550" name="Changes" comment="added interfaces to version control">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Realtime/AdvancedRendText.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/ContentEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/ContentEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/AdvancedRendText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/AdvancedRendText.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/QuestGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/QuestGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
