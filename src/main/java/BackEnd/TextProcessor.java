@@ -107,6 +107,35 @@ public class TextProcessor {
         return allItemsInRoom(itemsRequested);
     }
 
+    public Item getSingleItem(int itemId){
+
+        Item itemFound = null;
+        String line;
+        String splitBy = ";";
+
+        try{
+            BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(itemsFilePath)));
+
+            while((line = br.readLine()) != null){
+
+                String[] currentLine = line.split(splitBy);
+
+                if(Integer.parseInt(currentLine[0]) == itemId){
+
+                    itemFound = new Item(Integer.parseInt(currentLine[0]), currentLine[1], 0);
+                    break;
+
+                }
+            }
+
+            br.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return itemFound;
+    }
+
 
     public ArrayList<Item> getAllItems()
     {
