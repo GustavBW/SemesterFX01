@@ -1,5 +1,6 @@
 package Realtime;
 
+import BackEnd.GraphicsProcessor;
 import Realtime.interfaces.Renderable;
 import Realtime.interfaces.Tickable;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,11 +23,12 @@ public class Player implements Renderable, Tickable {
     private Vector2D velocity;
     private final double drag = 0.95, velFloorVal = 0.0001, mvSpeed = 100000, toDegree = 57.2957795;
     private boolean upKeyPressed,rightKeyPressed,downKeyPressed,leftKeyPressed = false;
+    private GraphicsProcessor gp = new GraphicsProcessor();
 
     public Player(int x, int y, Image image){
         this.posX = x;
         this.posY = y;
-        this.image = null;
+        this.image = gp.getPlayerGraphics() ;
         velocity = new Vector2D(0,0);
 
 
