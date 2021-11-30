@@ -185,6 +185,7 @@ public class QuestGUI implements Renderable {
         }
     }
     public boolean getDisplayStatus(){return doDisplay;}
+    public void updateQuests(){createNew();}
 
     @Override
     public void onInstancedRender() {

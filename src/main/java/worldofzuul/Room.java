@@ -154,9 +154,10 @@ public class Room {
             }
         }
     }
-    public void useItem(Item item){
+    public boolean useItem(Item item){
         boolean hasTriedBefore = false;
         boolean isQuestItem = false;
+        boolean success = false;
         Quest foundQuest = null;
 
         if(item != null) {                                                          //Just... to make sure u'know
@@ -190,8 +191,10 @@ public class Room {
                     if(foundQuest.getAmountNeeded() <= 0) {
                         foundQuest.setQuestStatus(true);
                         System.out.println(foundQuest.getDesc());
+                        success = true;
                     }else {
                         System.out.println("Det lader til at gøre en forskel, men det er ikke helt nok.");
+                        success = true;
                     }
                 }
             }
@@ -205,6 +208,7 @@ public class Room {
         }else{
             System.out.println("Error: Item provided to Room.useItem is null " + Thread.currentThread().getStackTrace()[2].getLineNumber());
         }
+        return success;
     }
 
     public ArrayList<Quest> getQuests(){return quests;}

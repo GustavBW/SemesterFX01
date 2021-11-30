@@ -36,6 +36,8 @@ public class useCItemButton extends dropCItemButton implements Clickable, Render
         color1 = new Color(1,1,1,0.8);
         Game.getInventoryManager().inventoryChanged = true;
         Game.getInventoryManager().useCItem(citem);
+
+
         System.out.println("You pressed a useCItemButton for CITEM id: " + citem.getId());
     }
 

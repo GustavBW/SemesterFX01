@@ -36,6 +36,7 @@ public class MainGUIController extends Application implements Runnable{
     private BorderPane bp;
     private MouseHandler mouseHandler;
     private InventoryGUIManager iGUIM;
+    private QuestGUI qGUI;
     private RoomTitleText roomTitleText;
 
     //Player Movement
@@ -61,6 +62,7 @@ public class MainGUIController extends Application implements Runnable{
         createLoggingTexts();
 
         iGUIM = Game.getiGUIM();
+        qGUI = Game.getqGUI();
 
         mainStage = stage;
         mainStage.setTitle("WorldOfToxins");
@@ -140,6 +142,11 @@ public class MainGUIController extends Application implements Runnable{
 
         long timeA = System.nanoTime();
 
+        if(sceneChangeRequested && roomToChangeTo != null){     //Just adding a bit more redundancy here.
+            changeScene(roomToChangeTo);
+            //displayRoomDescription();
+        }
+
         gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.BLUE);
         gc.fillRect(0,0,Game.WIDTH,Game.HEIGHT);
@@ -173,11 +180,7 @@ public class MainGUIController extends Application implements Runnable{
 
         long timeB = System.nanoTime();
         logTimeRender = timeB - timeA;
-
-        if(sceneChangeRequested && roomToChangeTo != null){     //Just adding a bit more redundancy here.
-            changeScene(roomToChangeTo);
-            //displayRoomDescription();
-        }
+        
     }               //THIS IS THE GUY YOU'RE LOOKING FOR
 
     public void displayTemporaryText(Interactible i){
@@ -333,7 +336,7 @@ public class MainGUIController extends Application implements Runnable{
         iGUIM.setDoDisplay(!iGUIM.getDisplayStatus());
     }
     public void toggleQuestGUI(){
-
+        qGUI.setDisplayStatus(!qGUI.getDisplayStatus());
     }
 
     public InventoryGUIManager getiGUIM(){return iGUIM;}

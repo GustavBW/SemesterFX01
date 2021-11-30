@@ -270,3 +270,12 @@ target/classes/Realtime/QuestGUI.class
 target/classes/Realtime/OnKeyReleased.class
 target/classes/Realtime/OnKeyReleased$1.class
 target/classes/Realtime/inventory/InventoryGUIManager.class
+target/classes/worldofzuul/Room.class
+target/classes/worldofzuul/Game.class
+target/classes/Realtime/OnKeyPressed.class
+target/classes/Realtime/OnKeyPressed$1.class
+target/classes/Realtime/MainGUIController.class
+target/classes/Realtime/MainGUIController$1.class
+target/classes/Realtime/inventory/useCItemButton.class
+target/classes/Realtime/inventory/InventoryManager.class
+target/classes/Realtime/inventory/dropCItemButton.class

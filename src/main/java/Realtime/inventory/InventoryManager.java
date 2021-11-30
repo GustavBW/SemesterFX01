@@ -3,6 +3,7 @@ package Realtime.inventory;
 import worldofzuul.Game;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class InventoryManager {
 
@@ -10,7 +11,7 @@ public class InventoryManager {
     private final ArrayList<CItem> cinventory;
     private final int inventorySize = 9;
 
-    public boolean inventoryChanged = false;
+    public boolean inventoryChanged = false, questsChanged = false;
 
     public InventoryManager(){
         inventory = new ArrayList<>();
@@ -77,13 +78,21 @@ public class InventoryManager {
             }
         }
     }
-    public void useCItem(CItem citem){
+    public boolean useCItem(CItem citem){
         if(citem != null) {
             if (useItem(citem.getItem().getName())) {
                 inventoryChanged = true;
-                citem.destroy();
+
+                if(!citem.getItem().getName().equalsIgnoreCase("Kamera")) {
+                    citem.destroy();
+                }
+            }else{
+                if(!citem.getItem().getName().equalsIgnoreCase("Kamera")) {
+                    citem.reInstate();
+                }
             }
         }
+        return false;
     }
 
     public void addItem(Item item){
@@ -159,9 +168,9 @@ public class InventoryManager {
             System.out.println("Du har ikke noget " + name);
         }
         if(itemToUse != null){
-            Game.getCurrentRoom().useItem(itemToUse);                                   //Send the item along to currentRoom to be used
-            success = true;
+            success = Game.getCurrentRoom().useItem(itemToUse);                                   //Send the item along to currentRoom to be used
         }
+        Game.updateQuestGUI = true;
         return success;
     }
 

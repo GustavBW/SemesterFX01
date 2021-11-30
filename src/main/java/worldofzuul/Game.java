@@ -18,6 +18,7 @@ public class Game implements Runnable{
     private static MainGUIController mGUIC;
     private static InventoryManager inventoryManager;
     private static InventoryGUIManager iGUIM;
+    private static QuestGUI qGUI;
     private final InteractionHandler interHandler;
     public final ArrayList<Room> allRooms = new ArrayList<>();
     private Thread tickThread, interThread, renderThread;
@@ -32,7 +33,7 @@ public class Game implements Runnable{
     public static final int WIDTH = 1500, HEIGHT = 1000, DELAY = 50;
     public static Player player;
     public static Room currentRoom;
-    public static boolean isRunning = false,onPause = false, isAwaiting = false, awaitBoolean = false;
+    public static boolean isRunning = false,onPause = false, isAwaiting = false, awaitBoolean = false, updateQuestGUI = false;
 
     public static void main(String[] args) {
         new Game();
@@ -49,6 +50,7 @@ public class Game implements Runnable{
         inventoryManager = new InventoryManager();
         iGUIM = new InventoryGUIManager(inventoryManager, true);
         mGUIC = new MainGUIController();
+        qGUI = new QuestGUI();
         //mGUIC.setCollection(ContentEngine.getRoomCollection(currentRoom));
         MainGUIController.roomToChangeTo = ContentEngine.getRoomCollection(currentRoom);
         MainGUIController.sceneChangeRequested = true;
@@ -103,9 +105,13 @@ public class Game implements Runnable{
                 for(Tickable t : Tickable.tickables){
                     t.tick();
                 }
+
                 if(inventoryManager.inventoryChanged){          //Its the Tick threads (this one) that actually updates the Inventory GUI.
                     iGUIM.createNew(true);
                     inventoryManager.inventoryChanged = false;
+                }
+                if(updateQuestGUI){             //This boolean is set by the InventoryManager to the value of whether or not using an item was successfull.
+                    qGUI.updateQuests();
                 }
 
                 long timeB = System.nanoTime();
@@ -282,4 +288,5 @@ public class Game implements Runnable{
     public static InventoryGUIManager getiGUIM(){return iGUIM;}
     public static MainGUIController getMGUIC(){return mGUIC;}
     public static InventoryManager getInventoryManager(){return inventoryManager;}
+    public static QuestGUI getqGUI(){return qGUI;}
 }
