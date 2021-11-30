@@ -17,6 +17,7 @@ public class GraphicsProcessor {
         //CItem stuff
         private final String cItemDirectory = "/CItem";
         private final String cItemPositions = "cItemPositions.csv";
+        private final String cItemSplitBy = ";";
 
         public ArrayList<RenderableImage> getBaseForRoom(int roomId){
                 ArrayList<RenderableImage> images = new ArrayList<>();
@@ -46,53 +47,34 @@ public class GraphicsProcessor {
 
                 Point2D position = null;
                 Image picture = null;
-                String lines;
-                String splitBy = ";";
-                PosPicCombo output = new PosPicCombo();
 
                 try{
-                        BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/Graphics/CItem/cItemPositions.csv")));
-                        while((lines = br.readLine()) != null){
-                                String[] line = lines.split(splitBy);
-                               if(Integer.parseInt(line[0]) == itemId){
-                                       picture = citemImage(Integer.parseInt(line[0]));
-                                       position = citemPositon(line[1]);
-                                       output = new PosPicCombo(picture,position);
-                                       return output;
-                               }else{
+                        BufferedReader pictureReader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(graphicsDirectory + cItemDirectory + "/" + itemId)));
+                        BufferedReader positionReader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(graphicsDirectory + cItemDirectory + cItemPositions)));
 
-                               }
+                        String line;
+
+                        while((line = positionReader.readLine()) != null){
+                                String[] currentLine = line.split(cItemSplitBy);
+
+                                if(currentLine[0].equals(String.valueOf(itemId))){
+                                        position = new Point2D(Integer.parseInt(currentLine[1]), Integer.parseInt(currentLine[2]));
+                                        break;
+                                }
                         }
 
+                        //picture = (Image) (pictureReader.read());
+
+
+                        pictureReader.close();
+                        positionReader.close();
                 }catch (Exception e){
                         e.printStackTrace();
                 }
 
 
-                return output;
+                return new PosPicCombo(picture,position);
         }
-
-        private Image citemImage(int itemId){
-                Image output;
-                output = new Image(getClass().getResourceAsStream("/Graphics/CItem/" + itemId));
-                return output;
-        }
-
-        private Point2D citemPositon(String position){
-                Point2D output;
-                String splitBy = ",";
-                String[] xAndY = position.split(splitBy);
-                output = new Point2D(Double.parseDouble(xAndY[1]), Double.parseDouble(xAndY[1]));
-                return output;
-        }
-
-
-
-
-
-
-
-
 
 
         public Image getPlayerGraphics(){
