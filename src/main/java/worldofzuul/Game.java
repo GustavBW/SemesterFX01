@@ -50,12 +50,13 @@ public class Game implements Runnable{
         inventoryManager = new InventoryManager();
         iGUIM = new InventoryGUIManager(inventoryManager, true);
         mGUIC = new MainGUIController();
-        qGUI = new QuestGUI();
-        //mGUIC.setCollection(ContentEngine.getRoomCollection(currentRoom));
+
         MainGUIController.roomToChangeTo = ContentEngine.getRoomCollection(currentRoom);
         MainGUIController.sceneChangeRequested = true;
+
+        qGUI = new QuestGUI();
+
         start();
-        //MainGUIController.main(args);
     }
 
     private void createRooms() {
@@ -110,6 +111,7 @@ public class Game implements Runnable{
                     iGUIM.createNew(true);
                     inventoryManager.inventoryChanged = false;
                 }
+
                 if(updateQuestGUI){             //This boolean is set by the InventoryManager to the value of whether or not using an item was successfull.
                     qGUI.updateQuests();
                 }

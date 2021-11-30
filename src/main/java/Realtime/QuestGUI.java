@@ -150,6 +150,8 @@ public class QuestGUI implements Renderable {
                 }
             }
         }
+
+        doDisplay = true;   //Setting doDisplay to true here, will cause the QuestGUI to pop up whenever somethings changed.
         isReady = true;
     }
 

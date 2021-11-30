@@ -180,7 +180,7 @@ public class MainGUIController extends Application implements Runnable{
 
         long timeB = System.nanoTime();
         logTimeRender = timeB - timeA;
-        
+
     }               //THIS IS THE GUY YOU'RE LOOKING FOR
 
     public void displayTemporaryText(Interactible i){
