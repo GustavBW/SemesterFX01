@@ -50,7 +50,8 @@ public class Game implements Runnable{
         iGUIM = new InventoryGUIManager(inventoryManager, false);
         mGUIC = new MainGUIController();
         //mGUIC.setCollection(ContentEngine.getRoomCollection(currentRoom));
-
+        MainGUIController.roomToChangeTo = ContentEngine.getRoomCollection(currentRoom);
+        MainGUIController.sceneChangeRequested = true;
         start();
         //MainGUIController.main(args);
     }

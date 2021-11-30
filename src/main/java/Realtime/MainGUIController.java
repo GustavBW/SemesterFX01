@@ -149,9 +149,9 @@ public class MainGUIController extends Application implements Runnable{
         for(Renderable r : Renderable.renderLayer0){
             r.render(gc);
         }
-        for(Renderable r : Renderable.renderLayer1){
-            r.render(gc);
-        }
+        //for(Renderable r : Renderable.renderLayer1){
+        //    r.render(gc);
+        //}
         for(Renderable r : Renderable.renderLayer2){
             r.render(gc);
         }
