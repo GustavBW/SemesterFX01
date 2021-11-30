@@ -29,14 +29,20 @@ public class Quest {
         this.type = QuestType.Use;
     }
 
-    public Quest(int id, String desc, String hint, int itemId, int amount, QuestType type){
+    public Quest(int id, String desc, String hint, int itemId, int amount, String type){
         this(id, desc, hint, itemId, amount);
 
         if(type == null) {
             this.type = QuestType.Use;
+
         }else{
-            this.type = type;
+            if(type.equalsIgnoreCase("PickUp")) {
+                this.type = QuestType.PickUP;
+            }else{
+                this.type = QuestType.Use;
+            }
         }
+
     }
 
     public Quest(int id, String desc, String hint, int itemId) {

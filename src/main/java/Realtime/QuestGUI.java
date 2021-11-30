@@ -26,8 +26,8 @@ public class QuestGUI implements Renderable {
     private final Color mainTitleColor, descColor, titleColor, qCompleteTitleColor, qCompleteDescColor, backgroundColor1, backgroundColor2;
 
     //The great thing about procedually generating the GUI : No whacky numbers! Only conditionally scaling values. Edit: Almost no whacky values
-    private final double xTitlePosition = Game.WIDTH * 0.8, xDescPosition = xTitlePosition + 20, yOffsetFromScreen = Game.HEIGHT * 0.2, yOffsetBetweenTexts = 0;
-    private double totalDisplayHeight = 10;
+    private final double xTitlePosition = Game.WIDTH * 0.8, xDescPosition = xTitlePosition + 20, yOffsetFromScreen = Game.HEIGHT * 0.2, yOffsetBetweenTexts = 0, yOffsetBetweenSegments = 10;
+    private double totalDisplaceMent = 0, totalDisplayHeight = 10;
     private final int descWidthSymbols = 45;
 
 
@@ -60,6 +60,8 @@ public class QuestGUI implements Renderable {
 
     private void createNew(){
         isReady = false;
+        int counter = 0;
+        double displacement = 0;
 
         clear();
 
@@ -75,7 +77,7 @@ public class QuestGUI implements Renderable {
                     questTitles.add(
                             previouslyAddedText = new AdvancedRendText(
                                     tempTextProc.getSingleItem(q.getQuestItemId()).getName(),
-                                    new Point2D(xTitlePosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
+                                    new Point2D(xTitlePosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts + displacement),
                                     fontTitle,
                                     qCompleteTitleColor,
                                     100
@@ -90,12 +92,14 @@ public class QuestGUI implements Renderable {
                                     descWidthSymbols
                     ));
 
+                    counter++;
+                    displacement = yOffsetBetweenSegments * counter;
                 }else{
 
                     questTitles.add(
                             previouslyAddedText = new AdvancedRendText(
                                     tempTextProc.getSingleItem(q.getQuestItemId()).getName(),
-                                    new Point2D(xTitlePosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
+                                    new Point2D(xTitlePosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts + displacement),
                                     fontTitle,
                                     titleColor,
                                     100
@@ -110,10 +114,13 @@ public class QuestGUI implements Renderable {
                                     descWidthSymbols
                             ));
 
+                    counter++;
+                    displacement = yOffsetBetweenSegments * counter;
                 }
             }
         }
 
+        totalDisplaceMent = displacement;
         totalDisplayHeight = calculateTotalDisplayHeight();
         doDisplay = true;   //Setting doDisplay to true here, will cause the QuestGUI to pop up whenever somethings changed.
         isReady = true;
@@ -172,7 +179,8 @@ public class QuestGUI implements Renderable {
             totalHeight += ( art == null ?  10 : art.getTotalHeight()) + yOffsetBetweenTexts;
         }
 
-        return (totalHeight + mainGUITitle.getTotalHeight());
+
+        return (totalHeight + mainGUITitle.getTotalHeight() + totalDisplaceMent);
     }
 
     @Override
