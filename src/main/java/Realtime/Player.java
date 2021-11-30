@@ -66,16 +66,16 @@ public class Player implements Renderable, Tickable {
     public void tick() {
 
         if (upKeyPressed) {     //Using a Vector2D is necessary for getting the rotation angle
-            velocity.addY( -1 * Game.interpolation * mvSpeed );
+            velocity.decreaseY( Game.interpolation * mvSpeed);
         }
         if (rightKeyPressed) {
-            velocity.addX( 1 * Game.interpolation * mvSpeed);
+            velocity.addX( Game.interpolation * mvSpeed);
         }
         if (downKeyPressed) {
-            velocity.addY( 1 * Game.interpolation * mvSpeed);
+            velocity.addY( Game.interpolation * mvSpeed);
         }
         if (leftKeyPressed) {
-            velocity.addX( -1 * Game.interpolation * mvSpeed);
+            velocity.decreaseX(Game.interpolation * mvSpeed);
         }
 
         orX = posX - imW;   //Updating Origins
