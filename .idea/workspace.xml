@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="6bfdae99-945c-487c-90a0-7c778f424550" name="Changes" comment="added interfaces to version control">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/ExtendedFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/ExtendedFunctions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/QuestGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/QuestGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,5 +158,10 @@
         <PinnedItemInfo parentTag="Realtime.MainGUIController" memberName="iGUIM" />
       </pinned-members>
     </pin-to-top-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Semesterprojekt01_iml$Game.ic" NAME="Game Coverage Results" MODIFIED="1638304565112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Realtime.inventory.*</FILTER>
+    </SUITE>
   </component>
 </project>

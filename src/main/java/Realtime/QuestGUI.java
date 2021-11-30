@@ -18,7 +18,7 @@ public class QuestGUI implements Renderable {
 
     private final ArrayList<AdvancedRendText> questTitles;
     private final ArrayList<AdvancedRendText> questDescriptions;
-    private final AdvancedRendText mainGUITitle;
+    private AdvancedRendText mainGUITitle;
 
     private final Font fontTitle, fontText, fontMainTitle;
     private final Color mainTitleColor, descColor, titleColor, qCompleteTitleColor, qCompleteDescColor, backgroundColor1, backgroundColor2;
@@ -42,10 +42,10 @@ public class QuestGUI implements Renderable {
         titleColor = new Color(209 / 255.0,153 / 255.0,0,1);
         qCompleteTitleColor = new Color(32 / 255.0,158 / 255.0,0,1);
         qCompleteDescColor = new Color(95 / 255.0,130 / 255.0,0.4,1);
-        backgroundColor1 = new Color(0,0,0,0.5);
-        backgroundColor2 = new Color(1,1,1,0.5);
+        backgroundColor1 = new Color(1,1,1,0.5);
+        backgroundColor2 = new Color(0,0,0,0.5);
 
-        mainGUITitle = new AdvancedRendText("Quests", new Point2D(xTitlePosition + 10, yOffsetFromScreen + 10), fontMainTitle, mainTitleColor, 100);
+        mainGUITitle = new AdvancedRendText("Quests", new Point2D(xTitlePosition + 10, yOffsetFromScreen + 20), fontMainTitle, mainTitleColor, 100);
 
         createNew();
     }
@@ -56,10 +56,7 @@ public class QuestGUI implements Renderable {
         clear();
 
         TextProcessor tempTextProc = ContentEngine.getTextProcessor();
-        boolean firstOne = true;
         AdvancedRendText previouslyAddedText = mainGUITitle;
-
-
 
         if(MainGUIController.getCurrentRoom().getRoom().getQuests() != null){
 
@@ -146,7 +143,7 @@ public class QuestGUI implements Renderable {
         //Might seem redundant, but I'mma use it to check for some stuff shortly.
 
         if(status){
-            System.out.println("Now displaying Quest GUI");
+
             doDisplay = true;
         }else{
 
@@ -167,7 +164,7 @@ public class QuestGUI implements Renderable {
             totalHeight += ( art == null ?  10 : art.getTotalHeight());
         }
 
-        return totalHeight + mainGUITitle.getTotalHeight();
+        return (totalHeight + mainGUITitle.getTotalHeight());
     }
 
     @Override

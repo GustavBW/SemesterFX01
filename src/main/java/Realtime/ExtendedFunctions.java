@@ -16,13 +16,18 @@ public class ExtendedFunctions {
         for(String word : asIndividualWords){
 
             //Just add up the words and mush them together until you reach max
+            if(asIndividualWords.length > 1) {
 
-            if((currentLine + word).getBytes(StandardCharsets.UTF_8).length < symbolsPerLine){
-                currentLine.append(word).append(" ");
+                if ((currentLine + word).getBytes(StandardCharsets.UTF_8).length < symbolsPerLine) {
+                    currentLine.append(word).append(" ");
+
+                } else {
+                    array.add(currentLine.toString());
+                    currentLine = new StringBuilder();
+                }
 
             }else{
-                array.add(currentLine.toString());
-                currentLine = new StringBuilder();
+                array.add(word);
             }
         }
         return array;
