@@ -1,21 +1,23 @@
 package Realtime.triggers;
 
+import BackEnd.ContentEngine;
 import BackEnd.RoomCollection;
 import BackEnd.ExitDefinition;
 import Realtime.InteractionHandler;
 import Realtime.MainGUIController;
 import javafx.geometry.Point2D;
 import worldofzuul.Game;
+import worldofzuul.Room;
 
 public class RoomExitTrigger extends DistanceTrigger{
 
-    private final RoomCollection roomToChangeTo;
+    private final Room roomToChangeTo;
     private ExitDefinition exit;
     private Point2D position;
     private final int interActionRadius = 50;
     private String direction;
 
-    public RoomExitTrigger(RoomCollection rc, ExitDefinition ed) {
+    public RoomExitTrigger(Room rc, ExitDefinition ed) {
 
         this.roomToChangeTo = rc;
         this.exit = ed;
@@ -33,7 +35,7 @@ public class RoomExitTrigger extends DistanceTrigger{
     }
 
 
-    public RoomExitTrigger(RoomCollection rc, Point2D position, String direction){      //We might wanna place exits in other places than the four above
+    public RoomExitTrigger(Room rc, Point2D position, String direction){      //We might wanna place exits in other places than the four above
         roomToChangeTo = rc;
         this.position = position;
         this.direction = direction;
@@ -54,16 +56,16 @@ public class RoomExitTrigger extends DistanceTrigger{
     public void onInteraction(){
         System.out.println("You just interacted with a Room Trigger");
 
-        MainGUIController.roomToChangeTo = roomToChangeTo;
+        MainGUIController.roomToChangeTo = ContentEngine.getRoomCollection(roomToChangeTo);
         MainGUIController.sceneChangeRequested = true;
     }
     @Override
     public String getPopUpText(){
 
         if(exit == null){
-            return direction + ": " + roomToChangeTo.getRoom().getName();
+            return direction + ": " + roomToChangeTo.getName();
         }else {
-            return exit.getDirection() + ": " + roomToChangeTo.getRoom().getName();
+            return exit.getDirection() + ": " + roomToChangeTo.getName();
         }
     }
 

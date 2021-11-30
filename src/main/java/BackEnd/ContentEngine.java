@@ -8,6 +8,7 @@ import Realtime.inventory.Item;
 import javafx.scene.image.Image;
 import worldofzuul.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ContentEngine {
@@ -45,7 +46,7 @@ public class ContentEngine {
 
     public static RoomCollection getRoomCollection(Room room){
         ArrayList<RoomExitTrigger> exits = new ArrayList<>();
-        RoomCollection rc = new RoomCollection(room,getCItems(room.getId()), exits);        //Gotta parse the RoomExitTriggers here as well. Forgot them
+        RoomCollection rc = new RoomCollection(room,getCItems(room.getId()), getExitTriggers(room));        //Gotta parse the RoomExitTriggers here as well. Forgot them
 
         return rc;
     }
@@ -78,6 +79,18 @@ public class ContentEngine {
         return output;
     }
 
+
+    public static ArrayList<RoomExitTrigger> getExitTriggers(Room room){
+        TextProcessor tp = new TextProcessor();
+        ArrayList<Room> allRooms = tp.getAllRooms();
+        ArrayList<RoomExitTrigger> output = new ArrayList<>();
+
+        for(ExitDefinition ex : room.getExits()){
+            output.add(new RoomExitTrigger(allRooms.get(ex.getRoomId()), ex));
+        }
+
+        return output;
+    }
 
 
 
