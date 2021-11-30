@@ -47,7 +47,7 @@ public class Game implements Runnable{
         createRooms();
         parser = new Parser();
         inventoryManager = new InventoryManager();
-        iGUIM = new InventoryGUIManager(inventoryManager, false);
+        iGUIM = new InventoryGUIManager(inventoryManager, true);
         mGUIC = new MainGUIController();
         //mGUIC.setCollection(ContentEngine.getRoomCollection(currentRoom));
         MainGUIController.roomToChangeTo = ContentEngine.getRoomCollection(currentRoom);
@@ -104,7 +104,7 @@ public class Game implements Runnable{
                     t.tick();
                 }
                 if(inventoryManager.inventoryChanged){          //Its the Tick threads (this one) that actually updates the Inventory GUI.
-                    iGUIM.createNew(false);
+                    iGUIM.createNew(true);
                     inventoryManager.inventoryChanged = false;
                 }
 

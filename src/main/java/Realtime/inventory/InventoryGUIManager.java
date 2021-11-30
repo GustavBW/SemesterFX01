@@ -57,6 +57,7 @@ public class InventoryGUIManager {
 
             int i = 0;
 
+
             for (CItem c : inventoryManager.getCInventory()) {
 
                 //CIBS
@@ -70,16 +71,17 @@ public class InventoryGUIManager {
                 ArrayList<RenderableButton> newArrayList = new ArrayList<>();
 
                 Point2D sub1Position = new Point2D(CIBposition.getX() + 175, CIBposition.getY());
-                newArrayList.add(new useCItemButton(c,"Use", sub1Position, subWidth, buttonSize));
+                newArrayList.add(new useCItemButton(c, "Use", sub1Position, subWidth, buttonSize));
                 System.out.println("Made SUB at y = " + CIBposition.getY());
 
                 Point2D sub2Position = new Point2D(sub1Position.getX() + (subWidth * 1.15), sub1Position.getY());
-                newArrayList.add(new dropCItemButton(c,"Drop", sub2Position,subWidth, buttonSize));
+                newArrayList.add(new dropCItemButton(c, "Drop", sub2Position, subWidth, buttonSize));
 
                 SUBs.put(c.getId(), newArrayList);
 
                 i++;
             }
+
 
         }else{      //This is purely just to be able to test the system without having CItems in the game yet
 
@@ -124,7 +126,7 @@ public class InventoryGUIManager {
                 t.render(gc);
             }
 
-            if(inspectedElement != null){
+            if(inspectedElement != null && SUBs.get(inspectedElement.getId()) != null){
                 for(RenderableButton rB : SUBs.get(inspectedElement.getId())){
                     rB.render(gc);
                 }
@@ -197,18 +199,19 @@ public class InventoryGUIManager {
 
     public void setInspectedElement(CItem citem){
 
-        if(inspectedElement != null) {
+        if(inspectedElement != null && SUBs.get(inspectedElement.getId()) != null) {
             for (RenderableButton rB : SUBs.get(inspectedElement.getId())) {
                 rB.destroy();
             }
         }
 
-        for(RenderableButton rB : SUBs.get(citem.getId())){
-            rB.enableClickable();
+        if(citem != null && SUBs.get(citem.getId()) != null) {
+            for (RenderableButton rB : SUBs.get(citem.getId())) {
+                rB.enableClickable();
+            }
+            inspectedElement = citem;
         }
-
         inspectedElement = citem;
-
     }
 
     public boolean getDisplayStatus(){return doDisplay;}

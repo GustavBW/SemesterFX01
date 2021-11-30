@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bfdae99-945c-487c-90a0-7c778f424550" name="Changes" comment="added interfaces to version control">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Realtime/QuestGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/inventory/InventoryGUIManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/inventory/InventoryGUIManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldofzuul/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
