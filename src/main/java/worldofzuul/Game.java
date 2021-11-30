@@ -49,6 +49,7 @@ public class Game implements Runnable{
         inventoryManager = new InventoryManager();
         iGUIM = new InventoryGUIManager(inventoryManager, false);
         mGUIC = new MainGUIController();
+        //mGUIC.setCollection(ContentEngine.getRoomCollection(currentRoom));
 
         start();
         //MainGUIController.main(args);

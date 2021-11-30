@@ -1,5 +1,6 @@
 package Realtime;
 
+import BackEnd.GraphicsProcessor;
 import Realtime.interfaces.Interactible;
 import Realtime.interfaces.Renderable;
 import Realtime.interfaces.Tickable;
@@ -80,6 +81,7 @@ public class MainGUIController extends Application implements Runnable{
         new DistanceTrigger(Game.WIDTH / 2,Game.HEIGHT / 2,400);
         Renderable.renderLayer4.add(new RoomTitleText("CURRENT ROOM TITLE", 36));
 
+
         bp.setCenter(canvas);
         mouseHandler = new MouseHandler();
         Scene scene = new Scene(bp,Game.WIDTH,Game.HEIGHT);
@@ -137,6 +139,7 @@ public class MainGUIController extends Application implements Runnable{
     }
     private void onUpdate(){
 
+        GraphicsProcessor gp = new GraphicsProcessor();
         long timeA = System.nanoTime();
 
         gc = canvas.getGraphicsContext2D();
@@ -219,7 +222,6 @@ public class MainGUIController extends Application implements Runnable{
 
     @Override
     public void init(){
-
     }//This one loads the first RoomCollection in through the CE
     public static void main(String[] args) {
         launch(args);

@@ -1,6 +1,7 @@
 package BackEnd;
 
 import Realtime.RenderableImage;
+import Realtime.debugging.TestingCItem;
 import Realtime.triggers.RoomExitTrigger;
 import Realtime.inventory.CItem;
 import Realtime.inventory.Item;
@@ -29,7 +30,9 @@ public class ContentEngine {
     }
 
 
-    public ArrayList<CItem> getCItems(int roomId){
+    public static ArrayList<CItem> getCItems(int roomId){
+        TextProcessor tp = new TextProcessor();
+        GraphicsProcessor gp = new GraphicsProcessor();
         ArrayList<CItem> citems = new ArrayList<>();
         ArrayList<Item> items = tp.getItemsForRoom(roomId);
 
@@ -40,7 +43,7 @@ public class ContentEngine {
         return citems;
     }
 
-    public RoomCollection getRoomCollection(Room room){
+    public static RoomCollection getRoomCollection(Room room){
         RoomCollection rc = new RoomCollection(room,getCItems(room.getId()), (ArrayList<RoomExitTrigger>) null);        //Gotta parse the RoomExitTriggers here as well. Forgot them
 
         return rc;
@@ -65,7 +68,7 @@ public class ContentEngine {
         output.add(convertToRenderableImage(gp.getShadowImage(roomId)));
         output.add(convertToRenderableImage(gp.getTopImage(roomId)));
         output.add(convertToRenderableImage(gp.getPlayerGraphics()));
-
+        System.out.println("test");
         return output;
     }
 
