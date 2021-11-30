@@ -1,0 +1,32 @@
+
+Under finder du den syntaks der skal benyttes for at oprette nye rum direkte ved tilfæjelser til csv-filerne. 
+
+Legend:
+De forskellige kolonner opdeles af et semikolon " ; "
+Enkelte elementer har flere dele opdelt af en apostrof " ' "
+Item kolonnen i Room Desc .csv tager først et id, så apostrof, og så mængden af det item.
+Exit kolonnen i Room Desc .csv tager først et exit id, der er en retning som nort/south/east/west, så apostrof, og derefter id'et på det rum, den retning leder til.
+
+INGEN MELLEMRUM VED ";"
+
+Room Desc .csv
+id ; name ; Short desc. ; Long desc. ; Quest id, quest id ; exit id, exit id... ; itemId ' amount, itemId ' amount, itemId ' amount, itemId ' amount...
+id;name;shortdesc;longdesc;questids;exitids;itemids
+
+Items .csv
+id. ; name
+
+Exits .csv
+id ; name ; roomId
+
+Room Quest .csv
+quest id ; quest resolved desc. ; quest hint ; Quest item id 
+
+
+
+
+
+
+
+ 
+
