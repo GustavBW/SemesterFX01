@@ -48,6 +48,7 @@ public class MainGUIController extends Application implements Runnable{
     private static RoomCollection currentCollection;
     private RoomCollection previousRCollection;             //Important for some race conditions and Interactibles and such
     private long logLastCall = 0, distTrigLastTextCall = 0, roomTrigLastCall = 0;
+    private String roomTitle = "Room Title";
 
     public static long logTimeRender = 888,logTimeTick = 888,logTimeInter = 888;
     public static boolean isRunning = false, isReady = false, awaitBoolean = false, sceneChangeRequested = false;
@@ -78,9 +79,7 @@ public class MainGUIController extends Application implements Runnable{
         };
         timer.start();
 
-        new DistanceTrigger(Game.WIDTH / 2,Game.HEIGHT / 2,400);
-        Renderable.renderLayer4.add(new RoomTitleText("CURRENT ROOM TITLE", 36));
-
+        roomTitleText = new RoomTitleText(roomTitle, 36);
 
         bp.setCenter(canvas);
         mouseHandler = new MouseHandler();
@@ -258,10 +257,13 @@ public class MainGUIController extends Application implements Runnable{
         getThatPlayerBackInThere();                 //Since it might be for the best to just wipe everything. It's easiest to just add the player in afterwards.
         Game.currentRoom = rc.getRoom();            //Kinda redundant. But it's a nice touch.
 
+        roomTitleText.setText(rc.getRoom().getName());
+
         displayRoomDescription();
 
         long timeB = System.nanoTime();
         System.out.println("MGUIC.changeScene() took: " + (timeB - timeA) + "ns");  //Hopefully we wont ever reach scene changes taking more than half a second. But we for sure will know exactly how long each was.
+
         sceneChangeRequested = false;
         isReady = true; //With this flag set - which the other threads are looking for - they'll resume their tasks.
     }

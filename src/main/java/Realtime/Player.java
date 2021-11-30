@@ -66,16 +66,16 @@ public class Player implements Renderable, Tickable {
     public void tick() {
 
         if (upKeyPressed) {     //Using a Vector2D is necessary for getting the rotation angle
-            velocity.setY( -1 );
+            velocity.addY( -1 * Game.interpolation * mvSpeed );
         }
         if (rightKeyPressed) {
-            velocity.setX( 1 );
+            velocity.addX( 1 * Game.interpolation * mvSpeed);
         }
         if (downKeyPressed) {
-            velocity.setY( 1 );
+            velocity.addY( 1 * Game.interpolation * mvSpeed);
         }
         if (leftKeyPressed) {
-            velocity.setX( -1 );
+            velocity.addX( -1 * Game.interpolation * mvSpeed);
         }
 
         orX = posX - imW;   //Updating Origins
@@ -83,8 +83,8 @@ public class Player implements Renderable, Tickable {
 
         //Checking if the update in position would place the player out of bounds
         if((orX + velocity.getX() < Game.WIDTH && orX + velocity.getX() > 0) && (orY + velocity.getY() < Game.HEIGHT && orY + velocity.getY() > 0)) {
-            posX += velocity.getX() * Game.interpolation * mvSpeed;
-            posY += velocity.getY() * Game.interpolation * mvSpeed;
+            posX += velocity.getX();
+            posY += velocity.getY();
         }
 
         rotationRadian = Math.asin((velocity.getY() + 1 / ( Math.sqrt( velocity.getSquareX() + velocity.getSquareY() ) + 1) - 1)); //Adding 1 in both top and bottom to avoid dividing by zero, then subtracting that again

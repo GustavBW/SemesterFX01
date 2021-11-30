@@ -13,7 +13,7 @@ public class RoomTitleText implements Renderable {
 
     private final Point2D position;
     private final Font fontToUse;
-    private final String text;
+    private String text;
     private Color color1, color2;
     private int dropShadowOffset = -1;
 
@@ -47,6 +47,10 @@ public class RoomTitleText implements Renderable {
     @Override
     public void onInstancedRender() {
 
+    }
+
+    public void setText(String newText){
+        text = newText;
     }
 
 }

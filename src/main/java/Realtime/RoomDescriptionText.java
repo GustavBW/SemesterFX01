@@ -45,6 +45,8 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
 
         textAsLines = ExtendedFunctions.toLines(text,100," ");
         linesMade = textAsLines.size();
+
+
     }
 
     @Override
