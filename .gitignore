@@ -1,6 +1,7 @@
 
 *.xml
 .idea/
+target/
 .idea/libraries/Maven__org_openjfx_javafx_base_win_17_ea_11.xml
 .idea/libraries/Maven__org_openjfx_javafx_base_win_17_ea_11.xml
 .idea/libraries/Maven__org_openjfx_javafx_controls_win_17_ea_11.xml
@@ -317,3 +318,23 @@ target/classes/Realtime/inventory/InventoryGUIManager.class
 target/classes/Realtime/inventory/dropCItemButton.class
 .idea/workspace.xml
 .idea/workspace.xml
+target/classes/Data/RoomQuest.csv
+target/classes/Realtime/AdvancedRendText.class
+target/classes/Realtime/ExtendedFunctions.class
+target/classes/Realtime/MainGUIController$1.class
+target/classes/Realtime/MainGUIController.class
+
+target/classes/worldofzuul/Game.class
+target/classes/Realtime/OnKeyReleased.class
+target/classes/Realtime/OnKeyReleased$1.class
+target/classes/Realtime/OnKeyPressed.class
+target/classes/Realtime/OnKeyPressed$1.class
+target/classes/Realtime/MainGUIController.class
+target/classes/Realtime/MainGUIController$1.class
+target/classes/Realtime/inventory/useCItemButton.class
+target/classes/Realtime/inventory/InventoryManager.class
+target/classes/Realtime/inventory/InventoryGUIManager.class
+target/classes/Realtime/inventory/dropCItemButton.class
+target/classes/Realtime/ExtendedFunctions.class
+target/classes/Realtime/AdvancedRendText.class
+target/classes/Data/RoomQuest.csv
