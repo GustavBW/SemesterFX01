@@ -68,7 +68,7 @@ public class ContentEngine {
         output.add(convertToRenderableImage(gp.getShadowImage(roomId)));
         output.add(convertToRenderableImage(gp.getTopImage(roomId)));
         output.add(convertToRenderableImage(gp.getPlayerGraphics()));
-        System.out.println("test");
+
         return output;
     }
 
