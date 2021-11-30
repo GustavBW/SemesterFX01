@@ -1,6 +1,8 @@
 package Realtime.inventory;
 
+import Realtime.MainGUIController;
 import worldofzuul.Game;
+import worldofzuul.Quest;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -48,6 +50,10 @@ public class InventoryManager {
             }
             if (!doesAlreadyContain) {
                 cinventory.add(new CItem(citem.getItem(), citem.getPosPic()));
+                Game.updateQuestGUI = evaluateItemOnPickUp(citem);
+                    //evaluateItemOnPickUp goes through all quests and sees if this item is relevant AND if the quest type is PickUp. If it aint QuestType.PickUp, Quest.evaluateItemOnPickUp
+                    //will always return false. Thus not asking Game to update the Quest GUI.
+
                 inventoryChanged = true;
                 citem.destroy();
             }
@@ -174,6 +180,16 @@ public class InventoryManager {
         return success;
     }
 
+    private boolean evaluateItemOnPickUp(CItem citem){
+        return evaluateItemOnPickUp(citem.getItem());
+    }
+    private boolean evaluateItemOnPickUp(Item item){
+        boolean isIt = false;
+        for(Quest q : MainGUIController.getCurrentRoom().getRoom().getQuests()){
+            isIt = q.evaluateItemOnPickUp(item);
+        }
+        return isIt;
+    }
 
 
     public ArrayList<CItem> getCInventory(){return cinventory;}
