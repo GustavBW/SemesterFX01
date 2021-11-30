@@ -88,7 +88,7 @@ public class Player implements Renderable, Tickable {
         }
 
         rotationRadian = Math.asin((velocity.getY() + 1 / ( Math.sqrt( velocity.getSquareX() + velocity.getSquareY() ) + 1) - 1)); //Adding 1 in both top and bottom to avoid dividing by zero, then subtracting that again
-        System.out.println("rotation angle is: " + rotationRadian * toDegree + " velX is: " + velocity.getX() + " velY is: " + velocity.getY() + " magnitude is: " + velocity.magnitude() + " Game.interpolation is: " + Game.interpolation);
+        //System.out.println("rotation angle is: " + rotationRadian * toDegree + " velX is: " + velocity.getX() + " velY is: " + velocity.getY() + " magnitude is: " + velocity.magnitude() + " Game.interpolation is: " + Game.interpolation);
 
         velocity.multiply(drag);
 

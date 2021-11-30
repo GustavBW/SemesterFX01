@@ -262,7 +262,7 @@ public class MainGUIController extends Application implements Runnable{
 
         long timeB = System.nanoTime();
         System.out.println("MGUIC.changeScene() took: " + (timeB - timeA) + "ns");  //Hopefully we wont ever reach scene changes taking more than half a second. But we for sure will know exactly how long each was.
-
+        sceneChangeRequested = false;
         isReady = true; //With this flag set - which the other threads are looking for - they'll resume their tasks.
     }
     private void clearAllTicksRendersInters(){
