@@ -17,13 +17,15 @@ public class QuestGUI implements Renderable {
 
     private boolean isReady = false, doDisplay = false;
 
-    private ArrayList<AdvancedRendText> questTitles;
-    private ArrayList<AdvancedRendText> questDescriptions;
+    private final ArrayList<AdvancedRendText> questTitles;
+    private final ArrayList<AdvancedRendText> questDescriptions;
 
-    private Font fontTitle, fontText;
-    private Color descColor, titleColor, qCompleteTitleColor, qCompleteDescColor;
+    private final Font fontTitle, fontText;
+    private final Color descColor, titleColor, qCompleteTitleColor, qCompleteDescColor, backgroundColor1, backgroundColor2;
 
-    private final double xTextPosition = Game.WIDTH * 0.8, yOffsetBetweenTexts = 5;
+    //The great thing about procedually generating the GUI : No whacky numbers! Only conditionally scaling values.
+    private final double xTextPosition = Game.WIDTH * 0.8, yOffsetFromScreen = Game.HEIGHT * 0.2, yOffsetBetweenTexts = 5;
+    private double totalDisplayHeight = 10;
     private final int descWidthSymbols = 100;
 
 
@@ -38,6 +40,8 @@ public class QuestGUI implements Renderable {
         titleColor = new Color(1,1,1,1);
         qCompleteTitleColor = new Color(0.1,0.6,0.1,1);
         qCompleteDescColor = new Color(0.4,0.4,0.4,1);
+        backgroundColor1 = new Color(1,1,1,1);
+        backgroundColor2 = new Color(1,1,1,1);
 
 
         createNew();
@@ -65,7 +69,7 @@ public class QuestGUI implements Renderable {
                         questTitles.add(
                                 previouslyAddedText = new AdvancedRendText(
                                         tempTextProc.getSingleItem(q.getQuestItemId()).getName(),
-                                        new Point2D(xTextPosition, Game.HEIGHT * 0.2),
+                                        new Point2D(xTextPosition, yOffsetFromScreen),
                                         fontTitle,
                                         qCompleteTitleColor,
                                         100
@@ -111,7 +115,7 @@ public class QuestGUI implements Renderable {
                         questTitles.add(
                                 previouslyAddedText = new AdvancedRendText(
                                         tempTextProc.getSingleItem(q.getQuestItemId()).getName(),
-                                        new Point2D(xTextPosition, Game.HEIGHT * 0.2),
+                                        new Point2D(xTextPosition, yOffsetFromScreen),
                                         fontTitle,
                                         titleColor,
                                         100
@@ -151,6 +155,7 @@ public class QuestGUI implements Renderable {
             }
         }
 
+        totalDisplayHeight = calculateTotalDisplayHeight();
         doDisplay = true;   //Setting doDisplay to true here, will cause the QuestGUI to pop up whenever somethings changed.
         isReady = true;
     }
@@ -163,6 +168,12 @@ public class QuestGUI implements Renderable {
     @Override
     public void render(GraphicsContext gc) {
         if(doDisplay && isReady){
+
+            gc.setFill(backgroundColor1);
+            gc.fillRoundRect(xTextPosition - 10, yOffsetFromScreen - 10, Game.WIDTH + 100, totalDisplayHeight + 10, 10 , 10);
+
+            gc.setFill(backgroundColor2);
+            gc.fillRoundRect(xTextPosition - 5, yOffsetFromScreen - 5, Game.WIDTH + 100, totalDisplayHeight + 5, 10 , 10);
 
             for(AdvancedRendText aRT : questTitles){
                 aRT.render(gc);
@@ -179,7 +190,7 @@ public class QuestGUI implements Renderable {
         //Might seem redundant, but I'mma use it to check for some stuff shortly.
 
         if(status){
-
+            System.out.println("Now displaying Quest GUI");
             doDisplay = true;
         }else{
 
@@ -188,6 +199,20 @@ public class QuestGUI implements Renderable {
     }
     public boolean getDisplayStatus(){return doDisplay;}
     public void updateQuests(){createNew();}
+
+    private double calculateTotalDisplayHeight(){
+        double totalHeight = 10;
+
+        for(AdvancedRendText art : questTitles){
+            totalHeight += ( art == null ?  10 : art.getTotalHeight()); //Enjoy the ternaries while they last
+        }
+
+        for(AdvancedRendText art : questDescriptions){
+            totalHeight += ( art == null ?  10 : art.getTotalHeight());
+        }
+
+        return totalHeight;
+    }
 
     @Override
     public void onInstancedRender() {

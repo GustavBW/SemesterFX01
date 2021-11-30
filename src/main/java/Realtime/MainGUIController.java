@@ -120,7 +120,7 @@ public class MainGUIController extends Application implements Runnable{
     }
 
     private void updateLogText() {
-        if(System.currentTimeMillis() >= logLastCall + 500) {       //Triggers log updated ~2 times a second
+        if(System.currentTimeMillis() >= logLastCall + 200) {       //Triggers log updated ~5 times a second
             long rFPS = 1_000_000_000 / (logTimeRender + 1);        //Super fast method of avoiding dividing by zero
             long iFPS = 1_000_000_000 / (logTimeInter + 1);         //Unfortunatly it will make the times occur slower
             long tFPS = 1_000_000_000 / (logTimeTick + 1);          //By a very small fraction
@@ -172,6 +172,7 @@ public class MainGUIController extends Application implements Runnable{
         }
 
         iGUIM.render(gc);
+        qGUI.render(gc);
 
         roomTitleText.render(gc);
 
