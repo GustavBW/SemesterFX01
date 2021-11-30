@@ -138,7 +138,6 @@ public class MainGUIController extends Application implements Runnable{
     }
     private void onUpdate(){
 
-        GraphicsProcessor gp = new GraphicsProcessor();
         long timeA = System.nanoTime();
 
         gc = canvas.getGraphicsContext2D();
