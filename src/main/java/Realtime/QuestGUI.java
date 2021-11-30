@@ -26,9 +26,9 @@ public class QuestGUI implements Renderable {
     private final Color mainTitleColor, descColor, titleColor, qCompleteTitleColor, qCompleteDescColor, backgroundColor1, backgroundColor2;
 
     //The great thing about procedually generating the GUI : No whacky numbers! Only conditionally scaling values. Edit: Almost no whacky values
-    private final double xTitlePosition = Game.WIDTH * 0.75, xDescPosition = xTitlePosition + 10, yOffsetFromScreen = Game.HEIGHT * 0.2, yOffsetBetweenTexts = 0;
+    private final double xTitlePosition = Game.WIDTH * 0.8, xDescPosition = xTitlePosition + 20, yOffsetFromScreen = Game.HEIGHT * 0.2, yOffsetBetweenTexts = 0;
     private double totalDisplayHeight = 10;
-    private final int descWidthSymbols = 60;
+    private final int descWidthSymbols = 45;
 
 
     public QuestGUI(){
@@ -53,7 +53,7 @@ public class QuestGUI implements Renderable {
         backgroundColor1 = new Color(1,1,1,0.5);
         backgroundColor2 = new Color(0,0,0,0.5);
 
-        mainGUITitle = new AdvancedRendText("Quests", new Point2D(xTitlePosition + ((Game.WIDTH - Game.WIDTH * 0.81) / 2), yOffsetFromScreen + 20), fontMainTitle, mainTitleColor, 100);
+        mainGUITitle = new AdvancedRendText("Quests", new Point2D(xTitlePosition + ((Game.WIDTH - Game.WIDTH * 0.85) / 2), yOffsetFromScreen + 20), fontMainTitle, mainTitleColor, 100);
 
         createNew();
     }
@@ -129,10 +129,10 @@ public class QuestGUI implements Renderable {
         if(doDisplay && isReady){
 
             gc.setFill(backgroundColor1);
-            gc.fillRoundRect(xTitlePosition - 10, yOffsetFromScreen - 10, Game.WIDTH + 100, totalDisplayHeight + 10, 10 , 10);
+            gc.fillRoundRect(xTitlePosition - 10, yOffsetFromScreen - 10, Game.WIDTH + 100, totalDisplayHeight + 20, 10 , 10);
 
             gc.setFill(backgroundColor2);
-            gc.fillRoundRect(xTitlePosition - 5, yOffsetFromScreen - 5, Game.WIDTH + 100, totalDisplayHeight + 5, 10 , 10);
+            gc.fillRoundRect(xTitlePosition - 5, yOffsetFromScreen - 5, Game.WIDTH + 100, totalDisplayHeight + 10, 10 , 10);
 
             mainGUITitle.render(gc);
 
