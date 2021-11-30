@@ -19,7 +19,7 @@ public class Game implements Runnable{
     private static InventoryManager inventoryManager;
     private static InventoryGUIManager iGUIM;
     private final InteractionHandler interHandler;
-    private final ArrayList<Room> allRooms = new ArrayList<>();
+    public final ArrayList<Room> allRooms = new ArrayList<>();
     private Thread tickThread, interThread, renderThread;
 
     private int helpCount = 0, hintCount = 0, turnCount = 0;
