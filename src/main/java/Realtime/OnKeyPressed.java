@@ -17,34 +17,40 @@ public class OnKeyPressed implements EventHandler<KeyEvent> {
     public void handle(KeyEvent keyEvent) {
 
         switch (keyEvent.getCode()) {
-            case W: {
+            case W -> {
                 Game.player.setUpKeyPressed(true);
-                break;
+
             }
-            case D: {
+            case D -> {
                 Game.player.setRightKeyPressed(true);
-                break;
+
             }
-            case S: {
+            case S -> {
                 Game.player.setDownKeyPressed(true);
-                break;
+
             }
-            case A: {
+            case A -> {
                 Game.player.setLeftKeyPressed(true);
-                break;
+
             }
-            case E: {
-                if(InteractionHandler.interactibleReadyToInteract != null){
+            case E -> {
+                if (InteractionHandler.interactibleReadyToInteract != null) {
                     InteractionHandler.interactibleReadyToInteract.onInteraction();
                 }
-                break;
+
             }
-            case P: {
+            case P -> {
                 Game.onPause = !Game.onPause;
+
             }
-            case I: {
+            case I -> {
                 mGUIC.toggleInventoryGUI();
+
+            }
+            case TAB -> {
+                mGUIC.toggleQuestGUI();
             }
         }
+
     }
 }

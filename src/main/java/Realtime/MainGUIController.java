@@ -332,6 +332,9 @@ public class MainGUIController extends Application implements Runnable{
     public void toggleInventoryGUI(){
         iGUIM.setDoDisplay(!iGUIM.getDisplayStatus());
     }
+    public void toggleQuestGUI(){
+
+    }
 
     public InventoryGUIManager getiGUIM(){return iGUIM;}
     public static RoomCollection getCurrentRoom(){

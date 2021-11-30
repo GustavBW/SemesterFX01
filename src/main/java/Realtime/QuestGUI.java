@@ -155,9 +155,8 @@ public class QuestGUI implements Renderable {
 
     private void clear(){
         questTitles.clear();
+        questDescriptions.clear();
     }
-
-
 
     @Override
     public void render(GraphicsContext gc) {
@@ -185,6 +184,7 @@ public class QuestGUI implements Renderable {
             doDisplay = false;
         }
     }
+    public boolean getDisplayStatus(){return doDisplay;}
 
     @Override
     public void onInstancedRender() {
