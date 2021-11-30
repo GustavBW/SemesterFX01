@@ -8,6 +8,10 @@ public class PosPicCombo {
     private Image image;
     private Point2D position;
 
+    public PosPicCombo(){
+
+    }
+
     public PosPicCombo(Image image, Point2D position){
         this.image = image;
         this.position = position;
