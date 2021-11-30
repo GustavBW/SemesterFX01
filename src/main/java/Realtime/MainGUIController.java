@@ -177,6 +177,7 @@ public class MainGUIController extends Application implements Runnable{
 
         if(sceneChangeRequested && roomToChangeTo != null){     //Just adding a bit more redundancy here.
             changeScene(roomToChangeTo);
+            //displayRoomDescription();
         }
     }               //THIS IS THE GUY YOU'RE LOOKING FOR
 
@@ -261,11 +262,10 @@ public class MainGUIController extends Application implements Runnable{
 
         roomTitleText.setText(rc.getRoom().getName());
 
-        displayRoomDescription();
-
         long timeB = System.nanoTime();
         System.out.println("MGUIC.changeScene() took: " + (timeB - timeA) + "ns");  //Hopefully we wont ever reach scene changes taking more than half a second. But we for sure will know exactly how long each was.
 
+        roomToChangeTo = null;
         sceneChangeRequested = false;
         isReady = true; //With this flag set - which the other threads are looking for - they'll resume their tasks.
     }
@@ -318,11 +318,11 @@ public class MainGUIController extends Application implements Runnable{
         Renderable.renderLayer2.add(Game.player);
     }
     private void onAwait(){
-        System.out.print(" ");       //Tricking the compiler to not skip the while loop
+        System.out.print("");       //Tricking the compiler to not skip the while loop
         if(!awaitBoolean){
             System.out.println("MGUIC is Awaiting Game and InteractionHandler at: " + System.nanoTime());
         }
-        System.out.println(" ");
+        System.out.print("");
         awaitBoolean = true;
     }
     private void onExitFlagSleep(){

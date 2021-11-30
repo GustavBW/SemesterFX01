@@ -110,7 +110,7 @@ public class InteractionHandler implements Runnable{
             System.out.println("InteractionHandler was asked to Await. Now awaiting at: " + System.nanoTime());
             awaitBoolean = !awaitBoolean;
         }
-        System.out.println(" ");
+        System.out.print("");
     }
     private void onExitFlagSleep(){
         isAwaiting = false;

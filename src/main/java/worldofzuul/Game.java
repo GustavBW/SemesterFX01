@@ -127,7 +127,7 @@ public class Game implements Runnable{
             System.out.println("Game was asked to Await. Now awaiting at: " + System.nanoTime());
             awaitBoolean = !awaitBoolean;
         }
-        System.out.print(" ");
+        System.out.print("");
     }
     private void onExitFlagSleep(){
         isAwaiting = false;
