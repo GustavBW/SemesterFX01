@@ -17,7 +17,6 @@ public class AdvancedRendText implements Renderable {
     private final int symbolsPerLine;
     private final ArrayList<String> lines;
     private final double lineHeight;
-    private final double pointsToPixel = 1.3333333333333333;
     private final double textLineOffset = 1;
 
     public AdvancedRendText(String text, Point2D position, Font font, Color color, int symbolsPerLine) {
@@ -27,7 +26,7 @@ public class AdvancedRendText implements Renderable {
         this.color = color;
         this.symbolsPerLine = symbolsPerLine;
 
-        lineHeight = font.getSize() * pointsToPixel + textLineOffset;
+        lineHeight = font.getSize() * textLineOffset;
         lines = ExtendedFunctions.toLines(text, symbolsPerLine, " ");
     }
 
@@ -48,7 +47,7 @@ public class AdvancedRendText implements Renderable {
     public void onInstancedRender() {    }
 
     public double getTotalHeight(){
-        return lines.size() * textLineOffset * fontToUse.getSize() * pointsToPixel;
+        return lines.size() * textLineOffset * fontToUse.getSize();
     }
 
     public double getY(){return position.getY();}

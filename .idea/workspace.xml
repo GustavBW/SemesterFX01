@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6bfdae99-945c-487c-90a0-7c778f424550" name="Changes" comment="added interfaces to version control">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/AdvancedRendText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/AdvancedRendText.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/ExtendedFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/ExtendedFunctions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Realtime/QuestGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Realtime/QuestGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/RoomQuest.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Data/RoomQuest.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Realtime/OnKeyReleased.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/worldofzuul/Game.class" afterDir="false" />
@@ -153,6 +155,20 @@
     <option name="LAST_COMMIT_MESSAGE" value="added interfaces to version control" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Realtime/QuestGUI.java</url>
+          <line>130</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Realtime/AdvancedRendText.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Realtime.MainGUIController" memberName="iGUIM" />

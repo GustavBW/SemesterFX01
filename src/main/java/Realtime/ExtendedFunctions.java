@@ -12,14 +12,16 @@ public class ExtendedFunctions {
         ArrayList<String> array = new ArrayList<>();        //Array of strings returned
         String[] asIndividualWords = text.split(splitBy);   //When split
         StringBuilder currentLine = new StringBuilder();
+        int wordsRolledThrough = 1;
 
         for(String word : asIndividualWords){
 
             //Just add up the words and mush them together until you reach max
-            if(asIndividualWords.length > 1) {
+            if(asIndividualWords.length - wordsRolledThrough > 1) {
 
                 if ((currentLine + word).getBytes(StandardCharsets.UTF_8).length < symbolsPerLine) {
                     currentLine.append(word).append(" ");
+                    wordsRolledThrough++;
 
                 } else {
                     array.add(currentLine.toString());
@@ -27,7 +29,7 @@ public class ExtendedFunctions {
                 }
 
             }else{
-                array.add(word);
+                array.add(currentLine + word);
             }
         }
         return array;

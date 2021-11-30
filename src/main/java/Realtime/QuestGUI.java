@@ -7,6 +7,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import worldofzuul.Game;
 import worldofzuul.Quest;
 
@@ -24,28 +26,34 @@ public class QuestGUI implements Renderable {
     private final Color mainTitleColor, descColor, titleColor, qCompleteTitleColor, qCompleteDescColor, backgroundColor1, backgroundColor2;
 
     //The great thing about procedually generating the GUI : No whacky numbers! Only conditionally scaling values. Edit: Almost no whacky values
-    private final double xTitlePosition = Game.WIDTH * 0.75, xDescPosition = xTitlePosition + 10, yOffsetFromScreen = Game.HEIGHT * 0.2, yOffsetBetweenTexts = 5;
+    private final double xTitlePosition = Game.WIDTH * 0.75, xDescPosition = xTitlePosition + 10, yOffsetFromScreen = Game.HEIGHT * 0.2, yOffsetBetweenTexts = 0;
     private double totalDisplayHeight = 10;
-    private final int descWidthSymbols = 100;
+    private final int descWidthSymbols = 60;
 
 
     public QuestGUI(){
         questTitles = new ArrayList<>();
         questDescriptions = new ArrayList<>();
 
-        fontMainTitle = new Font("Impact", 26);
-        fontTitle = new Font("Verdana", 20);
-        fontText = new Font("Helvetica", 14);
+        fontMainTitle = Font.font( "Impact", 26);
+        fontTitle = Font.font("Impact", FontPosture.REGULAR, 20);
+        fontText = Font.font("Helvetica", 14);
 
-        mainTitleColor = new Color(194 / 255.0,110 / 255.0,1 / 255.0,1);
+        //this.nativeFont = var1;   Obj
+        //this.family = var2;   String
+        //this.name = var3;     String
+        //this.style = var4;    String
+        //this.size = var5;     double
+
+        mainTitleColor = new Color(209 / 255.0,153 / 255.0,0,1);
         descColor = new Color(1,1,1,1);
-        titleColor = new Color(209 / 255.0,153 / 255.0,0,1);
+        titleColor = new Color(194 / 255.0,110 / 255.0,1 / 255.0,1);
         qCompleteTitleColor = new Color(32 / 255.0,158 / 255.0,0,1);
         qCompleteDescColor = new Color(95 / 255.0,130 / 255.0,0.4,1);
         backgroundColor1 = new Color(1,1,1,0.5);
         backgroundColor2 = new Color(0,0,0,0.5);
 
-        mainGUITitle = new AdvancedRendText("Quests", new Point2D(xTitlePosition + 10, yOffsetFromScreen + 20), fontMainTitle, mainTitleColor, 100);
+        mainGUITitle = new AdvancedRendText("Quests", new Point2D(xTitlePosition + ((Game.WIDTH - Game.WIDTH * 0.81) / 2), yOffsetFromScreen + 20), fontMainTitle, mainTitleColor, 100);
 
         createNew();
     }
@@ -157,11 +165,11 @@ public class QuestGUI implements Renderable {
         double totalHeight = 10;
 
         for(AdvancedRendText art : questTitles){
-            totalHeight += ( art == null ?  10 : art.getTotalHeight()); //Enjoy the ternaries while they last
+            totalHeight += ( art == null ?  10 : art.getTotalHeight()) + yOffsetBetweenTexts; //Enjoy the ternaries while they last
         }
 
         for(AdvancedRendText art : questDescriptions){
-            totalHeight += ( art == null ?  10 : art.getTotalHeight());
+            totalHeight += ( art == null ?  10 : art.getTotalHeight()) + yOffsetBetweenTexts;
         }
 
         return (totalHeight + mainGUITitle.getTotalHeight());
