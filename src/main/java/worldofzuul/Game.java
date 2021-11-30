@@ -115,6 +115,7 @@ public class Game implements Runnable{
 
                 if(updateQuestGUI){             //This boolean is set by the InventoryManager to the value of whether or not using an item was successfull.
                     qGUI.updateQuests();
+                    updateQuestGUI = false;
                 }
 
                 long timeB = System.nanoTime();

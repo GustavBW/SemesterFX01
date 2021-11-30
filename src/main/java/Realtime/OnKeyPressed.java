@@ -50,6 +50,10 @@ public class OnKeyPressed implements EventHandler<KeyEvent> {
             case TAB -> {
                 mGUIC.toggleQuestGUI();
             }
+            case U -> {     //Debugging shortcut
+                Game.updateQuestGUI = true;
+                Game.getInventoryManager().inventoryChanged = true;
+            }
         }
 
     }

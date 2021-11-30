@@ -7,7 +7,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import worldofzuul.Game;
 import worldofzuul.Quest;
 
@@ -19,12 +18,13 @@ public class QuestGUI implements Renderable {
 
     private final ArrayList<AdvancedRendText> questTitles;
     private final ArrayList<AdvancedRendText> questDescriptions;
+    private final AdvancedRendText mainGUITitle;
 
-    private final Font fontTitle, fontText;
-    private final Color descColor, titleColor, qCompleteTitleColor, qCompleteDescColor, backgroundColor1, backgroundColor2;
+    private final Font fontTitle, fontText, fontMainTitle;
+    private final Color mainTitleColor, descColor, titleColor, qCompleteTitleColor, qCompleteDescColor, backgroundColor1, backgroundColor2;
 
-    //The great thing about procedually generating the GUI : No whacky numbers! Only conditionally scaling values.
-    private final double xTextPosition = Game.WIDTH * 0.8, yOffsetFromScreen = Game.HEIGHT * 0.2, yOffsetBetweenTexts = 5;
+    //The great thing about procedually generating the GUI : No whacky numbers! Only conditionally scaling values. Edit: Almost no whacky values
+    private final double xTitlePosition = Game.WIDTH * 0.75, xDescPosition = xTitlePosition + 10, yOffsetFromScreen = Game.HEIGHT * 0.2, yOffsetBetweenTexts = 5;
     private double totalDisplayHeight = 10;
     private final int descWidthSymbols = 100;
 
@@ -33,16 +33,19 @@ public class QuestGUI implements Renderable {
         questTitles = new ArrayList<>();
         questDescriptions = new ArrayList<>();
 
+        fontMainTitle = new Font("Impact", 26);
         fontTitle = new Font("Verdana", 20);
         fontText = new Font("Helvetica", 14);
 
+        mainTitleColor = new Color(194 / 255.0,110 / 255.0,1 / 255.0,1);
         descColor = new Color(1,1,1,1);
-        titleColor = new Color(1,1,1,1);
-        qCompleteTitleColor = new Color(0.1,0.6,0.1,1);
-        qCompleteDescColor = new Color(0.4,0.4,0.4,1);
-        backgroundColor1 = new Color(1,1,1,1);
-        backgroundColor2 = new Color(1,1,1,1);
+        titleColor = new Color(209 / 255.0,153 / 255.0,0,1);
+        qCompleteTitleColor = new Color(32 / 255.0,158 / 255.0,0,1);
+        qCompleteDescColor = new Color(95 / 255.0,130 / 255.0,0.4,1);
+        backgroundColor1 = new Color(0,0,0,0.5);
+        backgroundColor2 = new Color(1,1,1,0.5);
 
+        mainGUITitle = new AdvancedRendText("Quests", new Point2D(xTitlePosition + 10, yOffsetFromScreen + 10), fontMainTitle, mainTitleColor, 100);
 
         createNew();
     }
@@ -54,7 +57,9 @@ public class QuestGUI implements Renderable {
 
         TextProcessor tempTextProc = ContentEngine.getTextProcessor();
         boolean firstOne = true;
-        AdvancedRendText previouslyAddedText = null;
+        AdvancedRendText previouslyAddedText = mainGUITitle;
+
+
 
         if(MainGUIController.getCurrentRoom().getRoom().getQuests() != null){
 
@@ -62,95 +67,44 @@ public class QuestGUI implements Renderable {
 
                 if(q.isComplete()){
 
-                    //Tracking when doing the first one is important for the layout, since the rest refer to the previouslyAddedText.
-                    //The first one obviously can't refer to the previous one and will give a nullpointer if not checked for.
+                    questTitles.add(
+                            previouslyAddedText = new AdvancedRendText(
+                                    tempTextProc.getSingleItem(q.getQuestItemId()).getName(),
+                                    new Point2D(xTitlePosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
+                                    fontTitle,
+                                    qCompleteTitleColor,
+                                    100
+                    ));
 
-                    if(firstOne) {
-                        questTitles.add(
-                                previouslyAddedText = new AdvancedRendText(
-                                        tempTextProc.getSingleItem(q.getQuestItemId()).getName(),
-                                        new Point2D(xTextPosition, yOffsetFromScreen),
-                                        fontTitle,
-                                        qCompleteTitleColor,
-                                        100
-                        ));
-
-
-                        questDescriptions.add(
-                                previouslyAddedText = new AdvancedRendText(
-                                        q.getDesc(),
-                                        new Point2D(xTextPosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
-                                        fontText,
-                                        qCompleteDescColor,
-                                        descWidthSymbols
-                        ));
-
-                        firstOne = false;
-                    }else{
-
-
-                        questTitles.add(
-                                previouslyAddedText = new AdvancedRendText(
-                                        tempTextProc.getSingleItem(q.getQuestItemId()).getName(),
-                                        new Point2D(xTextPosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
-                                        fontTitle,
-                                        qCompleteTitleColor,
-                                        100
-                        ));
-
-                        questDescriptions.add(
-                                previouslyAddedText = new AdvancedRendText(
-                                        q.getDesc(),
-                                        new Point2D(xTextPosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
-                                        fontText,
-                                        qCompleteDescColor,
-                                        descWidthSymbols
-                        ));
-
-                    }
+                    questDescriptions.add(
+                            previouslyAddedText = new AdvancedRendText(
+                                    q.getDesc(),
+                                    new Point2D(xDescPosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
+                                    fontText,
+                                    qCompleteDescColor,
+                                    descWidthSymbols
+                    ));
 
                 }else{
 
-                    if(firstOne) {
-                        questTitles.add(
-                                previouslyAddedText = new AdvancedRendText(
-                                        tempTextProc.getSingleItem(q.getQuestItemId()).getName(),
-                                        new Point2D(xTextPosition, yOffsetFromScreen),
-                                        fontTitle,
-                                        titleColor,
-                                        100
-                                ));
+                    questTitles.add(
+                            previouslyAddedText = new AdvancedRendText(
+                                    tempTextProc.getSingleItem(q.getQuestItemId()).getName(),
+                                    new Point2D(xTitlePosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
+                                    fontTitle,
+                                    titleColor,
+                                    100
+                            ));
 
-                        questDescriptions.add(
-                                previouslyAddedText = new AdvancedRendText(
-                                        q.getHint(),
-                                        new Point2D(xTextPosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
-                                        fontText,
-                                        descColor,
-                                        descWidthSymbols
-                                ));
+                    questDescriptions.add(
+                            previouslyAddedText = new AdvancedRendText(
+                                    q.getHint(),
+                                    new Point2D(xDescPosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
+                                    fontText,
+                                    descColor,
+                                    descWidthSymbols
+                            ));
 
-                        firstOne = false;
-                    }else{
-
-                        questTitles.add(
-                                previouslyAddedText = new AdvancedRendText(
-                                        tempTextProc.getSingleItem(q.getQuestItemId()).getName(),
-                                        new Point2D(xTextPosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
-                                        fontTitle,
-                                        titleColor,
-                                        100
-                                ));
-
-                        questDescriptions.add(
-                                previouslyAddedText = new AdvancedRendText(
-                                        q.getHint(),
-                                        new Point2D(xTextPosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
-                                        fontText,
-                                        descColor,
-                                        descWidthSymbols
-                                ));
-                    }
                 }
             }
         }
@@ -170,10 +124,12 @@ public class QuestGUI implements Renderable {
         if(doDisplay && isReady){
 
             gc.setFill(backgroundColor1);
-            gc.fillRoundRect(xTextPosition - 10, yOffsetFromScreen - 10, Game.WIDTH + 100, totalDisplayHeight + 10, 10 , 10);
+            gc.fillRoundRect(xTitlePosition - 10, yOffsetFromScreen - 10, Game.WIDTH + 100, totalDisplayHeight + 10, 10 , 10);
 
             gc.setFill(backgroundColor2);
-            gc.fillRoundRect(xTextPosition - 5, yOffsetFromScreen - 5, Game.WIDTH + 100, totalDisplayHeight + 5, 10 , 10);
+            gc.fillRoundRect(xTitlePosition - 5, yOffsetFromScreen - 5, Game.WIDTH + 100, totalDisplayHeight + 5, 10 , 10);
+
+            mainGUITitle.render(gc);
 
             for(AdvancedRendText aRT : questTitles){
                 aRT.render(gc);
@@ -211,7 +167,7 @@ public class QuestGUI implements Renderable {
             totalHeight += ( art == null ?  10 : art.getTotalHeight());
         }
 
-        return totalHeight;
+        return totalHeight + mainGUITitle.getTotalHeight();
     }
 
     @Override
