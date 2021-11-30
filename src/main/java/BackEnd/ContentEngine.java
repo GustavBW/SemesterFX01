@@ -44,7 +44,8 @@ public class ContentEngine {
     }
 
     public static RoomCollection getRoomCollection(Room room){
-        RoomCollection rc = new RoomCollection(room,getCItems(room.getId()), (ArrayList<RoomExitTrigger>) null);        //Gotta parse the RoomExitTriggers here as well. Forgot them
+        ArrayList<RoomExitTrigger> exits = new ArrayList<>();
+        RoomCollection rc = new RoomCollection(room,getCItems(room.getId()), exits);        //Gotta parse the RoomExitTriggers here as well. Forgot them
 
         return rc;
     }
