@@ -12,11 +12,31 @@ public class Vector2D {
         this.y = y;
         magnitude = magnitude();
     }
+    public Vector2D(){this(0,0);}
 
     public void normalize(){
         x = x / magnitude;
         y = y / magnitude;
         magnitude();
+    }
+    public void ortogonalize(){
+        double preX = x;
+        double preY = y;
+        x = preY * -1;
+        y = preX;
+    }
+    public void invert(){
+        this.multiply(-1);
+    }
+    public Vector2D getInverted(){
+        Vector2D v2 = new Vector2D(x,y);
+        v2.invert();
+        return v2;
+    }
+    public Vector2D getOrtogonal(){
+        Vector2D v2 = new Vector2D(x,y);
+        v2.ortogonalize();
+        return v2;
     }
     public double magnitude(){
         magnitude = Math.sqrt( (x*x) + (y*y) );
@@ -55,6 +75,23 @@ public class Vector2D {
         y += k;
         magnitude();
     }
+    public void decreaseX(double k){
+        x -= k;
+        magnitude();
+    }
+    public void decreaseY(double k){
+        y -= k;
+        magnitude();
+    }
+    public void remove(double k){
+        x -= k;
+        y -= k;
+        magnitude();
+    }
+    public void subtract(Vector2D v2){
+        x -= v2.getX();
+        y -= v2.getY();
+    }
     public void setX(double k){x = k;}
     public void setY(double k){y = k;}
     public void clear(){
@@ -87,6 +124,9 @@ public class Vector2D {
     public static Vector2D normalize(double x1, double y1){
         double magnitude = Math.sqrt( Math.abs(( x1 * x1 ) + ( y1 * y1 )) );
         return new Vector2D(x1 / magnitude , y1 / magnitude);
+    }
+    public static Vector2D difference(Vector2D vA, Vector2D vB){
+        return new Vector2D(vB.getX() - vA.getX(), vB.getY() - vA.getY());
     }
 
 }
