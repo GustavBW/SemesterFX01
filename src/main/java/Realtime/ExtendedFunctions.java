@@ -12,7 +12,7 @@ public class ExtendedFunctions {
         ArrayList<String> array = new ArrayList<>();        //Array of strings returned
         String[] asIndividualWords = text.split(splitBy);   //When split
         StringBuilder currentLine = new StringBuilder();
-        int wordsRolledThrough = 1;
+        int wordsRolledThrough = 0;
 
         for(String word : asIndividualWords){
 
@@ -26,6 +26,8 @@ public class ExtendedFunctions {
                 } else {
                     array.add(currentLine.toString());
                     currentLine = new StringBuilder();
+                    currentLine.append(word).append(" ");
+                    wordsRolledThrough++;
                 }
 
             }else{

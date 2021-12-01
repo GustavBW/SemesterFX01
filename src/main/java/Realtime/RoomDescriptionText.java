@@ -25,25 +25,32 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
 
     private final Point2D position;
     private final Point2D sizes;
-    private final String text;
+    private String next = "Next";
     private int advance;    //Since you can click this thing multiple times. This tracks how long you've "advanced".
     private final Font fontToUse;
+    private final Font nextTextFont;
     private final Color color1;
     private final Color color2;
+    private final Color textColor;
+    private final Color nextTextColor;
     private final ArrayList<String> textAsLines;
     private int linesMade = 0;
     private final int linesToShowAtATime = 4;
     private final int lineHeight = 30;
+    private int offset = 40;
 
     public RoomDescriptionText(String text, int lifetime){
         super(lifetime + System.currentTimeMillis());
-        this.text = text;
         sizes = new Point2D(Game.WIDTH / 3.0, Game.HEIGHT / 5.0);   //Don't worry about it. It'll work :D
-        position = new Point2D(Game.WIDTH - (sizes.getX() * 2), Game.HEIGHT * 0.85);
+        position = new Point2D(Game.WIDTH - (sizes.getX() * 2), Game.HEIGHT * 0.8);
 
         fontToUse = Font.font("Times New Roman", FontWeight.BOLD, 20D);
-        color1 = new Color(1,1,1,0.5);
-        color2 = new Color(0,0,0,0.5);
+        nextTextFont = Font.font("Impact", 26D);
+
+        color2 = new Color(255/255.0,255/255.0,255/255.0,0.5);
+        color1 = new Color(0/255.0,0/255.0,0/255.0,0.5);
+        textColor = new Color(0,0,0,1);
+        nextTextColor = new Color(1,1,1,1);
 
         textAsLines = ExtendedFunctions.toLines(text,60," ");
         linesMade = textAsLines.size();
@@ -54,22 +61,21 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
 
     @Override
     public boolean inBounds(int x, int y) {
-        new RenderableSquare(position,sizes.getX(),sizes.getY(),500,Color.BLACK);
-        System.out.println(position.getX() + "->" + (position.getX()+sizes.getX()) + " | " + position.getY() + "->" + (position.getY() + sizes.getY()) + " gotten positions: " + x + " | " + y);
 
-        boolean rangeX = x < position.getX() + sizes.getX() && position.getX() > x;
-        boolean rangeY = y < position.getY() + sizes.getY() && position.getY() > y;
+        boolean rangeX = x < position.getX() + sizes.getX() && x > position.getX();
+        boolean rangeY = y < position.getY() + sizes.getY() && y > position.getY();
 
-        return (rangeX) && (rangeY);
+        return (rangeX && rangeY);
     }
 
     @Override
     public void onInteraction() {
+
         if(advance * linesToShowAtATime > linesMade){   //If you've gotten shown all the text and press again, it marks this for termination next render pass.
             TemporaryRenderable.tempRends.add(this);
         }
+
         advance++;
-        System.out.println("You pressed the Room Description Text, advance is : " + advance);
     }
 
     @Override
@@ -83,14 +89,24 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
         gc.setFill(color1);
         gc.fillRoundRect(position.getX(), position.getY(), sizes.getX(), sizes.getY() + 200, 10, 10);   //This will go out of the screen. And that is intentional
 
-        gc.setFill(Color.BLACK);
+        gc.setFill(textColor);
         gc.setFont(fontToUse);
 
         for(int i = 0; i < linesToShowAtATime; i++){
             if(i + (advance * linesToShowAtATime) < textAsLines.size()) {
-                gc.fillText(textAsLines.get(i + (advance * linesToShowAtATime)), position.getX() + 5, position.getY() + (i * lineHeight) + 20, Game.WIDTH / 3.0);
+                gc.fillText(textAsLines.get(i + (advance * linesToShowAtATime)), position.getX() + 5, position.getY() + (i * lineHeight) + 25, sizes.getX());
             }
         }
+
+        gc.setFill(nextTextColor);
+        gc.setFont(nextTextFont);
+
+        if(advance * linesToShowAtATime > linesMade){
+            next = "Close";
+            offset = -10;
+        }
+        gc.fillText(next, position.getX() + (sizes.getX() / 2.0) - 30, position.getY() + (linesToShowAtATime * lineHeight) + offset, sizes.getX());
+
     }
 
     @Override
@@ -115,7 +131,6 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
     public int getInterRadius() {
         return 0;
     }
-
 
     @Override
     public void onInstancedRender() {

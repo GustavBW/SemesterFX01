@@ -64,8 +64,7 @@ public class Room {
     public String getName(){return this.roomName;}
     public String getLongDescription()
     {
-
-        return longDesc + "\n" + getExitString();
+        return longDesc;
     }
     public String getShortDescription()
     {
