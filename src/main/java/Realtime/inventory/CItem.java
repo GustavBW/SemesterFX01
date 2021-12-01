@@ -1,5 +1,6 @@
 package Realtime.inventory;
 
+import BackEnd.ContentEngine;
 import BackEnd.PosPicCombo;
 import Realtime.InteractionHandler;
 import Realtime.MainGUIController;
@@ -30,12 +31,12 @@ public class CItem extends Item implements Interactible, Renderable {
         if(posPic.getPos() != null) {
             position = posPic.getPos();
         }else{
-            position = new Point2D(Game.WIDTH * r.nextDouble(), Game.HEIGHT * r.nextDouble());
+            position = new Point2D(100 + (Game.WIDTH * r.nextDouble() - 200), 100 + (Game.HEIGHT * r.nextDouble() - 200));
         }
         if(posPic.getPic() != null) {
             picture = posPic.getPic();
         }else{
-            picture = new Image(getClass().getResourceAsStream("/Graphics/CItem/1.png"));
+            picture = ContentEngine.getDefaultCItemImage();
         }
 
         onInstancedInter();

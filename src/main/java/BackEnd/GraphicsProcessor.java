@@ -117,4 +117,7 @@ public class GraphicsProcessor {
                 return output;
         }
 
+        public Image getDefaultCItemImage() {
+                return new Image(getClass().getResourceAsStream("/Graphics/CItem/QuestionMark.png"));
+        }
 }

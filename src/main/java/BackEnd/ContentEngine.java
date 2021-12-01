@@ -95,6 +95,8 @@ public class ContentEngine {
         return output;
     }
 
-
+    public static Image getDefaultCItemImage(){
+        return new GraphicsProcessor().getDefaultCItemImage();
+    }
 
 }
