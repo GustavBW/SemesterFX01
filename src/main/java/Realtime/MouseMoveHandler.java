@@ -14,7 +14,6 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
         mouseY = 0;
     }
     public void handle(MouseEvent mouseEvent) {
-        System.out.println("X " + mouseEvent.getX() + " || Y " + mouseEvent.getY());
         this.mouseX = mouseEvent.getX();
         this.mouseY = mouseEvent.getY();
     }
