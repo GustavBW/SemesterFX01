@@ -2,6 +2,7 @@ package Realtime;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ExtendedFunctions {
 
@@ -11,6 +12,8 @@ public class ExtendedFunctions {
 
         ArrayList<String> array = new ArrayList<>();        //Array of strings returned
         String[] asIndividualWords = text.split(splitBy);   //When split
+
+
         StringBuilder currentLine = new StringBuilder();
         int wordsRolledThrough = 0;
 

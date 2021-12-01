@@ -37,6 +37,7 @@ public class MainGUIController extends Application implements Runnable{
     private InventoryGUIManager iGUIM;
     private QuestGUI qGUI;
     private RoomTitleText roomTitleText;
+    private RoomDescriptionText currentRoomDescribtion;
 
     //Player Movement
     private OnKeyPressed keyHandlerDown;
@@ -191,16 +192,10 @@ public class MainGUIController extends Application implements Runnable{
 
         //I'mma split them up like this, as to be able to customize their looks later
 
-        if(i instanceof DistanceTrigger || i instanceof CItem){
+        if(i instanceof CItem){
             if(System.currentTimeMillis() > distTrigLastTextCall + 500) {
                 new RenderableText(i.getPopUpText(), new Point2D(i.getPosX(), i.getPosY()), 500);
                 distTrigLastTextCall = System.currentTimeMillis();
-            }
-        }
-        if(i instanceof RoomExitTrigger){
-            if(System.currentTimeMillis() > roomTrigLastCall + 500){
-                new RenderableText(i.getPopUpText(), new Point2D(i.getPosX(), i.getPosY()), 500);
-                roomTrigLastCall = System.currentTimeMillis();
             }
         }
     }
@@ -208,7 +203,7 @@ public class MainGUIController extends Application implements Runnable{
 
         String text = currentCollection.getRoom().getLongDescription();
 
-        new RoomDescriptionText(text, 50_000);
+        currentRoomDescribtion = new RoomDescriptionText(text, 50_000);
 
     }
     public void cleanUpExpired(){
@@ -267,6 +262,10 @@ public class MainGUIController extends Application implements Runnable{
         addNewInteractibles(rc);
         getThatPlayerBackInThere();                 //Since it might be for the best to just wipe everything. It's easiest to just add the player in afterwards.
         Game.currentRoom = rc.getRoom();            //Kinda redundant. But it's a nice touch.
+
+        if(currentRoomDescribtion != null){
+            currentRoomDescribtion.destroy();
+        }
 
         roomTitleText.setText(rc.getRoom().getName());
 

@@ -1,6 +1,7 @@
 package Realtime;
 
 import Realtime.interfaces.Renderable;
+import javafx.beans.NamedArg;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -52,4 +53,8 @@ public class AdvancedRendText implements Renderable {
 
     public double getY(){return position.getY();}
     public double getX(){return position.getX();}
+
+    public AdvancedRendText getDropShadow(double pixelOffset){
+        return new AdvancedRendText(text, new Point2D(position.getX() + pixelOffset, position.getY() + pixelOffset), fontToUse, Color.BLACK, symbolsPerLine);
+    }
 }
