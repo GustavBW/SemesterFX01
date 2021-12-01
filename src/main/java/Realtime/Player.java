@@ -8,28 +8,24 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import worldofzuul.Game;
 
-import java.util.Vector;
-
 public class Player implements Renderable, Tickable {
 
     private double posX;
     private double posY;
+    private double rotation;
     private double orX;
     private double orY;
     private int imW;
     private int imH;  //orX describes the graphical origin. Meaning where the center of any image or rectangle LOOKS to be.
-    private double rotationRadian = 0;
     private final Image image;
-    private Vector2D velocity;
-    private final double drag = 0.95, velFloorVal = 0.0001, mvSpeed = 100000, toDegree = 57.2957795;
-    private boolean upKeyPressed,rightKeyPressed,downKeyPressed,leftKeyPressed = false;
+    private final double speed = 3;
+    private boolean upKeyPressed,rightKeyPressed,downKeyPressed,leftKeyPressed, running = false;
     private GraphicsProcessor gp = new GraphicsProcessor();
 
     public Player(int x, int y, Image image){
         this.posX = x;
         this.posY = y;
         this.image = gp.getPlayerGraphics();
-        velocity = new Vector2D(0,0);
 
 
         if(this.image != null) {                //This if condition wont be necessary when images are working
@@ -66,43 +62,37 @@ public class Player implements Renderable, Tickable {
 
     @Override
     public void tick() {
+        double prePosX = posX;
+        double prePosY = posY;
+        double currentSpeed = speed;
+
+        if (running) currentSpeed += 3;
 
         if (upKeyPressed) {     //Using a Vector2D is necessary for getting the rotation angle
-            velocity.decreaseY( Game.interpolation * mvSpeed);
+            posY -= currentSpeed;
         }
         if (rightKeyPressed) {
-            velocity.addX( Game.interpolation * mvSpeed);
+            posX += currentSpeed;
         }
         if (downKeyPressed) {
-            velocity.addY( Game.interpolation * mvSpeed);
+            posY += currentSpeed;
         }
         if (leftKeyPressed) {
-            velocity.decreaseX(Game.interpolation * mvSpeed);
+            posX -= currentSpeed;
         }
 
         orX = posX - imW;   //Updating Origins
         orY = posY - imH;
 
-        //Checking if the update in position would place the player out of bounds
-        if((orX + velocity.getX() < Game.WIDTH && orX + velocity.getX() > 0) && (orY + velocity.getY() < Game.HEIGHT && orY + velocity.getY() > 0)) {
-            posX += velocity.getX();
-            posY += velocity.getY();
+
+        if(posX >= Game.WIDTH || posX <= 0){        //Capping movement at the boarders of the canvas
+            posX = prePosX;
         }
-
-        rotationRadian = Math.asin((velocity.getY() + 1 / ( Math.sqrt( velocity.getSquareX() + velocity.getSquareY() ) + 1) - 1)); //Adding 1 in both top and bottom to avoid dividing by zero, then subtracting that again
-        //System.out.println("rotation angle is: " + rotationRadian * toDegree + " velX is: " + velocity.getX() + " velY is: " + velocity.getY() + " magnitude is: " + velocity.magnitude() + " Game.interpolation is: " + Game.interpolation);
-
-        velocity.multiply(drag);
-
-        if(velocity.getX() < velFloorVal){
-            velocity.setX(0);
-        }
-        if(velocity.getY() < velFloorVal){
-            velocity.setY(0);
+        if(posY >= Game.HEIGHT || posY <= 0){
+            posY = prePosY;
         }
     }
 
-    public Vector2D getVelocity(){return velocity;}
     public double getPosX(){return posX;}
     public double getPosY(){return posY;}
     public double getOrX(){return orX;}
@@ -141,6 +131,14 @@ public class Player implements Renderable, Tickable {
 
     public void setLeftKeyPressed(boolean leftKeyPressed) {
         this.leftKeyPressed = leftKeyPressed;
+    }
+
+    public boolean isRunning() {
+        return this.running;
+    }
+
+    public void setRunning(boolean state) {
+        this.running = state;
     }
 
     @Override
