@@ -41,6 +41,7 @@ public class MainGUIController extends Application implements Runnable{
     //Player Movement
     private OnKeyPressed keyHandlerDown;
     private OnKeyReleased keyHandlerUp;
+    private MouseMoveHandler mouseMoveHandler;
 
     //Graphics stuff
     private Canvas canvas;
@@ -90,8 +91,11 @@ public class MainGUIController extends Application implements Runnable{
         //Movement/Keyboard
         keyHandlerDown = new OnKeyPressed(this);
         keyHandlerUp = new OnKeyReleased();
+        mouseMoveHandler = new MouseMoveHandler(this);
         scene.setOnKeyPressed(e -> keyHandlerDown.handle(e));
         scene.setOnKeyReleased(e -> keyHandlerUp.handle(e));
+        scene.setOnMouseMoved(e -> mouseMoveHandler.handle(e));
+
 
 
         mainStage.setScene(scene);
