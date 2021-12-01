@@ -63,10 +63,19 @@ public class CItem extends Item implements Interactible, Renderable {
     public PosPicCombo getPosPic(){return posPic;}
 
     public void reInstate(){
+        InteractionHandler.reInstatitingItem = true;
+
+        while(!InteractionHandler.isAwaiting){
+            System.out.print("");
+        }
+
         MainGUIController.getCurrentRoom().getCitems().add(this);
         position = new Point2D(Game.player.getOrX(),Game.player.getOrY());
+
         Interactible.interactibles.add(this);
         Renderable.renderLayer1.add(this);
+
+        InteractionHandler.reInstatitingItem = false;
     }
     @Override
     public void onInteraction() {
@@ -96,9 +105,18 @@ public class CItem extends Item implements Interactible, Renderable {
     }
 
     public void destroy(){                                  //Removes the item from any static contexts in which a reference is kept
+
+        InteractionHandler.reInstatitingItem = true;
+
+        while(!InteractionHandler.isAwaiting){
+            System.out.print("");
+        }
+
         MainGUIController.getCurrentRoom().getCitems().remove(this);
         Interactible.interactibles.remove(this);
         Renderable.renderLayer1.remove(this);
+
+        InteractionHandler.reInstatitingItem = false;
     }
 
     @Override

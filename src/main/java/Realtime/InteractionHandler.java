@@ -14,7 +14,7 @@ public class InteractionHandler implements Runnable{
     private Player player;
 
     public static Interactible interactibleReadyToInteract;
-    public static boolean isRunning,isAwaiting = false,awaitBoolean;
+    public static boolean isRunning,isAwaiting = false,awaitBoolean, reInstatitingItem = false;
 
     private boolean doPrintExitFlagSleepStatus = false;
 
@@ -26,7 +26,7 @@ public class InteractionHandler implements Runnable{
 
         awaitBoolean = true;
         while(!MainGUIController.isReady || MainGUIController.sceneChangeRequested){
-            awaiting();
+            awaiting("InteractionHandler is awaiting MainGuiController");
         }
         onExitFlagSleep();
 
@@ -37,9 +37,10 @@ public class InteractionHandler implements Runnable{
 
             awaitBoolean = true;
             while(!MainGUIController.isReady || MainGUIController.sceneChangeRequested){
-                awaiting();
+                awaiting("InteractionHandler is awaiting MainGuiController");
             }
             onExitFlagSleep();
+            awaitBoolean = true;
 
             long timeA = System.nanoTime();
 
@@ -49,6 +50,11 @@ public class InteractionHandler implements Runnable{
             if(!Interactible.interactibles.isEmpty()) { //An interesting thing happens when you don't check. It simply sends too many updates to MGUIC which messes everything up
 
                 boolean foundSomething = false;
+
+                while(reInstatitingItem){
+                    awaiting("InteractionHandler is awaiting boolean reInstatitingItem");
+                }
+                isAwaiting = false;
 
                 for (Interactible i : Interactible.interactibles) {
 
@@ -108,10 +114,11 @@ public class InteractionHandler implements Runnable{
         return toReturn;
     }
 
-    private void awaiting(){
+    private void awaiting(String s){
         isAwaiting = true;
         if(awaitBoolean){
             System.out.println("InteractionHandler was asked to Await. Now awaiting at: " + System.nanoTime() + " amount of interactibles: " + Interactible.interactibles.size());
+            System.out.println(s);
             awaitBoolean = !awaitBoolean;
             doPrintExitFlagSleepStatus = true;
         }
