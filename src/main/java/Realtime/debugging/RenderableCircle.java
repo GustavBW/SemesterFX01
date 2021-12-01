@@ -23,12 +23,11 @@ public class RenderableCircle extends TemporaryRenderable implements Renderable 
         posX = (int) center.getX() - radius;
         posY = (int) center.getY() - radius;
 
-        onInstancedRender();
     }
 
     @Override
     public void onInstancedRender() {
-        Renderable.renderLayer3.add(this);
+        Renderable.renderLayer4.add(this);
     }
 
     @Override
@@ -45,5 +44,11 @@ public class RenderableCircle extends TemporaryRenderable implements Renderable 
     @Override
     public void destroy() {
         Renderable.renderLayer3.remove(this);
+    }
+
+
+    @Override
+    public String toString(){
+        return "Renderable Circle | position x : " + posX + " | position y : " + posY + " | radius r : " + diameter / 2;
     }
 }

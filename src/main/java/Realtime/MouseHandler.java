@@ -14,6 +14,7 @@ public class MouseHandler implements EventHandler<MouseEvent> {
             if(c != null){
                 c.onInteraction();
             }
+            System.out.println(c);
         }
     }
 }

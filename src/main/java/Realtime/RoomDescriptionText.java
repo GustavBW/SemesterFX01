@@ -6,6 +6,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import worldofzuul.Game;
 
 import java.lang.reflect.Array;
@@ -29,21 +30,21 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
     private final Color color1;
     private final Color color2;
     private final ArrayList<String> textAsLines;
-    private int linesMade;
+    private int linesMade = 0;
     private final int linesToShowAtATime = 4;
-    private final int lineHeight = 10;
+    private final int lineHeight = 30;
 
     public RoomDescriptionText(String text, int lifetime){
         super(lifetime + System.currentTimeMillis());
         this.text = text;
         sizes = new Point2D(Game.WIDTH / 3.0, Game.HEIGHT / 5.0);   //Don't worry about it. It'll work :D
-        position = new Point2D(Game.WIDTH - (sizes.getX() * 2), Game.HEIGHT - (sizes.getY() * 4));
+        position = new Point2D(Game.WIDTH - (sizes.getX() * 2), Game.HEIGHT * 0.85);
 
-        fontToUse = new Font("Times New Roman", 16D);
+        fontToUse = Font.font("Times New Roman", FontWeight.BOLD, 20D);
         color1 = new Color(1,1,1,0.5);
         color2 = new Color(0,0,0,0.5);
 
-        textAsLines = ExtendedFunctions.toLines(text,100," ");
+        textAsLines = ExtendedFunctions.toLines(text,60," ");
         linesMade = textAsLines.size();
 
         onInstancedClick();
@@ -61,6 +62,7 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
             TemporaryRenderable.tempRends.add(this);
         }
         advance++;
+        System.out.println("You pressed the Room Description Text, advance is : " + advance);
     }
 
     @Override
@@ -68,7 +70,7 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
 
         //Outer Rectangle
         gc.setFill(color2);
-        gc.fillRoundRect(position.getX() - 5, position.getY() - 5, sizes.getX() + 5, sizes.getY() + 200, 10, 10);   //This will go out of the screen. And that is intentional
+        gc.fillRoundRect(position.getX() - 5, position.getY() - 5, sizes.getX() + 10, sizes.getY() + 200, 10, 10);   //This will go out of the screen. And that is intentional
 
         //Inner Rectangle
         gc.setFill(color1);
@@ -78,7 +80,9 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
         gc.setFont(fontToUse);
 
         for(int i = 0; i < linesToShowAtATime; i++){
-            gc.fillText(textAsLines.get(i + (advance * linesToShowAtATime)), position.getX() + 5, position.getY() + (i * lineHeight) + 5, Game.WIDTH / 3.0);
+            if(i + (advance * linesToShowAtATime) < textAsLines.size()) {
+                gc.fillText(textAsLines.get(i + (advance * linesToShowAtATime)), position.getX() + 5, position.getY() + (i * lineHeight) + 20, Game.WIDTH / 3.0);
+            }
         }
     }
 

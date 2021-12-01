@@ -1,6 +1,5 @@
 package Realtime;
 
-import BackEnd.GraphicsProcessor;
 import Realtime.interfaces.Interactible;
 import Realtime.interfaces.Renderable;
 import Realtime.interfaces.Tickable;
@@ -144,7 +143,7 @@ public class MainGUIController extends Application implements Runnable{
 
         if(sceneChangeRequested && roomToChangeTo != null){     //Just adding a bit more redundancy here.
             changeScene(roomToChangeTo);
-            //displayRoomDescription();
+            displayRoomDescription();
         }
 
         gc = canvas.getGraphicsContext2D();

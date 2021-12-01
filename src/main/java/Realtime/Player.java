@@ -28,7 +28,7 @@ public class Player implements Renderable, Tickable {
     public Player(int x, int y, Image image){
         this.posX = x;
         this.posY = y;
-        this.image = gp.getPlayerGraphics() ;
+        this.image = gp.getPlayerGraphics();
         velocity = new Vector2D(0,0);
 
 

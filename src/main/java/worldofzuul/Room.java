@@ -64,14 +64,8 @@ public class Room {
     public String getName(){return this.roomName;}
     public String getLongDescription()
     {
-        String descToReturn = longDesc;
 
-        if(hasVisitedBefore){
-            descToReturn = shortDesc;
-        }
-
-        hasVisitedBefore = true;
-        return descToReturn + "\n" + getExitString();
+        return longDesc + "\n" + getExitString();
     }
     public String getShortDescription()
     {

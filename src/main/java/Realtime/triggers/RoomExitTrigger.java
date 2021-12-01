@@ -5,11 +5,16 @@ import BackEnd.RoomCollection;
 import BackEnd.ExitDefinition;
 import Realtime.InteractionHandler;
 import Realtime.MainGUIController;
+import Realtime.debugging.RenderableCircle;
+import Realtime.interfaces.Interactible;
+import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import worldofzuul.Game;
 import worldofzuul.Room;
 
-public class RoomExitTrigger extends DistanceTrigger{
+public class RoomExitTrigger extends DistanceTrigger implements Interactible {
 
     private final Room roomToChangeTo;
     private ExitDefinition exit;
@@ -17,6 +22,7 @@ public class RoomExitTrigger extends DistanceTrigger{
     private final int interActionRadius = 50;
     private String direction;
     private Point2D playerNextPosition;
+    private RenderableCircle showingRadius;
 
     public RoomExitTrigger(Room rc, ExitDefinition ed) {
 
@@ -32,8 +38,11 @@ public class RoomExitTrigger extends DistanceTrigger{
             case "west" -> {position = new Point2D(0, Game.HEIGHT / 2.0); playerNextPosition = new Point2D(Game.WIDTH, Game.HEIGHT / 2.0); }
         }
 
+        showingRadius = new RenderableCircle(position, interActionRadius, 100, Color.WHITE);
+
         super.setPosX((int) position.getX());
         super.setPosY((int) position.getY());
+
     }
 
 
@@ -45,8 +54,11 @@ public class RoomExitTrigger extends DistanceTrigger{
         this.position = position;
         this.direction = direction;
 
+        showingRadius = new RenderableCircle(position, interActionRadius, 100, Color.WHITE);
+
         super.setPosX((int) position.getX());   //Yeah so this is scuffed dont @ me
         super.setPosY((int) position.getY());
+
     }
 
 
@@ -81,9 +93,17 @@ public class RoomExitTrigger extends DistanceTrigger{
         }
     }
 
-        //Just overriding these two blokes as the MGUIC is taking care of adding them into the appropriate places. Them doing it themselves could cause unintended issues
+    @Override
+    public int getInterRadius() {
+
+        return interActionRadius;
+    }
+
+    //Just overriding these two blokes as the MGUIC is taking care of adding them into the appropriate places. Them doing it themselves could cause unintended issues
     @Override
     public void onInstancedInter() {
 
     }
+
+
 }

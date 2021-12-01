@@ -38,9 +38,6 @@ public class CItem extends Item implements Interactible, Renderable {
         }else{
             picture = ContentEngine.getDefaultCItemImage();
         }
-
-        //onInstancedInter();
-        //onInstancedRender();
     }
     @Override
     public void onInstancedInter(){
