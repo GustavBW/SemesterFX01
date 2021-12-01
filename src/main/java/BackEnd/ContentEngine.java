@@ -98,5 +98,8 @@ public class ContentEngine {
     public static Image getDefaultCItemImage(){
         return new GraphicsProcessor().getDefaultCItemImage();
     }
+    public static Image getExitArrowImage(String whichOne){
+        return new GraphicsProcessor().getExitArrowImage(whichOne);
+    }
 
 }

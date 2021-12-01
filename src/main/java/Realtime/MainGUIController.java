@@ -283,7 +283,7 @@ public class MainGUIController extends Application implements Runnable{
         Renderable.renderLayer0.clear();    //Ground layer
         Renderable.renderLayer1.clear();    //Item + NPC + houseWalls
         Renderable.renderLayer2.clear();    //Welp we add the player back in again anyways, so might aswell make sure to just clean up shop.
-        Renderable.renderLayer3.clear();    //Rooftops
+        Renderable.renderLayer3.clear();    //Rooftops + ExitArrows
         Renderable.renderLayer4.clear();    //UI
     }
     private void addNewRenderables(RoomCollection rc){
@@ -311,6 +311,7 @@ public class MainGUIController extends Application implements Runnable{
         }else{ status += " 3,"; success = false;}
 
         Renderable.renderLayer1.addAll(rc.getCitems());
+        Renderable.renderLayer3.addAll(rc.getExitTriggers());
 
         if(success) {   //Also again redundant. But I have a feeling we'll have some hickups
             System.out.println("MGUIC succesfully added new renderables during scene change.");

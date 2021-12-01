@@ -11,12 +11,15 @@ public class GraphicsProcessor {
 
         //Room stuff
         private final String graphicsDirectory = "/Graphics";
+        private final String roomGraphicsDirectory = "/RoomGraphics";
+        private final String playerGraphicsDirectory = "/Player";
+        private final String miscellaniousDirectory = "/MISC";
         private final String[] subDirectories = {"/TestDirectory"};
         private final String[] imageTypes = {"/TestPicture.png","/BASE.png","MIDDLE.png","/SHADOW.png","/TOP.png"};
 
         //CItem stuff
         private final String cItemDirectory = "/CItem";
-        private final String cItemPositions = "cItemPositions.csv";
+        private final String cItemPositions = "/cItemPositions.csv";
 
         public ArrayList<RenderableImage> getBaseForRoom(int roomId){
                 ArrayList<RenderableImage> images = new ArrayList<>();
@@ -51,7 +54,7 @@ public class GraphicsProcessor {
                 PosPicCombo output = new PosPicCombo();
 
                 try{
-                        BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/Graphics/CItem/cItemPositions.csv")));
+                        BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(graphicsDirectory + cItemDirectory + cItemPositions)));
                         while((lines = br.readLine()) != null){
                                 String[] line = lines.split(splitBy);
                                 if(Integer.parseInt(line[0]) == itemId){
@@ -74,7 +77,7 @@ public class GraphicsProcessor {
 
         private Image citemImage(int itemId){
                 Image output;
-                output = new Image(getClass().getResourceAsStream("/Graphics/CItem/" + itemId + ".png"));
+                output = new Image(getClass().getResourceAsStream( graphicsDirectory + cItemDirectory + "/" + itemId + ".png"));
                 return output;
         }
 
@@ -89,35 +92,39 @@ public class GraphicsProcessor {
 
         public Image getPlayerGraphics(){
                 Image output;
-                output = new Image(getClass().getResourceAsStream("/Graphics/Player/PlayerTest.png"));
+                output = new Image(getClass().getResourceAsStream( graphicsDirectory + playerGraphicsDirectory + "/PlayerTest.png"));
                 return output;
         }
 
         public Image getBaseImage(int roomId){
                 Image output;
-                output = new Image(getClass().getResourceAsStream("/Graphics/" + roomId + "/BASE.png"));
+                output = new Image(getClass().getResourceAsStream( graphicsDirectory + roomGraphicsDirectory + "/" + roomId + "/BASE.png"));
                 return output;
         }
 
         public Image getMiddleImage(int roomId){
                 Image output;
-                output = new Image(getClass().getResourceAsStream("/Graphics/" + roomId + "/MIDDLE.png"));
+                output = new Image(getClass().getResourceAsStream(graphicsDirectory + roomGraphicsDirectory + "/" + roomId + "/MIDDLE.png"));
                 return output;
         }
 
         public Image getShadowImage(int roomId){
                 Image output;
-                output = new Image(getClass().getResourceAsStream("/Graphics/" + roomId + "/SHADOW.png"));
+                output = new Image(getClass().getResourceAsStream(graphicsDirectory + roomGraphicsDirectory + "/" + roomId + "/SHADOW.png"));
                 return output;
         }
 
         public Image getTopImage(int roomId){
                 Image output;
-                output = new Image(getClass().getResourceAsStream("/Graphics/" + roomId + "/TOP.png"));
+                output = new Image(getClass().getResourceAsStream(graphicsDirectory + roomGraphicsDirectory + "/" + roomId + "/TOP.png"));
                 return output;
         }
 
         public Image getDefaultCItemImage() {
-                return new Image(getClass().getResourceAsStream("/Graphics/CItem/QuestionMark.png"));
+                return new Image(getClass().getResourceAsStream(graphicsDirectory + cItemDirectory + "/QuestionMark.png"));
+        }
+
+        public Image getExitArrowImage(String whichOne){
+                return new Image(getClass().getResourceAsStream( graphicsDirectory + miscellaniousDirectory + "/ExitArrows/" + whichOne + "Arrow.png"));
         }
 }
