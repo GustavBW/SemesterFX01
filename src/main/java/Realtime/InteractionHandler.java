@@ -23,16 +23,19 @@ public class InteractionHandler implements Runnable{
     public void calcDistances(){
 
         awaitBoolean = true;
-        while(!MainGUIController.isReady){
+        while(!MainGUIController.isReady || MainGUIController.sceneChangeRequested){
             awaiting();
         }
+        System.out.println("InteractionHandler exited Flag Sleep");
+        onExitFlagSleep();
 
 
         while(Game.isRunning && MainGUIController.isRunning){
 
             if(Game.onPause){continue;}
 
-            if(!MainGUIController.isReady){
+            awaitBoolean = true;
+            while(!MainGUIController.isReady || MainGUIController.sceneChangeRequested){
                 awaiting();
             }
             onExitFlagSleep();
