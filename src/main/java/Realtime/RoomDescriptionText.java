@@ -1,5 +1,6 @@
 package Realtime;
 
+import Realtime.debugging.RenderableSquare;
 import Realtime.interfaces.Clickable;
 import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
@@ -53,7 +54,13 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
 
     @Override
     public boolean inBounds(int x, int y) {
-        return (position.getX() < x + sizes.getX() && position.getX() > x) && (position.getY() < y + sizes.getY() && position.getY() > y);
+        new RenderableSquare(position,sizes.getX(),sizes.getY(),500,Color.BLACK);
+        System.out.println(position.getX() + "->" + (position.getX()+sizes.getX()) + " | " + position.getY() + "->" + (position.getY() + sizes.getY()) + " gotten positions: " + x + " | " + y);
+
+        boolean rangeX = x < position.getX() + sizes.getX() && position.getX() > x;
+        boolean rangeY = y < position.getY() + sizes.getY() && position.getY() > y;
+
+        return (rangeX) && (rangeY);
     }
 
     @Override

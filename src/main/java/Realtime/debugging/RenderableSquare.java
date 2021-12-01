@@ -8,12 +8,15 @@ import javafx.scene.paint.Color;
 
 public class RenderableSquare extends TemporaryRenderable implements Renderable {
 
-    private int sizeX, sizeY, posX, posY;
+    private double sizeX;
+    private double sizeY;
+    private int posX;
+    private int posY;
     private long timeOfDeath;
     private final Color color;
     private final Point2D position;
 
-    public RenderableSquare(Point2D position, int sizeX, int sizeY, int lifetime, Color color){
+    public RenderableSquare(Point2D position, double sizeX, double sizeY, int lifetime, Color color){
         super(lifetime + System.currentTimeMillis());
         this.sizeX = sizeX;
         this.sizeY = sizeY;
@@ -33,7 +36,7 @@ public class RenderableSquare extends TemporaryRenderable implements Renderable 
     public void render(GraphicsContext gc) {
 
         gc.setFill(color);
-        gc.fillRect(posX, posY, sizeX, sizeY);
+        gc.fillRect(position.getX(),position.getY(), sizeX, sizeY);
 
         if(System.currentTimeMillis() > timeOfDeath){
             TemporaryRenderable.tempRends.add(this);
