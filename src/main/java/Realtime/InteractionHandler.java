@@ -51,7 +51,14 @@ public class InteractionHandler implements Runnable{
                 boolean foundSomething = false;
 
                 for (Interactible i : Interactible.interactibles) {
-                    if(i instanceof DistanceTrigger) {
+
+                    if(i instanceof SquareTrigger){     //Yeah SquareTriggers don't use math. Just a giant ass if statement.
+                        if(((SquareTrigger) i).isInBounds(pPosX,pPosY)){
+                            interactibleReadyToInteract = i;
+                            i.onInVicinity();
+                            foundSomething = true;
+                        }
+                    }else{
                         int interRadiusSq = i.getInterRadius() * i.getInterRadius();
                         double distXSq = (pPosX - i.getPosX()) * (pPosX - i.getPosX());
                         double distYSq = (pPosY - i.getPosY()) * (pPosY - i.getPosY());
@@ -62,13 +69,7 @@ public class InteractionHandler implements Runnable{
                             interactibleReadyToInteract = i;
                             i.onInVicinity();
                             foundSomething = true;
-                        }
-                    }
-                    if(i instanceof SquareTrigger){     //Yeah SquareTriggers don't use math. Just a giant ass if statement.
-                        if(((SquareTrigger) i).isInBounds(pPosX,pPosY)){
-                            interactibleReadyToInteract = i;
-                            i.onInVicinity();
-                            foundSomething = true;
+
                         }
                     }
                 }

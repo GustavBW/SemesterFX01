@@ -306,6 +306,8 @@ public class MainGUIController extends Application implements Runnable{
         }else{ status += " 3,"; success = false;}
 
         Renderable.renderLayer1.addAll(rc.getCitems());
+
+
         Renderable.renderLayer3.addAll(rc.getExitTriggers());
 
         if(success) {   //Also again redundant. But I have a feeling we'll have some hickups
@@ -315,10 +317,12 @@ public class MainGUIController extends Application implements Runnable{
         }
     }
     private void addNewInteractibles(RoomCollection rc){
+
         Interactible.interactibles.addAll(rc.getExitTriggers());
         Interactible.interactibles.addAll(rc.getCitems());
 
-        System.out.println("MGUIC.changeScene added new Interactibles " + rc.getExitTriggers().get(0).getPopUpText());
+
+
     }
     private void getThatPlayerBackInThere(){
         Tickable.tickables.add(Game.player);

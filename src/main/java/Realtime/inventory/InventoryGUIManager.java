@@ -72,7 +72,6 @@ public class InventoryGUIManager {
 
                 Point2D sub1Position = new Point2D(CIBposition.getX() + 175, CIBposition.getY());
                 newArrayList.add(new useCItemButton(c, "Use", sub1Position, subWidth, buttonSize));
-                System.out.println("Made SUB at y = " + CIBposition.getY());
 
                 Point2D sub2Position = new Point2D(sub1Position.getX() + (subWidth * 1.15), sub1Position.getY());
                 newArrayList.add(new dropCItemButton(c, "Drop", sub2Position, subWidth, buttonSize));

@@ -19,7 +19,7 @@ public class CItem extends Item implements Interactible, Renderable {
     private Image picture;
     private Item item;
     private PosPicCombo posPic;
-    private int interRadius = 50;
+    private int interRadius = 80;
     private boolean showText = false;
     private String text;
 
@@ -47,6 +47,7 @@ public class CItem extends Item implements Interactible, Renderable {
     @Override
     public void onInstancedInter(){
         Interactible.interactibles.add(this);
+        System.out.println("Added " + this + " to interactibles");
     }
     @Override
     public int getInterRadius(){return interRadius;}
@@ -76,7 +77,6 @@ public class CItem extends Item implements Interactible, Renderable {
     @Override
     public void onInVicinity() {
         InteractionHandler.interactibleReadyToInteract = this;
-        System.out.println("You're in vicinity of: " + text);
         showText = true;
     }
     @Override
@@ -84,11 +84,7 @@ public class CItem extends Item implements Interactible, Renderable {
         return super.getName() + " " + super.getAmount();
     }
 
-    @Override
-    public void onInstancedRender() {
-        Renderable.renderLayer1.add(this);
-        Interactible.interactibles.add(this);
-    }
+
     @Override
     public void render(GraphicsContext gc) {
         gc.drawImage(picture, position.getX(),position.getY());
@@ -114,5 +110,10 @@ public class CItem extends Item implements Interactible, Renderable {
             toReturn = "CITEM: " + item.getName() + " " + item.getAmount();
         }
         return toReturn;
+    }
+
+    @Override
+    public void onInstancedRender() {
+        Renderable.renderLayer1.add(this);
     }
 }

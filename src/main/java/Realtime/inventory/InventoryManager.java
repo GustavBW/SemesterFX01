@@ -54,6 +54,7 @@ public class InventoryManager {
                     //evaluateItemOnPickUp goes through all quests and sees if this item is relevant AND if the quest type is PickUp. If it aint QuestType.PickUp, Quest.evaluateItemOnPickUp
                     //will always return false. Thus not asking Game to update the Quest GUI.
 
+                System.out.println(citem + " is a quest item : " + Game.updateQuestGUI);
                 inventoryChanged = true;
                 citem.destroy();
             }
