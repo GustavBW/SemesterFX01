@@ -151,9 +151,9 @@ public class MainGUIController extends Application implements Runnable{
         gc.setFill(Color.BLUE);
         gc.fillRect(0,0,Game.WIDTH,Game.HEIGHT);
 
-        //for(Renderable r : Renderable.renderLayer0){
-        //    r.render(gc);
-        //}
+        for(Renderable r : Renderable.renderLayer0){
+            r.render(gc);
+        }
         for(Renderable r : Renderable.renderLayer1){
             r.render(gc);
         }
@@ -251,12 +251,14 @@ public class MainGUIController extends Application implements Runnable{
 
         long timeA = System.nanoTime(); //Thus the timing starts. Now the fun happens. (The timing is only for me really, so I can see if somethings up
 
+        clearAllTicksRendersInters();
+
         previousRCollection = currentCollection;    //Keeping track of the previous collection is necessary due to the way CItems can be put back into the world. If done during
                                                     //a scene change, trying to add it to the new Room you're entering, WILL cause a ConcurrentModificationsException. (As you're adding to an arraylist whilest
                                                     //its elements are being read and executed in other places. Also this is only an issue since the Interaction system is on another thread.
         currentCollection = rc;                     //Updating current RC - which is also static meaning you can technically reference all current room components (base images, CItems, triggers...) from anywhere
 
-        clearAllTicksRendersInters();               //Wipe all the lists. Tickables, Renderables, Interactable. NOT Clickable as clickables are UI elements and are updated elsewhere (take the Inventory GUI).
+                                                   //Wipe all the lists. Tickables, Renderables, Interactable. NOT Clickable as clickables are UI elements and are updated elsewhere (take the Inventory GUI).
                                                     //Also this is the step that would fuck everything up if the other threads were running at this point. And oh gosh darn I don't want anymore race conditions.
         addNewRenderables(rc);                      //Then read from the arraylist and adds them in.
         addNewInteractibles(rc);

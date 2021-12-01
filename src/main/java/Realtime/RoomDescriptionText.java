@@ -79,7 +79,6 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
 
         for(int i = 0; i < linesToShowAtATime; i++){
             gc.fillText(textAsLines.get(i + (advance * linesToShowAtATime)), position.getX() + 5, position.getY() + (i * lineHeight) + 5, Game.WIDTH / 3.0);
-
         }
     }
 

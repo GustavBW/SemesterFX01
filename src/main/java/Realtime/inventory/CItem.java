@@ -26,6 +26,7 @@ public class CItem extends Item implements Interactible, Renderable {
         super(item);
         this.item = item;
         this.posPic = posPic;
+
         if(posPic.getPos() != null) {
             position = posPic.getPos();
         }else{
