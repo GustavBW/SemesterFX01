@@ -10,6 +10,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import worldofzuul.Game;
 
+import java.util.Random;
+
 public class CItem extends Item implements Interactible, Renderable {
 
     private Point2D position;
@@ -18,18 +20,26 @@ public class CItem extends Item implements Interactible, Renderable {
     private PosPicCombo posPic;
     private int interRadius = 50;
 
+    private static Random r = new Random();
+
     public CItem(Item item, PosPicCombo posPic){
         super(item);
         this.item = item;
         this.posPic = posPic;
-        position = posPic.getPos();
-        picture = posPic.getPic();
-
+        if(posPic.getPos() != null) {
+            position = posPic.getPos();
+        }else{
+            position = new Point2D(Game.WIDTH * r.nextDouble(), Game.HEIGHT * r.nextDouble());
+        }
+        if(posPic.getPic() != null) {
+            picture = posPic.getPic();
+        }else{
+            picture = new Image(getClass().getResourceAsStream("/Graphics/CItem/1.png"));
+        }
 
         onInstancedInter();
         onInstancedRender();
     }
-
     @Override
     public void onInstancedInter(){
         Interactible.interactibles.add(this);

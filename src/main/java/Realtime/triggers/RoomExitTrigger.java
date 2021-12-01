@@ -16,6 +16,7 @@ public class RoomExitTrigger extends DistanceTrigger{
     private Point2D position;
     private final int interActionRadius = 50;
     private String direction;
+    private Point2D playerNextPosition;
 
     public RoomExitTrigger(Room rc, ExitDefinition ed) {
 
@@ -23,10 +24,10 @@ public class RoomExitTrigger extends DistanceTrigger{
         this.exit = ed;
 
         switch (ed.getDirection()) {
-            case "south" -> position = new Point2D(Game.WIDTH / 2.0, Game.HEIGHT);
-            case "east" -> position = new Point2D(Game.WIDTH, Game.HEIGHT / 2.0);
-            case "north" -> position = new Point2D(Game.WIDTH / 2.0, 0);
-            case "west" -> position = new Point2D(0, Game.HEIGHT / 2.0);
+            case "south" -> {position = new Point2D(Game.WIDTH / 2.0, Game.HEIGHT); playerNextPosition = new Point2D(Game.WIDTH / 2.0, 0); }
+            case "east" -> {position = new Point2D(Game.WIDTH, Game.HEIGHT / 2.0); playerNextPosition = new Point2D(0, Game.HEIGHT / 2.0); }
+            case "north" -> {position = new Point2D(Game.WIDTH / 2.0, 0); playerNextPosition = new Point2D(Game.WIDTH / 2.0, Game.HEIGHT); }
+            case "west" -> {position = new Point2D(0, Game.HEIGHT / 2.0); playerNextPosition = new Point2D(Game.WIDTH, Game.HEIGHT / 2.0); }
         }
 
         super.setPosX((int) position.getX());
@@ -48,9 +49,13 @@ public class RoomExitTrigger extends DistanceTrigger{
 
     @Override
     public void onInVicinity(){
+        String not = " ";
+        System.out.println("You're in vicinity of a Room ExitTrigger");
         if(InteractionHandler.interactibleReadyToInteract == null) {
             InteractionHandler.interactibleReadyToInteract = this;
+            not = "not";
         }
+        System.out.print(", however InteractionHandler.interactibleReadyToInteract is not null");
     }
     @Override
     public void onInteraction(){
@@ -58,6 +63,10 @@ public class RoomExitTrigger extends DistanceTrigger{
 
         MainGUIController.roomToChangeTo = ContentEngine.getRoomCollection(roomToChangeTo);
         MainGUIController.sceneChangeRequested = true;
+
+        Game.player.setPosX((int) playerNextPosition.getX());
+        Game.player.setPosY((int) playerNextPosition.getY());
+
     }
     @Override
     public String getPopUpText(){

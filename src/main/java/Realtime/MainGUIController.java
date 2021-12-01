@@ -151,12 +151,12 @@ public class MainGUIController extends Application implements Runnable{
         gc.setFill(Color.BLUE);
         gc.fillRect(0,0,Game.WIDTH,Game.HEIGHT);
 
-        for(Renderable r : Renderable.renderLayer0){
-            r.render(gc);
-        }
-        //for(Renderable r : Renderable.renderLayer1){
+        //for(Renderable r : Renderable.renderLayer0){
         //    r.render(gc);
         //}
+        for(Renderable r : Renderable.renderLayer1){
+            r.render(gc);
+        }
         for(Renderable r : Renderable.renderLayer2){
             r.render(gc);
         }
@@ -315,6 +315,9 @@ public class MainGUIController extends Application implements Runnable{
     }
     private void addNewInteractibles(RoomCollection rc){
         Interactible.interactibles.addAll(rc.getExitTriggers());
+        Interactible.interactibles.addAll(rc.getCitems());
+
+        System.out.println("MGUIC.changeScene added new Interactibles " + rc.getExitTriggers().get(0).getPopUpText());
     }
     private void getThatPlayerBackInThere(){
         Tickable.tickables.add(Game.player);

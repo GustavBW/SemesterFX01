@@ -77,6 +77,8 @@ public class Game implements Runnable{
         while(!MainGUIController.isReady){
             onAwait();
         }
+        awaitBoolean = false;
+
         try{Thread.sleep(500);
         }catch (Exception e){e.printStackTrace();}
         onExitFlagSleep();
@@ -87,7 +89,7 @@ public class Game implements Runnable{
         while(MainGUIController.isRunning && Game.isRunning){
             loops = 0;
 
-            while(!MainGUIController.isReady){
+            while(!MainGUIController.isReady || MainGUIController.sceneChangeRequested){
                 onAwait();
             }
             isAwaiting = false;
