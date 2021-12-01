@@ -36,8 +36,8 @@ public class Player implements Renderable, Tickable {
             this.imH = 50;
         }
 
-        this.orX = posX - imW;
-        this.orY = posY - imH;
+        this.orX = posX + imW;
+        this.orY = posY + imH;
 
         onInstancedRender();
         onInstancedTick();
@@ -46,18 +46,15 @@ public class Player implements Renderable, Tickable {
     @Override
     public void render(GraphicsContext gc) {
 
-        //Gotta save the GraphicsContext as the rotation needs to be removed from the GC using restore()
-        gc.save();
-        //gc.rotate(rotationRadian * toDegree);
-
         if(image != null){
-            gc.drawImage(image,orX,orY);
+            gc.drawImage(image,posX,posY);
+            //             img   sx   sy   sw   sh   dx   dy        dw      dh
+            gc.drawImage(image, posX, posY, imW, imH, posX ,posY,-1 * imW,  imH);
+
         }else{
             gc.setFill(Color.GREEN);
             gc.fillRect(orX,orY,100,100);
         }
-
-        gc.restore();
     }
 
     @Override
@@ -81,14 +78,14 @@ public class Player implements Renderable, Tickable {
             posX -= currentSpeed;
         }
 
-        orX = posX - imW;   //Updating Origins
-        orY = posY - imH;
+        orX = posX + imW;   //Updating Origins
+        orY = posY + imH;
 
 
-        if(posX >= Game.WIDTH || posX <= 0){        //Capping movement at the boarders of the canvas
+        if(orX >= Game.WIDTH || orX <= 0){        //Capping movement at the boarders of the canvas
             posX = prePosX;
         }
-        if(posY >= Game.HEIGHT || posY <= 0){
+        if(orY >= Game.HEIGHT || orY <= 0){
             posY = prePosY;
         }
     }

@@ -65,12 +65,11 @@ public class RoomExitTrigger extends DistanceTrigger implements Interactible {
     @Override
     public void onInVicinity(){
         String not = " ";
-        System.out.println("You're in vicinity of a Room ExitTrigger");
+
         if(InteractionHandler.interactibleReadyToInteract == null) {
             InteractionHandler.interactibleReadyToInteract = this;
             not = "not";
         }
-        System.out.print(", however InteractionHandler.interactibleReadyToInteract is not null");
     }
     @Override
     public void onInteraction(){
