@@ -74,14 +74,14 @@ public class RoomExitTrigger extends DistanceTrigger implements Interactible, Re
                     position = new Point2D(Game.WIDTH / 2.0, 0);
                     playerNextPosition = new Point2D(Game.WIDTH / 2.0, Game.HEIGHT - 100);
                     imagePosition = new Point2D(position.getX() - (arrowImage.getWidth() / 2.0), arrowImage.getHeight() * 0.2);
-                    textPosition = new Point2D(imagePosition.getX() - ((text.getBytes(StandardCharsets.UTF_8).length * (textSize * textHeightToWidthFactor)) / 2.0) , imagePosition.getY());
+                    textPosition = new Point2D(imagePosition.getX() - ((text.getBytes(StandardCharsets.UTF_8).length * (textSize * textHeightToWidthFactor)) / 2.0) , imagePosition.getY() + arrowImage.getHeight() + 20);
 
                 }
                 case "west" -> {
                     position = new Point2D(0, Game.HEIGHT / 2.0);
                     playerNextPosition = new Point2D(Game.WIDTH - 100, Game.HEIGHT / 2.0);
                     imagePosition = new Point2D(position.getX(), position.getY() - (arrowImage.getHeight() / 2.0));
-                    textPosition = new Point2D(imagePosition.getX(), imagePosition.getY());
+                    textPosition = new Point2D(imagePosition.getX() + 20, imagePosition.getY());
                 }
             }
         }
@@ -105,8 +105,6 @@ public class RoomExitTrigger extends DistanceTrigger implements Interactible, Re
     }
     @Override
     public void onInteraction(){
-        System.out.println("You just interacted with a Room Trigger");
-
         MainGUIController.roomToChangeTo = ContentEngine.getRoomCollection(roomToChangeTo);
         MainGUIController.sceneChangeRequested = true;
 
@@ -129,8 +127,6 @@ public class RoomExitTrigger extends DistanceTrigger implements Interactible, Re
 
         return interActionRadius;
     }
-
-    //Just overriding these two blokes as the MGUIC is taking care of adding them into the appropriate places. Them doing it themselves could cause unintended issues
 
     @Override
     public void render(GraphicsContext gc) {

@@ -20,6 +20,8 @@ public class CItem extends Item implements Interactible, Renderable {
     private Item item;
     private PosPicCombo posPic;
     private int interRadius = 50;
+    private boolean showText = false;
+    private String text;
 
     private static Random r = new Random();
 
@@ -38,6 +40,9 @@ public class CItem extends Item implements Interactible, Renderable {
         }else{
             picture = ContentEngine.getDefaultCItemImage();
         }
+
+        this.text = item.getName() + " " + item.getAmount();
+
     }
     @Override
     public void onInstancedInter(){
@@ -71,6 +76,8 @@ public class CItem extends Item implements Interactible, Renderable {
     @Override
     public void onInVicinity() {
         InteractionHandler.interactibleReadyToInteract = this;
+        System.out.println("You're in vicinity of: " + text);
+        showText = true;
     }
     @Override
     public String getPopUpText() {
@@ -85,6 +92,11 @@ public class CItem extends Item implements Interactible, Renderable {
     @Override
     public void render(GraphicsContext gc) {
         gc.drawImage(picture, position.getX(),position.getY());
+
+        if(showText){
+            gc.fillText(text, position.getX(), position.getY());
+            showText = false;
+        }
     }
 
     public void destroy(){                                  //Removes the item from any static contexts in which a reference is kept

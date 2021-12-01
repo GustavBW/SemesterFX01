@@ -158,9 +158,7 @@ public class MainGUIController extends Application implements Runnable{
         for(Renderable r : Renderable.renderLayer0){
             r.render(gc);
         }
-        for(Renderable r : Renderable.renderLayer1){
-            r.render(gc);
-        }
+
         for(Renderable r : Renderable.renderLayer2){
             r.render(gc);
         }
@@ -173,6 +171,10 @@ public class MainGUIController extends Application implements Runnable{
 
         if(InteractionHandler.interactibleReadyToInteract != null){
             displayTemporaryText(InteractionHandler.interactibleReadyToInteract);
+        }
+
+        for(Renderable r : Renderable.renderLayer1){        //Moved the CITEMS above the rest for now. Whilest troubleshooting them.
+            r.render(gc);
         }
 
         iGUIM.render(gc);
@@ -192,12 +194,6 @@ public class MainGUIController extends Application implements Runnable{
 
         //I'mma split them up like this, as to be able to customize their looks later
 
-        if(i instanceof CItem){
-            if(System.currentTimeMillis() > distTrigLastTextCall + 500) {
-                new RenderableText(i.getPopUpText(), new Point2D(i.getPosX(), i.getPosY()), 500);
-                distTrigLastTextCall = System.currentTimeMillis();
-            }
-        }
     }
     public void displayRoomDescription(){
 

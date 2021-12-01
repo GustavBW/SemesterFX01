@@ -20,7 +20,7 @@ public class ExtendedFunctions {
         for(String word : asIndividualWords){
 
             //Just add up the words and mush them together until you reach max
-            if(asIndividualWords.length - wordsRolledThrough > 1) {
+            if(asIndividualWords.length - wordsRolledThrough > 1 && word.getBytes(StandardCharsets.UTF_8).length < symbolsPerLine) {
 
                 if ((currentLine + word).getBytes(StandardCharsets.UTF_8).length < symbolsPerLine) {
                     currentLine.append(word).append(" ");
@@ -35,6 +35,7 @@ public class ExtendedFunctions {
 
             }else{
                 array.add(currentLine + word);
+                wordsRolledThrough++;
             }
         }
         return array;
