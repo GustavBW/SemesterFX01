@@ -32,12 +32,14 @@ public class RoomExitTrigger extends DistanceTrigger implements Interactible, Re
 
         this.roomToChangeTo = rc;
         this.exit = ed;
+        arrowImage = ContentEngine.getExitArrowImage(ed.getDirection());
 
         if(roomToChangeTo.getId() == 1 || roomToChangeTo.getName().equalsIgnoreCase("Sudkhira Landsby")) {
 
             ed = new ExitDefinition(9999, "Step into", 1);
             position = new Point2D(Game.WIDTH * 0.13, Game.HEIGHT * 0.8);
             playerNextPosition = new Point2D(Game.WIDTH * 0.35, Game.HEIGHT * 0.5);
+            arrowImage = ContentEngine.getExitArrowImage("south");          //Override image in this case
 
         }else{
             switch (ed.getDirection()) {
@@ -60,8 +62,8 @@ public class RoomExitTrigger extends DistanceTrigger implements Interactible, Re
             }
         }
 
-
-        showingRadius = new RenderableCircle(position, interActionRadius, 100, Color.WHITE);
+        Color someColor = new Color(1,1,1,0.5);
+        showingRadius = new RenderableCircle(position, interActionRadius, 100, someColor);
 
         super.setPosX((int) position.getX());
         super.setPosY((int) position.getY());
@@ -110,7 +112,7 @@ public class RoomExitTrigger extends DistanceTrigger implements Interactible, Re
     public void render(GraphicsContext gc) {
 
         showingRadius.render(gc);
-
+        gc.drawImage(arrowImage, position.getX(), position.getY());
     }
 
     @Override

@@ -13,7 +13,7 @@ public class GraphicsProcessor {
         private final String graphicsDirectory = "/Graphics";
         private final String roomGraphicsDirectory = "/RoomGraphics";
         private final String playerGraphicsDirectory = "/Player";
-        private final String miscellaniousDirectory = "/MISC";
+        private final String miscellaniousDirectory = "/MISC/MISC";
         private final String[] subDirectories = {"/TestDirectory"};
         private final String[] imageTypes = {"/TestPicture.png","/BASE.png","MIDDLE.png","/SHADOW.png","/TOP.png"};
 
