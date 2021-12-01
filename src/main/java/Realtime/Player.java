@@ -28,16 +28,12 @@ public class Player implements Renderable, Tickable {
         this.image = gp.getPlayerGraphics();
 
 
-        if(this.image != null) {                //This if condition wont be necessary when images are working
-            this.imW = (int) image.getWidth();
-            this.imH = (int) image.getHeight();
-        }else{
-            this.imW = 50;
-            this.imH = 50;
-        }
+        this.imW = (int) image.getWidth();
+        this.imH = (int) image.getHeight();
 
-        this.orX = posX + imW;
-        this.orY = posY + imH;
+
+        this.orX = posX - imW;
+        this.orY = posY - imH;
 
         onInstancedRender();
         onInstancedTick();
@@ -45,16 +41,7 @@ public class Player implements Renderable, Tickable {
 
     @Override
     public void render(GraphicsContext gc) {
-
-        if(image != null){
-            gc.drawImage(image,posX,posY);
-            //             img   sx   sy   sw   sh   dx   dy        dw      dh
-            gc.drawImage(image, posX, posY, imW, imH, posX ,posY,-1 * imW,  imH);
-
-        }else{
-            gc.setFill(Color.GREEN);
-            gc.fillRect(orX,orY,100,100);
-        }
+        gc.drawImage(image,posX,posY);
     }
 
     @Override
@@ -78,8 +65,8 @@ public class Player implements Renderable, Tickable {
             posX -= currentSpeed;
         }
 
-        orX = posX + imW;   //Updating Origins
-        orY = posY + imH;
+        orX = posX + (imW / 2.0);   //Updating Origins
+        orY = posY + (imH / 2.0);
 
 
         if(orX >= Game.WIDTH || orX <= 0){        //Capping movement at the boarders of the canvas
