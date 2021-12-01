@@ -9,7 +9,7 @@ public class DistanceTrigger implements Interactible {
 
     private int posX, posY, interRadius;
 
-    public DistanceTrigger(){
+    public DistanceTrigger(double x, double y, int r){
         this(0,0,0);
     }
 

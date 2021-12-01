@@ -16,6 +16,8 @@ public class InteractionHandler implements Runnable{
     public static Interactible interactibleReadyToInteract;
     public static boolean isRunning,isAwaiting = false,awaitBoolean;
 
+    private boolean doPrintExitFlagSleepStatus = false;
+
     public InteractionHandler(Player player){
         this.player = player;
     }
@@ -26,7 +28,6 @@ public class InteractionHandler implements Runnable{
         while(!MainGUIController.isReady || MainGUIController.sceneChangeRequested){
             awaiting();
         }
-        System.out.println("InteractionHandler exited Flag Sleep");
         onExitFlagSleep();
 
 
@@ -103,20 +104,25 @@ public class InteractionHandler implements Runnable{
                 break;
             }
         }
-
         return toReturn;
     }
 
     private void awaiting(){
         isAwaiting = true;
         if(awaitBoolean){
-            System.out.println("InteractionHandler was asked to Await. Now awaiting at: " + System.nanoTime());
+            System.out.println("InteractionHandler was asked to Await. Now awaiting at: " + System.nanoTime() + " amount of interactibles: " + Interactible.interactibles.size());
             awaitBoolean = !awaitBoolean;
+            doPrintExitFlagSleepStatus = true;
         }
         System.out.print("");
     }
+
     private void onExitFlagSleep(){
         isAwaiting = false;
+        if(doPrintExitFlagSleepStatus) {
+            System.out.println("InteractionHandler continued from Flag Sleep at SysTimeNs: " + System.nanoTime() + " amount of interactibles: " + Interactible.interactibles.size());
+            doPrintExitFlagSleepStatus =  !doPrintExitFlagSleepStatus;
+        }
     }
     @Override
     public void run() {

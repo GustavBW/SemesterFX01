@@ -20,6 +20,8 @@ public class RoomExitTrigger extends DistanceTrigger{
 
     public RoomExitTrigger(Room rc, ExitDefinition ed) {
 
+        super(0,0,50);
+
         this.roomToChangeTo = rc;
         this.exit = ed;
 
@@ -32,18 +34,19 @@ public class RoomExitTrigger extends DistanceTrigger{
 
         super.setPosX((int) position.getX());
         super.setPosY((int) position.getY());
-        super.setInterRadius(interActionRadius);
     }
 
 
     public RoomExitTrigger(Room rc, Point2D position, String direction){      //We might wanna place exits in other places than the four above
+
+        super(position.getX(), position.getY(), 50);
+
         roomToChangeTo = rc;
         this.position = position;
         this.direction = direction;
 
         super.setPosX((int) position.getX());   //Yeah so this is scuffed dont @ me
         super.setPosY((int) position.getY());
-        super.setInterRadius(interActionRadius);
     }
 
 
