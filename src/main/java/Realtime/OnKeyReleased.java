@@ -29,6 +29,10 @@ public class OnKeyReleased implements EventHandler<KeyEvent> {
                 Game.player.setLeftKeyPressed(false);
                 break;
             }
+            case SHIFT: {
+                Game.player.setRunning(false);
+                break;
+            }
         }
     }
 }
