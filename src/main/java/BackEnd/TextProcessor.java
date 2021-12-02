@@ -179,12 +179,14 @@ public class TextProcessor {
                 for(Integer i: idNumbers){
                     if(Integer.parseInt(atributes[0]) == i)
                     {
-                        Quest quest = new Quest(Integer.parseInt(atributes[0]),
-                                                atributes[1],
-                                                atributes[2],
-                                                Integer.parseInt(atributes[3]),
-                                                Integer.parseInt(atributes[4]),
-                                                atributes[5]);
+                        Quest quest = new Quest(Integer.parseInt(atributes[0]), //Quest id
+                                                atributes[1],                   //Quest titel
+                                                atributes[2],                   //Quest resolved describtion
+                                                atributes[3],                   //Quest hint
+                                                Integer.parseInt(atributes[4]), //Item id
+                                                Integer.parseInt(atributes[5]), //Item amount needed
+                                                atributes[6]);                  //Quest type
+
                         output.add(quest);
                     }
                 }

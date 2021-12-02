@@ -72,11 +72,15 @@ public class QuestGUI implements Renderable {
 
             for(Quest q : MainGUIController.getCurrentRoom().getRoom().getQuests()){
 
+                String title = q.getTitle();
+                String resolvedDescribtion = q.getDesc();
+                String notResolvedDesc = q.getHint();
+
                 if(q.isComplete()){
 
                     questTitles.add(
                             previouslyAddedText = new AdvancedRendText(
-                                    tempTextProc.getSingleItem(q.getQuestItemId()).getName(),
+                                    title,
                                     new Point2D(xTitlePosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts + displacement),
                                     fontTitle,
                                     qCompleteTitleColor,
@@ -85,7 +89,7 @@ public class QuestGUI implements Renderable {
 
                     questDescriptions.add(
                             previouslyAddedText = new AdvancedRendText(
-                                    q.getDesc(),
+                                    resolvedDescribtion,
                                     new Point2D(xDescPosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
                                     fontText,
                                     qCompleteDescColor,
@@ -98,7 +102,7 @@ public class QuestGUI implements Renderable {
 
                     questTitles.add(
                             previouslyAddedText = new AdvancedRendText(
-                                    tempTextProc.getSingleItem(q.getQuestItemId()).getName(),
+                                    title,
                                     new Point2D(xTitlePosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts + displacement),
                                     fontTitle,
                                     titleColor,
@@ -107,7 +111,7 @@ public class QuestGUI implements Renderable {
 
                     questDescriptions.add(
                             previouslyAddedText = new AdvancedRendText(
-                                    q.getHint(),
+                                    notResolvedDesc,
                                     new Point2D(xDescPosition, previouslyAddedText.getTotalHeight() + previouslyAddedText.getY() + yOffsetBetweenTexts),
                                     fontText,
                                     descColor,
