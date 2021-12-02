@@ -54,17 +54,6 @@ public class ContentEngine {
         return rc;
     }
 
-    public ArrayList<RoomCollection> getAllRoomCollections(){
-        ArrayList<RoomCollection> allRoomCollections = new ArrayList<>();
-        ArrayList<Room> allRooms = tp.getAllRooms();
-
-        for(Room r : allRooms){
-            allRoomCollections.add(getRoomCollection(r));
-        }
-
-        return allRoomCollections;
-    }
-
     public static ArrayList<RenderableImage> specificRoomGraphics(int roomId){
         ArrayList<RenderableImage> output = new ArrayList<>();
         GraphicsProcessor gp = new GraphicsProcessor();
