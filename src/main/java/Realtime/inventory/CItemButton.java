@@ -28,9 +28,6 @@ public class CItemButton implements Clickable, Renderable {
         this.sizeY = sizeY;
         this.interRadius = ((sizeX + sizeY) / 2) / 2;
         this.iGUIM = iGUIM;
-
-        onInstancedClick();
-        onInstancedRender();
     }
 
     @Override
@@ -86,7 +83,6 @@ public class CItemButton implements Clickable, Renderable {
     }
 
     public void destroy(){
-        Renderable.renderLayer4.remove(this);
         Clickable.clickables.remove(this);
     }
 

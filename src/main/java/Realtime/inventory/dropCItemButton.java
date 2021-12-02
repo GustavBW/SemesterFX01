@@ -49,8 +49,12 @@ public class dropCItemButton extends RenderableButton implements Renderable, Cli
     public void onInteraction() {
         color1 = new Color(1,1,1,0.8);
         Game.getInventoryManager().inventoryChanged = true;
-        Game.getInventoryManager().useCItem(citem);
+        Game.getInventoryManager().dropCItem(citem);
         System.out.println("You pressed a dropCItemButton for CITEM id: " + citem.getId());
+    }
+
+    public void destroy(){
+        Clickable.clickables.remove(this);
     }
 
     @Override
@@ -69,5 +73,5 @@ public class dropCItemButton extends RenderableButton implements Renderable, Cli
     public void onInstancedRender() {    }
 
     @Override
-    public void onInstancedClick() {    }
+    public void onInstancedClick() {Clickable.clickables.add(this);}
 }

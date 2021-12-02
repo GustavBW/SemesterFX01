@@ -97,8 +97,6 @@ public class MainGUIController extends Application implements Runnable{
         scene.setOnKeyReleased(e -> keyHandlerUp.handle(e));
         scene.setOnMouseMoved(e -> mouseMoveHandler.handle(e));
 
-
-
         mainStage.setScene(scene);
         mainStage.setOnCloseRequest(e -> stop());
         mainStage.requestFocus();
@@ -174,8 +172,6 @@ public class MainGUIController extends Application implements Runnable{
         if(InteractionHandler.interactibleReadyToInteract != null){
             displayTemporaryText(InteractionHandler.interactibleReadyToInteract);
         }
-
-
 
         iGUIM.render(gc);
         qGUI.render(gc);

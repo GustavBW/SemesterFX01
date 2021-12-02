@@ -15,9 +15,9 @@ import java.util.HashMap;
 public class InventoryGUIManager {
 
     private final InventoryManager inventoryManager;
-    private final ArrayList<CItemButton> CIBs;        //Main buttons for each item in the inventory
-    private final ArrayList<RenderableText> RTFBs;    //Labels telling what item it is and how many of these you got
-    private final HashMap<Integer, ArrayList<RenderableButton>> SUBs; //Functional buttons that actually do the Use / Drop thing
+    private ArrayList<CItemButton> CIBs;        //Main buttons for each item in the inventory
+    private ArrayList<RenderableText> RTFBs;    //Labels telling what item it is and how many of these you got
+    private HashMap<Integer, ArrayList<RenderableButton>> SUBs; //Functional buttons that actually do the Use / Drop thing
 
     //Me checking if updating the inventory GUI actually works as expected.
     private int howManyTimesHaveIDoneThis = 0;
@@ -82,31 +82,8 @@ public class InventoryGUIManager {
             }
 
 
-        }else{      //This is purely just to be able to test the system without having CItems in the game yet
-
-            for (int j = 0; j < 10; j++) {
-
-                TestingCItem tempCitem = new TestingCItem(new Item(j,"tempCItem",69),new PosPicCombo(null, new Point2D(1,1)));
-
-                //CIBS
-                Point2D CIBposition = new Point2D(mainFramePosX + (buttonSize * 0.75), ((mainFramePosY + (mainFrameHeight * 0.11)) + (j * (buttonSize + buttonPadding))) - (buttonSize / 2.0));
-                CIBs.add(new CItemButton(tempCitem, CIBposition, buttonSize, buttonSize, this));
-
-                Point2D RTFBposition = new Point2D(CIBposition.getX() + (buttonSize * 1.5), CIBposition.getY() + 4 + (buttonSize / 2.0));
-                RTFBs.add(new RenderableText("Stuff & Amount " + howManyTimesHaveIDoneThis, RTFBposition, 100));
-
-                //SUBS
-                ArrayList<RenderableButton> newArrayList = new ArrayList<>();
-
-                Point2D sub1Position = new Point2D(CIBposition.getX() + 175, CIBposition.getY());
-                newArrayList.add(new useCItemButton(tempCitem,"Use", sub1Position, subWidth, buttonSize));
-
-                Point2D sub2Position = new Point2D(sub1Position.getX() + (subWidth * 1.15), sub1Position.getY());
-                newArrayList.add(new dropCItemButton(tempCitem,"Drop", sub2Position,subWidth, buttonSize));
-
-                SUBs.put(j, newArrayList);
-            }
         }
+
         destroyAll();     //As some of these elements above adds themselves their renderlayers on instantiation, we just make sure to remove them at first.
 
         GUIisReady = true;
@@ -135,17 +112,13 @@ public class InventoryGUIManager {
     }
 
     public void clearAll(){
-        if(!CIBs.isEmpty() && CIBs != null) {
-            CIBs.clear();
-        }
 
-        if(!RTFBs.isEmpty() && RTFBs != null) {
-            RTFBs.clear();
-        }
+        //Screw using clear() this is much more consistent
 
-        if(!SUBs.isEmpty() && SUBs != null) {
-            SUBs.clear();
-        }
+        CIBs = new ArrayList<>();
+        RTFBs = new ArrayList<>();
+        SUBs = new HashMap<>();
+
     }
     public void destroyAll(){
         if(!(CIBs.isEmpty() || CIBs == null)) {
@@ -181,6 +154,11 @@ public class InventoryGUIManager {
                 for(RenderableButton rB : ARB){
                     rB.onInstancedClick();
                 }
+            }
+        }
+        if(!(RTFBs.isEmpty() || RTFBs == null)){
+            for(RenderableText t : RTFBs){
+                t.onInstancedRender();
             }
         }
     }
