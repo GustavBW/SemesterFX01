@@ -21,29 +21,6 @@ public class GraphicsProcessor {
         private final String cItemDirectory = "/CItem";
         private final String cItemPositions = "/cItemPositions.csv";
 
-        public ArrayList<RenderableImage> getBaseForRoom(int roomId){
-                ArrayList<RenderableImage> images = new ArrayList<>();
-
-                try{
-                        for(String s : imageTypes) {
-                                /*ImageInput picture = new ImageInput (new InputStreamReader(getClass().getResourceAsStream(graphicsDirectory + "/" + roomId + s)));
-
-
-                                images.add(br.read());
-                                //Hjælp
-                                br.close();
-
-                                 */
-                        }
-
-
-                }catch (Exception e){
-                        e.printStackTrace();
-                }
-
-
-                return images;
-        }
 
         public PosPicCombo getCItemPosPic(int itemId){
 
