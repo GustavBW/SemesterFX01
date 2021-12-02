@@ -107,6 +107,7 @@ public class RoomExitTrigger extends DistanceTrigger implements Interactible, Re
     public void onInteraction(){
         MainGUIController.roomToChangeTo = ContentEngine.getRoomCollection(roomToChangeTo);
         MainGUIController.sceneChangeRequested = true;
+        Game.updateQuestGUI = true;
 
         Game.player.setPosX((int) playerNextPosition.getX());
         Game.player.setPosY((int) playerNextPosition.getY());

@@ -37,7 +37,10 @@ public class InventoryManager {
     }
 
     public void addCItem(CItem citem){
+
         boolean doesAlreadyContain = false;
+        boolean isQuestItem = false;
+
         if(cinventory.size() < inventorySize) {
             for (CItem i : cinventory) {
                 if(i == citem) {
@@ -50,17 +53,18 @@ public class InventoryManager {
             }
             if (!doesAlreadyContain) {
                 cinventory.add(new CItem(citem.getItem(), citem.getPosPic()));
-                Game.updateQuestGUI = evaluateItemOnPickUp(citem);
+                isQuestItem = evaluateItemOnPickUp(citem);
                     //evaluateItemOnPickUp goes through all quests and sees if this item is relevant AND if the quest type is PickUp. If it aint QuestType.PickUp, Quest.evaluateItemOnPickUp
                     //will always return false. Thus not asking Game to update the Quest GUI.
 
-                System.out.println(citem + " is a quest item : " + Game.updateQuestGUI);
+                System.out.println(citem + " is a quest item : " + isQuestItem);
                 inventoryChanged = true;
                 citem.destroy();
             }
         }else{
             citem.reInstate();
         }
+        Game.updateQuestGUI = true;
         addItem(citem.getItem());
     }
     public void removeCItem(CItem citem){

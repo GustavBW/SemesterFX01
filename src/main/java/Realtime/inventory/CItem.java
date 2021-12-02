@@ -126,7 +126,7 @@ public class CItem extends Item implements Interactible, Renderable {
         if(item == null){
             toReturn = "CITEM with no Item";
         }else{
-            toReturn = "CITEM: " + item.getName() + " " + item.getAmount();
+            toReturn = "CITEM id: " + item.getId() + " | " + item.getName() + " " + item.getAmount();
         }
         return toReturn;
     }
