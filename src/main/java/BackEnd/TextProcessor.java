@@ -180,9 +180,9 @@ public class TextProcessor {
                     if(Integer.parseInt(atributes[0]) == i)
                     {
                         Quest quest = new Quest(Integer.parseInt(atributes[0]),
-                                atributes[1],
-                                atributes[2],
-                                Integer.parseInt(atributes[3]));
+                                                atributes[1],
+                                                atributes[2],
+                                                Integer.parseInt(atributes[3]));
                         output.add(quest);
                     }
                 }
