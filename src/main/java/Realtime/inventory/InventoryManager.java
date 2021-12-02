@@ -1,6 +1,7 @@
 package Realtime.inventory;
 
 import Realtime.MainGUIController;
+import Realtime.QuestType;
 import worldofzuul.Game;
 import worldofzuul.Quest;
 
@@ -9,199 +10,108 @@ import java.util.Objects;
 
 public class InventoryManager {
 
-    private final ArrayList<Item> inventory;
     private final ArrayList<CItem> cinventory;
-    private final int inventorySize = 9;
+    private final int inventorySize = 10;
 
     public boolean inventoryChanged = false, questsChanged = false;
 
     public InventoryManager(){
-        inventory = new ArrayList<>();
         cinventory = new ArrayList<>();
     }
 
-    public boolean removeItem(String name){
-        boolean foundItem = false;
-        for (Item i : inventory){
-            if(i.getName().equalsIgnoreCase(name)){
-                inventory.remove(i);
-                inventoryChanged = true;
-                foundItem = true;
-                break;
-            }
-        }
-        if(!foundItem){
-            System.out.println("Sådan en ting har du ikke på dig");
-        }
-        return foundItem;
-    }
-
-    public void addCItem(CItem citem){
-
-        boolean doesAlreadyContain = false;
+    public boolean addCItem(CItem citem){
+        boolean success = false;
+        boolean wasAlreadyInInventory = false;
         boolean isQuestItem = false;
 
-        if(cinventory.size() < inventorySize) {
-            for (CItem i : cinventory) {
-                if(i == citem) {
-                    i.changeAmount(citem.getAmount());
-                    inventoryChanged = true;
-                    i.destroy();
-                    doesAlreadyContain = true;
-                    break;
-                }
-            }
-            if (!doesAlreadyContain) {
-                cinventory.add(new CItem(citem.getItem(), citem.getPosPic()));
-                isQuestItem = evaluateItemOnPickUp(citem);
-                    //evaluateItemOnPickUp goes through all quests and sees if this item is relevant AND if the quest type is PickUp. If it aint QuestType.PickUp, Quest.evaluateItemOnPickUp
-                    //will always return false. Thus not asking Game to update the Quest GUI.
+        if(citem != null){
+            if(cinventory.size() < inventorySize) {
 
-                System.out.println(citem + " is a quest item : " + isQuestItem);
+                for (Quest q : Game.getCurrentRoom().getQuests()) {
+                    isQuestItem = q.evaluateItem(citem, QuestType.PickUP);
+                }
+
+                for (CItem c : cinventory) {
+                    if (c.getId() == citem.getId()) {
+                        wasAlreadyInInventory = true;
+                        c.changeAmount(citem.getAmount());
+                        success = true;
+                    }
+                }
+
+                if (!wasAlreadyInInventory) {
+                    cinventory.add(citem);
+                    success = true;
+                }
+
                 inventoryChanged = true;
-                citem.destroy();
             }
-        }else{
-            citem.reInstate();
         }
-        Game.updateQuestGUI = true;
-        addItem(citem.getItem());
+        return success;
     }
-    public void removeCItem(CItem citem){
-        boolean foundTheThing = false;
+
+
+    public boolean removeCItem(CItem citem){       //  Removes item on a GAME level
+        boolean removedTheThingFromRoom = false;
+        boolean removedTheThingFromInventory = false;
+        boolean citemWasRemovedFromPlay = false;
+
         for(CItem i : cinventory){
             if(i == citem) {
-                i.destroy();
-                cinventory.remove(i);
-                inventoryChanged = true;
-                foundTheThing = true;
+
+                citemWasRemovedFromPlay = i.destroy();
+                removedTheThingFromInventory = cinventory.remove(i);
+                removedTheThingFromRoom = MainGUIController.getCurrentRoom().getCitems().remove(this);
+
+                inventoryChanged = removedTheThingFromInventory;
                 break;
             }
         }
+
+        return removedTheThingFromInventory && removedTheThingFromRoom && citemWasRemovedFromPlay;
     }
     public void dropCItem(CItem citem){
-        for(CItem i : cinventory){
-            if(i == citem){
-                i.reInstate();
-                inventoryChanged = true;
-                cinventory.remove(i);
-                break;
-            }
+        if(citem != null){
+            citem.reInstate();
+            inventoryChanged = true;
+            cinventory.remove(citem);
         }
     }
     public boolean useCItem(CItem citem){
-        if(citem != null) {
-            if (useItem(citem.getItem().getName())) {
+        boolean success = false;
+        boolean isQuestItem = false;
 
+        if(citem != null){
 
-                if(!citem.getItem().getName().equalsIgnoreCase("Kamera")) {
-                    citem.destroy();
-                    cinventory.remove(citem);
-                }
-
-            }else{
-
-                if(!citem.getItem().getName().equalsIgnoreCase("Kamera")) {
-                    citem.reInstate();
-                    cinventory.remove(citem);
-                }
-
+            for(Quest q : Game.getCurrentRoom().getQuests()){
+                success = q.evaluateItem(citem, QuestType.Use);
+                isQuestItem = success;
             }
-        }
-        inventoryChanged = true;
-        return false;
-    }
 
-    public void addItem(Item item){
+            if(isQuestItem){
+                if(!(citem.getId() == 11 || citem.getName().equalsIgnoreCase("Kamera"))) {    //Yay for Nor gates
+                    Game.updateQuestGUI = removeCItem(citem);
+                    inventoryChanged = Game.updateQuestGUI;
 
-        boolean containsItem = false;
-        boolean ableToFit = false;
-
-        if (inventory.size() <= inventorySize) {
-            if (item != null) {                                      //Firstly check if the item is null
-                for (int i = 0; i < inventory.size(); i++) {         //Secondly check if it exists in the inventory already
-                    if (inventory.get(i).getName().equalsIgnoreCase(item.getName())) {
-                        inventory.get(i).changeAmount(item.getAmount());        //And simply increase the amount of it in the inventory
-                        inventoryChanged = true;
-                        containsItem = true;
-                        ableToFit = true;
-                        System.out.println("Du fandt mere: " + item.getName());
-                        break;
-                    }
-                }
-                if (!containsItem) {
-                    inventory.add(new Item(item.getId(),item.getName(), item.getAmount()));                                //And put it there
-                    inventoryChanged = true;
-                    System.out.println("Du har nu en ny ting: " + item.getName());
-                    ableToFit = true;
+                }else{
+                    Game.updateQuestGUI = true;
 
                 }
             }
         }
-        if(!ableToFit && item != null){                                     //If you inventory does not contain the item, and doesn't have space for it.
-            System.out.println("Du har ikke mere plads i din rygsæk!");
-            Game.getCurrentRoom().addItem(item);            //Put that thing back where you found it.
-        }
+
+        return success;
     }
-    public Item getItem(String name){
-        Item itemFound = null;
-        for (Item item : inventory) {
-            if (item.getName().equalsIgnoreCase(name)) {
-                itemFound = item;
-            }
-        }
-        return itemFound;
-    }
+
     public void printInventory(){
         System.out.println();
-        for (Item n : inventory){
+        for (Item n : cinventory){
             if(n != null) {
-                System.out.print(n.getName() + " " + n.getAmount() + " | ");
+                System.out.print(n);
             }
         }
         System.out.println("");
     }
-    public boolean useItem(String name){           //Called from Game.processCommand, triggered by CMD Word USE
-        boolean success = false;
-        Item itemToUse = null;                  //Prepare an item
-        boolean dontEvenThinkAboutIt = false;
-
-        if(name != null) {                      //Just to be sure
-            for (Item i : inventory) {                                                   //traverse array
-                if (i.getName().equalsIgnoreCase(name)) {                                 //Null-safe equals. Checking if you got the item in the first place
-                    itemToUse = new Item(i.getId(),i.getName(), i.getAmount());     //If you do, initiate itemToUse as a clone of that item
-                    if(!name.equalsIgnoreCase("Kamera")) {
-                        inventory.remove(i);                                                 //Now remove that item from your inventory
-                        inventoryChanged = true;
-                    }
-                    break;
-                }
-            }
-        }else {                                                                         //If you forget to write the name of the item
-            System.out.println("Det er en mærkelig ting at bruge her. Hvad med om du er lidt mere specifik?");
-            dontEvenThinkAboutIt = true;
-        }
-        if(itemToUse == null && !dontEvenThinkAboutIt){                                                          //If you dont have any of the item youre trying to use
-            System.out.println("Du har ikke noget " + name);
-        }
-        if(itemToUse != null){
-            success = Game.getCurrentRoom().useItem(itemToUse);                                   //Send the item along to currentRoom to be used
-        }
-        Game.updateQuestGUI = true;
-        return success;
-    }
-
-    private boolean evaluateItemOnPickUp(CItem citem){
-        return evaluateItemOnPickUp(citem.getItem());
-    }
-    private boolean evaluateItemOnPickUp(Item item){
-        boolean isIt = false;
-        for(Quest q : MainGUIController.getCurrentRoom().getRoom().getQuests()){
-            isIt = q.evaluateItemOnPickUp(item);
-        }
-        return isIt;
-    }
-
 
     public ArrayList<CItem> getCInventory(){return cinventory;}
 }

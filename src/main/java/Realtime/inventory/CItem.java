@@ -80,8 +80,10 @@ public class CItem extends Item implements Interactible, Renderable {
     }
     @Override
     public void onInteraction() {
-        Game.getInventoryManager().addCItem(this);
-        destroy();
+        boolean destroy = Game.getInventoryManager().addCItem(this);
+
+        if(destroy){destroy();}
+
         System.out.println("You picked up: " + super.getName());
     }
     @Override
@@ -105,7 +107,9 @@ public class CItem extends Item implements Interactible, Renderable {
         }
     }
 
-    public void destroy(){                                  //Removes the item from any static contexts in which a reference is kept
+    public boolean destroy(){                                  //Removes the item from any static contexts in which a reference is kept
+        boolean removedFromInteractibles = false;
+        boolean removedFromRenderLayer = false;
 
         InteractionHandler.reInstatitingItem = true;
 
@@ -113,11 +117,12 @@ public class CItem extends Item implements Interactible, Renderable {
             System.out.print("");
         }
 
-        MainGUIController.getCurrentRoom().getCitems().remove(this);
-        Interactible.interactibles.remove(this);
-        Renderable.renderLayer1.remove(this);
+        removedFromInteractibles = Interactible.interactibles.remove(this);
+        removedFromRenderLayer = Renderable.renderLayer1.remove(this);
 
         InteractionHandler.reInstatitingItem = false;
+
+        return removedFromInteractibles && removedFromRenderLayer;
     }
 
     @Override

@@ -155,59 +155,7 @@ public class Game implements Runnable{
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
     }
-    private boolean processCommand(Command command)         //I feel like this should be a switch-case - GBW
-    {
-        turnCount++;
-        boolean wantToQuit = false;
 
-        CommandWord commandWord = command.getCommandWord();
-
-        if(commandWord == CommandWord.UNKNOWN) {
-            System.out.println("Hvad er det du gerne vil?...");
-            return false;
-        }
-        if (commandWord == CommandWord.HELP) {
-            printHelp();
-            helpCount++;
-        }
-        if (commandWord == CommandWord.INVENTORY){
-            inventoryManager.printInventory();
-        }
-        if (commandWord == CommandWord.GATHER){
-            inventoryManager.addItem(currentRoom.takeItem(command.getSecondWord()));
-        }
-        if (commandWord == CommandWord.USE){
-            inventoryManager.useItem(command.getSecondWord());
-        }
-        if (commandWord == CommandWord.INVESTIGATE){
-            currentRoom.investigate();
-        }
-        if (commandWord == CommandWord.DROP){
-            currentRoom.addItem(inventoryManager.getItem(command.getSecondWord()));
-            if(inventoryManager.removeItem(command.getSecondWord())){
-                System.out.println("Du efterlod " + command.getSecondWord() + " i " + currentRoom.getName());
-            }
-        }
-        if (commandWord == CommandWord.HINT){
-            if(currentRoom.isQuestsSolved()){
-                System.out.println("Du har allerede gjort alt du kunne her.");
-            }else {
-                System.out.println(currentRoom.getNextQuest().getHint());
-            }
-
-            hintCount++;
-        }
-        if(commandWord == CommandWord.EXITS){
-            System.out.println("Du har følgende steder du kan tage hen: " + currentRoom.getExitString());
-        }
-        else if (commandWord == CommandWord.GO) {
-            goRoom(command);
-        }
-        else if (commandWord == CommandWord.QUIT) {
-            wantToQuit = quit(command);
-        }
-        return wantToQuit;
-    }
     private void printHelp() 
     {
         System.out.println("Du farer forvildet om i heden,");
@@ -237,6 +185,7 @@ public class Game implements Runnable{
     public static Room getCurrentRoom(){
         return currentRoom;
     }
+
     private boolean quit(Command command) 
     {
         if(command.hasSecondWord()) {

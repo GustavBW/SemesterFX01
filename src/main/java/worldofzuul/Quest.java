@@ -78,17 +78,20 @@ public class Quest {
         return this.completed;
     }
 
-    public boolean evaluateItemOnPickUp(Item item){
+    public boolean evaluateItem(Item item, QuestType type){
         boolean success = false;
 
-        if (item.getId() == itemId && type == QuestType.PickUP){
-            amountNeeded -= item.getAmount();
+        if(this.type == type) {
+            if (item.getId() == itemId) {
+                amountNeeded -= item.getAmount();
 
-            if(amountNeeded <= 0){
-                completed = true;
+                if (amountNeeded <= 0) {
+                    completed = true;
+                    Game.updateQuestGUI = true;
+                }
+
+                success = true;
             }
-
-            success = true;
         }
 
         return success;
