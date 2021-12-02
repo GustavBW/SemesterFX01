@@ -90,5 +90,8 @@ public class ContentEngine {
     public static Image getExitArrowImage(String whichOne){
         return new GraphicsProcessor().getExitArrowImage(whichOne);
     }
+    public static Image getCheckMark(){
+        return new GraphicsProcessor().getCheckMark();
+    }
 
 }

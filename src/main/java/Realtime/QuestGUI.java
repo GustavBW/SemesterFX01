@@ -51,7 +51,7 @@ public class QuestGUI implements Renderable {
         backgroundColor1 = new Color(1,1,1,0.5);
         backgroundColor2 = new Color(0,0,0,0.5);
 
-        checkMarkImage = new Image(getClass().getResourceAsStream("/Graphics/MISC/MISC/CheckMark.png"));
+        checkMarkImage = ContentEngine.getCheckMark();
 
         mainGUITitle = new AdvancedRendText("Quests", new Point2D(xTitlePosition + ((Game.WIDTH - Game.WIDTH * 0.85) / 2), yOffsetFromScreen + 20), fontMainTitle, mainTitleColor, 100);
 

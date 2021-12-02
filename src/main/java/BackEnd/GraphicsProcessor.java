@@ -104,4 +104,7 @@ public class GraphicsProcessor {
         public Image getExitArrowImage(String whichOne){
                 return new Image(getClass().getResourceAsStream( graphicsDirectory + miscellaniousDirectory + "/ExitArrows/" + whichOne + "Arrow.png"));
         }
+        public Image getCheckMark(){
+                return new Image(getClass().getResourceAsStream(graphicsDirectory + miscellaniousDirectory + "/CheckMark.png"));
+        }
 }
