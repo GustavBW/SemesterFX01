@@ -182,7 +182,9 @@ public class TextProcessor {
                         Quest quest = new Quest(Integer.parseInt(atributes[0]),
                                                 atributes[1],
                                                 atributes[2],
-                                                Integer.parseInt(atributes[3]));
+                                                Integer.parseInt(atributes[3]),
+                                                Integer.parseInt(atributes[4]),
+                                                atributes[5]);
                         output.add(quest);
                     }
                 }
