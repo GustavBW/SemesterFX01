@@ -1,5 +1,6 @@
 package Realtime.inventory;
 
+import Realtime.MainGUIController;
 import Realtime.RenderableButton;
 import Realtime.debugging.RenderableSquare;
 import Realtime.interfaces.Clickable;
@@ -35,6 +36,7 @@ public class useCItemButton extends dropCItemButton implements Clickable, Render
     public void onInteraction() {
         color1 = new Color(1,1,1,0.8);
         Game.getInventoryManager().useCItem(citem);
+        Game.getiGUIM().setInspectedElement(null);
         System.out.println("You pressed a useCItemButton for CITEM id: " + citem.getId());
     }
 

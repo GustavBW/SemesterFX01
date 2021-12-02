@@ -5,6 +5,7 @@ import BackEnd.TextProcessor;
 import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -30,6 +31,9 @@ public class QuestGUI implements Renderable {
     private double totalDisplaceMent = 0, totalDisplayHeight = 10;
     private final int descWidthSymbols = 45;
 
+    private boolean roomSolved;
+    private final Image checkMarkImage;
+
 
     public QuestGUI(){
         questTitles = new ArrayList<>();
@@ -39,12 +43,6 @@ public class QuestGUI implements Renderable {
         fontTitle = Font.font("Impact", FontPosture.REGULAR, 20);
         fontText = Font.font("Helvetica", 14);
 
-        //this.nativeFont = var1;   Obj
-        //this.family = var2;   String
-        //this.name = var3;     String
-        //this.style = var4;    String
-        //this.size = var5;     double
-
         mainTitleColor = new Color(209 / 255.0,153 / 255.0,0,1);
         descColor = new Color(1,1,1,1);
         titleColor = new Color(194 / 255.0,110 / 255.0,1 / 255.0,1);
@@ -52,6 +50,8 @@ public class QuestGUI implements Renderable {
         qCompleteDescColor = new Color(95 / 255.0,130 / 255.0,0.4,1);
         backgroundColor1 = new Color(1,1,1,0.5);
         backgroundColor2 = new Color(0,0,0,0.5);
+
+        checkMarkImage = new Image(getClass().getResourceAsStream("/Graphics/MISC/MISC/CheckMark.png"));
 
         mainGUITitle = new AdvancedRendText("Quests", new Point2D(xTitlePosition + ((Game.WIDTH - Game.WIDTH * 0.85) / 2), yOffsetFromScreen + 20), fontMainTitle, mainTitleColor, 100);
 
@@ -122,6 +122,7 @@ public class QuestGUI implements Renderable {
                     displacement = yOffsetBetweenSegments * counter;
                 }
             }
+            roomSolved = MainGUIController.getCurrentRoom().getRoom().isQuestsSolved();
         }
 
         totalDisplaceMent = displacement;
@@ -153,6 +154,10 @@ public class QuestGUI implements Renderable {
 
             for(AdvancedRendText aRT : questDescriptions){
                 aRT.render(gc);
+            }
+
+            if(roomSolved){
+                gc.drawImage(checkMarkImage, xTitlePosition + 120, yOffsetFromScreen + 50);
             }
         }
     }

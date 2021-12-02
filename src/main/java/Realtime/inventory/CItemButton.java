@@ -46,8 +46,6 @@ public class CItemButton implements Clickable, Renderable {
     @Override
     public void render(GraphicsContext gc) {
 
-
-
         if(iGUIM.getInspectedElement() == citem) {
 
             gc.setFill(new Color(1,1,1,0.8));

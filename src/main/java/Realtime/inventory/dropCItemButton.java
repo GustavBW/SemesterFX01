@@ -48,6 +48,7 @@ public class dropCItemButton extends RenderableButton implements Renderable, Cli
     @Override
     public void onInteraction() {
         color1 = new Color(1,1,1,0.8);
+        Game.getiGUIM().setInspectedElement(null);
         Game.getInventoryManager().inventoryChanged = true;
         Game.getInventoryManager().dropCItem(citem);
         System.out.println("You pressed a dropCItemButton for CITEM id: " + citem.getId());

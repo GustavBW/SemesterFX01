@@ -1,12 +1,14 @@
 package Realtime.inventory;
 
 import BackEnd.PosPicCombo;
+import Realtime.AdvancedRendText;
 import Realtime.RenderableButton;
 import Realtime.RenderableText;
 import Realtime.debugging.TestingCItem;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import worldofzuul.Game;
 
 import java.util.ArrayList;
@@ -19,13 +21,13 @@ public class InventoryGUIManager {
     private ArrayList<RenderableText> RTFBs;    //Labels telling what item it is and how many of these you got
     private HashMap<Integer, ArrayList<RenderableButton>> SUBs; //Functional buttons that actually do the Use / Drop thing
 
-    //Me checking if updating the inventory GUI actually works as expected.
-    private int howManyTimesHaveIDoneThis = 0;
-
     //Specifications for the inventory look.
-    private final int mainFrameWidth = 300, mainFrameHeight = 400, buttonSize = 30, subWidth = 40, buttonPadding = 5;
+    private final int mainFrameWidth = 300, mainFrameHeight = 450, buttonSize = 30, subWidth = 40, buttonPadding = 5;
     private final double mainFramePosX = (Game.WIDTH / 2.0) - (mainFrameWidth / 2.0);
     private final double mainFramePosY = (Game.HEIGHT / 2.0) - (mainFrameHeight / 2.0);
+    private final AdvancedRendText titleText;
+    private final Font fontMainTitle;
+    private final Color mainTitleColor;
 
     //The Inspected Element is set by the CItemButton that is pressed. THis is how the iGUIM determines which Sub-buttons to show
     private CItem inspectedElement;
@@ -40,7 +42,10 @@ public class InventoryGUIManager {
         this.RTFBs = new ArrayList<>();
         this.SUBs = new HashMap<>();
 
-        howManyTimesHaveIDoneThis = 0;
+        mainTitleColor = new Color(209 / 255.0,153 / 255.0,0,1);
+        fontMainTitle = Font.font( "Impact", 26);
+        titleText = new AdvancedRendText("Inventory", new Point2D(mainFramePosX + 100, mainFramePosY - 10), fontMainTitle, mainTitleColor, 100);
+
         createNew(actuallyTheThing);
     }
 
@@ -48,15 +53,12 @@ public class InventoryGUIManager {
 
         //Wiping all the lists of stuff first, then checking if to show a mockup (if actuallyTheThing == false) or the real functional thing (if actuallyTheThing == true)
 
-        howManyTimesHaveIDoneThis++;
-
         GUIisReady = false;
         clearAll();
 
         if(actuallyTheThing) {
 
             int i = 0;
-
 
             for (CItem c : inventoryManager.getCInventory()) {
 
@@ -80,8 +82,6 @@ public class InventoryGUIManager {
 
                 i++;
             }
-
-
         }
 
         destroyAll();     //As some of these elements above adds themselves their renderlayers on instantiation, we just make sure to remove them at first.
@@ -91,7 +91,11 @@ public class InventoryGUIManager {
 
     public void render(GraphicsContext gc){
         if(doDisplay && GUIisReady) {
-            gc.setFill(new Color(0, 0, 0, 0.3));
+
+            gc.setFill(new Color(1,1,1,0.5));
+            gc.fillRoundRect(mainFramePosX - 5, mainFramePosY - 5, mainFrameWidth + 10, mainFrameHeight + 10, 50, 50);
+
+            gc.setFill(new Color(0, 0, 0, 0.5));
             gc.fillRoundRect(mainFramePosX, mainFramePosY, mainFrameWidth, mainFrameHeight, 50, 50);
 
 
@@ -107,6 +111,8 @@ public class InventoryGUIManager {
                     rB.render(gc);
                 }
             }
+
+            titleText.render(gc);
 
         }
     }
