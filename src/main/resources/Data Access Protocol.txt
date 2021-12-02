@@ -20,8 +20,8 @@ Exits .csv
 id ; name ; roomId
 
 Room Quest .csv
-int        String                  String      Int             int           String < pickup / use >
-quest id ; quest resolved desc. ; quest hint ; Quest item id ; item amount ; type
+int        String        String                 String       Int             int           String < pickup / use >
+quest id ; quest title ; quest resolved desc. ; quest hint ; Quest item id ; item amount ; type
 
 
 

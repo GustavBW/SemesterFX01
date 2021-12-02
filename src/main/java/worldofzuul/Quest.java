@@ -7,6 +7,7 @@ public class Quest {
     private int id;
     private String desc;
     private String hint;
+    private String title;
     private int itemId;
     private boolean completed = false;
     private int amountNeeded, originalAmount;
@@ -27,6 +28,12 @@ public class Quest {
         }
 
         this.type = QuestType.Use;
+        this.title = "Use";
+    }
+
+    public Quest(int id,  String title, String desc, String hint, int itemId, int amount, String type){
+        this(id, desc, hint, itemId, amount, type);
+        this.title = title;
     }
 
     public Quest(int id, String desc, String hint, int itemId, int amount, String type){
@@ -37,9 +44,11 @@ public class Quest {
 
         }else{
             if(type.equalsIgnoreCase("PickUp")) {
+                this.title = "Pick Up";
                 this.type = QuestType.PickUP;
             }else{
                 this.type = QuestType.Use;
+                this.title = "Use";
             }
         }
 
@@ -52,6 +61,7 @@ public class Quest {
         this(999999, "Test Quest", "Test Quest", 999999, 1);
     }
 
+    public String getTitle(){return this.title;}
     public String getDesc() {
         return this.desc;
     }
