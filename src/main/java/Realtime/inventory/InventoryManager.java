@@ -88,17 +88,23 @@ public class InventoryManager {
     public boolean useCItem(CItem citem){
         if(citem != null) {
             if (useItem(citem.getItem().getName())) {
-                inventoryChanged = true;
+
 
                 if(!citem.getItem().getName().equalsIgnoreCase("Kamera")) {
                     citem.destroy();
+                    cinventory.remove(citem);
                 }
+
             }else{
+
                 if(!citem.getItem().getName().equalsIgnoreCase("Kamera")) {
                     citem.reInstate();
+                    cinventory.remove(citem);
                 }
+
             }
         }
+        inventoryChanged = true;
         return false;
     }
 

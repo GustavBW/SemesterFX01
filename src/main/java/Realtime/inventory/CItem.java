@@ -4,6 +4,7 @@ import BackEnd.ContentEngine;
 import BackEnd.PosPicCombo;
 import Realtime.InteractionHandler;
 import Realtime.MainGUIController;
+import Realtime.interfaces.Clickable;
 import Realtime.interfaces.Interactible;
 import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
