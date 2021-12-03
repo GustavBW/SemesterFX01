@@ -229,15 +229,17 @@ public class MainGUIController extends Application implements Runnable{
     }
     public void setCollection(RoomCollection rc){currentCollection = rc;}
     private void changeScene(RoomCollection rc){
-
         //This function takes awhile due to the fact that the rest of the threads has to stop what they're doing first.
-        //At first it signals to the other threads (that are always looking for this static booleans) that somethings up.
+        //At first it signals to the other threads (that are always looking for this static boolean) that somethings up.
         isReady = false;
         awaitBoolean = false;
-        while(!(Game.isAwaiting && InteractionHandler.isAwaiting)){ //Afterwards it goes into a busy-sleep giving a little message in the log awaiting the other threads to declare that they're now waiting
+        while(!(Game.isAwaiting && InteractionHandler.isAwaiting)){
+            //Afterwards it goes into a busy-sleep giving a little message
+            //in the log awaiting the other threads to declare that they're now waiting
             onAwait();
         }
-        onExitFlagSleep();           //Since the step above can anywhere from .1 millisecond to a couple of seconds (it shouldn't, but might happen) it writes a message to the log again.
+        onExitFlagSleep();    //Since the step above can anywhere from .1 millisecond to a couple of seconds
+        // (it really shouldn't, but might happen) it writes a message to the log again.
 
         long timeA = System.nanoTime(); //Thus the timing starts. Now the fun happens. (The timing is only for me really, so I can see if somethings up
 

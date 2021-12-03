@@ -54,6 +54,9 @@ public class InventoryGUIManager {
         //Wiping all the lists of stuff first, then checking if to show a mockup (if actuallyTheThing == false) or the real functional thing (if actuallyTheThing == true)
 
         GUIisReady = false;
+
+        destroyAll();
+
         clearAll();
 
         if(actuallyTheThing) {
@@ -87,6 +90,7 @@ public class InventoryGUIManager {
         destroyAll();     //As some of these elements above adds themselves their renderlayers on instantiation, we just make sure to remove them at first.
 
         GUIisReady = true;
+        doDisplay = false;
     }
 
     public void render(GraphicsContext gc){
