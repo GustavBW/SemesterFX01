@@ -13,6 +13,10 @@ public class Quest {
     private int amountNeeded, originalAmount;
     private QuestType type;
 
+    //TODO show image when using Kamera in room
+    //TODO add some clouds and get them moving
+
+
     public Quest(int id, String desc, String hint, int itemId, int amount) {
         this.id = id;
         this.desc = desc;
@@ -22,9 +26,11 @@ public class Quest {
         if(amount <= 0){
             this.amountNeeded = 1;
             this.originalAmount = 1;
+
         } else {
             this.amountNeeded = amount;
             this.originalAmount = amount;
+
         }
 
         this.type = QuestType.Use;
@@ -46,6 +52,7 @@ public class Quest {
             if(type.equalsIgnoreCase("PickUp")) {
                 this.title = "Pick Up";
                 this.type = QuestType.PickUP;
+
             }else{
                 this.type = QuestType.Use;
                 this.title = "Use";

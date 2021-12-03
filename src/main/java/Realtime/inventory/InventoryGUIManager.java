@@ -51,7 +51,7 @@ public class InventoryGUIManager {
 
     public void createNew(boolean actuallyTheThing){
 
-        //Wiping all the lists of stuff first, then checking if to show a mockup (if actuallyTheThing == false) or the real functional thing (if actuallyTheThing == true)
+        //Emptying all the lists first, to ensure no buttons not shown, but still there - ghost buttons.
 
         GUIisReady = false;
 
@@ -69,6 +69,7 @@ public class InventoryGUIManager {
                 Point2D CIBposition = new Point2D(mainFramePosX + buttonSize, ((mainFramePosY + (mainFrameHeight * 0.11)) + (i * (buttonSize + buttonPadding))) - (buttonSize / 2.0));   //Disable this when there's some Citems
                 CIBs.add(new CItemButton(c, CIBposition, buttonSize, buttonSize, this));
 
+                //RTFBs & RTFBDSs
                 Point2D RTFBposition = new Point2D(CIBposition.getX() + (buttonSize * 1.5), CIBposition.getY() + 4 + (buttonSize / 2.0));
                 RTFBs.add(new RenderableText(c.getPopUpText(), RTFBposition, 100));
 
@@ -157,7 +158,6 @@ public class InventoryGUIManager {
                 c.onInstancedClick();
             }
         }
-            //No RTFB's here as they're not interactible / clickable. They're but renderable.
 
         if(!(SUBs.isEmpty() || SUBs == null)) {
             for(ArrayList<RenderableButton> ARB : SUBs.values()){

@@ -44,13 +44,13 @@ public class RoomDescriptionText extends TemporaryRenderable implements Renderab
         sizes = new Point2D(Game.WIDTH / 3.0, Game.HEIGHT / 5.0);   //Don't worry about it. It'll work :D
         position = new Point2D(Game.WIDTH - (sizes.getX() * 2), Game.HEIGHT * 0.8);
 
-        fontToUse = Font.font("Times New Roman", FontWeight.BOLD, 20D);
+        fontToUse = Font.font("Times New Roman", 20D);
         nextTextFont = Font.font("Impact", 26D);
 
         color2 = new Color(255/255.0,255/255.0,255/255.0,0.5);
         color1 = new Color(0/255.0,0/255.0,0/255.0,0.5);
-        textColor = new Color(0,0,0,1);
-        nextTextColor = new Color(1,1,1,1);
+        textColor = new Color(1,1,1,1);
+        nextTextColor = new Color(209 / 255.0,153 / 255.0,0,1);
 
         textAsLines = ExtendedFunctions.toLines(text,60," ");
         linesMade = textAsLines.size();
