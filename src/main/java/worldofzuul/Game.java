@@ -56,7 +56,6 @@ public class Game implements Runnable{
 
         qGUI = new QuestGUI();  //This guy requests MainGUIController.getCurrentRoom() which will return MainGUIController.roomToChange if sceneChangeRequest == true.
                                 //However that means this guy can only be instantiated AFTER roomToChangeTo & sceneChangeRequested has been set. Else it gives a nullpointer exception.
-
         start();
     }
 

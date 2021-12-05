@@ -94,6 +94,8 @@ public class InventoryManager {
                     inventoryChanged = Game.updateQuestGUI;
 
                 }else{
+
+
                     Game.updateQuestGUI = true;
                     inventoryChanged = true;
                 }
