@@ -6,6 +6,7 @@ import Realtime.triggers.RoomExitTrigger;
 import Realtime.inventory.CItem;
 import Realtime.inventory.Item;
 import javafx.scene.image.Image;
+import org.w3c.dom.Text;
 import worldofzuul.*;
 
 import java.lang.reflect.Array;
@@ -38,10 +39,23 @@ public class ContentEngine {
         ArrayList<Item> items = tp.getItemsForRoom(roomId);
 
         for(Item i : items){
-            citems.add(new CItem(i, gp.getCItemPosPic(i.getId())));
+            if (!alreadyPickedUp(i.getId())) {
+                citems.add(new CItem(i, gp.getCItemPosPic(i.getId())));
+            }
         }
-
         return citems;
+    }
+
+
+    private static boolean alreadyPickedUp(int itemId){
+        boolean output = false;
+
+        for(CacheItemInfo c: getItemsCached()){
+            if(itemId == c.getItemId() && Game.currentRoom.getId() == c.getRoomId()){
+                output = true;
+            }
+        }
+        return output;
     }
 
     public static TextProcessor getTextProcessor(){
@@ -92,6 +106,28 @@ public class ContentEngine {
     }
     public static Image getCheckMark(){
         return new GraphicsProcessor().getCheckMark();
+    }
+
+
+
+
+
+
+    public static ArrayList<CacheItemInfo> getItemsCached(){
+        TextProcessor tp = new TextProcessor();
+        ArrayList<CacheItemInfo> output = new ArrayList<>();
+        output.addAll(tp.convertToCacheItemInfo(tp.readAllLines()));
+        return output;
+    }
+
+
+
+    public static void addItemToCache(CItem model){
+        TextProcessor tp = new TextProcessor();
+        ArrayList<String> lines = tp.readAllLines();
+        CacheItemInfo info = new CacheItemInfo(Game.currentRoom.getId(), model.getId());
+        lines.add(tp.singleItemCacheToLine(info));
+        tp.writeToTempItemFile(lines);
     }
 
 }

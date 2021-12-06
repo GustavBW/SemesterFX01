@@ -16,7 +16,7 @@ public class Game implements Runnable{
     private final static TextProcessor tp = new TextProcessor();
     private final static GraphicsProcessor gp = new GraphicsProcessor();
     private static MainGUIController mGUIC;
-    private static InventoryManager inventoryManager;
+    public static InventoryManager inventoryManager;
     private static InventoryGUIManager iGUIM;
     private static QuestGUI qGUI;
     private final InteractionHandler interHandler;

@@ -4,9 +4,7 @@ import Realtime.inventory.Item;
 import worldofzuul.Quest;
 import worldofzuul.Room;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 
 
@@ -16,6 +14,7 @@ public class TextProcessor {
     private String roomsFilePath = "/Data/Rooms.csv";
     private String exitsFilePath = "/Data/Exits.csv";
     private String roomQuestFilePath = "/Data/RoomQuest.csv";
+    private String cacheItemDataFilePath = "/Data/CacheItemData.csv";
 
 
     public ArrayList<Room> getAllRooms()
@@ -234,5 +233,62 @@ public class TextProcessor {
             output.add(allexits.get(Integer.parseInt(s)));
         }
         return output;
+    }
+
+
+
+
+
+
+
+    public ArrayList<String> readAllLines()
+    {
+        ArrayList<String> output = new ArrayList<>();
+        String line;
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(cacheItemDataFilePath));
+            while((line = br.readLine()) != null)
+            {
+                output.add(line);
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+            System.out.println("No Cached Items");
+        }
+        return output;
+    }
+
+    public ArrayList<CacheItemInfo> convertToCacheItemInfo(ArrayList<String> lines){
+        ArrayList<CacheItemInfo> output = new ArrayList<>();
+        for(String s: lines){
+            String[] collumns = s.split(";");
+            output.add(new CacheItemInfo(Integer.parseInt(collumns[0]),
+                                         Integer.parseInt(collumns[1])));
+        }
+        return output;
+    }
+
+
+    public void writeToTempItemFile(ArrayList<String> allLines){
+        try(PrintWriter writer = new PrintWriter(cacheItemDataFilePath)){
+            for(String s: allLines){
+                writer.write(s);
+            }
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<String> convertItemCacheToStrings(ArrayList<CacheItemInfo> models){
+        ArrayList<String> output = new ArrayList<>();
+        for(CacheItemInfo c: models){
+            output.add(singleItemCacheToLine(c));
+        }
+        return output;
+    }
+
+    public String singleItemCacheToLine(CacheItemInfo model){
+        return model.getRoomId() + ";" + model.getItemId();
     }
 }

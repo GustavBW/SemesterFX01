@@ -1,5 +1,6 @@
 package Realtime.inventory;
 
+import BackEnd.ContentEngine;
 import Realtime.MainGUIController;
 import Realtime.QuestType;
 import worldofzuul.Game;
@@ -41,6 +42,7 @@ public class InventoryManager {
 
                 if (!wasAlreadyInInventory) {
                     cinventory.add(citem);
+                    ContentEngine.addItemToCache(citem);
                     success = true;
                 }
 
