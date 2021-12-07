@@ -25,6 +25,7 @@ public class Game implements Runnable{
     private Thread tickThread, interThread, renderThread;
 
     private int helpCount = 0, hintCount = 0, turnCount = 0, endGameRoomId = 5;
+    private boolean hasSwappedToEndgame = false;
     public static double interpolation = 1; //Interpolation is a factor that tells you how long the last tick took compared to having 1 tick per second
                                             //This thus makes it possible to just multiply any movement-vectors with the interpolation, to get all speeds
                                             //As say pixels per second. (It will always be a frame behind, but that's just how it works)
@@ -106,9 +107,10 @@ public class Game implements Runnable{
 
                 if(onPause){continue;}
 
-                if(evaluateGameCompletion()){
+                if(evaluateGameCompletion() && !hasSwappedToEndgame){
                     MainGUIController.roomToChangeTo = ContentEngine.getRoomCollection(ContentEngine.specificRoom(endGameRoomId));
                     MainGUIController.sceneChangeRequested = true;
+                    hasSwappedToEndgame = !hasSwappedToEndgame;
                 }
 
                 for(Tickable t : Tickable.tickables){
@@ -241,14 +243,20 @@ public class Game implements Runnable{
     }
 
     public boolean evaluateGameCompletion() {
-        boolean gameComplete = true;
+        boolean roomsComplete = true;
+        boolean allRoomsVisited = false;
+
         for (RoomCollection rc : ContentEngine.collections) {
             if (!rc.getRoom().isQuestsSolved()) {
-                gameComplete = false;
+                roomsComplete = false;
             }
         }
 
-        return gameComplete;
+        if(ContentEngine.collections.size() >= allRooms.size() - 3){
+            allRoomsVisited = true;
+        }
+
+        return roomsComplete && allRoomsVisited;
     }
 
     @Override
