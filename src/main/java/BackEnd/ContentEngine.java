@@ -111,4 +111,14 @@ public class ContentEngine {
         return new GraphicsProcessor().getCheckMark();
     }
 
+    public static Room specificRoom (int id){
+        ArrayList<Room> allRooms = allRoomes();
+        for(Room r: allRooms){
+            if(r.getId() == id){
+                return r;
+            }
+        }
+        return allRooms.get(0);
+    }
+
 }

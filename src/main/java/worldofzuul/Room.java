@@ -27,6 +27,7 @@ public class Room {
     private ArrayList<ExitDefinition> exitDefinitions = new ArrayList<>();
 
 
+
     public Room(String roomName, String description) {
         this.id = 0;
         this.longDesc = description;
