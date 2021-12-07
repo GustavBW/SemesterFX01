@@ -7,6 +7,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import worldofzuul.Game;
 
+import java.nio.charset.StandardCharsets;
+
 public class RoomTitleText implements Renderable {
 
     //This text will automaticle align right in the middle of the screen at the top.
@@ -16,7 +18,7 @@ public class RoomTitleText implements Renderable {
     private String text;
     private Color color1, color2;
     private int dropShadowOffset = -1;
-
+    private boolean validString = false;
 
     public RoomTitleText(String text, int fontSize) {
         this.text = text;
@@ -25,8 +27,10 @@ public class RoomTitleText implements Renderable {
             //So. Font size is measured in "points" Pt, not pixels (Px), which means above is to take the amount of letters in the text, at a given font size, converted to pixels.
             //That is how I get the size of the text.
 
-        color2 = new Color(1,1,1,1);
-        color1 = new Color(0,0,0,1);
+        validString = text.getBytes(StandardCharsets.UTF_8).length > 2; //Do not render anything if the title only contains a single letter
+
+        color2 = new Color(1,1,1,1);    //Text Color
+        color1 = new Color(0,0,0,1);    //Drop Shadow
     }
 
     public void destroy(){
@@ -36,12 +40,14 @@ public class RoomTitleText implements Renderable {
     @Override
     public void render(GraphicsContext gc) {
 
-        gc.setFill(color1);
-        gc.setFont(fontToUse);
-        gc.fillText(text, position.getX(), position.getY());
+        if(validString) {
+            gc.setFill(color1);
+            gc.setFont(fontToUse);
+            gc.fillText(text, position.getX(), position.getY());
 
-        gc.setFill(color2);
-        gc.fillText(text, position.getX() + dropShadowOffset,position.getY() + dropShadowOffset);
+            gc.setFill(color2);
+            gc.fillText(text, position.getX() + dropShadowOffset, position.getY() + dropShadowOffset);
+        }
 
     }
     @Override
@@ -51,6 +57,7 @@ public class RoomTitleText implements Renderable {
 
     public void setText(String newText){
         text = newText;
+        validString = newText.getBytes(StandardCharsets.UTF_8).length > 2;
     }
 
 }
