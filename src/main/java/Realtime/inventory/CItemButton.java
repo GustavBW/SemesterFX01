@@ -55,8 +55,8 @@ public class CItemButton implements Clickable, Renderable {
 
             for (int i = 0; i < 3; i++) {
                 gc.fillRect(position.getX() + ((sizeX / 2.0) - 6) + (i * 5),position.getY() + ((sizeY / 2.0) - 7.5) , 2, 15);
-
             }
+
         }else{
 
             gc.setFill(color1);
