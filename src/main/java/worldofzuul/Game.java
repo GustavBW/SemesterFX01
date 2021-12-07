@@ -2,6 +2,7 @@ package worldofzuul;
 
 import BackEnd.ContentEngine;
 import BackEnd.GraphicsProcessor;
+import BackEnd.RoomCollection;
 import BackEnd.TextProcessor;
 import Realtime.*;
 import Realtime.interfaces.Tickable;
@@ -241,10 +242,9 @@ public class Game implements Runnable{
 
     public boolean evaluateGameCompletion() {
         boolean gameComplete = true;
-        for (Room room : Room.roomsList) {
-            if (!room.isQuestsSolved()) {
+        for (RoomCollection rc : ContentEngine.collections) {
+            if (!rc.getRoom().isQuestsSolved()) {
                 gameComplete = false;
-                break;
             }
         }
 

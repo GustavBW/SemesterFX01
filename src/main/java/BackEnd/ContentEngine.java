@@ -16,7 +16,7 @@ public class ContentEngine {
 
     private TextProcessor tp = new TextProcessor();
     private GraphicsProcessor gp;
-    private static ArrayList<RoomCollection> collections = new ArrayList<>();
+    public static ArrayList<RoomCollection> collections = new ArrayList<>();
 
     public ContentEngine(){
 
