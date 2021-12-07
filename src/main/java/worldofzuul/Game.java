@@ -32,7 +32,7 @@ public class Game implements Runnable{
     private long deltaNSInterpolation = 0;
     final int TICKS_PER_SECOND = 60, SKIP_TICKS = 1000 / TICKS_PER_SECOND,MAX_FRAMESKIP = 5;
 
-    public static final int WIDTH = 1500, HEIGHT = 1000, DELAY = 50;
+    public static final int WIDTH = 1500, HEIGHT = 1000, DELAY = 50,  titleScreenRoomId = 8;
     public static Player player;
     public static Room currentRoom;
     public static boolean isRunning = false,onPause = false, isAwaiting = false, awaitBoolean = false, updateQuestGUI = false;
@@ -68,7 +68,7 @@ public class Game implements Runnable{
            r.setAllExits();
         }
 
-        currentRoom = allRooms.get(0);
+        currentRoom = allRooms.get(titleScreenRoomId);
     }
     public void play()
     {            

@@ -22,6 +22,8 @@ import javafx.stage.Stage;
 import worldofzuul.Game;
 import BackEnd.RoomCollection;
 
+import java.nio.charset.StandardCharsets;
+
 public class MainGUIController extends Application implements Runnable{
 
     //This class will control the scene, stage and the general GUI setup.
@@ -195,7 +197,10 @@ public class MainGUIController extends Application implements Runnable{
 
         String text = currentCollection.getRoom().getLongDescription();
 
-        currentRoomDescribtion = new RoomDescriptionText(text, 50_000);
+        //If there's 1 or less character of description, it wont begin rendering the gui element.
+        if(text.getBytes(StandardCharsets.UTF_8).length > 2) {
+            currentRoomDescribtion = new RoomDescriptionText(text, 50_000);
+        }
 
     }
     public void cleanUpExpired(){
