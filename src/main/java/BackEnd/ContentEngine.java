@@ -111,26 +111,4 @@ public class ContentEngine {
         return new GraphicsProcessor().getCheckMark();
     }
 
-
-
-
-
-
-    //public static ArrayList<CacheItemInfo> getItemsCached(){
-    //    TextProcessor tp = new TextProcessor();
-    //    ArrayList<CacheItemInfo> output = new ArrayList<>();
-    //    output.addAll(tp.convertToCacheItemInfo(tp.readAllLines()));
-    //    return output;
-    //}
-
-
-
-    //public static void addItemToCache(CItem model){
-    //    TextProcessor tp = new TextProcessor();
-    //    ArrayList<String> lines = tp.readAllLines();
-    //    CacheItemInfo info = new CacheItemInfo(Game.currentRoom.getId(), model.getId());
-    //    lines.add(tp.singleItemCacheToLine(info));
-    //    tp.writeToTempItemFile(lines);
-    //}
-
 }
