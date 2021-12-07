@@ -16,6 +16,7 @@ public class ContentEngine {
 
     private TextProcessor tp = new TextProcessor();
     private GraphicsProcessor gp;
+    private static ArrayList<RoomCollection> collections = new ArrayList<>();
 
     public ContentEngine(){
 
@@ -50,9 +51,24 @@ public class ContentEngine {
     }
 
     public static RoomCollection getRoomCollection(Room room){
-        RoomCollection rc = new RoomCollection(room);        //Gotta parse the RoomExitTriggers here as well. Forgot them
 
-        return rc;
+        boolean foundIt = false;
+        RoomCollection toReturn = null;
+
+        for(RoomCollection rc : collections){
+            if (rc.getId() == room.getId()){
+                foundIt = true;
+                toReturn = rc;
+                break;
+            }
+        }
+
+        if(!foundIt) {
+            toReturn = new RoomCollection(room);        //Gotta parse the RoomExitTriggers here as well. Forgot them
+            collections.add(toReturn);
+        }
+
+        return toReturn;
     }
 
     public static ArrayList<RenderableImage> specificRoomGraphics(int roomId){
