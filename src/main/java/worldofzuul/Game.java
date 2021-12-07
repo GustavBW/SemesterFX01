@@ -23,7 +23,7 @@ public class Game implements Runnable{
     public final ArrayList<Room> allRooms = new ArrayList<>();
     private Thread tickThread, interThread, renderThread;
 
-    private int helpCount = 0, hintCount = 0, turnCount = 0;
+    private int helpCount = 0, hintCount = 0, turnCount = 0, endGameRoomId = 5;
     public static double interpolation = 1; //Interpolation is a factor that tells you how long the last tick took compared to having 1 tick per second
                                             //This thus makes it possible to just multiply any movement-vectors with the interpolation, to get all speeds
                                             //As say pixels per second. (It will always be a frame behind, but that's just how it works)
@@ -106,7 +106,7 @@ public class Game implements Runnable{
                 if(onPause){continue;}
 
                 if(evaluateGameCompletion()){
-                    MainGUIController.roomToChangeTo = null;
+                    MainGUIController.roomToChangeTo = ContentEngine.getRoomCollection(ContentEngine.specificRoom(endGameRoomId));
                     MainGUIController.sceneChangeRequested = true;
                 }
 
