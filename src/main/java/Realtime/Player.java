@@ -27,7 +27,7 @@ public class Player implements Renderable, Tickable {
     private boolean upKeyPressed,rightKeyPressed,downKeyPressed,leftKeyPressed, running = false;
     private GraphicsProcessor gp = new GraphicsProcessor();
 
-    public Player(int x, int y, Image image){
+    public Player(int x, int y, ArrayList<Image> image){
         this.posX = x;
         this.posY = y;
         this.images = gp.getPlayerGraphics();
@@ -35,8 +35,8 @@ public class Player implements Renderable, Tickable {
         questsResolved = new ArrayList<>();
         questsResolved.add(-1);
 
-        this.imW = (int) image.getWidth();
-        this.imH = (int) image.getHeight();
+        this.imW = (int) image.get(0).getWidth();
+        this.imH = (int) image.get(0).getHeight();
 
         this.orX = posX - imW;
         this.orY = posY - imH;

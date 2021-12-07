@@ -68,9 +68,12 @@ public class GraphicsProcessor {
         }
 
 
-        public Image getPlayerGraphics(){
-                Image output;
-                output = new Image(getClass().getResourceAsStream( graphicsDirectory + playerGraphicsDirectory + "/PlayerTest.png"));
+        public ArrayList<Image> getPlayerGraphics(){
+                ArrayList<Image> output = new ArrayList<>();
+                output.add(new Image(getClass().getResourceAsStream( graphicsDirectory + playerGraphicsDirectory + "/Player0.png")));
+                output.add(new Image(getClass().getResourceAsStream( graphicsDirectory + playerGraphicsDirectory + "/Player1.png")));
+                output.add(new Image(getClass().getResourceAsStream( graphicsDirectory + playerGraphicsDirectory + "/Player2.png")));
+                output.add(new Image(getClass().getResourceAsStream( graphicsDirectory + playerGraphicsDirectory + "/Player3.png")));
                 return output;
         }
 
