@@ -94,6 +94,7 @@ public class Quest {
 
                 if (amountNeeded <= 0) {
                     completed = true;
+                    Game.player.questResolved(id);
                     Game.updateQuestGUI = true;
                 }
 

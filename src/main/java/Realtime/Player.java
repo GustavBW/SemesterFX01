@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import worldofzuul.Game;
 
+import java.util.ArrayList;
+
 public class Player implements Renderable, Tickable {
 
     private double posX;
@@ -19,6 +21,7 @@ public class Player implements Renderable, Tickable {
     private int imH;  //orX describes the graphical origin. Meaning where the center of any image or rectangle LOOKS to be.
     private final Image image;
     private final double speed = 3;
+    private ArrayList<Integer> questsResolved;
     private boolean upKeyPressed,rightKeyPressed,downKeyPressed,leftKeyPressed, running = false;
     private GraphicsProcessor gp = new GraphicsProcessor();
 
@@ -26,11 +29,10 @@ public class Player implements Renderable, Tickable {
         this.posX = x;
         this.posY = y;
         this.image = gp.getPlayerGraphics();
-
+        questsResolved = new ArrayList<>();
 
         this.imW = (int) image.getWidth();
         this.imH = (int) image.getHeight();
-
 
         this.orX = posX - imW;
         this.orY = posY - imH;
@@ -81,6 +83,11 @@ public class Player implements Renderable, Tickable {
     public double getPosY(){return posY;}
     public double getOrX(){return orX;}
     public double getOrY(){return orY;}
+
+    public void questResolved(int questId){
+        questsResolved.add(questId);
+        System.out.println("Resolved Quest " + questId);
+    }
 
     public void setPosX(int pos){posX = pos;}
     public void setPosY(int pos){posY = pos;}
