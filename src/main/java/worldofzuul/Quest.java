@@ -8,7 +8,7 @@ public class Quest {
     private String desc;
     private String hint;
     private String title;
-    private int itemId;
+    private int itemId, gateId;
     private boolean completed = false;
     private int amountNeeded, originalAmount;
     private QuestType type;
@@ -59,6 +59,11 @@ public class Quest {
             }
         }
 
+    }
+
+    public Quest(int id, String desc, String hint, int itemId, int amount, String type, int gateId){
+        this(id, desc, hint, itemId, amount, type);
+        this.gateId = gateId;
     }
 
     public Quest(int id, String desc, String hint, int itemId) {
