@@ -32,6 +32,7 @@ public class GraphicsProcessor {
 
                 try{
                         BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(graphicsDirectory + cItemDirectory + cItemPositions)));
+
                         while((lines = br.readLine()) != null){
                                 String[] line = lines.split(splitBy);
                                 if(Integer.parseInt(line[0]) == itemId){
@@ -62,7 +63,7 @@ public class GraphicsProcessor {
                 Point2D output;
                 String splitBy = ",";
                 String[] xAndY = position.split(splitBy);
-                output = new Point2D(Double.parseDouble(xAndY[1]), Double.parseDouble(xAndY[1]));
+                output = new Point2D(Double.parseDouble(xAndY[0]), Double.parseDouble(xAndY[1]));
                 return output;
         }
 
