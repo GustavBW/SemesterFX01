@@ -219,10 +219,9 @@ public class Room {
     public Boolean isQuestsSolved(){
         boolean someBool = true;
         for(Quest q : quests){
-            if(q.isComplete()){
-
-            }else{
+            if(!q.isComplete()){
                 someBool = false;
+                break;
             }
         }
         return someBool;
