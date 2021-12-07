@@ -37,8 +37,9 @@ public class Quest {
         this.title = "Use";
     }
 
-    public Quest(int id,  String title, String desc, String hint, int itemId, int amount, String type){
+    public Quest(int id,  String title, String desc, String hint, int itemId, int amount, String type, int gateId){
         this(id, desc, hint, itemId, amount, type);
+        this.gateId = gateId;
         this.title = title;
     }
 
@@ -59,11 +60,6 @@ public class Quest {
             }
         }
 
-    }
-
-    public Quest(int id, String desc, String hint, int itemId, int amount, String type, int gateId){
-        this(id, desc, hint, itemId, amount, type);
-        this.gateId = gateId;
     }
 
     public Quest(int id, String desc, String hint, int itemId) {
