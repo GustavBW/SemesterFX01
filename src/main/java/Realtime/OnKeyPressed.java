@@ -17,50 +17,42 @@ public class OnKeyPressed implements EventHandler<KeyEvent> {
     public void handle(KeyEvent keyEvent) {
 
         switch (keyEvent.getCode()) {
-            case W: {
+            case W -> {
                 Game.player.setUpKeyPressed(true);
-                break;
             }
-            case D: {
+            case D -> {
                 Game.player.setRightKeyPressed(true);
-                break;
             }
-            case S: {
+            case S -> {
                 Game.player.setDownKeyPressed(true);
-                break;
             }
-            case A: {
+            case A -> {
                 Game.player.setLeftKeyPressed(true);
-                break;
             }
-            case SHIFT: {
+            case SHIFT -> {
                 Game.player.setRunning(true);
-                break;
             }
-            case E: {
+            case E -> {
                 if (InteractionHandler.interactibleReadyToInteract != null) {
                     InteractionHandler.interactibleReadyToInteract.onInteraction();
                 }
-                break;
             }
-            case P: {
+            case P -> {
                 Game.onPause = !Game.onPause;
-                break;
             }
-            case I: {
+            case I -> {
                 mGUIC.toggleInventoryGUI();
-                break;
             }
-            case TAB: {
+            case TAB -> {
                 mGUIC.toggleQuestGUI();
-                break;
             }
-            case U: {     //Debugging shortcut
+            case U -> {     //Debugging shortcut
                 Game.updateQuestGUI = true;
                 Game.getInventoryManager().inventoryChanged = true;
-                break;
+            }
+            case F3 -> {
+                mGUIC.togglePerformanceGUI();
             }
         }
-
     }
 }
