@@ -19,7 +19,9 @@ public class Player implements Renderable, Tickable {
     private double orY;
     private int imW;
     private int imH;  //orX describes the graphical origin. Meaning where the center of any image or rectangle LOOKS to be.
-    private final Image image;
+    private int direction = 0;
+    private Image image;
+    private ArrayList<Image> images;
     private final double speed = 3;
     private ArrayList<Integer> questsResolved;
     private boolean upKeyPressed,rightKeyPressed,downKeyPressed,leftKeyPressed, running = false;
@@ -28,7 +30,8 @@ public class Player implements Renderable, Tickable {
     public Player(int x, int y, Image image){
         this.posX = x;
         this.posY = y;
-        this.image = gp.getPlayerGraphics();
+        this.images = gp.getPlayerGraphics();
+        //this.image = images.get(0);
         questsResolved = new ArrayList<>();
         questsResolved.add(-1);
 
@@ -44,7 +47,7 @@ public class Player implements Renderable, Tickable {
 
     @Override
     public void render(GraphicsContext gc) {
-        gc.drawImage(image,posX,posY);
+        gc.drawImage(images.get(direction),posX,posY);
     }
 
     @Override
@@ -57,15 +60,19 @@ public class Player implements Renderable, Tickable {
 
         if (upKeyPressed) {     //Using a Vector2D is necessary for getting the rotation angle
             posY -= currentSpeed;
+            this.direction = 0;
         }
         if (rightKeyPressed) {
             posX += currentSpeed;
+            this.direction = 1;
         }
         if (downKeyPressed) {
             posY += currentSpeed;
+            this.direction = 2;
         }
         if (leftKeyPressed) {
             posX -= currentSpeed;
+            this.direction = 3;
         }
 
         orX = posX + (imW / 2.0);   //Updating Origins
@@ -132,6 +139,14 @@ public class Player implements Renderable, Tickable {
 
     public void setRunning(boolean state) {
         this.running = state;
+    }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
     }
 
     @Override
