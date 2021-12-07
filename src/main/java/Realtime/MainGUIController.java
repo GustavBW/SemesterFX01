@@ -242,9 +242,7 @@ public class MainGUIController extends Application implements Runnable{
         getThatPlayerBackInThere();
         Game.currentRoom = rc.getRoom();            //Updating the variable stored in the Game class as some functionality is running in parallel using the variable in Room and not here. (InventoryManager)
 
-        if(currentRoomDescribtion != null){
-            currentRoomDescribtion.destroy();
-        }
+        destroyRoomDescription();       //This got it's own function as this functionality needs to be accessible from the KeyHandlers as well.
 
         roomTitleText.setText(rc.getRoom().getName());  //Updating the Room title
 
@@ -329,7 +327,17 @@ public class MainGUIController extends Application implements Runnable{
     public void togglePerformanceGUI(){
         perfGUI.toggleDisplayStatus(!perfGUI.getDisplayStatus());
     }
-
+    public void destroyRoomDescription(){
+        if(currentRoomDescribtion != null){
+            currentRoomDescribtion.destroy();
+        }
+    }
+    public void hideAllGUIs(){
+        qGUI.setDisplayStatus(false);
+        iGUIM.setDoDisplay(false);
+        perfGUI.toggleDisplayStatus(false);
+        destroyRoomDescription();
+    }
     public InventoryGUIManager getiGUIM(){return iGUIM;}
     public static RoomCollection getCurrentRoom(){
         if(sceneChangeRequested) {

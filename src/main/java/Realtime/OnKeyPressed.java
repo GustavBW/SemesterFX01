@@ -53,6 +53,9 @@ public class OnKeyPressed implements EventHandler<KeyEvent> {
             case F3 -> {
                 mGUIC.togglePerformanceGUI();
             }
+            case ESCAPE -> {
+                mGUIC.hideAllGUIs();
+            }
         }
     }
 }
