@@ -1,5 +1,9 @@
-0;Find Dine Ting;Fedt. Måske du skulle få brug for dem senere. Hold godt fast på dem;Der ligger nogle ting ved bilen. Gå over og saml dem op;11;1;PickUp;-1
+0;Find Dit kamera;Fedt. Måske du skulle få brug for dem senere. Hold godt fast på dem;Der ligger nogle ting ved bilen. Gå over og saml dem op;11;1;PickUp;-1
 1;Test Dit Kamera;Dit kamera ser ud til at virke, og du har taget et billede. Tid til at komme videre!;Prøv at tage et billede med dit kamera. Det kunne være det var i stykker!;11;1;Use;0
-2;Find Maske;Du har nu en maske. Prøv at se nærmere på kemikalierne i 'Liming, Soaking & Krom' rummet;Det brude ligge en maske her et sted. Gå over og saml den op;12;1;Pickup;-1
-3;Tag en Prøve;Du har taget en prøve fra tønderne. Tid til at få det testet;Tag en prøve af kemikaliet fra tønderne;10;1;Pickup;2
-4;Dokumenter Omgivelserne;Du har dokumenteret omgivelserne;Brug dit kamera;11;1;Use;1
+2;Find En Maske;Du har nu en maske. Prøv at se nærmere på kemikalierne i 'Liming, Soaking & Krom' rummet;Det brude ligge en maske her et sted. Gå over og saml den op;12;1;Pickup;-1
+3;Tag En Prøve;Du har taget en prøve af væsken;Sørg for du har en maske og saml noget væske op;10;1;Pickup;-1
+4;Tag En Prøve;Du har taget en prøve fra tønderne. Tid til at få det testet;Tag en prøve af kemikaliet fra tønderne;8;1;Pickup;-1
+5;Dokumenter Omgivelserne;Du har dokumenteret omgivelserne;Brug dit kamera til at dokumenter alt det skind der ligger rundt omkring;11;1;Use;0
+6;Dokumenter Omgivelserne;Du har dokumenteret omgivelserne;Brug til kamera til at dokumenter alle de væsker der løber ned på jorden. Tag et billede af den blå væske;11;1;Use;0
+7;Dokumenter Omgivelserne;Du har dokumenteret omgivelserne;Dokumenter hvordan de bare hælder væsker ned i vandet, fra tønder med røde 'X' på;11;1;Use;0
+8;Tag En Prøve;Du har taget en prøve af vandet;Tag ud til floden, og se om du kan finde en flaske med noget af flodens vand;3;1;Pickup;-1
