@@ -54,14 +54,6 @@ public class RoomExitTrigger extends DistanceTrigger implements Interactible, Re
             imagePosition = new Point2D(position.getX() - (arrowImage.getWidth() / 2.0), position.getY() - (arrowImage.getHeight() * 0.8));
             textPosition = new Point2D(imagePosition.getX() - (text.getBytes(StandardCharsets.UTF_8).length * (textSize * textHeightToWidthFactor)), imagePosition.getY() - 10);
 
-        }else if (roomToChangeTo.getId() == Game.titleScreenRoomId){
-
-            position = new Point2D(Game.WIDTH * 0.5, Game.HEIGHT * 0.5);
-            playerNextPosition = new Point2D(Game.WIDTH * 0.6, Game.HEIGHT * 0.1);
-            arrowImage = ContentEngine.getExitArrowImage("west");
-            imagePosition = new Point2D(Game.WIDTH * 0.46, Game.HEIGHT * 0.46);
-            textPosition = new Point2D(imagePosition.getX(), imagePosition.getY() - 50);
-
         }else{
             switch (ed.getDirection()) {
                 case "south" -> {
@@ -92,6 +84,14 @@ public class RoomExitTrigger extends DistanceTrigger implements Interactible, Re
                     textPosition = new Point2D(imagePosition.getX() + 20, imagePosition.getY());
                 }
             }
+        }
+        if (roomToChangeTo.getId() == Game.titleScreenRoomId || roomToChangeTo.getName().equalsIgnoreCase("T")) {
+
+            position = new Point2D(Game.WIDTH * 0.5, Game.HEIGHT * 0.5);
+            playerNextPosition = new Point2D(Game.WIDTH * 0.6, Game.HEIGHT * 0.1);
+            arrowImage = ContentEngine.getExitArrowImage("west");
+            imagePosition = new Point2D(Game.WIDTH * 0.46, Game.HEIGHT * 0.46);
+            textPosition = new Point2D(imagePosition.getX(), imagePosition.getY() - 50);
         }
 
         super.setPosX((int) position.getX());

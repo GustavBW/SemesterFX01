@@ -62,6 +62,7 @@ public class QuestGUI implements Renderable {
         isReady = false;
         int counter = 0;
         double displacement = 0;
+        boolean questsFound = false;
 
         clear();
 
@@ -98,6 +99,7 @@ public class QuestGUI implements Renderable {
 
                     counter++;
                     displacement = yOffsetBetweenSegments * counter;
+                    questsFound = true;
                 }else{
 
                     questTitles.add(
@@ -120,6 +122,7 @@ public class QuestGUI implements Renderable {
 
                     counter++;
                     displacement = yOffsetBetweenSegments * counter;
+                    questsFound = true;
                 }
             }
             roomSolved = MainGUIController.getCurrentRoom().getRoom().isQuestsSolved();
@@ -127,7 +130,7 @@ public class QuestGUI implements Renderable {
 
         totalDisplaceMent = displacement;
         totalDisplayHeight = calculateTotalDisplayHeight();
-        doDisplay = true;   //Setting doDisplay to true here, will cause the QuestGUI to pop up whenever somethings changed.
+        doDisplay = questsFound;   //Setting doDisplay to true here, will cause the QuestGUI to pop up whenever somethings changed.
         isReady = true;
     }
 
