@@ -105,6 +105,11 @@ public class Game implements Runnable{
 
                 if(onPause){continue;}
 
+                if(evaluateGameCompletion()){
+                    MainGUIController.roomToChangeTo = null;
+                    MainGUIController.sceneChangeRequested = true;
+                }
+
                 for(Tickable t : Tickable.tickables){
                     t.tick();
                 }

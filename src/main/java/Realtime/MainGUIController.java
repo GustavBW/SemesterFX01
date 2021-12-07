@@ -315,12 +315,8 @@ public class MainGUIController extends Application implements Runnable{
         }
     }
     private void addNewInteractibles(RoomCollection rc){
-
         Interactible.interactibles.addAll(rc.getExitTriggers());
         Interactible.interactibles.addAll(rc.getCitems());
-
-
-
     }
     private void getThatPlayerBackInThere(){
         Tickable.tickables.add(Game.player);
