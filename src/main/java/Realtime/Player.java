@@ -30,6 +30,7 @@ public class Player implements Renderable, Tickable {
         this.posY = y;
         this.image = gp.getPlayerGraphics();
         questsResolved = new ArrayList<>();
+        questsResolved.add(-1);
 
         this.imW = (int) image.getWidth();
         this.imH = (int) image.getHeight();
@@ -88,6 +89,7 @@ public class Player implements Renderable, Tickable {
         questsResolved.add(questId);
         System.out.println("Resolved Quest " + questId);
     }
+    public ArrayList<Integer> getResovledQuests(){return questsResolved;}
 
     public void setPosX(int pos){posX = pos;}
     public void setPosY(int pos){posY = pos;}

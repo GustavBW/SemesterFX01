@@ -89,7 +89,7 @@ public class Quest {
     public boolean evaluateItem(Item item, QuestType type){
         boolean success = false;
 
-        if(this.type == type) {
+        if(this.type == type && Game.player.getResovledQuests().contains(gateId)) {
             if (item.getId() == itemId) {
                 amountNeeded -= item.getAmount();
 
