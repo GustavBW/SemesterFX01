@@ -39,24 +39,11 @@ public class ContentEngine {
         ArrayList<Item> items = tp.getItemsForRoom(roomId);
 
         for(Item i : items){
-            if (!alreadyPickedUp(i.getId())) {
                 citems.add(new CItem(i, gp.getCItemPosPic(i.getId())));
-            }
         }
         return citems;
     }
 
-
-    private static boolean alreadyPickedUp(int itemId){
-        boolean output = false;
-
-        for(CacheItemInfo c: getItemsCached()){
-            if(itemId == c.getItemId() && Game.currentRoom.getId() == c.getRoomId()){
-                output = true;
-            }
-        }
-        return output;
-    }
 
     public static TextProcessor getTextProcessor(){
         return new TextProcessor();
@@ -113,21 +100,21 @@ public class ContentEngine {
 
 
 
-    public static ArrayList<CacheItemInfo> getItemsCached(){
-        TextProcessor tp = new TextProcessor();
-        ArrayList<CacheItemInfo> output = new ArrayList<>();
-        output.addAll(tp.convertToCacheItemInfo(tp.readAllLines()));
-        return output;
-    }
+    //public static ArrayList<CacheItemInfo> getItemsCached(){
+    //    TextProcessor tp = new TextProcessor();
+    //    ArrayList<CacheItemInfo> output = new ArrayList<>();
+    //    output.addAll(tp.convertToCacheItemInfo(tp.readAllLines()));
+    //    return output;
+    //}
 
 
 
-    public static void addItemToCache(CItem model){
-        TextProcessor tp = new TextProcessor();
-        ArrayList<String> lines = tp.readAllLines();
-        CacheItemInfo info = new CacheItemInfo(Game.currentRoom.getId(), model.getId());
-        lines.add(tp.singleItemCacheToLine(info));
-        tp.writeToTempItemFile(lines);
-    }
+    //public static void addItemToCache(CItem model){
+    //    TextProcessor tp = new TextProcessor();
+    //    ArrayList<String> lines = tp.readAllLines();
+    //    CacheItemInfo info = new CacheItemInfo(Game.currentRoom.getId(), model.getId());
+    //    lines.add(tp.singleItemCacheToLine(info));
+    //    tp.writeToTempItemFile(lines);
+    //}
 
 }

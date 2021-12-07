@@ -42,7 +42,7 @@ public class InventoryManager {
 
                 if (!wasAlreadyInInventory) {
                     cinventory.add(citem);
-                    ContentEngine.addItemToCache(citem);
+                    //ContentEngine.addItemToCache(citem);
                     success = true;
                 }
 

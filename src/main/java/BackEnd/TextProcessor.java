@@ -241,54 +241,54 @@ public class TextProcessor {
 
 
 
-    public ArrayList<String> readAllLines()
-    {
-        ArrayList<String> output = new ArrayList<>();
-        String line;
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(cacheItemDataFilePath));
-            while((line = br.readLine()) != null)
-            {
-                output.add(line);
-            }
+    //public ArrayList<String> readAllLines()
+    //{
+    //    ArrayList<String> output = new ArrayList<>();
+    //    String line;
+    //    try{
+    //        BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(cacheItemDataFilePath)));
+    //        while((line = br.readLine()) != null)
+    //        {
+    //            output.add(line);
+    //        }
+//
+    //    }catch (IOException e){
+    //        e.printStackTrace();
+    //        System.out.println("No Cached Items");
+    //    }
+    //    return output;
+    //}
 
-        }catch (IOException e){
-            e.printStackTrace();
-            System.out.println("No Cached Items");
-        }
-        return output;
-    }
-
-    public ArrayList<CacheItemInfo> convertToCacheItemInfo(ArrayList<String> lines){
-        ArrayList<CacheItemInfo> output = new ArrayList<>();
-        for(String s: lines){
-            String[] collumns = s.split(";");
-            output.add(new CacheItemInfo(Integer.parseInt(collumns[0]),
-                                         Integer.parseInt(collumns[1])));
-        }
-        return output;
-    }
+   //public ArrayList<CacheItemInfo> convertToCacheItemInfo(ArrayList<String> lines){
+   //    ArrayList<CacheItemInfo> output = new ArrayList<>();
+   //    for(String s: lines){
+   //        String[] collumns = s.split(";");
+   //        output.add(new CacheItemInfo(Integer.parseInt(collumns[0]),
+   //                                     Integer.parseInt(collumns[1])));
+   //    }
+   //    return output;
+   //}
 
 
-    public void writeToTempItemFile(ArrayList<String> allLines){
-        try(PrintWriter writer = new PrintWriter(cacheItemDataFilePath)){
-            for(String s: allLines){
-                writer.write(s);
-            }
-        } catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-    }
+   //public void writeToTempItemFile(ArrayList<String> allLines){
+   //    try(PrintWriter writer = new PrintWriter(cacheItemDataFilePath)){
+   //        for(String s: allLines){
+   //            writer.write(s);
+   //        }
+   //    } catch (FileNotFoundException e){
+   //        e.printStackTrace();
+   //    }
+   //}
 
-    public ArrayList<String> convertItemCacheToStrings(ArrayList<CacheItemInfo> models){
-        ArrayList<String> output = new ArrayList<>();
-        for(CacheItemInfo c: models){
-            output.add(singleItemCacheToLine(c));
-        }
-        return output;
-    }
+    //public ArrayList<String> convertItemCacheToStrings(ArrayList<CacheItemInfo> models){
+    //    ArrayList<String> output = new ArrayList<>();
+    //    for(CacheItemInfo c: models){
+    //        output.add(singleItemCacheToLine(c));
+    //    }
+    //    return output;
+    //}
 
-    public String singleItemCacheToLine(CacheItemInfo model){
-        return model.getRoomId() + ";" + model.getItemId();
-    }
+    //public String singleItemCacheToLine(CacheItemInfo model){
+    //    return model.getRoomId() + ";" + model.getItemId();
+    //}
 }
