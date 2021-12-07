@@ -10,6 +10,8 @@ import Realtime.interfaces.Renderable;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import worldofzuul.Game;
 
 import java.util.Random;
@@ -23,6 +25,7 @@ public class CItem extends Item implements Interactible, Renderable {
     private int interRadius = 80;
     private boolean showText = false;
     private String text;
+    private Font fontToUse;
 
     private static Random r = new Random();
 
@@ -30,6 +33,7 @@ public class CItem extends Item implements Interactible, Renderable {
         super(item);
         this.item = item;
         this.posPic = posPic;
+        this.fontToUse = Font.font("Impact", 28);
 
         if(posPic.getPos() != null) {
             position = posPic.getPos();
@@ -102,7 +106,16 @@ public class CItem extends Item implements Interactible, Renderable {
         gc.drawImage(picture, position.getX(),position.getY());
 
         if(showText){
+
+            gc.setFont(fontToUse);
+
+            gc.setFill(Color.WHITE);
+            gc.fillText(text, position.getX()-1, position.getY()-1);
+
+            gc.setFill(Color.BLACK);
             gc.fillText(text, position.getX(), position.getY());
+
+
             showText = false;
         }
     }
