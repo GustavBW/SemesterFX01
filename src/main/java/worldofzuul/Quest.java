@@ -9,7 +9,7 @@ public class Quest {
     private String hint;
     private String title;
     private int itemId, gateId;
-    private boolean completed = false;
+    private boolean completed = false, isGated = false;
     private int amountNeeded, originalAmount;
     private QuestType type;
 
@@ -39,6 +39,11 @@ public class Quest {
 
     public Quest(int id,  String title, String desc, String hint, int itemId, int amount, String type, int gateId){
         this(id, desc, hint, itemId, amount, type);
+
+        if(gateId == -1){
+            isGated = true;
+        }
+
         this.gateId = gateId;
         this.title = title;
     }
@@ -88,8 +93,15 @@ public class Quest {
 
     public boolean evaluateItem(Item item, QuestType type){
         boolean success = false;
+        boolean gateCondition = true;
 
-        if(this.type == type && Game.player.getResovledQuests().contains(gateId)) {
+        if(isGated) {
+            if (!Game.player.getResovledQuests().contains(gateId)) {
+                gateCondition = false;
+            }
+        }
+
+        if (this.type == type && gateCondition) {
             if (item.getId() == itemId) {
                 amountNeeded -= item.getAmount();
 
@@ -102,6 +114,7 @@ public class Quest {
                 success = true;
             }
         }
+
 
         return success;
     }
