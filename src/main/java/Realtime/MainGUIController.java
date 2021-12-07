@@ -26,8 +26,6 @@ public class MainGUIController extends Application implements Runnable{
     //This class can take in a RoomCollection and display what it contains
 
     public static Stage mainStage;
-    private Text renderFPSText,interFPSText,tickFPSText;
-    private HBox hboxTop;
 
     //static elements. Always there.
     private BorderPane bp;  //A borderpane to contain the canvas for easy of moveing the canvas around and/or adding elements around the canvas
@@ -62,11 +60,10 @@ public class MainGUIController extends Application implements Runnable{
     public void start(Stage stage) throws Exception {
         isRunning = true;       //Although it's running, it's not ready. Thus the other threads will await, but will continuesly check for isReady.
         bp = new BorderPane();
-        createLoggingTexts();   //Initiating the logging texts used to display how well the game is performing right now
 
         iGUIM = Game.getiGUIM();    //Initiated by Game as these GUI controllers needs some data the MainGUIController doesn't have access to.
         qGUI = Game.getqGUI();
-        perfGUI = new PerformanceGUI();
+        perfGUI = new PerformanceGUI(); //Initiating the logging texts used to display how well the game is performing right now
 
         mainStage = stage;
         mainStage.setTitle("World Of Toxins");
@@ -111,24 +108,8 @@ public class MainGUIController extends Application implements Runnable{
         System.out.println("MGUIC has finished setup at " + System.nanoTime()); //Logging the time the MainGUIController finished up to keep track of performance.
     }
 
-    private void createLoggingTexts() {
-
-        renderFPSText = new Text("R FPS: Inactive ");
-        renderFPSText.setDisable(true);
-        interFPSText = new Text("I FPS: Inactive ");
-        interFPSText.setDisable(true);
-        tickFPSText = new Text("T FPS: Inactive ");
-        tickFPSText.setDisable(true);
-
-        hboxTop = new HBox(5);
-        hboxTop.getChildren().addAll(renderFPSText,interFPSText,tickFPSText);
-        hboxTop.setAlignment(Pos.CENTER);
-
-        bp.setTop(hboxTop);
-    }
-
     private void updateLogText() {
-        if(System.currentTimeMillis() >= logLastCall + 200) {       //Triggers log updated ~5 times a second
+        if(System.currentTimeMillis() >= logLastCall + 500) {       //Triggers log updated ~5 times a second
             long rFPS = 1_000_000_000 / (logTimeRender + 1);        //Super fast method of avoiding dividing by zero
             long iFPS = 1_000_000_000 / (logTimeInter + 1);         //Unfortunatly it will make the times occur slower
             long tFPS = 1_000_000_000 / (logTimeTick + 1);          //By a very small fraction
@@ -339,7 +320,6 @@ public class MainGUIController extends Application implements Runnable{
         System.out.println("MGUIC continued from flag sleep at: " + System.nanoTime());
         awaitBoolean = false;
     }
-
     public void toggleInventoryGUI(){
         iGUIM.setDoDisplay(!iGUIM.getDisplayStatus());
     }

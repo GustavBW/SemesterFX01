@@ -83,11 +83,11 @@ public class InteractionHandler implements Runnable{
                 if(!foundSomething){                    //Resets it as the MGUIC listens to whether or not "interactibleReadyToInteract" is null
                     interactibleReadyToInteract = null;
                 }
-
-                long timeB = System.nanoTime();
-
-                MainGUIController.logTimeTick = (timeB - timeA);
             }
+
+            long timeB = System.nanoTime();
+
+            MainGUIController.logTimeInter = (timeB - timeA);
         }
     }
     public static Clickable findInteractibleOnMouseClick(int mouseX, int mouseY){
