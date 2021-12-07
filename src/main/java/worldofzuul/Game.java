@@ -234,6 +234,18 @@ public class Game implements Runnable{
 
     }
 
+    public boolean evaluateGameCompletion() {
+        boolean gameComplete = true;
+        for (Room room : Room.roomsList) {
+            if (!room.isQuestsSolved()) {
+                gameComplete = false;
+                break;
+            }
+        }
+
+        return gameComplete;
+    }
+
     @Override
     public void run() {
         play();
