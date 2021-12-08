@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-Main-Class: Game
-Class-Path: WorldOfToxinsv1.0.jar/worldofzuul/Game.class
+Main-Class: Game.class
+Class-Path: WorldOfToxinsv1.0/worldofzuul
 
