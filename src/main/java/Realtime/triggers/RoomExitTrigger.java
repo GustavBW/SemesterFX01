@@ -102,7 +102,6 @@ public class RoomExitTrigger extends DistanceTrigger implements Interactible, Re
         dropShadow = advancedRendText.getDropShadow(2);
     }
 
-
     @Override
     public void onInVicinity(){
 

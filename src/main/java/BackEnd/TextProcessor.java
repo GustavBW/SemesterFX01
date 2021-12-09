@@ -51,9 +51,6 @@ public class TextProcessor {
 
     }
 
-
-
-
     public ArrayList<Item> allItemsInRoom(String itemsRequested)
     {
         String splitByComma = ",";
@@ -134,8 +131,7 @@ public class TextProcessor {
 
         return itemFound;
     }
-
-
+    
     public ArrayList<Item> getAllItems()
     {
         ArrayList<Item> output = new ArrayList<>();

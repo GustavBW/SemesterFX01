@@ -66,7 +66,7 @@ public class MainGUIController extends Application implements Runnable{
         perfGUI = new PerformanceGUI(); //Initiating the logging texts used to display how well the game is performing right now
 
         mainStage = stage;
-        mainStage.setTitle("World Of Toxins");
+        mainStage.setTitle("Pollution Inc.");
 
         canvas = new Canvas(Game.WIDTH,Game.HEIGHT);
         gc = canvas.getGraphicsContext2D(); //DrawGraphics - a 2D array of pixels each individually overwritable. Displayed on screen every frame
