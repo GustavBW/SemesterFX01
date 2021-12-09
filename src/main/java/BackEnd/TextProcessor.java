@@ -131,7 +131,7 @@ public class TextProcessor {
 
         return itemFound;
     }
-    
+
     public ArrayList<Item> getAllItems()
     {
         ArrayList<Item> output = new ArrayList<>();

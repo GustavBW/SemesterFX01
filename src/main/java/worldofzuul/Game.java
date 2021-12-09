@@ -12,6 +12,9 @@ import Realtime.inventory.InventoryManager;
 import java.util.ArrayList;
 
 public class Game implements Runnable{
+
+    //A Game by Alexander Birkwald, Emil Frederik Coyte Orland, Gustav Bundgaard Wanscher
+
     private final Parser parser;
 
     private final static TextProcessor tp = new TextProcessor();
