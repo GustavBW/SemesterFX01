@@ -1,9 +1,9 @@
-0;Find Dit kamera;Fedt. Måske du skulle få brug for dem senere. Hold godt fast på dem;Der ligger nogle ting ved bilen. Gå over og saml dem op;11;1;PickUp;-1
-1;Test Dit Kamera;Dit kamera ser ud til at virke, og du har taget et billede. Tid til at komme videre!;Prøv at tage et billede med dit kamera. Det kunne være det var i stykker!;11;1;Use;0
-2;Find En Maske;Du har nu en maske. Prøv at se nærmere på kemikalierne i 'Liming, Soaking & Krom' rummet;Det brude ligge en maske her et sted. Gå over og saml den op;12;1;Pickup;0
-3;Tag En Prøve;Du har taget en prøve af væsken;Sørg for du har en maske og saml noget væske op;10;1;Pickup;0
-4;Tag En Prøve;Du har taget en prøve fra tønderne. Tid til at få det testet;Tag en prøve af kemikaliet fra tønderne;8;1;Pickup;0
+0;Find Dit kamera;Fedt. Maaske du skulle faa brug for dem senere. Hold godt fast paa dem;Der ligger nogle ting ved bilen. Gaa over og saml dem op;11;1;PickUp;-1
+1;Test Dit Kamera;Dit kamera ser ud til at virke, og du har taget et billede. Tid til at komme videre!;Proev at tage et billede med dit kamera. Det kunne vaere det var i stykker!;11;1;Use;0
+2;Find En Maske;Du har nu en maske. Proev at se naermere paa kemikalierne i 'Liming, Soaking & Krom' rummet;Det brude ligge en maske her et sted. Gaa over og saml den op;12;1;Pickup;0
+3;Tag En Proeve;Du har taget en proeve af vaesken;Soerg for du har en maske og saml noget vaeske op;10;1;Pickup;0
+4;Tag En Proeve;Du har taget en proeve fra toenderne. Tid til at faa det testet;Tag en proeve af kemikaliet fra toenderne;8;1;Pickup;0
 5;Dokumenter Omgivelserne;Du har dokumenteret omgivelserne;Brug dit kamera til at dokumenter alt det skind der ligger rundt omkring;11;1;Use;-1
-6;Dokumenter Omgivelserne;Du har dokumenteret omgivelserne;Brug til kamera til at dokumenter alle de væsker der løber ned på jorden. Tag et billede af den blå væske;11;1;Use;0
-7;Dokumenter Omgivelserne;Du har dokumenteret omgivelserne;Dokumenter hvordan de bare hælder væsker ned i vandet, fra tønder med røde 'X' på;11;1;Use;0
-8;Tag En Prøve;Du har taget en prøve af vandet;Tag ud til floden, og se om d    u kan finde en flaske med noget af flodens vand;3;1;Pickup;0
+6;Dokumenter Omgivelserne;Du har dokumenteret omgivelserne;Brug til kamera til at dokumenter alle de vaesker der loeber ned paa jorden. Tag et billede af den blaa vaeske;11;1;Use;0
+7;Dokumenter Omgivelserne;Du har dokumenteret omgivelserne;Dokumenter hvordan de bare haelder vaesker ned i vandet, fra toender med roede 'X' paa;11;1;Use;0
+8;Tag En Proeve;Du har taget en proeve af vandet;Tag ud til floden, og se om d    u kan finde en flaske med noget af flodens vand;3;1;Pickup;0
