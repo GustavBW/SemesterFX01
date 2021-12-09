@@ -74,7 +74,7 @@ public class CItem extends Item implements Interactible, Renderable {
             System.out.print("");
         }
 
-        MainGUIController.getCurrentRoom().getCitems().add(this);
+        ContentEngine.getRoomCollection(MainGUIController.getCurrentRoom().getRoom()).getCitems().add(this);
         position = new Point2D(Game.player.getOrX(),Game.player.getOrY());
 
         Interactible.interactibles.add(this);
@@ -123,6 +123,7 @@ public class CItem extends Item implements Interactible, Renderable {
     public boolean destroy(){                                  //Removes the item from any static contexts in which a reference is kept
         boolean removedFromInteractibles = false;
         boolean removedFromRenderLayer = false;
+        boolean removedFromCollection = false;
 
         InteractionHandler.reInstatitingItem = true;
 
@@ -132,10 +133,11 @@ public class CItem extends Item implements Interactible, Renderable {
 
         removedFromInteractibles = Interactible.interactibles.remove(this);
         removedFromRenderLayer = Renderable.renderLayer1.remove(this);
+        removedFromCollection = ContentEngine.getRoomCollection(MainGUIController.getCurrentRoom().getRoom()).getCitems().remove(this);
 
         InteractionHandler.reInstatitingItem = false;
 
-        return removedFromInteractibles && removedFromRenderLayer;
+        return removedFromInteractibles && removedFromRenderLayer && removedFromCollection;
     }
 
     @Override
