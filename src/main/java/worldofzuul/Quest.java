@@ -95,7 +95,7 @@ public class Quest {
         boolean success = false;
         boolean gateCondition = true;
 
-        if(isGated) {
+        if(isGated) {   //Checking gate id
             if (!Game.player.getResovledQuests().contains(gateId)) {
                 gateCondition = false;
             }
@@ -110,12 +110,9 @@ public class Quest {
                     Game.player.questResolved(id);
                     Game.updateQuestGUI = true;
                 }
-
                 success = true;
             }
         }
-
-
         return success;
     }
 

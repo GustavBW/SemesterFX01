@@ -83,10 +83,6 @@ public class Game implements Runnable{
         }
         awaitBoolean = false;
 
-        try{Thread.sleep(500);
-        }catch (Exception e){e.printStackTrace();}
-        onExitFlagSleep();
-
         int loops;
         double next_game_tick = System.currentTimeMillis();
 
@@ -101,30 +97,30 @@ public class Game implements Runnable{
 
             while (System.currentTimeMillis() > next_game_tick
                     && loops < MAX_FRAMESKIP) {
-
+                    //Limiting the loop to an almost constant framerate (60fps)
+                    //to help with player movement.
                 long timeA = System.nanoTime();
 
                 next_game_tick += SKIP_TICKS;
                 loops++;
 
-
-                if(onPause){continue;}
+                if(onPause){continue;}  //Disable tickable evaluation (player) if paused
 
                 if(evaluateGameCompletion() && !hasSwappedToEndgame){
                     MainGUIController.roomToChangeTo = ContentEngine.getRoomCollection(ContentEngine.specificRoom(endGameRoomId));
                     MainGUIController.sceneChangeRequested = true;
                     hasSwappedToEndgame = !hasSwappedToEndgame;
                 }
+                //Each frame, the tickThread evaluates wether or not to change to the "endgame" rooms
 
                 for(Tickable t : Tickable.tickables){
                     t.tick();
                 }
-
+                //Updating GUI's (temporarily disabling their render function to avoid issues).
                 if(inventoryManager.inventoryChanged){          //Its the Tick threads (this one) that actually updates the Inventory GUI.
                     iGUIM.createNew(true);
                     inventoryManager.inventoryChanged = false;
                 }
-
                 if(updateQuestGUI){             //This boolean is set by the InventoryManager to the value of whether or not using an item was successfull.
                     qGUI.updateQuests();
                     updateQuestGUI = false;
@@ -254,11 +250,9 @@ public class Game implements Runnable{
                 roomsComplete = false;
             }
         }
-
         if(ContentEngine.collections.size() >= allRooms.size() - 3){
-            allRoomsVisited = true;
-        }
-
+            allRoomsVisited = true; //The "endgame" rooms consists of 3 rooms.
+        }                           //Thus they're removed from the equation.
         return roomsComplete && allRoomsVisited;
     }
 

@@ -42,9 +42,11 @@ public class SquareTrigger implements Interactible {
         return popUpText;
     }
 
-    public boolean isInBounds(double pOrX,double pOrY){
-        //If each of the coordinates given (x & y) is within the boundaries of the square trigger. Based on its position and its size.
-        return (pOrX < x + sizeX && pOrX > x) && (pOrY < y + sizeY && pOrY > y);
+    public boolean isInBounds(double mX,double mY){
+        // Returns whether or not each of the coordinates given (x & y)
+        // is within the boundaries of the square trigger based on its
+        // position and its size.
+        return (mX < x + sizeX && mX > x) && (mY < y + sizeY && mY > y);
     }
     public Point2D getInvApproachVector(int pOrX, int pOrY){
         return new Point2D(pOrX - orX,pOrY - orY);

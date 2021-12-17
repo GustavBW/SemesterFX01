@@ -10,7 +10,7 @@ MIDDLE  A 1000 by 1500 picture that shows the interiors of any rooms.           
 SHADOW  A 1000 by 1500 picture that contains the shadows from walls and such            PNG     ("/Graphics/x/SHADOW.png")
 TOP     A 1000 by 1500 picture that shows rooftops, tree-tops, clouds.                  PNG     ("/Graphics/x/TOP.png")
 
-NB: DO KEEP IN MIND that Renderlayer4 (TOP) is also used for some parts of UI! Check yourself before you wreck yourself as they say ;)
+NB: DO KEEP IN MIND that Renderlayer4 (TOP) is also used for some parts of UI!
 
 /Graphics/Player/
 Contains 4 directories: North, South, East & West. These directories contains the walking animations (or still frames) of the player moving in these directions.

@@ -58,7 +58,7 @@ public class Player implements Renderable, Tickable {
 
         if (running) currentSpeed += 3;
 
-        if (upKeyPressed) {     //Using a Vector2D is necessary for getting the rotation angle
+        if (upKeyPressed) {
             posY -= currentSpeed;
             this.direction = 0;
         }

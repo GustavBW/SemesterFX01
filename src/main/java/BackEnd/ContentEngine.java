@@ -55,17 +55,17 @@ public class ContentEngine {
         boolean foundIt = false;
         RoomCollection toReturn = null;
 
-        for(RoomCollection rc : collections){
-            if (rc.getId() == room.getId()){
+        for(RoomCollection rc : collections){   //Go through all existing RoomCollections
+            if (rc.getId() == room.getId()){    //Check if the ids matches
                 foundIt = true;
                 toReturn = rc;
                 break;
             }
         }
 
-        if(!foundIt) {
-            toReturn = new RoomCollection(room);        //Gotta parse the RoomExitTriggers here as well. Forgot them
-            collections.add(toReturn);
+        if(!foundIt) {  //If the room collection wasn't found. Make a new one.
+            toReturn = new RoomCollection(room);
+            collections.add(toReturn);  //Add this new RoomCollection to the ArrayList
         }
 
         return toReturn;

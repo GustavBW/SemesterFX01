@@ -90,14 +90,13 @@ public class InteractionHandler implements Runnable{
             MainGUIController.logTimeInter = (timeB - timeA);
         }
     }
+
     public static Clickable findInteractibleOnMouseClick(int mouseX, int mouseY){
         Clickable toReturn = null;
 
         //Offsetting where you click so it matches what you expect. JavaFX is just wierd
         mouseX += 2;
         mouseY -= 8;
-
-        new RenderableCircle(new Point2D(mouseX, mouseY), 5, 1000, Color.BLACK);
 
         for(Clickable c : Clickable.clickables){
             int interRadiusSq = c.getInterRadius() * c.getInterRadius();

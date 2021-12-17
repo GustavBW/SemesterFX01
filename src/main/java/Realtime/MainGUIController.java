@@ -129,7 +129,7 @@ public class MainGUIController extends Application implements Runnable{
         long timeA = System.nanoTime();
 
         //STEP 0 - Check for a scene change BEFORE rendering the entire scene
-        if(sceneChangeRequested && roomToChangeTo != null){     //Just adding a bit more redundancy here.
+        if(sceneChangeRequested && roomToChangeTo != null){
             changeScene(roomToChangeTo);
             displayRoomDescription();
         }
@@ -154,7 +154,7 @@ public class MainGUIController extends Application implements Runnable{
             r.render(gc);
         }
 
-        //STOP 3 - Render all persistent GUI's (GUI's that remain through all rooms) on top of everything else.
+        //STEP 3 - Render the UI's on top of everything else.
         iGUIM.render(gc);
         qGUI.render(gc);
         perfGUI.render(gc);
